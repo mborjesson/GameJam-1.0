@@ -14,7 +14,7 @@ public class Brainemy extends AIEnemy
 		super(x, y);
 
         int sizeX = 22;
-		int sizeY = 28;
+		int sizeY = 27;
 		
 		setSprite(new Image("data/images/characters/player/enemystill.png"));
 	    setAnimation("data/images/characters/player/enemyanim.png", sizeX, sizeY, 3);
