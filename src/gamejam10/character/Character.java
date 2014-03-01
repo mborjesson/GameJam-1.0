@@ -74,9 +74,8 @@ public abstract class Character extends LevelObject {
 
     public void jump() {
         if (onGround) {
-        	MusicPlayer mp = MusicPlayer.getInstance();
-        	mp.playJumpSound();
             y_velocity = -0.6f;
+            
         }
     }
 

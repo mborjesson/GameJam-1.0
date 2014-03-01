@@ -2,15 +2,13 @@ package gamejam10.ai;
 
 import gamejam10.character.Character;
 
-public class RandomMovementAction {
+public class RandomMovementAction extends AIAction  {
 
 	private Character character;
 	double accumulatedTime = 0;
-	double minX;
-	double maxX;
+	RandomMovementAction.Parameters parameters;
 	double movementDuration;
-	double minMovementDuration;
-	double maxMovementDuration;
+
 	Direction dir;
 	
 	double previousX = 0;
@@ -21,17 +19,21 @@ public class RandomMovementAction {
 		RIGHT
 	}
 	
-	public RandomMovementAction(Character c, double minX, double maxX, 
-			double minMovementDuration, double maxMovementDuration) {
+	public static class Parameters {
+		public double minX;
+		public double maxX;
+		public double minMovementDuration;
+		public double maxMovementDuration;
+	}
+	
+	public RandomMovementAction(Character c, RandomMovementAction.Parameters parameters) {
 		character = c;
-		this.minX = minX;
-		this.maxX = maxX;
-		this.maxMovementDuration = maxMovementDuration;
-		this.minMovementDuration = minMovementDuration;
+		this.parameters = parameters;
+		
 		dir = Direction.LEFT;
 	}
 	
-	public void update(double dt) {
+	public void doAction(double dt) {
 		
 		// |minX             spawn               maxX|
 		
@@ -39,15 +41,15 @@ public class RandomMovementAction {
 		
 		notMovingCorrection(dt);
 		
-		if ( character.getX() <= minX ) {
+		if ( character.getX() <= parameters.minX ) {
 			accumulatedTime = 0;
-			movementDuration = 1000 + Math.random() * 2000;
+			movementDuration = parameters.minMovementDuration + Math.random() * parameters.maxMovementDuration;
 			character.moveRight(1000);
 		}
 		
-		if ( character.getX() >= maxX ) {
+		if ( character.getX() >= parameters.maxX ) {
 			accumulatedTime = 0;
-			movementDuration = 1000 + Math.random() * 2000;
+			movementDuration = parameters.minMovementDuration + Math.random() * parameters.maxMovementDuration;
 			character.moveLeft(1000);
 		}
 		

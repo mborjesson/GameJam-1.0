@@ -64,8 +64,8 @@ public class Physics {
     }
     
     private void killPlayer() {
-        gameState.getPlayer().setX(128);
-        gameState.getPlayer().setY(50);
+        gameState.getPlayer().setX(50);
+        gameState.getPlayer().setY(350);
         
         MusicPlayer mp = MusicPlayer.getInstance();
     	 mp.playDeathSound();

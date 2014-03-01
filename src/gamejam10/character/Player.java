@@ -4,6 +4,7 @@
  */
 package gamejam10.character;
 
+import gamejam10.audio.MusicPlayer;
 import gamejam10.physics.AABoundingRect;
 
 import org.newdawn.slick.Image;
@@ -37,6 +38,15 @@ public class Player extends Character {
         maximumFallSpeed = 1.0f;
         decelerationSpeed = 0.09f;
         
+    }
+    
+    @Override
+    public void jump() {
+        if (onGround) {
+        	MusicPlayer mp = MusicPlayer.getInstance();
+        	mp.playJumpSound();
+            y_velocity = -0.6f;
+        }
     }
     
     public void updateBoundingShape(){

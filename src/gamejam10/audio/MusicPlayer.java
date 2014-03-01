@@ -76,11 +76,11 @@ public class MusicPlayer {
     }
     
     public void playJumpSound() {
-        jump.play();
+    	jump.play(1, 0.2f);
     }
     
     public void playDeathSound() {
-        death.play();
+        death.play(1, 0.3f);
     }
     
     
