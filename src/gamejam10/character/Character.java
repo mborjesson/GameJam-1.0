@@ -37,6 +37,8 @@ public abstract class Character extends LevelObject {
     protected float decelerationSpeed = 1;
     protected float maximumSpeed = 1;
     
+    private float jumpVelocity = -0.6f;
+    
     protected boolean highlight = false;
 
     public Character(float x, float y) throws SlickException {
@@ -76,10 +78,18 @@ public abstract class Character extends LevelObject {
             }
         }
     }
-
+    
+    public void setJumpVelocity(float jumpVelocity) {
+    	this.jumpVelocity = jumpVelocity;
+    }
+    
+    public float getJumpVelocity() {
+    	return this.jumpVelocity;
+    }
+    
     public void jump() {
         if (onGround) {
-            y_velocity = -0.6f;
+            y_velocity = getJumpVelocity();
             
         }
     }
