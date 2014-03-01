@@ -75,13 +75,8 @@ public abstract class Character extends LevelObject {
 
     public void jump() {
         if (onGround) {
-        	try {
-        		MusicPlayer mp = MusicPlayer.getInstance();
-        		mp.playJumpSound();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        	MusicPlayer mp = MusicPlayer.getInstance();
+        	mp.playJumpSound();
             y_velocity = -0.6f;
         }
     }

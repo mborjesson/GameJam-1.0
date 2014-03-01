@@ -59,13 +59,8 @@ public class Physics {
                 
                  if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                      System.out.println("AAAAAAHHHHHHHHHHHH!!!!!!!!!!!");
-                     try {
-						Music a = new Music("data/sounds/dead_lava.wav");
-						a.play();
-					} catch (SlickException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+                     MusicPlayer mp = MusicPlayer.getInstance();
+                 	 mp.playDeathSound();
                      gameState.getPlayer().setX(128);
                      gameState.getPlayer().setY(50);
                      return false;
