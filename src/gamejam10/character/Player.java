@@ -41,7 +41,7 @@ public class Player extends Character {
     
     public void updateBoundingShape(){
         
-        boundingShape.updatePosition(x,y);
+        boundingShape.updatePosition(x,y+2);
     }
     
 //    public void moveLeft(int delta){
