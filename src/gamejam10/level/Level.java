@@ -50,6 +50,7 @@ public class Level {
 					case SPAWN: {
 						String name = map.getObjectProperty(groupID, objectID,
 								"name", null);
+
 						int x = map.getObjectX(groupID, objectID);
 						int y = map.getObjectY(groupID, objectID);
 						int width = map.getObjectWidth(groupID, objectID);
@@ -66,8 +67,8 @@ public class Level {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
 								
-								int deltaTilesMin = 5; // TODO: Read from map
-								int deltaTilesMax = 7; // TODO: Read from map
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
 								
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
@@ -86,9 +87,9 @@ public class Level {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
 								
-								int deltaTilesMin = 5; // TODO: Read from map
-								int deltaTilesMax = 7; // TODO: Read from map
-								
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
+
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
@@ -118,14 +119,14 @@ public class Level {
 		sun = new Sun(10*1000);
 
 		// TEST
-//		AIEnemy en = new AIEnemy(50, 370);
-//		BasicAI ai = new BasicAI(en, player);
-//		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
-//		moveParameters.minX = 50;
-//		moveParameters.maxX = 150;
-//		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
-//		en.setAI(ai);
-//		enemies.add(en);
+		AIEnemy en = new AIEnemy(50, 370);
+		BasicAI ai = new BasicAI(en, player);
+		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
+		moveParameters.minX = 50;
+		moveParameters.maxX = 150;
+		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
+		en.setAI(ai);
+		enemies.add(en);
 
 		addCharacter(player);
 		//addEnemies(enemies);
