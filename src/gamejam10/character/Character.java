@@ -4,6 +4,7 @@
  */
 package gamejam10.character;
 
+import gamejam10.audio.MusicPlayer;
 import gamejam10.enums.Facing;
 import gamejam10.level.LevelObject;
 import gamejam10.physics.*;
@@ -73,6 +74,13 @@ public abstract class Character extends LevelObject {
 
     public void jump() {
         if (onGround) {
+        	try {
+        		MusicPlayer mp = MusicPlayer.getInstance();
+        		mp.playJumpSound();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             y_velocity = -0.6f;
         }
     }

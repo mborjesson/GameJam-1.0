@@ -4,12 +4,16 @@
  */
 package gamejam10.physics;
 
+import gamejam10.audio.MusicPlayer;
 import gamejam10.character.Character;
 import gamejam10.level.Level;
 import gamejam10.level.LevelObject;
 import gamejam10.states.GameState;
 
 import java.util.ArrayList;
+
+import org.newdawn.slick.Music;
+import org.newdawn.slick.SlickException;
 
 
 /**
@@ -55,6 +59,13 @@ public class Physics {
                 
                  if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                      System.out.println("AAAAAAHHHHHHHHHHHH!!!!!!!!!!!");
+                     try {
+						Music a = new Music("data/sounds/dead_lava.wav");
+						a.play();
+					} catch (SlickException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                      gameState.getPlayer().setX(128);
                      gameState.getPlayer().setY(50);
                      return false;
@@ -98,6 +109,7 @@ public class Physics {
                 if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                     //don't forget to move the object back up even if we are on the ground!
                     obj.getBoundingShape().movePosition(0, -1);
+                    
                     return true;
                 }
             }

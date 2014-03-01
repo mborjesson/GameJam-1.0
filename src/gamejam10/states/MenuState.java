@@ -32,7 +32,8 @@ public class MenuState extends BasicGameState {
     
     private MusicPlayer musicPlayer;
     private Image menuImage;
-
+    private boolean startGame = false;
+    
     @Override
     public int getID() {
         return States.MENU.getID();
@@ -62,11 +63,20 @@ public class MenuState extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         Input input = container.getInput();
-        if (input.isKeyPressed(Input.KEY_SPACE)) {
+        if (input.isKeyPressed(Input.KEY_SPACE) || startGame) {
             musicPlayer.playGameMusic();
+            startGame = false;
             game.enterState(States.GAME.getID(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
         } 
         
+    }
+    
+    public void controllerButtonPressed(int controller, int button)
+    {	
+    	if(button == 8)
+    	{
+    		startGame = true;
+    	}
     }
     
     //this method is overriden from basicgamestate and will trigger once you press any key on your keyboard
@@ -76,7 +86,4 @@ public class MenuState extends BasicGameState {
             System.exit(0);
         }
     }
-    
-    
-
 }
