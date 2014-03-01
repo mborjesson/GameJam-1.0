@@ -4,6 +4,7 @@
  */
 package gamejam10;
 
+import gamejam10.audio.*;
 import gamejam10.enums.*;
 import gamejam10.options.Options;
 import gamejam10.states.GameState;
@@ -39,13 +40,15 @@ public class Main extends StateBasedGame {
 
     public Main(String title) {
         super(title);
+        
+        AudioPlayer.getInstance().initialize();
     }
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
         this.addState(new MenuState());
         this.addState(new GameState());
-        enterState(States.MENU.getID());
+        enterState(States.GAME.getID());
     }
     
     public static Options getOptions() {

@@ -4,10 +4,11 @@
  */
 package gamejam10.physics;
 
-import gamejam10.audio.MusicPlayer;
+import gamejam10.audio.AudioPlayer;
 import gamejam10.character.Character;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
+import gamejam10.enums.*;
 import gamejam10.level.Level;
 import gamejam10.level.LevelObject;
 import gamejam10.states.GameState;
@@ -51,6 +52,7 @@ public class Physics {
     }
     
     private void checkCollisionBetweenCharacters(Level level) {
+    	// O(N^2) ftw :)
     	for (Character c : level.getCharacters() ) {
 			if ( c instanceof Player ) {
 				for (Character c2 : level.getCharacters()) {
@@ -67,8 +69,8 @@ public class Physics {
         gameState.getPlayer().setX(50);
         gameState.getPlayer().setY(350);
         
-        MusicPlayer mp = MusicPlayer.getInstance();
-    	 mp.playDeathSound();
+        AudioPlayer ap = AudioPlayer.getInstance();
+    	 ap.playSound(SoundType.DEATH, 0.2f);
     }
 
     private boolean checkCollision(LevelObject obj, Tile[][] mapTiles, float y_movement) {

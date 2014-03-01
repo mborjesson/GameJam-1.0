@@ -16,7 +16,7 @@ import java.util.*;
 
 import gamejam10.Main;
 import gamejam10.ai.BasicAI;
-import gamejam10.audio.MusicPlayer;
+import gamejam10.audio.AudioPlayer;
 import gamejam10.character.AIEnemy;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
@@ -63,7 +63,7 @@ public class GameState extends BasicGameState {
 	private Camera camera = new Camera();
 
 
-	private MusicPlayer musicPlayer;
+	private AudioPlayer musicPlayer;
 
    
     
@@ -82,9 +82,9 @@ public class GameState extends BasicGameState {
 //		en.setAI(new BasicAI(en, player, 100, 200));
 //		enemies.add(en);
 
-		musicPlayer = MusicPlayer.getInstance();
+		musicPlayer = AudioPlayer.getInstance();
 		
-		camera.setWidth(1500);
+		camera.setWidth(1000);
 
 		level = new Level("map06");
 		level.setCamera(camera);
@@ -97,7 +97,7 @@ public class GameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		g.setBackground(Color.white);
+		g.setBackground(Color.yellow);
 		g.clear();
 		
 		// calculate scale
@@ -161,7 +161,7 @@ public class GameState extends BasicGameState {
 		}
 
 		if (i.isKeyPressed(Input.KEY_ESCAPE)) {
-			musicPlayer.playMenuMusic();
+			musicPlayer.playMusic(MusicType.MENU, 1);
 			game.enterState(States.MENU.getID(), new FadeOutTransition(
 					Color.black, 50), new FadeInTransition(Color.black, 50));
 		}
