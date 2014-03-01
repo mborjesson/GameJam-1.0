@@ -91,7 +91,7 @@ public abstract class Character extends LevelObject {
     public void jump() {
         if (onGround) {
             y_velocity = getJumpVelocity();
-            
+            showJumpingAnimation = true;
         }
     }
 
@@ -140,6 +140,32 @@ public abstract class Character extends LevelObject {
         }
         movingAnimations.put(Facing.LEFT, facingLeftAnimation);
 
+    }
+    
+    protected void setJumpAnimation(String img, int frameWidth, int frameHeight, int duration, int numberOfFrames) {
+        SpriteSheet sheet = null;
+        try {
+            sheet = new SpriteSheet(img, frameWidth, frameHeight);
+        } catch (SlickException ex) {
+            ex.printStackTrace();
+        }
+
+        jumpAnimations = new HashMap<Facing, Animation>();
+        
+        Animation jumpAnimationRight = new Animation();
+        
+        for (int i = 0; i < numberOfFrames; i++) {
+        	jumpAnimationRight.addFrame(sheet.getSprite(i, 0), duration);
+        }
+        
+        Animation jumpAnimationLeft = new Animation();
+        
+        for (int i = 0; i < numberOfFrames; i++) {
+        	jumpAnimationLeft.addFrame(sheet.getSprite(i, 0).getFlippedCopy(true, false), duration);
+        }
+        
+        jumpAnimations.put(Facing.RIGHT, jumpAnimationRight);
+        jumpAnimations.put(Facing.LEFT, jumpAnimationLeft);
     }
 
     protected void setAnimation(String img, int frameWidth, int frameHeight, int numberOfFrames) {
@@ -194,17 +220,33 @@ public abstract class Character extends LevelObject {
         return y;
     }
 
+    HashMap<Facing, Animation> jumpAnimations;
+    boolean showJumpingAnimation;
+    
     public void render(Graphics g, float offset_x, float offset_y){
     	
     	float xp = x-offset_x;
     	float yp = y-offset_y;
  
-        //draw a moving animation if we have one and we moved within the last 150 miliseconds
-        if(movingAnimations != null && moving){
-            movingAnimations.get(facing).draw(xp, yp);                
-        }else{            
-            sprites.get(facing).draw(xp, yp);          
-        }
+    	if ( jumpAnimations != null && showJumpingAnimation ) {
+            
+    		Animation anim = jumpAnimations.get(facing);
+    		anim.draw(xp, yp);
+
+    		// If we showed the last animation
+            if ( anim.getCurrentFrame() == anim.getImage(anim.getFrameCount()-1) ) {
+            	showJumpingAnimation = false;
+            	anim.restart();
+            }
+            
+    	} else {
+	        //draw a moving animation if we have one and we moved within the last 150 miliseconds
+	        if(movingAnimations != null && moving){
+	            movingAnimations.get(facing).draw(xp, yp);                
+	        }else{            
+	            sprites.get(facing).draw(xp, yp);          
+	        }
+    	}
         
         if (highlight) {
     		g.setColor(Color.white);
