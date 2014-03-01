@@ -30,7 +30,7 @@ public class Enemy extends Character {
        setAnimation("data/images/characters/player/enemyanim.png", 22, 28, 3);
        
        //default bounding shape is a 32 by 32 box
-        boundingShape = new AABoundingRect(x,y,24,30);
+        boundingShape = new AABoundingRect(x,y,22,28);
         
         accelerationSpeed = 0.001f;
         maximumSpeed = 0.05f; //0.15f;
