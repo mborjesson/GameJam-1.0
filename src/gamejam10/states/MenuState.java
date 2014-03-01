@@ -5,14 +5,25 @@
 package gamejam10.states;
 
 
-import gamejam10.*;
-import gamejam10.audio.*;
-import gamejam10.enums.*;
-import gamejam10.menu.*;
+import gamejam10.Main;
+import gamejam10.audio.AudioPlayer;
+import gamejam10.enums.MusicType;
+import gamejam10.enums.States;
+import gamejam10.menu.Menu;
+import gamejam10.menu.MenuAction;
+import gamejam10.menu.MenuActionEnterMenu;
+import gamejam10.menu.MenuActionEnterState;
 
-import org.newdawn.slick.*;
-import org.newdawn.slick.state.*;
-import org.newdawn.slick.state.transition.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
     
 /**
@@ -22,6 +33,7 @@ import org.newdawn.slick.state.transition.*;
 public class MenuState extends BasicGameState {
     
     private AudioPlayer audioPlayer;
+    private Image menuImage;
     private boolean startGame = false;
     
     private Menu menu = null;
@@ -39,7 +51,7 @@ public class MenuState extends BasicGameState {
     	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID()));
         
         audioPlayer = AudioPlayer.getInstance();
-        audioPlayer.playMusic(MusicType.MENU, 0.3f);
+        audioPlayer.playMusic(MusicType.MENU, 1);
         
     }
 
@@ -82,7 +94,7 @@ public class MenuState extends BasicGameState {
         	if (a instanceof MenuActionEnterState) {
         		MenuActionEnterState actionState = (MenuActionEnterState)a;
         		if (actionState.getStateId() == States.GAME.getID()) {
-                    audioPlayer.playMusic(MusicType.GAME);
+                    audioPlayer.playMusic(MusicType.GAME, 0.3f);
                     startGame = false;
         		}
                 game.enterState(actionState.getStateId(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );

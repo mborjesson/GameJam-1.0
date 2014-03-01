@@ -51,6 +51,7 @@ public abstract class Character extends LevelObject {
     }
 
     protected void setSprite(Image i) {
+    	i.setFilter(Image.FILTER_NEAREST);
         sprites = new HashMap<Facing, Image>();
         sprites.put(Facing.RIGHT, i);
         sprites.put(Facing.LEFT, i.getFlippedCopy(true, false));
@@ -164,6 +165,7 @@ public abstract class Character extends LevelObject {
 //            sheet = new SpriteSheet("media/homeranim.png", 36, 65);
             //sheet = new SpriteSheet(img, 36, 65);
             sheet = new SpriteSheet(img, frameWidth, frameHeight);
+            sheet.setFilter(Image.FILTER_NEAREST);
         } catch (SlickException ex) {
             ex.printStackTrace();
         }

@@ -6,13 +6,16 @@ package gamejam10;
 
 import gamejam10.audio.*;
 import gamejam10.enums.*;
-import gamejam10.options.*;
-import gamejam10.states.*;
+import gamejam10.options.Options;
+import gamejam10.states.ExitState;
 import gamejam10.states.GameState;
+import gamejam10.states.MenuState;
 
 import org.lwjgl.opengl.*;
-import org.newdawn.slick.*;
-import org.newdawn.slick.state.*;
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 
 
@@ -47,8 +50,8 @@ public class Main extends StateBasedGame {
     public void initStatesList(GameContainer gc) throws SlickException {
         this.addState(new MenuState());
         this.addState(new GameState());
-        this.addState(new ExitState());
         enterState(States.MENU.getID());
+        this.addState(new ExitState());
     }
     
     public static Options getOptions() {
