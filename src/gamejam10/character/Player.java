@@ -11,6 +11,8 @@ import gamejam10.physics.AABoundingRect;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 
 /**
  *
@@ -32,7 +34,7 @@ public class Player extends Character {
        
        //default bounding shape is a 32 by 32 box
 
-        boundingShape = new AABoundingRect(x,y,/*24,30*/20, 41);
+        boundingShape = new AABoundingRect(x,y,/*24,30*/20, 39);
         
         accelerationSpeed = 0.09f;
         maximumSpeed = 0.23f;
@@ -54,6 +56,11 @@ public class Player extends Character {
         
         boundingShape.updatePosition(x,y+2);
     }
+
+	@Override
+	public void handleCollision(Character c2) {
+		System.out.println(this + " colliding with " + c2);
+	}
     
 //    public void moveLeft(int delta){
 //        facing = Facing.LEFT; 
