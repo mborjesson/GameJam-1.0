@@ -29,7 +29,7 @@ public class Player extends Character {
        setAnimation("data/images/characters/player/homeranimsmall.png");
        
        //default bounding shape is a 32 by 32 box
-        boundingShape = new AABoundingRect(x,y,30,30);
+        boundingShape = new AABoundingRect(x,y,30,32);
         
         accelerationSpeed = 0.001f;
         maximumSpeed = 0.15f;

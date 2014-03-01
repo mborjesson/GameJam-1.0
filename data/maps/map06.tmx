@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="bw_smoothies" tilewidth="32" tileheight="32">
+  <image source="../images/bw_smoothies.png" trans="ffffff" width="128" height="256"/>
+  <tile id="0">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="maplayer" width="256" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3c246CMBQF0M44F/z/HzaGkMEJQYEWjpy1kv1itNaHTak2XkspVxERERERSZcoIs0Fzkb/IS/9h7yi9/+y4Lld6ef+2WgucDbR+7/E2nl/lcfP7vpBFvoPeUXv//+1eS4/B80R3lWWHo2vI+7voRd13Qfai9j/4Xv876MnAic3t5+e6t/UNaLmY7/l3PsQiORdzgED9ek/5BWl/x87vhfQi9L/+77f73KwL+dpIK+j133gOGv6/8qZ3C338q4/sA/rP+Sl/5BX6/5P7RXW7A1qjQP8sf5DXvr/XHf0BKCRLf2fO7PnPB/Et6X/c8+rdQ9h7YV2Ivd/+B+ArdyLwLRn53iGDP8F0C14zatjjtUcf6/vM1rNWSRSSqMxx1rOfeq91j52p/eSKaXRmGMt516T7svZcgPDQygrAIAAAA==
+  </data>
+ </layer>
+ <objectgroup color="#5500ff" name="objects" width="256" height="32">
+  <properties>
+   <property name="spawn" value="1"/>
+  </properties>
+  <object name="Player" type="spawn" x="109" y="323" width="45" height="22">
+   <properties>
+    <property name="name" value="player"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

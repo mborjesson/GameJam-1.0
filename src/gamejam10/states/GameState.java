@@ -51,7 +51,7 @@ public class GameState extends BasicGameState {
 		
 		camera.setWidth(1500);
 
-		level = new Level("map04");
+		level = new Level("map06");
 		level.setCamera(camera);
 
 		player = level.getPlayer();
@@ -62,7 +62,7 @@ public class GameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		g.setBackground(Color.black);
+		g.setBackground(Color.white);
 		g.clear();
 		
 		// calculate scale
