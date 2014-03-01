@@ -1,5 +1,6 @@
 package gamejam10.ai;
 
+import gamejam10.ai.RandomMovementAIAction.Direction;
 import gamejam10.character.Character;
 
 /**
@@ -10,7 +11,8 @@ public class PatrollingAIAction implements AIAction  {
 	private Character character;
 	double accumulatedTime = 0;
 	PatrollingAIAction.Parameters parameters;
-
+	double previousX = 0;
+	double notMovingDelta = 0;
 	Direction dir;
 	
 	enum Direction {
@@ -42,5 +44,33 @@ public class PatrollingAIAction implements AIAction  {
 			character.moveLeft(1000);
 		}
 		
+		notMovingCorrection(dt);
+		
+	}
+	
+	public void notMovingCorrection(double dt) {
+		
+		notMovingDelta  += dt;
+		
+		// Check if not moving
+		if ( character.getX() == previousX  ) {
+			notMovingDelta += dt;
+			
+			if ( notMovingDelta > 1000 ) {
+				System.out.println("Not moving!!");
+				character.jump();
+				
+				// Start moving again in the same direction
+				if ( dir == Direction.LEFT ) {
+					character.moveLeft(10000);
+				} else {
+					character.moveRight(10000);
+				}
+				
+				notMovingDelta = 0;
+			}
+		}
+		
+		previousX = character.getX();
 	}
 }
