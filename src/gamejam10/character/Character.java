@@ -234,10 +234,16 @@ public abstract class Character extends LevelObject {
     		Animation anim = jumpAnimations.get(facing);
     		anim.draw(xp, yp);
     		
+        	for (Animation a : jumpAnimations.values()) {
+				a.setCurrentFrame(anim.getFrame());
+			}
+    		
     		// If we showed the last animation
             if ( anim.getFrame() == anim.getFrameCount()-1 ) {
             	showJumpingAnimation = false;
-            	anim.restart();
+            	for (Animation a : jumpAnimations.values()) {
+					a.restart();
+				}
             	currentIndex = 0;
             }
             
