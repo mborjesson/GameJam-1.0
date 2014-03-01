@@ -12,12 +12,12 @@ import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.physics.*;
 
-
 import java.util.*;
 
 import gamejam10.Main;
 import gamejam10.ai.BasicAI;
 import gamejam10.audio.MusicPlayer;
+import gamejam10.character.AIEnemy;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
 import gamejam10.level.Level;
@@ -78,9 +78,9 @@ public class GameState extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame sbg)
 			throws SlickException {
 
-        Enemy en = new Enemy(300, 250);
-        en.setAI(new BasicAI(en, player));
-        enemies.add(en);
+//		AIEnemy en = new AIEnemy(200, 200);
+//		en.setAI(new BasicAI(en, player, 100, 200));
+//		enemies.add(en);
 
 		musicPlayer = MusicPlayer.getInstance();
 		
@@ -127,8 +127,8 @@ public class GameState extends BasicGameState {
 		handleKeyboardInput(gc.getInput(), delta, sbg);
 
         for (gamejam10.character.Character c : level.getCharacters()) {
-        	if ( c instanceof Enemy ) {
-        		Enemy e = (Enemy)c;
+        	if ( c instanceof AIEnemy ) {
+        		AIEnemy e = (AIEnemy)c;
         		e.updateAI(delta);
         	}
 		}
