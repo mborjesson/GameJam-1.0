@@ -3,6 +3,9 @@ package gamejam10.ai;
 import gamejam10.character.Character;
 import gamejam10.character.Player;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class BasicAI {
 
 	double accumulatedTime = 0;
@@ -11,16 +14,25 @@ public class BasicAI {
 	Character character;
 	Player player;
 	
-	public BasicAI(Character c, Player p) {
+	Collection<AIAction> aiActions = new ArrayList<AIAction>();
+	
+
+	boolean movingLeft = false;
+	boolean moving = false;
+	
+	
+	public BasicAI(Character c, Player p, int minX, int maxX) {
 		player = p;
 		character = c;
-		randomJumpAction = new RandomJumpAction(c, 1000, 5000);
-		randomMovementAction = new RandomMovementAction(c, 100, 500, 100, 1000);
+
+//		randomJumpAction = new RandomJumpAction(c, jumpParameters);
+//		randomMovementAction = new RandomMovementAction(c, moveParameters);
 		
 	}
 	
-	boolean movingLeft = false;
-	boolean moving = false;
+	public void addAIAction(AIAction aiAction) {
+		aiActions.add(aiAction);
+	}
 	
 	public void update(Character character, double dt) {
 		
@@ -46,8 +58,10 @@ public class BasicAI {
 //				
 //			}
 
-		randomJumpAction.update(dt);
-		randomMovementAction.update(dt);
+		for (AIAction aiAction : aiActions) {
+			aiAction.doAction(dt);
+		}
+
 		
 	}
 	

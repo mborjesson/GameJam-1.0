@@ -5,10 +5,12 @@
 package gamejam10.level;
 
 import gamejam10.*;
+import gamejam10.ai.BasicAI;
+import gamejam10.ai.RandomJumpAction;
+import gamejam10.ai.RandomMovementAction;
 import gamejam10.camera.*;
 import gamejam10.character.*;
 import gamejam10.character.Character;
-
 import gamejam10.enums.*;
 import gamejam10.physics.*;
 import gamejam10.character.Enemy;
@@ -16,11 +18,9 @@ import gamejam10.character.Player;
 import gamejam10.physics.Tile;
 
 import java.util.*;
-import java.util.ArrayList;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
-
 import org.newdawn.slick.*;
 import org.newdawn.slick.tiled.*;
 
@@ -63,6 +63,40 @@ public class Level {
 						case PLAYER: {
 							player = new Player(x, y);
 						}
+						case ENEMY_EASY: {
+							AIEnemy en = new AIEnemy(x, y);
+							BasicAI ai = new BasicAI(en, player, 100, 200);
+							
+							RandomMovementAction.Parameters moveParameters = new RandomMovementAction.Parameters();
+							moveParameters.maxMovementDuration = 1000;
+							moveParameters.minMovementDuration = 100;
+							moveParameters.minX = 100;
+							moveParameters.maxX = 200;
+							
+							ai.addAIAction(new RandomMovementAction(en, moveParameters));
+							en.setAI(ai);
+							enemies.add(en);
+
+						}
+						case ENEMY_JUMPING: {
+							AIEnemy en = new AIEnemy(x, y);
+							BasicAI ai = new BasicAI(en, player, 100, 200);
+							
+							RandomMovementAction.Parameters moveParameters = new RandomMovementAction.Parameters();
+							moveParameters.maxMovementDuration = 1000;
+							moveParameters.minMovementDuration = 100;
+							moveParameters.minX = 100;
+							moveParameters.maxX = 200;
+							
+							RandomJumpAction.Parameters jumpParameters = new RandomJumpAction.Parameters();
+							jumpParameters.maxTimeBetweenJumps = 5000;
+							jumpParameters.minTimeBetweenJumps = 1000;
+							
+							ai.addAIAction(new RandomJumpAction(en, jumpParameters));
+							ai.addAIAction(new RandomMovementAction(en, moveParameters));
+							en.setAI(ai);
+							enemies.add(en);
+						}
 							break;
 						}
 					}
@@ -75,6 +109,8 @@ public class Level {
 
 		addCharacter(player);
 		//addEnemies(enemies);
+		
+		
 		for (Object e : enemies) {
 			addCharacter((Character)e);
 		}
