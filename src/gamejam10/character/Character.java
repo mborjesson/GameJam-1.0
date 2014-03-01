@@ -123,14 +123,14 @@ public abstract class Character extends LevelObject {
 
     }
 
-    protected void setAnimation(String img) {
+    protected void setAnimation(String img, int frameWidth, int frameHeight) {
         movingAnimations = new HashMap<Facing, Animation>();
 
         SpriteSheet sheet = null;
         try {
 //            sheet = new SpriteSheet("media/homeranim.png", 36, 65);
             //sheet = new SpriteSheet(img, 36, 65);
-            sheet = new SpriteSheet(img, 32, 32);
+            sheet = new SpriteSheet(img, frameWidth, frameHeight);
         } catch (SlickException ex) {
             ex.printStackTrace();
         }
