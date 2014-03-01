@@ -1,12 +1,13 @@
 package gamejam10.ai;
 
+import gamejam10.ai.PatrollingAIAction.Direction;
 import gamejam10.character.Character;
 
-public class RandomMovementAction extends AIAction  {
+public class RandomMovementAIAction implements AIAction  {
 
 	private Character character;
 	double accumulatedTime = 0;
-	RandomMovementAction.Parameters parameters;
+	RandomMovementAIAction.Parameters parameters;
 	double movementDuration;
 
 	Direction dir;
@@ -26,11 +27,11 @@ public class RandomMovementAction extends AIAction  {
 		public double maxMovementDuration;
 	}
 	
-	public RandomMovementAction(Character c, RandomMovementAction.Parameters parameters) {
+	public RandomMovementAIAction(Character c, RandomMovementAIAction.Parameters parameters) {
 		character = c;
 		this.parameters = parameters;
 		
-		dir = Direction.LEFT;
+		dir = Math.random() > 0.5 ? Direction.LEFT : Direction.RIGHT;
 	}
 	
 	public void doAction(double dt) {

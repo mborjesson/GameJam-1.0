@@ -6,8 +6,8 @@ package gamejam10.states;
 
 
 import gamejam10.Main;
-import gamejam10.audio.MusicPlayer;
-import gamejam10.enums.States;
+import gamejam10.audio.AudioPlayer;
+import gamejam10.enums.*;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
@@ -30,7 +30,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  */
 public class MenuState extends BasicGameState {
     
-    private MusicPlayer musicPlayer;
+    private AudioPlayer audioPlayer;
     private Image menuImage;
     private boolean startGame = false;
     
@@ -42,8 +42,8 @@ public class MenuState extends BasicGameState {
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         
-        musicPlayer = MusicPlayer.getInstance();
-        musicPlayer.playMenuMusic();
+        audioPlayer = AudioPlayer.getInstance();
+        audioPlayer.playMusic(MusicType.MENU, 0.3f);
         menuImage = new org.newdawn.slick.Image("data/images/mantis.jpg");
         
     }
@@ -64,7 +64,7 @@ public class MenuState extends BasicGameState {
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         Input input = container.getInput();
         if (input.isKeyPressed(Input.KEY_SPACE) || startGame) {
-            musicPlayer.playGameMusic();
+            audioPlayer.playMusic(MusicType.GAME);
             startGame = false;
             game.enterState(States.GAME.getID(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
         } 
