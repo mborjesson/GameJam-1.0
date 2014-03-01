@@ -45,7 +45,7 @@ public class Main extends StateBasedGame {
     public void initStatesList(GameContainer gc) throws SlickException {
         this.addState(new MenuState());
         this.addState(new GameState());
-        enterState(States.GAME.getID());
+        enterState(States.MENU.getID());
     }
     
     public static Options getOptions() {

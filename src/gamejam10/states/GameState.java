@@ -12,12 +12,12 @@ import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.physics.*;
 
-
 import java.util.*;
 
 import gamejam10.Main;
 import gamejam10.ai.BasicAI;
 import gamejam10.audio.MusicPlayer;
+import gamejam10.character.AIEnemy;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
 import gamejam10.level.Level;
@@ -78,9 +78,9 @@ public class GameState extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame sbg)
 			throws SlickException {
 
-        Enemy en = new Enemy(300, 250);
-        en.setAI(new BasicAI(en, player));
-        enemies.add(en);
+//		AIEnemy en = new AIEnemy(200, 200);
+//		en.setAI(new BasicAI(en, player, 100, 200));
+//		enemies.add(en);
 
 		musicPlayer = MusicPlayer.getInstance();
 		
@@ -115,6 +115,8 @@ public class GameState extends BasicGameState {
 		g.translate(camera.getX()+width*0.5f, camera.getY()+height*0.5f);
 		
 		level.render(g);
+		
+		gc.getInput().clearControlPressedRecord();
 	}
 
 
@@ -125,8 +127,8 @@ public class GameState extends BasicGameState {
 		handleKeyboardInput(gc.getInput(), delta, sbg);
 
         for (gamejam10.character.Character c : level.getCharacters()) {
-        	if ( c instanceof Enemy ) {
-        		Enemy e = (Enemy)c;
+        	if ( c instanceof AIEnemy ) {
+        		AIEnemy e = (AIEnemy)c;
         		e.updateAI(delta);
         	}
 		}
@@ -140,17 +142,17 @@ public class GameState extends BasicGameState {
 
 		// we can both use the WASD or arrow keys to move around, obviously we
 		// can't move both left and right simultaneously
-		if (i.isKeyDown(Input.KEY_A) || i.isKeyDown(Input.KEY_LEFT) || i.isControllerLeft(2)) {
+		if (i.isKeyDown(Input.KEY_A) || i.isKeyDown(Input.KEY_LEFT) || isControllerPressed("left", i)) {
 			player.moveLeft(delta);
 			player.setMoving(true);
-		} else if (i.isKeyDown(Input.KEY_D) || i.isKeyDown(Input.KEY_RIGHT) || i.isControllerRight(2)) {
+		} else if (i.isKeyDown(Input.KEY_D) || i.isKeyDown(Input.KEY_RIGHT) || isControllerPressed("right", i)) {
 			player.moveRight(delta);
 			player.setMoving(true);
 		} else {
 			player.setMoving(false);
 		}
 
-		if (i.isKeyDown(Input.KEY_UP) || i.isKeyDown(Input.KEY_W) || i.isButton1Pressed(2)) {
+		if (i.isKeyDown(Input.KEY_UP) || i.isKeyDown(Input.KEY_W) || isControllerPressed("a", i)) {
 			player.jump();
 		} else if (i.isKeyPressed(Input.KEY_J)) {
 			player.setHighlight(!player.isHighlight());
@@ -163,6 +165,21 @@ public class GameState extends BasicGameState {
 			game.enterState(States.MENU.getID(), new FadeOutTransition(
 					Color.black, 50), new FadeInTransition(Color.black, 50));
 		}
+	}
+	
+	private boolean isControllerPressed(String btn, Input i)
+	{
+		for(int c = 0; c < i.getControllerCount(); c++)
+		{
+			if (btn == "left" && i.isControllerLeft(c))
+				return true;
+			else if (btn == "right" && i.isControllerRight(c))
+				return true;
+			else if (btn == "a" && i.isButton1Pressed(c))
+				return true;
+		}
+		
+		return false;
 	}
 
 	/**

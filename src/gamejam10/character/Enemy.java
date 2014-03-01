@@ -17,8 +17,6 @@ import org.newdawn.slick.SlickException;
  */
 public class Enemy extends Character {
     
-	private BasicAI testBasicAI;
-	
      public Enemy(float x, float y) throws SlickException {
         super(x,y);
         this.x = x;
@@ -43,15 +41,5 @@ public class Enemy extends Character {
         
         boundingShape.updatePosition(x+3,y);
     }
-     
-      public void setAI(BasicAI ai) {
-    	  testBasicAI = ai;
-      }
-      
-      public void updateAI(double dt) {
-    	  testBasicAI.update(this, dt);
-      }
-     
-     
     
 }
