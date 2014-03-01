@@ -60,48 +60,49 @@ public class Level {
 								+ height);
 						CharacterType ct = CharacterType.getCharacterType(name);
 						switch (ct) {
-						case PLAYER: {
-							player = new Player(x, y);
-						}
-						case ENEMY_EASY: {
-							AIEnemy en = new AIEnemy(x, y);
-							BasicAI ai = new BasicAI(en, player);
-							
-							RandomMovementAction.Parameters moveParameters = new RandomMovementAction.Parameters();
-							moveParameters.maxMovementDuration = 1000;
-							moveParameters.minMovementDuration = 100;
-							moveParameters.minX = 100;
-							moveParameters.maxX = 200;
-							
-							ai.addAIAction(new RandomMovementAction(en, moveParameters));
-							
-							en.setAI(ai);
-							
-							enemies.add(en);
-
-						}
-						case ENEMY_JUMPING: {
-							AIEnemy en = new AIEnemy(x, y);
-							BasicAI ai = new BasicAI(en, player);
-							
-							RandomMovementAction.Parameters moveParameters = new RandomMovementAction.Parameters();
-							moveParameters.maxMovementDuration = 1000;
-							moveParameters.minMovementDuration = 100;
-							moveParameters.minX = 100;
-							moveParameters.maxX = 200;
-							
-							RandomJumpAction.Parameters jumpParameters = new RandomJumpAction.Parameters();
-							jumpParameters.maxTimeBetweenJumps = 5000;
-							jumpParameters.minTimeBetweenJumps = 1000;
-							
-							ai.addAIAction(new RandomJumpAction(en, jumpParameters));
-							ai.addAIAction(new RandomMovementAction(en, moveParameters));
-							
-							en.setAI(ai);
-							
-							enemies.add(en);
-						}
-							break;
+							case PLAYER: {
+								player = new Player(x, y);
+								break;
+							}
+							case ENEMY_EASY: {
+								AIEnemy en = new AIEnemy(x, y);
+								BasicAI ai = new BasicAI(en, player);
+								
+								RandomMovementAction.Parameters moveParameters = new RandomMovementAction.Parameters();
+								moveParameters.maxMovementDuration = 1000;
+								moveParameters.minMovementDuration = 100;
+								moveParameters.minX = 100;
+								moveParameters.maxX = 200;
+								
+								ai.addAIAction(new RandomMovementAction(en, moveParameters));
+								
+								en.setAI(ai);
+								
+								enemies.add(en);
+								break;
+							}
+							case ENEMY_JUMPING: {
+								AIEnemy en = new AIEnemy(x, y);
+								BasicAI ai = new BasicAI(en, player);
+								
+								RandomMovementAction.Parameters moveParameters = new RandomMovementAction.Parameters();
+								moveParameters.maxMovementDuration = 1000;
+								moveParameters.minMovementDuration = 100;
+								moveParameters.minX = 100;
+								moveParameters.maxX = 200;
+								
+								RandomJumpAction.Parameters jumpParameters = new RandomJumpAction.Parameters();
+								jumpParameters.maxTimeBetweenJumps = 5000;
+								jumpParameters.minTimeBetweenJumps = 1000;
+								
+								ai.addAIAction(new RandomJumpAction(en, jumpParameters));
+								ai.addAIAction(new RandomMovementAction(en, moveParameters));
+								
+								en.setAI(ai);
+								
+								enemies.add(en);
+								break;
+							}
 						}
 					}
 						break;
