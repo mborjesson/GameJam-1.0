@@ -83,22 +83,6 @@ public class MusicPlayer {
         death.play();
     }
     
-    /**
-     * 
-     */
-     private void randomGameMusic() {
-        
-        try {
-            //openingMenuMusic = new Music("/data/modar/c2k-burt_reynolds.xm");
-            //openingMenuMusic = new Music("/data/modar/c2k-helly_hansen.xm");
-        	gameMusic = new Music("/data/music/game.ogg");
-            //openingMenuMusic = new Music("/data/modar/kirby.ogg");
-        } catch (SlickException ex) {
-            //Logger.getLogger(GameState.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
- 
-    }
-    
     
     
 }
