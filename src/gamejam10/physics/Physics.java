@@ -96,10 +96,9 @@ public class Physics {
     	for (Character c : level.getCharacters() ) {
 			if ( c instanceof Player ) {
 				AABoundingRect box = (AABoundingRect)level.getEndOfWorldObject().getBoundingShape();
-				AABoundingRect cbox = (AABoundingRect)c.getBoundingShape();
-				
-				System.out.println("END BOX " + box.getX() + ", " + box.getY() + ", " + box.getWidth() + ", "	+ box.getHeight());
-				System.out.println("CHAR BOX " + cbox.getX() + ", " + cbox.getY() + ", " + cbox.getWidth() + ", "	+ cbox.getHeight());
+//				AABoundingRect cbox = (AABoundingRect)c.getBoundingShape();
+//				System.out.println("END BOX " + box.getX() + ", " + box.getY() + ", " + box.getWidth() + ", "	+ box.getHeight());
+//				System.out.println("CHAR BOX " + cbox.getX() + ", " + cbox.getY() + ", " + cbox.getWidth() + ", "	+ cbox.getHeight());
 				if (c.getBoundingShape().checkCollision(box)) {
 					
 					System.out.println("Woho \\0/ You Made It!!!");
