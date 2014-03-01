@@ -130,17 +130,17 @@ public class Level {
 			}
 		}
 		
-		sun = new Sun(10*1000);
+		sun = new Sun(1000*1000);
 
 		// TEST
-		AIEnemy en = new AIEnemy(50, 370);
-		BasicAI ai = new BasicAI(en, player);
-		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
-		moveParameters.minX = 50;
-		moveParameters.maxX = 150;
-		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
-		en.setAI(ai);
-		enemies.add(en);
+//		AIEnemy en = new AIEnemy(50, 370);
+//		BasicAI ai = new BasicAI(en, player);
+//		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
+//		moveParameters.minX = 50;
+//		moveParameters.maxX = 150;
+//		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
+//		en.setAI(ai);
+//		enemies.add(en);
 
 		addCharacter(player);
 		//addEnemies(enemies);
