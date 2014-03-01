@@ -23,7 +23,6 @@ public class RandomJumpAIAction implements AIAction {
 		accumulatedTime += dt;
 		
 		if ( accumulatedTime >= nextJumpTime ) {
-			System.out.println("Jumping");
 			character.jump();
 			accumulatedTime -= nextJumpTime;
 			nextJumpTime = parameters.minTimeBetweenJumps + (parameters.maxTimeBetweenJumps - parameters.minTimeBetweenJumps) * Math.random();

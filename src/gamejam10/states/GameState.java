@@ -328,7 +328,7 @@ public class GameState extends BasicGameState {
         
         level.update(delta);
         
-        physics.handlePhysics(level, delta);
+        physics.handlePhysics(sbg, level, delta);
 
 	}
 

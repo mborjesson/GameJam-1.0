@@ -24,8 +24,6 @@ import org.newdawn.slick.tiled.*;
  */
 public class Level {
 
-	private static final int TILE_WIDTH_X = 32;
-	
 	private TiledMap map;
 	private int mapWidth;
 	private int mapHeight;
@@ -35,6 +33,8 @@ public class Level {
 	// list of all characters on this map
 	private List<Character> characters = new ArrayList<Character>();
 	private List<Character> enemies = new ArrayList<Character>();
+	private EndOfLevelObject endOfWorldObject;
+	 
 	
 	private Sun sun = null;
 
@@ -54,7 +54,7 @@ public class Level {
 						int x = map.getObjectX(groupID, objectID);
 						int y = map.getObjectY(groupID, objectID);
 						int width = map.getObjectWidth(groupID, objectID);
-						int height = map.getObjectWidth(groupID, objectID);
+						int height = map.getObjectHeight(groupID, objectID);
 						System.out.println(x + ", " + y + ", " + width + ", "
 								+ height);
 						CharacterType ct = CharacterType.getCharacterType(name);
@@ -73,8 +73,8 @@ public class Level {
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = x - TILE_WIDTH_X * deltaTilesMin;
-								moveParameters.maxX = x + TILE_WIDTH_X * deltaTilesMax;
+								moveParameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								moveParameters.maxX = x + map.getTileWidth() * deltaTilesMax;
 								
 								ai.addAIAction(new RandomMovementAIAction(en, moveParameters));
 								
@@ -93,8 +93,8 @@ public class Level {
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = x - TILE_WIDTH_X * deltaTilesMin;
-								moveParameters.maxX = x + TILE_WIDTH_X * deltaTilesMax;
+								moveParameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								moveParameters.maxX = x + map.getTileWidth() * deltaTilesMax;
 								
 								RandomJumpAIAction.Parameters jumpParameters = new RandomJumpAIAction.Parameters();
 								jumpParameters.maxTimeBetweenJumps = 5000;
@@ -110,47 +110,49 @@ public class Level {
 							}
 							
 						}
+						break;
 					} 
-					case LEVEL_END: {
+					case TRIGGER: {
+						System.out.println(" ");
+						
+						System.out.println("Trigger Found!");
+						
 						System.out.println("LEVEL_END FOUND");
 						String name = map.getObjectProperty(groupID, objectID, "name", null);
 						int x = map.getObjectX(groupID, objectID);
 						int y = map.getObjectY(groupID, objectID);
+						
 						int width = map.getObjectWidth(groupID, objectID);
-						int height = map.getObjectWidth(groupID, objectID);
+						int height = map.getObjectHeight(groupID, objectID);
 						System.out.println(x + ", " + y + ", " + width + ", "	+ height);
+						
+						System.out.println("Name: " + name);
 						CharacterType ct = CharacterType.getCharacterType(name);
 						LevelType lt = LevelType.getLevelObject(name);
 						System.out.println("lt: " + lt);
 						
-					}
+						endOfWorldObject = new EndOfLevelObject(x, y, width, height);
 						break;
+						
+					}
+						
 					}
 				}
 			}
 		}
 		
-		sun = new Sun(60*1000);
+		sun = new Sun(160*1000);
 
 		// TEST
-		AIEnemy en = new AIEnemy(50, 370);
-		BasicAI ai = new BasicAI(en, player);
-		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
-		moveParameters.minX = 50;
-		moveParameters.maxX = 150;
-		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
-
-		RandomJumpAIAction.Parameters jumpParameters = new RandomJumpAIAction.Parameters();
-		jumpParameters.maxTimeBetweenJumps = 100;
-		jumpParameters.minTimeBetweenJumps = 0;
-		ai.addAIAction(new RandomJumpAIAction(en, jumpParameters));
-		en.setAI(ai);
-		
-		enemies.add(en);
 
 		addCharacter(player);
 		//addEnemies(enemies);
 		
+//		Brainemy beny = new Brainemy(50, 370, 50, 150);
+//		enemies.add(en);
+		
+		FloatEnemy fenemy = new FloatEnemy(50, 370, 50, 150);
+		enemies.add(fenemy);
 		
 		for (Object e : enemies) {
 			addCharacter((Character)e);
@@ -242,6 +244,7 @@ public class Level {
 	
 	public void update(int delta) {
 		sun.update(delta);
+//		player.update(delta);
 	}
 
 	public void addCharacter(Character c) {
@@ -324,4 +327,14 @@ public class Level {
 	public void setCamera(Camera camera) {
 		this.camera = camera;
 	}
+
+	public EndOfLevelObject getEndOfWorldObject() {
+		return endOfWorldObject;
+	}
+
+	public void setEndOfWorldObject(EndOfLevelObject endOfWorldObject) {
+		this.endOfWorldObject = endOfWorldObject;
+	}
+	
+	
 }

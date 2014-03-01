@@ -23,7 +23,9 @@ public class AudioPlayer {
     private static final AudioPlayer INSTANCE = new AudioPlayer();
     private Map<MusicType, Music> musicMap = new HashMap<MusicType, Music>();
     private Map<SoundType, Sound> soundMap = new HashMap<SoundType, Sound>();
-    private boolean enabled = false;
+
+    private boolean enabled = true;
+    private boolean initialized = false;
     
     public static AudioPlayer getInstance() {
         return INSTANCE;
@@ -38,7 +40,11 @@ public class AudioPlayer {
     	if (!enabled) {
     		return;
     	}
-        try {
+    	if (initialized) {
+    		return;
+    	}
+		initialized = true;
+    	try {
         	for (MusicType mt : MusicType.values()) {
         		musicMap.put(mt, new Music(mt.getFile()));
         	}
@@ -50,20 +56,28 @@ public class AudioPlayer {
         }
     }
 
-    /**
-     * 
-     */
-    private void muteAllMusic() {
+    private void stopMusic() {
     	if (!enabled) {
     		return;
     	}
-        //menuMusic.fade(500, 0, true);
-        //gameMusic.fade(500, 0, true);
-//        menuMusic.stop();
-//        gameMusic.stop();
     	for (Music m : musicMap.values()) {
     		m.stop();
     	}
+    }
+    
+    private void stopSound() {
+    	if (!enabled) {
+    		return;
+    	}
+    	
+    	for (Sound s : soundMap.values()) {
+    		s.stop();
+    	}
+    }
+    
+    private void stopAllSounds() {
+    	stopMusic();
+    	stopSound();
     }
     
     public void playMusic(MusicType type) {
@@ -74,7 +88,7 @@ public class AudioPlayer {
     	if (!enabled) {
     		return;
     	}
-        muteAllMusic();
+        stopMusic();
         musicMap.get(type).loop();
         musicMap.get(type).setVolume(volume);
     }
@@ -93,4 +107,17 @@ public class AudioPlayer {
     	}
     	soundMap.get(type).play(pitch, volume);
     }
+    
+    public void setEnabled(boolean enabled) {
+    	if (this.enabled && !enabled) {
+    		stopAllSounds();
+    	} else if (!this.enabled && enabled && !initialized) {
+    		initialize();
+    	}
+		this.enabled = enabled;
+	}
+    
+    public boolean isEnabled() {
+		return enabled;
+	}
 }

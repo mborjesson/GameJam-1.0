@@ -19,9 +19,13 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * @author gregof
  */
 public class Player extends Character {
+	
+	public float startx, starty;
      
     public Player(float x, float y) throws SlickException{
         super(x,y);
+        startx = x;
+        starty = y;
         //sprite = new Image("data/img/characters/player/player.png");
          setSprite(new Image("data/images/characters/player/mainstill.png") /*new Image("data/images/characters/player/homerstill.png")*/);
 //       setMovingAnimation(new Image[]{new Image("data/img/characters/player/player_1.png"),new Image("data/img/characters/player/player_2.png"),
@@ -31,6 +35,8 @@ public class Player extends Character {
        
        // setAnimation("data/images/characters/player/homeranim.png");
        setAnimation(/*"data/images/characters/player/homeranimsmall.png"*/"data/images/characters/player/mainanim.png", 20, 43, 8);
+       
+       setJumpAnimation("data/images/characters/player/mainanimjump.png", 20, 43, 250, 3);
        
        //default bounding shape is a 32 by 32 box
 
@@ -48,7 +54,8 @@ public class Player extends Character {
         if (onGround) {
         	AudioPlayer ap = AudioPlayer.getInstance();
         	ap.playSound(SoundType.JUMP, 0.3f);
-            y_velocity = -0.6f;
+            y_velocity = getJumpVelocity();
+            showJumpingAnimation = true;
         }
     }
     
@@ -61,6 +68,12 @@ public class Player extends Character {
 	public void handleCollision(Character c2) {
 		System.out.println(this + " colliding with " + c2);
 	}
+
+//	public void update(int delta) {
+//		if ( onGround ) {
+//		     setAnimation("data/images/characters/player/mainanim.png", 20, 43, 8);
+//		}
+//	}
     
 //    public void moveLeft(int delta){
 //        facing = Facing.LEFT; 

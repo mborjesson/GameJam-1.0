@@ -6,8 +6,11 @@ package gamejam10;
 
 import gamejam10.audio.*;
 import gamejam10.enums.*;
+import gamejam10.level.EndOfLevelObject;
 import gamejam10.options.Options;
+import gamejam10.states.ExitState;
 import gamejam10.states.GameState;
+import gamejam10.states.LevelCompletedState;
 import gamejam10.states.MenuState;
 
 import org.lwjgl.opengl.*;
@@ -41,6 +44,7 @@ public class Main extends StateBasedGame {
     public Main(String title) {
         super(title);
         
+        AudioPlayer.getInstance().setEnabled(options.isSoundEnabled());
         AudioPlayer.getInstance().initialize();
     }
 
@@ -48,7 +52,9 @@ public class Main extends StateBasedGame {
     public void initStatesList(GameContainer gc) throws SlickException {
         this.addState(new MenuState());
         this.addState(new GameState());
-        enterState(States.GAME.getID());
+        enterState(States.MENU.getID());
+        this.addState(new LevelCompletedState());
+        this.addState(new ExitState());
     }
     
     public static Options getOptions() {

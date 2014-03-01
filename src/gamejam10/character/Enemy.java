@@ -25,22 +25,21 @@ public class Enemy extends Character {
         // default sprite
     //    sprite = new Image("data/images/placeholder_sprite.png");
         
-               setSprite(new Image("data/images/characters/player/enemystill.png"));
-
-       setAnimation("data/images/characters/player/enemyanim.png", 22, 28, 3);
+       setSprite(new Image("data/images/characters/player/enemystill.png"));
+       setAnimation("data/images/characters/player/enemyanim.png", 22, 27, 3);
        
        //default bounding shape is a 32 by 32 box
-        boundingShape = new AABoundingRect(x,y,22,28);
+        boundingShape = new AABoundingRect(x,y,22,27);
         
         accelerationSpeed = 0.001f;
-        maximumSpeed = 0.05f; //0.15f;
+        maximumSpeed = 0.08f; //0.15f;
         maximumFallSpeed = 0.3f;
         decelerationSpeed = 0.001f;
     }
      
       public void updateBoundingShape(){
         
-        boundingShape.updatePosition(x+3,y);
+        boundingShape.updatePosition(x-3,y);
     }
 
 	@Override

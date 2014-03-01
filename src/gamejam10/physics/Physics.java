@@ -15,8 +15,12 @@ import gamejam10.states.GameState;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 
 /**
@@ -32,11 +36,12 @@ public class Physics {
         this.gameState = gameState;
     }
     
-    public void handlePhysics(Level level, int delta) {
+    public void handlePhysics(StateBasedGame sbg, Level level, int delta) {
         handleCharacters(level, delta);
         checkCollisionBetweenPlayerAndEnemies(level);
         checkCollisionBetweenCharacters(level);
         checkCollisionBetweenCharacterAndTheEndOfTheUniverse(level);
+        checkIfEndOfWorld(sbg, level);
     }
 
     private void handleCharacters(Level level, int delta) {
@@ -85,28 +90,46 @@ public class Physics {
 			if ( c instanceof Player ) {
 				float y =((AABoundingRect)c.getBoundingShape()).getY(); 
 							if (y > 1500) {
+								AudioPlayer.getInstance().playSound(SoundType.WEEE, 0.4f);
 								killPlayer();
 							}
 			}
 		}
     }
     
-    private void checkIfEndOfWorld(Level level) {
-    	//level.ge
+    private void checkIfEndOfWorld(StateBasedGame sbg, Level level) {
+    	for (Character c : level.getCharacters() ) {
+			if ( c instanceof Player ) {
+				AABoundingRect box = (AABoundingRect)level.getEndOfWorldObject().getBoundingShape();
+//				AABoundingRect cbox = (AABoundingRect)c.getBoundingShape();
+//				System.out.println("END BOX " + box.getX() + ", " + box.getY() + ", " + box.getWidth() + ", "	+ box.getHeight());
+//				System.out.println("CHAR BOX " + cbox.getX() + ", " + cbox.getY() + ", " + cbox.getWidth() + ", "	+ cbox.getHeight());
+				if (c.getBoundingShape().checkCollision(box)) {
+					
+					System.out.println("Woho \\0/ You Made It!!!");
+					sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
+				}
+					
+    	
+    	
+			}
+		}
     }
     
     
     
     
     private void killPlayer() {
-        gameState.getPlayer().setX(50);
-        gameState.getPlayer().setY(350);
+        gameState.getPlayer().setX(gameState.getPlayer().startx);
+        gameState.getPlayer().setY(gameState.getPlayer().starty);
+        gameState.getPlayer().setXVelocity(0);
+        gameState.getPlayer().setYVelocity(0);
         
         AudioPlayer ap = AudioPlayer.getInstance();
     	 ap.playSound(SoundType.DEATH, 0.2f);
     }
 
-    private boolean checkCollision(LevelObject obj, Tile[][] mapTiles) {
+    private boolean checkCollision(LevelObject obj, Tile[][] mapTiles, float y_movement) {
         //get only the tiles that matter
         //System.out.println("check collision");
         ArrayList<Tile> tiles = obj.getBoundingShape().getTilesOccupying(mapTiles);
@@ -137,6 +160,13 @@ public class Physics {
                 
                 if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                     // System.out.println("checkCollision true");
+                	if (obj.getYVelocity() > 0.90f)
+                	{
+                		System.out.println("Ugh!!!!!!!!!!!");
+                     	killPlayer();
+                         return false;
+                	}
+                	
                     return true;
                 }
             }
@@ -247,7 +277,7 @@ public class Physics {
                 obj.setX(obj.getX() + step_x);
  //System.out.println("in physics 222");
                 //if we collide with any of the bounding shapes of the tiles we have to revert to our original position
-                if (checkCollision(obj, level.getTiles())) {
+                if (checkCollision(obj, level.getTiles(), y_movement)) {
 //                    System.out.println("COL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     //undo our step, and set the velocity and amount we still have to move to 0, because we can't move in that direction
                     obj.setX(obj.getX() - step_x);
@@ -256,6 +286,8 @@ public class Physics {
                 }
 
             }
+            
+            //System.out.println("x_movement: " + y_movement);
             //same thing for the vertical, or y movement
             if (y_movement != 0) {
                 if ((y_movement > 0 && y_movement < step_y) || (y_movement > step_y && y_movement < 0)) {
@@ -270,7 +302,7 @@ public class Physics {
                 
                 obj.setY(obj.getY() + step_y);
 
-                if (checkCollision(obj, level.getTiles())) {
+                if (checkCollision(obj, level.getTiles(), y_movement)) {
                     obj.setY(obj.getY() - step_y);
                     obj.setYVelocity(0);
                     y_movement = 0;
