@@ -67,7 +67,7 @@ public class Level {
         int offset_x = 0;
 
         //the first thing we are going to need is the half-width of the screen, to calculate if the player is in the middle of our screen
-        int half_width = (int) (Main.WINDOW_WIDTH / Main.SCALE / 2);
+        int half_width = (int) (Main.getOptions().getWidth() / 2);
 
         //next up is the maximum offset, this is the most right side of the map, minus half of the screen offcourse
         int maxX = (int) (map.getWidth() * 32) - half_width*2;
@@ -92,7 +92,7 @@ public class Level {
     public int getYOffset() {
         int offset_y = 0;
 
-        int half_heigth = (int) (Main.WINDOW_HEIGTH / Main.SCALE / 2);
+        int half_heigth = (int) (Main.getOptions().getHeight() / 2);
 
         int maxY = (int) (map.getHeight() * 32) - half_heigth;
 

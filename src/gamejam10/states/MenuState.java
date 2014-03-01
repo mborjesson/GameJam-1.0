@@ -7,6 +7,7 @@ package gamejam10.states;
 
 import gamejam10.Main;
 import gamejam10.audio.MusicPlayer;
+import gamejam10.enums.States;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -32,7 +33,7 @@ public class MenuState extends BasicGameState {
 
     @Override
     public int getID() {
-        return Main.STATE_MENU;
+        return States.MENU.getID();
     }
 
     @Override
@@ -59,7 +60,7 @@ public class MenuState extends BasicGameState {
         Input input = container.getInput();
         if (input.isKeyPressed(Input.KEY_SPACE)) {
             musicPlayer.playGameMusic();
-            game.enterState(Main.STATE_GAME, new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
+            game.enterState(States.GAME.getID(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
         } 
         
     }

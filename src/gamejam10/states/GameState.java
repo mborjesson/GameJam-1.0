@@ -9,6 +9,7 @@ import gamejam10.Main;
 import gamejam10.audio.MusicPlayer;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
+import gamejam10.enums.States;
 import gamejam10.level.Level;
 import gamejam10.physics.AABoundingRect;
 import gamejam10.physics.Physics;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.logging.Logger;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -50,7 +52,7 @@ public class GameState extends BasicGameState {
             
     @Override
     public int getID() {
-        return Main.STATE_GAME;
+        return States.GAME.getID();
     }
 
    
@@ -136,7 +138,7 @@ public class GameState extends BasicGameState {
         
         if (i.isKeyPressed(Input.KEY_ESCAPE)) {
             musicPlayer.playMenuMusic();
-            game.enterState(Main.STATE_MENU, new FadeOutTransition(Color.black, 50), new FadeInTransition(Color.black, 50));
+            game.enterState(States.MENU.getID(), new FadeOutTransition(Color.black, 50), new FadeInTransition(Color.black, 50));
         } 
     }
     
