@@ -85,6 +85,7 @@ public class Physics {
 			if ( c instanceof Player ) {
 				float y =((AABoundingRect)c.getBoundingShape()).getY(); 
 							if (y > 1500) {
+								AudioPlayer.getInstance().playSound(SoundType.WEEE, 0.4f);
 								killPlayer();
 							}
 			}
