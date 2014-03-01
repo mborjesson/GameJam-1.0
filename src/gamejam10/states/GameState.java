@@ -236,9 +236,9 @@ public class GameState extends BasicGameState {
 		godShader.setUniformFloatVariable("exposure", 0.0034f);
 		godShader.setUniformFloatVariable("decay", 1.0f);
 		godShader.setUniformFloatVariable("density", 0.84f);
-		godShader.setUniformFloatVariable("weight", 5.65f);
-		godShader.setUniformFloatVariable("lightPositionOnScreen", 0.5f, 0.5f);
-		godShader.setUniformFloatVariable("test", 1.0f, 0.0f, 0.0f, 1.0f);
+		godShader.setUniformFloatVariable("weight", 1.65f);
+		godShader.setUniformFloatVariable("lightPositionOnScreen", level.getSun().getSunPositionX(), level.getSun().getSunPositionY());
+		//godShader.setUniformFloatVariable("test", 1.0f, 0.0f, 0.0f, 1.0f);
 
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
