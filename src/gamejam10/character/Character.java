@@ -150,11 +150,22 @@ public abstract class Character extends LevelObject {
             ex.printStackTrace();
         }
 
-        jumpAnimation = new Animation();
+        jumpAnimations = new HashMap<Facing, Animation>();
+        
+        Animation jumpAnimationRight = new Animation();
         
         for (int i = 0; i < numberOfFrames; i++) {
-            jumpAnimation.addFrame(sheet.getSprite(i, 0), duration);
+        	jumpAnimationRight.addFrame(sheet.getSprite(i, 0), duration);
         }
+        
+        Animation jumpAnimationLeft = new Animation();
+        
+        for (int i = 0; i < numberOfFrames; i++) {
+        	jumpAnimationLeft.addFrame(sheet.getSprite(i, 0).getFlippedCopy(true, false), duration);
+        }
+        
+        jumpAnimations.put(Facing.RIGHT, jumpAnimationRight);
+        jumpAnimations.put(Facing.LEFT, jumpAnimationLeft);
     }
 
     protected void setAnimation(String img, int frameWidth, int frameHeight, int numberOfFrames) {
@@ -209,7 +220,7 @@ public abstract class Character extends LevelObject {
         return y;
     }
 
-    Animation jumpAnimation;
+    HashMap<Facing, Animation> jumpAnimations;
     boolean showJumpingAnimation;
     
     public void render(Graphics g, float offset_x, float offset_y){
@@ -217,14 +228,15 @@ public abstract class Character extends LevelObject {
     	float xp = x-offset_x;
     	float yp = y-offset_y;
  
-    	if ( jumpAnimation != null && showJumpingAnimation ) {
+    	if ( jumpAnimations != null && showJumpingAnimation ) {
             
-    		jumpAnimation.draw(xp, yp);
+    		Animation anim = jumpAnimations.get(facing);
+    		anim.draw(xp, yp);
 
     		// If we showed the last animation
-            if ( jumpAnimation.getCurrentFrame() == jumpAnimation.getImage(jumpAnimation.getFrameCount()-1) ) {
+            if ( anim.getCurrentFrame() == anim.getImage(anim.getFrameCount()-1) ) {
             	showJumpingAnimation = false;
-            	jumpAnimation.restart();
+            	anim.restart();
             }
             
     	} else {
