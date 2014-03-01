@@ -156,7 +156,7 @@ public class Level {
 		// create an array to hold all the tiles in the map
 		tiles = new Tile[map.getWidth()][map.getHeight()];
 
-		int layerIndex = map.getLayerIndex("images");
+		int layerIndex = map.getLayerIndex("maplayer");
 
 		if (layerIndex == -1) {
 			// TODO we can clean this up later with an exception if we want, but

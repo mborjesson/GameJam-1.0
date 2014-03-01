@@ -86,7 +86,7 @@ public class GameState extends BasicGameState {
 		
 		camera.setWidth(1500);
 
-		level = new Level("map04");
+		level = new Level("map06");
 		level.setCamera(camera);
 
 		player = level.getPlayer();
@@ -97,7 +97,7 @@ public class GameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		g.setBackground(Color.black);
+		g.setBackground(Color.white);
 		g.clear();
 		
 		// calculate scale
@@ -140,17 +140,17 @@ public class GameState extends BasicGameState {
 
 		// we can both use the WASD or arrow keys to move around, obviously we
 		// can't move both left and right simultaneously
-		if (i.isKeyDown(Input.KEY_A) || i.isKeyDown(Input.KEY_LEFT)) {
+		if (i.isKeyDown(Input.KEY_A) || i.isKeyDown(Input.KEY_LEFT) || i.isControllerLeft(2)) {
 			player.moveLeft(delta);
 			player.setMoving(true);
-		} else if (i.isKeyDown(Input.KEY_D) || i.isKeyDown(Input.KEY_RIGHT)) {
+		} else if (i.isKeyDown(Input.KEY_D) || i.isKeyDown(Input.KEY_RIGHT) || i.isControllerRight(2)) {
 			player.moveRight(delta);
 			player.setMoving(true);
 		} else {
 			player.setMoving(false);
 		}
 
-		if (i.isKeyDown(Input.KEY_UP) || i.isKeyDown(Input.KEY_W)) {
+		if (i.isKeyDown(Input.KEY_UP) || i.isKeyDown(Input.KEY_W) || i.isButton1Pressed(2)) {
 			player.jump();
 		} else if (i.isKeyPressed(Input.KEY_J)) {
 			player.setHighlight(!player.isHighlight());
@@ -159,6 +159,7 @@ public class GameState extends BasicGameState {
 		}
 
 		if (i.isKeyPressed(Input.KEY_ESCAPE)) {
+			musicPlayer.playMenuMusic();
 			game.enterState(States.MENU.getID(), new FadeOutTransition(
 					Color.black, 50), new FadeInTransition(Color.black, 50));
 		}

@@ -8,8 +8,10 @@ import gamejam10.states.GameState;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 
 /**
@@ -24,6 +26,7 @@ public class MusicPlayer {
     private static final MusicPlayer INSTANCE = new MusicPlayer();
     private Music menuMusic;
     private Music gameMusic;
+    private Sound jump, death;
     
     public static MusicPlayer getInstance() {
         return INSTANCE;
@@ -31,14 +34,17 @@ public class MusicPlayer {
     
     
     private MusicPlayer() {
-//        try {
-//            
-//           menuMusic = new Music("/data/modar/c2k-commando2000theme.xm");
-//            randomGameMusic();
-//            
-//        } catch (SlickException ex) {
-//            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            
+            menuMusic = new Music("/data/music/menu.ogg");
+            gameMusic = new Music("/data/music/game.ogg");
+            jump = new Sound("data/sounds/Jump.wav");
+            death = new Sound("data/sounds/dead_lava.wav");
+            
+            
+        } catch (SlickException ex) {
+            //Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
@@ -46,10 +52,10 @@ public class MusicPlayer {
      * 
      */
     private void muteAll() {
-//        menuMusic.fade(500, 0, true);
-//        gameMusic.fade(500, 0, true);
-//        menuMusic.stop();
-//        gameMusic.stop();
+        //menuMusic.fade(500, 0, true);
+        //gameMusic.fade(500, 0, true);
+        menuMusic.stop();
+        gameMusic.stop();
     }
     
     /*
@@ -57,7 +63,7 @@ public class MusicPlayer {
      */
     public void playMenuMusic() {
         muteAll();        
-        //menuMusic.loop();
+        menuMusic.loop();
     }
     
     /*
@@ -65,23 +71,16 @@ public class MusicPlayer {
      */
     public void playGameMusic() {
         muteAll();
-        //gameMusic.loop();;
+        gameMusic.loop();
+        gameMusic.setVolume(0.2f);
     }
     
-    /**
-     * 
-     */
-     private void randomGameMusic() {
-        
-//        try {
-//            //openingMenuMusic = new Music("/data/modar/c2k-burt_reynolds.xm");
-//            //openingMenuMusic = new Music("/data/modar/c2k-helly_hansen.xm");
-//            gameMusic = new Music("/data/modar/c2k-lock_and_load.xm");
-//            //openingMenuMusic = new Music("/data/modar/kirby.ogg");
-//        } catch (SlickException ex) {
-//            Logger.getLogger(GameState.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
- 
+    public void playJumpSound() {
+        jump.play();
+    }
+    
+    public void playDeathSound() {
+        death.play();
     }
     
     

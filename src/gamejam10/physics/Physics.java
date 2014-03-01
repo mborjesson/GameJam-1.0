@@ -4,6 +4,7 @@
  */
 package gamejam10.physics;
 
+import gamejam10.audio.MusicPlayer;
 import gamejam10.character.Character;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
@@ -12,6 +13,9 @@ import gamejam10.level.LevelObject;
 import gamejam10.states.GameState;
 
 import java.util.ArrayList;
+
+import org.newdawn.slick.Music;
+import org.newdawn.slick.SlickException;
 
 
 /**
@@ -62,6 +66,9 @@ public class Physics {
     private void killPlayer() {
         gameState.getPlayer().setX(128);
         gameState.getPlayer().setY(50);
+        
+        MusicPlayer mp = MusicPlayer.getInstance();
+    	 mp.playDeathSound();
     }
 
     private boolean checkCollision(LevelObject obj, Tile[][] mapTiles) {
@@ -76,7 +83,7 @@ public class Physics {
                 
                  if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                      System.out.println("AAAAAAHHHHHHHHHHHH!!!!!!!!!!!");
-                     killPlayer();
+                 	killPlayer();
                      return false;
                  }
             } 
@@ -118,6 +125,7 @@ public class Physics {
                 if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                     //don't forget to move the object back up even if we are on the ground!
                     obj.getBoundingShape().movePosition(0, -1);
+                    
                     return true;
                 }
             }
