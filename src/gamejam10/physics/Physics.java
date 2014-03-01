@@ -71,7 +71,7 @@ public class Physics {
     	 mp.playDeathSound();
     }
 
-    private boolean checkCollision(LevelObject obj, Tile[][] mapTiles) {
+    private boolean checkCollision(LevelObject obj, Tile[][] mapTiles, float y_movement) {
         //get only the tiles that matter
         //System.out.println("check collision");
         ArrayList<Tile> tiles = obj.getBoundingShape().getTilesOccupying(mapTiles);
@@ -102,6 +102,15 @@ public class Physics {
                 
                 if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                     // System.out.println("checkCollision true");
+                	
+                	System.out.println(y_movement);
+                	if (y_movement > 10)
+                	{
+                		System.out.println("Ugh!!!!!!!!!!!");
+                     	killPlayer();
+                         return false;
+                	}
+                	
                     return true;
                 }
             }
@@ -212,7 +221,7 @@ public class Physics {
                 obj.setX(obj.getX() + step_x);
  //System.out.println("in physics 222");
                 //if we collide with any of the bounding shapes of the tiles we have to revert to our original position
-                if (checkCollision(obj, level.getTiles())) {
+                if (checkCollision(obj, level.getTiles(), y_movement)) {
 //                    System.out.println("COL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     //undo our step, and set the velocity and amount we still have to move to 0, because we can't move in that direction
                     obj.setX(obj.getX() - step_x);
@@ -221,6 +230,8 @@ public class Physics {
                 }
 
             }
+            
+            //System.out.println("x_movement: " + y_movement);
             //same thing for the vertical, or y movement
             if (y_movement != 0) {
                 if ((y_movement > 0 && y_movement < step_y) || (y_movement > step_y && y_movement < 0)) {
@@ -235,7 +246,7 @@ public class Physics {
                 
                 obj.setY(obj.getY() + step_y);
 
-                if (checkCollision(obj, level.getTiles())) {
+                if (checkCollision(obj, level.getTiles(), y_movement)) {
                     obj.setY(obj.getY() - step_y);
                     obj.setYVelocity(0);
                     y_movement = 0;
