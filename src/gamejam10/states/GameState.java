@@ -84,7 +84,7 @@ public class GameState extends BasicGameState {
 
 		musicPlayer = MusicPlayer.getInstance();
 		
-		camera.setWidth(1500);
+		camera.setWidth(1000);
 
 		level = new Level("map06");
 		level.setCamera(camera);
@@ -97,7 +97,7 @@ public class GameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		g.setBackground(Color.white);
+		g.setBackground(Color.yellow);
 		g.clear();
 		
 		// calculate scale
