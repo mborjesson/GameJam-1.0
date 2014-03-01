@@ -27,7 +27,7 @@ public class Enemy extends Character {
         
                setSprite(new Image("data/images/characters/player/homerstill.png"));
 
-       setAnimation("data/images/characters/player/homeranimsmall.png", 32, 32);
+       setAnimation("data/images/characters/player/homeranimsmall.png", 32, 32, 8);
        
        //default bounding shape is a 32 by 32 box
         boundingShape = new AABoundingRect(x,y,24,30);

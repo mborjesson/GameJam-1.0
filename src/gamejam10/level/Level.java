@@ -24,6 +24,8 @@ import org.newdawn.slick.tiled.*;
  */
 public class Level {
 
+	private static final int TITLE_WIDTH_X = 32;
+	
 	private TiledMap map;
 	private int mapWidth;
 	private int mapHeight;
@@ -64,11 +66,14 @@ public class Level {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
 								
+								int deltaTilesMin = 5; // TODO: Read from map
+								int deltaTilesMax = 7; // TODO: Read from map
+								
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = 100;
-								moveParameters.maxX = 200;
+								moveParameters.minX = x - TITLE_WIDTH_X * deltaTilesMin;
+								moveParameters.maxX = x + TITLE_WIDTH_X * deltaTilesMax;
 								
 								ai.addAIAction(new RandomMovementAIAction(en, moveParameters));
 								
@@ -81,11 +86,14 @@ public class Level {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
 								
+								int deltaTilesMin = 5; // TODO: Read from map
+								int deltaTilesMax = 7; // TODO: Read from map
+								
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = 100;
-								moveParameters.maxX = 200;
+								moveParameters.minX = x - TITLE_WIDTH_X * deltaTilesMin;
+								moveParameters.maxX = x + TITLE_WIDTH_X * deltaTilesMax;
 								
 								RandomJumpAIAction.Parameters jumpParameters = new RandomJumpAIAction.Parameters();
 								jumpParameters.maxTimeBetweenJumps = 5000;
