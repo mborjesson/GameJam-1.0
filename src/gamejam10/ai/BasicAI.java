@@ -21,7 +21,7 @@ public class BasicAI {
 	boolean moving = false;
 	
 	
-	public BasicAI(Character c, Player p, int minX, int maxX) {
+	public BasicAI(Character c, Player p) {
 		player = p;
 		character = c;
 

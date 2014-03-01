@@ -65,7 +65,7 @@ public class Level {
 						}
 						case ENEMY_EASY: {
 							AIEnemy en = new AIEnemy(x, y);
-							BasicAI ai = new BasicAI(en, player, 100, 200);
+							BasicAI ai = new BasicAI(en, player);
 							
 							RandomMovementAction.Parameters moveParameters = new RandomMovementAction.Parameters();
 							moveParameters.maxMovementDuration = 1000;
@@ -74,13 +74,15 @@ public class Level {
 							moveParameters.maxX = 200;
 							
 							ai.addAIAction(new RandomMovementAction(en, moveParameters));
+							
 							en.setAI(ai);
+							
 							enemies.add(en);
 
 						}
 						case ENEMY_JUMPING: {
 							AIEnemy en = new AIEnemy(x, y);
-							BasicAI ai = new BasicAI(en, player, 100, 200);
+							BasicAI ai = new BasicAI(en, player);
 							
 							RandomMovementAction.Parameters moveParameters = new RandomMovementAction.Parameters();
 							moveParameters.maxMovementDuration = 1000;
@@ -94,7 +96,9 @@ public class Level {
 							
 							ai.addAIAction(new RandomJumpAction(en, jumpParameters));
 							ai.addAIAction(new RandomMovementAction(en, moveParameters));
+							
 							en.setAI(ai);
+							
 							enemies.add(en);
 						}
 							break;
