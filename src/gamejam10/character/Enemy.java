@@ -31,10 +31,10 @@ public class Enemy extends Character {
        //default bounding shape is a 32 by 32 box
         boundingShape = new AABoundingRect(x,y,22,27);
         
-        accelerationSpeed = 0.001f;
-        maximumSpeed = 0.08f; //0.15f;
+        accelerationSpeed = 0.07f;
+        maximumSpeed = 0.25f; //0.15f;
         maximumFallSpeed = 0.3f;
-        decelerationSpeed = 0.001f;
+        decelerationSpeed = 0.05f;
     }
      
       public void updateBoundingShape(){
