@@ -6,17 +6,17 @@ import org.newdawn.slick.SlickException;
 
 public class AIEnemy extends Enemy {
 
-	private BasicAI testBasicAI;
+	private BasicAI basicAI;
 	
 	public AIEnemy(float x, float y) throws SlickException {
 		super(x, y);
 	}
 
     public void setAI(BasicAI ai) {
-  	  testBasicAI = ai;
+  	  basicAI = ai;
     }
     
     public void updateAI(double dt) {
-  	  testBasicAI.update(this, dt);
+  	  basicAI.update(this, dt);
     }
 }

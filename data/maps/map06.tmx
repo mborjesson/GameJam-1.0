@@ -50,7 +50,7 @@
  </tileset>
  <layer name="maplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3c247CIBQFUOau///DE9OQVEOqtlBOy1rJfjGmMg8bSge9ppSuIiIiIiIyXKKINBY4G/2Hcek/jCt6/7/eeO8lTWP/bDQWOJvo/X/H2nF/p/u/3fzBKPQfxhW9/49r81J+O40RjmqUHs3nEff3MIm67gPtRex/fo7/03sgcHJL++lS/0pzRM3X/tK59yEQyVHOAQP16T+MK0r/P3b8LGASpf+3fb//y8G+nKeBcfVe94F+1vT/lTO5W+7lzT+wD+s/jEv/YVyt+1/aK6zdG+Rzwb7HA3UcZf3P8whQz1H639Ol9wCgkS39Xzqz5zwfxLel/0vvq3UPYe2FdiL3Pz/v28q9CJQ9O8eTk38L4PEZ/JaUfl+g5vX3ep7RaswikZIaXXOu5dhLn7X2tRu9l5GSGl1zruXYa9J9OVv+AbKQb3QAgAAA
+   H4sIAAAAAAAAC+2c2Y7DIAxFmb35/x8eVaNIGeSCWUwMnCPdhyLkOITLlqhHCOFACCGEEEIIbScveMoFYDXwP8C+4H+AffHu/4+Cuo/wl/u7US4Aq+Hd/yXU5v0Z/t874wfsAv4H2Bfv/o/n5pS+b8oRYFZ28dF1HGF9D/CH13kf/JJaMx6ZOkcmThDqxGXSb6jDo//Pc/yvuxMBkdJ+8qq+plwzFkA9qXFa8p/U9j3Lfi7XX3EfsgIp/2mfu7Yc/9uSO1MDiJHW4ilvpnyuXf/nYkEd+B9KSXm8xP+aGMz/tnjx/9vAa0EbUt/A/3Pixf/Pff/d7+Vy7eChnTyQayOpvjaOVC7F2K3NrUj16dXO33JjnaafauNasvPYA33ZYT5b5b5mzx/8UeN/zTe5LWv5nv18Bd8DWLHK/L/q3rwkf83+Bq3XR1qgPex5DLoOzw1Ksfa/tFeo3Ruc3wX32GOM4sx5BPgfSpll/j/HkZm4jletxDGkmLO1D9zPLP6/k5r1e7xWGQHPDUpp8X/qm72dv+eLvY//wSst/k/V69UXR52d9ULy/ghfsm6DGjz7v9fZ2ai1yCvv43/wivb96PlfAKk+Xirp/wV6xh/lP6ucEfKkYBTzimXu0rVqy57ge7STglHMK5a59wTvo9X0C+lcC+cAgAAA
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
@@ -62,7 +62,7 @@
     <property name="name" value="player"/>
    </properties>
   </object>
-  <object name="Skurk 2" type="spawn" x="1440" y="799" width="31" height="33">
+  <object name="Skurk 2" type="spawn" x="3049" y="519" width="31" height="33">
    <properties>
     <property name="name" value="skurk02"/>
    </properties>
