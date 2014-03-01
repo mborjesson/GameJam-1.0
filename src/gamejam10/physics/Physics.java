@@ -136,13 +136,9 @@ public class Physics {
 //            System.out.println("((AABoundingRect)obj.getBoundingShape()).y: " + ((AABoundingRect)obj.getBoundingShape()).getY());
 //            System.out.println("((AABoundingRect)obj.getBoundingShape()).width: " + ((AABoundingRect)obj.getBoundingShape()).getWidth());
 //            System.out.println("((AABoundingRect)obj.getBoundingShape()).height: " + ((AABoundingRect)obj.getBoundingShape()).getHeight());
-            	System.out.println(y_movement);
-            	System.out.println("vel " + obj.getYVelocity());
                 
                 if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                     // System.out.println("checkCollision true");
-                	
-                	System.out.println("coll " + y_movement);
                 	if (obj.getYVelocity() > 0.90f)
                 	{
                 		System.out.println("Ugh!!!!!!!!!!!");
