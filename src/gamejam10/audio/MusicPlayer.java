@@ -24,6 +24,7 @@ public class MusicPlayer {
     private static final MusicPlayer INSTANCE = new MusicPlayer();
     private Music menuMusic;
     private Music gameMusic;
+    private Music jump;
     
     public static MusicPlayer getInstance() {
         return INSTANCE;
@@ -34,8 +35,9 @@ public class MusicPlayer {
         try {
             
             menuMusic = new Music("/data/music/menu.ogg");
-            //randomGameMusic();
-            gameMusic = new Music("/data/music/game.ogg");
+            randomGameMusic();
+            jump = new Music("data/sounds/Jump.wav");
+            
             
         } catch (SlickException ex) {
             //Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,8 +49,8 @@ public class MusicPlayer {
      * 
      */
     private void muteAll() {
-        menuMusic.fade(500, 0, true);
-        gameMusic.fade(500, 0, true);
+        //menuMusic.fade(500, 0, true);
+        //gameMusic.fade(500, 0, true);
         menuMusic.stop();
         gameMusic.stop();
     }
@@ -66,7 +68,18 @@ public class MusicPlayer {
      */
     public void playGameMusic() {
         muteAll();
-        gameMusic.loop();;
+        gameMusic.loop();
+        gameMusic.setVolume(0.2f);
+    }
+    
+    public void playJumpSound() {
+        gameMusic.pause();
+        
+    }
+    
+    public void resumeGameMusic() {
+        gameMusic.resume();
+        gameMusic.setVolume(0.2f);
     }
     
     /**
@@ -77,7 +90,7 @@ public class MusicPlayer {
         try {
             //openingMenuMusic = new Music("/data/modar/c2k-burt_reynolds.xm");
             //openingMenuMusic = new Music("/data/modar/c2k-helly_hansen.xm");
-            gameMusic = new Music("/data/modar/c2k-lock_and_load.xm");
+        	gameMusic = new Music("/data/music/game.ogg");
             //openingMenuMusic = new Music("/data/modar/kirby.ogg");
         } catch (SlickException ex) {
             //Logger.getLogger(GameState.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

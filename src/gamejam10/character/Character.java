@@ -4,6 +4,7 @@
  */
 package gamejam10.character;
 
+import gamejam10.audio.MusicPlayer;
 import gamejam10.enums.Facing;
 import gamejam10.level.LevelObject;
 
@@ -75,9 +76,9 @@ public abstract class Character extends LevelObject {
     public void jump() {
         if (onGround) {
         	try {
-				Music a = new Music("data/sounds/Jump.wav");
-				a.play();
-			} catch (SlickException e) {
+        		MusicPlayer mp = MusicPlayer.getInstance();
+        		mp.playJumpSound();
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
