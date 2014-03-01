@@ -107,8 +107,8 @@ public class GameState extends BasicGameState {
 		float scaleY = Main.getOptions().getHeight()/height;
 		g.scale(scaleX, scaleY);
 		
-		camera.setX(-player.getX());
-		camera.setY(-player.getY());
+		camera.setX(player.getX());
+		camera.setY(player.getY());
 		
 		level.render(g);
 		
