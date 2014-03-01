@@ -80,6 +80,8 @@ public class GameState extends BasicGameState {
 		g.translate(camera.getX()+width*0.5f, camera.getY()+height*0.5f);
 		
 		level.render(g);
+		
+		gc.getInput().clearControlPressedRecord();
 	}
 
 	@Override
