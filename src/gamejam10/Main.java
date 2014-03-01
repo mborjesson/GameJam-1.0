@@ -4,10 +4,12 @@
  */
 package gamejam10;
 
+import gamejam10.enums.*;
 import gamejam10.options.Options;
 import gamejam10.states.GameState;
 import gamejam10.states.MenuState;
 
+import org.lwjgl.opengl.*;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -21,6 +23,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Main extends StateBasedGame {
     public static void main(String[] args) throws SlickException {
+    	Display.setLocation(100, 100);
     	Main main = new Main("SlickScrollerTest");
         AppGameContainer app = new AppGameContainer(main);
         Options options = Main.getOptions();
@@ -42,8 +45,7 @@ public class Main extends StateBasedGame {
     public void initStatesList(GameContainer gc) throws SlickException {
         this.addState(new MenuState());
         this.addState(new GameState());
-        // this.addState(new GameOverState());
-
+        enterState(States.GAME.getID());
     }
     
     public static Options getOptions() {

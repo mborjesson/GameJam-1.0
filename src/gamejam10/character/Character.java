@@ -6,12 +6,11 @@ package gamejam10.character;
 
 import gamejam10.enums.Facing;
 import gamejam10.level.LevelObject;
+import gamejam10.physics.*;
 
 import java.util.HashMap;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
+
+import org.newdawn.slick.*;
 
 
 /**
@@ -31,6 +30,8 @@ public abstract class Character extends LevelObject {
     protected float accelerationSpeed = 1;
     protected float decelerationSpeed = 1;
     protected float maximumSpeed = 1;
+    
+    protected boolean highlight = true;
 
     public Character(float x, float y) throws SlickException {
         super(x,y);
@@ -174,24 +175,34 @@ public abstract class Character extends LevelObject {
         return y;
     }
 
-    public void render() {
-        //   sprite.draw(x - 2, y - 2);
-
-        //draw a moving animation if we have one and we moved within the last 150 miliseconds
-        if (movingAnimations != null && moving) { //&& lastTimeMoved+150 > System.currentTimeMillis()){
-            movingAnimations.get(facing).draw(x - 2, y - 2);
-        } else {
-            sprites.get(facing).draw(x - 2, y - 2);
-        }
-    }
-    
-    public void render(float offset_x, float offset_y){
+    public void render(Graphics g, float offset_x, float offset_y){
+    	
+    	float xp = x-offset_x;
+    	float yp = y-offset_y;
  
         //draw a moving animation if we have one and we moved within the last 150 miliseconds
         if(movingAnimations != null && moving){
-            movingAnimations.get(facing).draw(x-2-offset_x,y-2-offset_y);                
+            movingAnimations.get(facing).draw(xp, yp);                
         }else{            
-            sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);          
+            sprites.get(facing).draw(xp, yp);          
+        }
+        
+        if (highlight) {
+    		g.setColor(Color.white);
+    		AABoundingRect aab = (AABoundingRect) getBoundingShape();
+    		float width = aab.getWidth();
+    		float height = aab.getHeight();
+
+    		g.drawRect(xp, yp, width, height);
+
         }
     }
+    
+    public void setHighlight(boolean highlight) {
+		this.highlight = highlight;
+	}
+    
+    public boolean isHighlight() {
+		return highlight;
+	}
 }

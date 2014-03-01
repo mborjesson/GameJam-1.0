@@ -36,4 +36,19 @@
    H4sIAAAAAAAAA+2Y4Q7DIAiEbbu9/ysv/ljiCFgQEF35kkuWzaq7o9j0LKWcqS2VyPHwPHPzR+Nd5hZH5rYnmduejHq30/l2NOKO53zXzs0db8UTcutxBa8/SvXtVX5rkhJ2LTXnLrmNEp23h48RuXHq7N/AfNT87yfcb6tS/ezVby/XzG0OWI/R+OuRm/TslVx/R/RZRmFd89a5tXW0AjDHq/ObJyvnBu99CdIz2ut5xipLrCdaYpUb1q89+a6xYl/Unl0SNLlp9zni/axeLN0b5UV0btznImps1RuI+y4BWxPOZS3p3qTe3XlzgM+S9VKp1Hx9AE8U9AZgIgAA
   </data>
  </layer>
+ <objectgroup name="objects" width="110" height="20">
+  <properties>
+   <property name="spawn" value="1"/>
+  </properties>
+  <object name="Player" type="spawn" x="60" y="498" width="69" height="17">
+   <properties>
+    <property name="name" value="player"/>
+   </properties>
+  </object>
+  <object name="Enemy" type="spawn" x="213" y="318" width="67" height="22">
+   <properties>
+    <property name="name" value="skurk01"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
