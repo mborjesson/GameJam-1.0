@@ -34,6 +34,7 @@ public class Physics {
     public void handlePhysics(Level level, int delta) {
         handleCharacters(level, delta);
         checkCollisionBetweenCharacters(level);
+        checkCollisionBetweenCharacterAndTheEndOfTheUniverse(level);
     }
 
     private void handleCharacters(Level level, int delta) {
@@ -63,6 +64,21 @@ public class Physics {
 			}
 		}
     }
+    
+    private void checkCollisionBetweenCharacterAndTheEndOfTheUniverse(Level level) {
+    	// O(N^2) ftw :)
+    	for (Character c : level.getCharacters() ) {
+			if ( c instanceof Player ) {
+				float y =((AABoundingRect)c.getBoundingShape()).getY(); 
+							if (y > 1500) {
+								killPlayer();
+							}
+			}
+		}
+    }
+    
+    
+    
     
     private void killPlayer() {
         gameState.getPlayer().setX(50);
