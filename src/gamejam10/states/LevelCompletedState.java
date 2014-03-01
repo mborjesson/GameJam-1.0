@@ -4,6 +4,8 @@ import gamejam10.enums.*;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class LevelCompletedState extends BasicGameState {
 
@@ -24,7 +26,20 @@ public class LevelCompletedState extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
-		//container.exit();
+		
+		
+		handleKeyboardInput(container.getInput(), delta, game);
+		
+	}
+
+	
+
+	
+	private void handleKeyboardInput(Input i, int delta, StateBasedGame game) {
+	if (i.isKeyPressed(Input.KEY_ESCAPE)) {
+		game.enterState(States.MENU.getID(), new FadeOutTransition(
+				Color.black, 50), new FadeInTransition(Color.black, 50));
+		}
 	}
 
 	@Override
