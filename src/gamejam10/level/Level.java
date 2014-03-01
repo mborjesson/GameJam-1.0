@@ -104,7 +104,21 @@ public class Level {
 								enemies.add(en);
 								break;
 							}
+							
 						}
+					} 
+					case LEVEL_END: {
+						System.out.println("LEVEL_END FOUND");
+						String name = map.getObjectProperty(groupID, objectID, "name", null);
+						int x = map.getObjectX(groupID, objectID);
+						int y = map.getObjectY(groupID, objectID);
+						int width = map.getObjectWidth(groupID, objectID);
+						int height = map.getObjectWidth(groupID, objectID);
+						System.out.println(x + ", " + y + ", " + width + ", "	+ height);
+						CharacterType ct = CharacterType.getCharacterType(name);
+						LevelType lt = LevelType.getLevelObject(name);
+						System.out.println("lt: " + lt);
+						
 					}
 						break;
 					}

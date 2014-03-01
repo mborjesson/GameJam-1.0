@@ -97,7 +97,7 @@ public class GameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		g.setBackground(Color.yellow);
+		g.setBackground(Color.white);
 		g.clear();
 		
 		// calculate scale

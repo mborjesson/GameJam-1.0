@@ -78,6 +78,10 @@ public class Physics {
 		}
     }
     
+    private void checkIfEndOfWorld(Level level) {
+    	//level.ge
+    }
+    
     
     
     
