@@ -24,8 +24,6 @@ import org.newdawn.slick.tiled.*;
  */
 public class Level {
 
-	private static final int TITLE_WIDTH_X = 32;
-	
 	private TiledMap map;
 	private int mapWidth;
 	private int mapHeight;
@@ -52,6 +50,7 @@ public class Level {
 					case SPAWN: {
 						String name = map.getObjectProperty(groupID, objectID,
 								"name", null);
+
 						int x = map.getObjectX(groupID, objectID);
 						int y = map.getObjectY(groupID, objectID);
 						int width = map.getObjectWidth(groupID, objectID);
@@ -68,14 +67,14 @@ public class Level {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
 								
-								int deltaTilesMin = 5; // TODO: Read from map
-								int deltaTilesMax = 7; // TODO: Read from map
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
 								
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = x - TITLE_WIDTH_X * deltaTilesMin;
-								moveParameters.maxX = x + TITLE_WIDTH_X * deltaTilesMax;
+								moveParameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								moveParameters.maxX = x + map.getTileWidth() * deltaTilesMax;
 								
 								ai.addAIAction(new RandomMovementAIAction(en, moveParameters));
 								
@@ -88,14 +87,14 @@ public class Level {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
 								
-								int deltaTilesMin = 5; // TODO: Read from map
-								int deltaTilesMax = 7; // TODO: Read from map
-								
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
+
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = x - TITLE_WIDTH_X * deltaTilesMin;
-								moveParameters.maxX = x + TITLE_WIDTH_X * deltaTilesMax;
+								moveParameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								moveParameters.maxX = x + map.getTileWidth() * deltaTilesMax;
 								
 								RandomJumpAIAction.Parameters jumpParameters = new RandomJumpAIAction.Parameters();
 								jumpParameters.maxTimeBetweenJumps = 5000;
@@ -142,17 +141,23 @@ public class Level {
 			}
 		}
 		
-		sun = new Sun(10*1000);
+		sun = new Sun(60*1000);
 
 		// TEST
-//		AIEnemy en = new AIEnemy(50, 370);
-//		BasicAI ai = new BasicAI(en, player);
-//		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
-//		moveParameters.minX = 50;
-//		moveParameters.maxX = 150;
-//		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
-//		en.setAI(ai);
-//		enemies.add(en);
+		AIEnemy en = new AIEnemy(50, 370);
+		BasicAI ai = new BasicAI(en, player);
+		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
+		moveParameters.minX = 50;
+		moveParameters.maxX = 150;
+		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
+
+		RandomJumpAIAction.Parameters jumpParameters = new RandomJumpAIAction.Parameters();
+		jumpParameters.maxTimeBetweenJumps = 100;
+		jumpParameters.minTimeBetweenJumps = 0;
+		ai.addAIAction(new RandomJumpAIAction(en, jumpParameters));
+		en.setAI(ai);
+		
+		enemies.add(en);
 
 		addCharacter(player);
 		//addEnemies(enemies);
@@ -165,80 +170,29 @@ public class Level {
 		loadTileMap();
 	}
 
-	public int getXOffset() {
-		int offsetX = 0;
-
-		// the first thing we are going to need is the half-width of the screen,
-		// to calculate if the player is in the middle of our screen
-		int halfWidth = (int) (Main.getOptions().getWidth() / 2);
-
-		// next up is the maximum offset, this is the most right side of the
-		// map, minus half of the screen offcourse
-		int maxX = (int) (map.getWidth() * map.getTileWidth()) - halfWidth * 2;
-
-		// now we have 3 cases here
-		if (player.getX() < halfWidth) {
-			// the player is between the most left side of the map, which is
-			// zero and half a screen size which is 0+half_screen
-			offsetX = 0;
-		} else if (player.getX() > maxX) {
-			// the player is between the maximum point of scrolling and the
-			// maximum width of the map
-			// the reason why we substract half the screen again is because we
-			// need to set our offset to the topleft position of our screen
-			offsetX = maxX - halfWidth;
-		} else {
-			// the player is in between the 2 spots, so we set the offset to the
-			// player, minus the half-width of the screen
-			offsetX = (int) (player.getX() - halfWidth);
-		}
-
-		return offsetX;
-
-	}
-
-	public int getYOffset() {
-		int offsetY = 0;
-
-		int halfHeight = (int) (Main.getOptions().getHeight() / 2);
-
-		int maxY = (int) (map.getHeight() * map.getTileHeight()) - halfHeight;
-
-		if (player.getY() < halfHeight) {
-			offsetY = 0;
-		} else if (player.getY() > maxY) {
-			offsetY = maxY - halfHeight;
-		} else {
-			offsetY = (int) (player.getY() - halfHeight);
-		}
-
-		return offsetY;
-	}
-
 	public void render(Graphics g) {
 		g.setBackground(new Color(sun.getSunColor(), sun.getSunColor(), sun.getSunColor()));
 		g.clear();
 
 		g.pushTransform();
 		
-		g.translate(camera.getX()+camera.getWidth()*0.5f, camera.getY()+camera.getHeight()*0.5f);
+		float x = Math.min(map.getWidth()*map.getTileWidth()-camera.getWidth(), Math.max(0, camera.getX()-camera.getWidth()*0.5f));
+		float y = Math.min(map.getHeight()*map.getTileHeight()-camera.getHeight(), Math.max(0, camera.getY()-camera.getHeight()*0.5f));
 		
-
-//		int offsetX = getXOffset();
-//		int offsetY = getYOffset();
-		int offsetX = 0;
-		int offsetY = 0;
+		g.translate(-x, -y);
+		
 
 		// render the map first
 		map.render(0, 0);
+//		System.out.println(getXOffset() + ", " + camera.getX() + ", " + camera.getMinX());
 //		map.render(-(offsetX % map.getTileWidth()),
 //				-(offsetY % map.getTileHeight()),
 //				offsetX / map.getTileWidth(), offsetY / map.getTileHeight(),
-//				42, 25);
+//				(int)camera.getWidth()/map.getTileWidth(), (int)camera.getHeight()/map.getTileHeight());
 
 		// and then render the characters on top of the map
 		for (Character c : characters) {
-			c.render(g, offsetX, offsetY);
+			c.render(g, 0, 0);
 		}
 
 		g.popTransform();
