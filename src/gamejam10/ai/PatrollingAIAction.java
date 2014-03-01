@@ -27,7 +27,7 @@ public class PatrollingAIAction implements AIAction  {
 		character = c;
 		this.parameters = parameters;
 		
-		dir = Direction.LEFT;
+		dir = Math.random() > 0.5 ? Direction.LEFT : Direction.RIGHT;
 	}
 	
 	public void doAction(double dt) {
