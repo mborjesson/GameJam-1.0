@@ -64,7 +64,14 @@
   </object>
   <object name="Skurk 2" type="spawn" x="3049" y="519" width="31" height="33">
    <properties>
+    <property name="deltatilesmax" value="7"/>
+    <property name="deltatilesmin" value="4"/>
     <property name="name" value="skurk02"/>
+   </properties>
+  </object>
+  <object name="The End" type="trigger" x="5536" y="352" width="67" height="319">
+   <properties>
+    <property name="name" value="end"/>
    </properties>
   </object>
  </objectgroup>

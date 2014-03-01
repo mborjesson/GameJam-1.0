@@ -1,6 +1,7 @@
 package gamejam10.states;
 
 import gamejam10.Main;
+import gamejam10.shader.Shader;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
@@ -9,8 +10,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-
-import shader.Shader;
 
 public class ShaderState extends BasicGameState {
 

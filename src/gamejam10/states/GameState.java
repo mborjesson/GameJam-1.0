@@ -27,6 +27,7 @@ import gamejam10.level.Level;
 import gamejam10.physics.AABoundingRect;
 import gamejam10.physics.Physics;
 import gamejam10.physics.Tile;
+import gamejam10.shader.Shader;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.EXTFramebufferObject;
@@ -55,7 +56,6 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.state.transition.RotateTransition;
 
-import shader.Shader;
 
 
 /**
@@ -215,10 +215,8 @@ public class GameState extends BasicGameState {
 		float scaleY = Main.getOptions().getHeight()/height;
 		g.scale(scaleX, scaleY);
 		
-		camera.setX(-player.getX());
-		camera.setY(-player.getY());
-		
-		g.translate(camera.getX()+width*0.5f, camera.getY()+height*0.5f);
+		camera.setX(player.getX());
+		camera.setY(player.getY());
 		
 		level.render(g);
 		
@@ -278,6 +276,7 @@ public class GameState extends BasicGameState {
         	}
 		}
         
+        level.update(delta);
         
         physics.handlePhysics(level, delta);
 

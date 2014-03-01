@@ -34,15 +34,11 @@ public class PatrollingAIAction implements AIAction  {
 		
 		// |minX             spawn               maxX|
 		
-//		accumulatedTime += dt;
-		
 		if ( character.getX() <= parameters.minX ) {
-//			accumulatedTime = 0;
 			character.moveRight(1000);
 		}
 		
 		if ( character.getX() >= parameters.maxX ) {
-//			accumulatedTime = 0;
 			character.moveLeft(1000);
 		}
 		
