@@ -5,11 +5,11 @@ import gamejam10.character.Character;
 /**
  * Requires a parallel surface to patrol
  */
-public class PatrollingAction implements AIAction  {
+public class PatrollingAIAction implements AIAction  {
 
 	private Character character;
 	double accumulatedTime = 0;
-	PatrollingAction.Parameters parameters;
+	PatrollingAIAction.Parameters parameters;
 
 	Direction dir;
 	
@@ -23,7 +23,7 @@ public class PatrollingAction implements AIAction  {
 		public double maxX;
 	}
 	
-	public PatrollingAction(Character c, PatrollingAction.Parameters parameters) {
+	public PatrollingAIAction(Character c, PatrollingAIAction.Parameters parameters) {
 		character = c;
 		this.parameters = parameters;
 		
