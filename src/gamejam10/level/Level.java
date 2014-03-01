@@ -128,10 +128,11 @@ public class Level {
 		int offsetY = 0;
 
 		// render the map first
-		map.render(-(offsetX % map.getTileWidth()),
-				-(offsetY % map.getTileHeight()),
-				offsetX / map.getTileWidth(), offsetY / map.getTileHeight(),
-				42, 25);
+		map.render(0, 0);
+//		map.render(-(offsetX % map.getTileWidth()),
+//				-(offsetY % map.getTileHeight()),
+//				offsetX / map.getTileWidth(), offsetY / map.getTileHeight(),
+//				42, 25);
 
 		// and then render the characters on top of the map
 		for (Character c : characters) {

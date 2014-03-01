@@ -49,7 +49,7 @@ public class GameState extends BasicGameState {
 
 		musicPlayer = MusicPlayer.getInstance();
 		
-		camera.setWidth(400);
+		camera.setWidth(1500);
 
 		level = new Level("map04");
 		level.setCamera(camera);
@@ -69,6 +69,7 @@ public class GameState extends BasicGameState {
 		// we want to show what camera wants to show (in pixels)
 		float width = (float)camera.getWidth();
 		float height = (float)(camera.getWidth()/Main.getOptions().getAspectRatio());
+		camera.setHeight(height);
 		float scaleX = Main.getOptions().getWidth()/width;
 		float scaleY = Main.getOptions().getHeight()/height;
 		g.scale(scaleX, scaleY);
