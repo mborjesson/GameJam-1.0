@@ -35,6 +35,8 @@ public class Level {
 	// list of all characters on this map
 	private List<Character> characters = new ArrayList<Character>();
 	private List<Character> enemies = new ArrayList<Character>();
+	private EndOfLevelObject endOfWorldObject;
+	 
 	
 	private Sun sun = null;
 
@@ -53,7 +55,7 @@ public class Level {
 						int x = map.getObjectX(groupID, objectID);
 						int y = map.getObjectY(groupID, objectID);
 						int width = map.getObjectWidth(groupID, objectID);
-						int height = map.getObjectWidth(groupID, objectID);
+						int height = map.getObjectHeight(groupID, objectID);
 						System.out.println(x + ", " + y + ", " + width + ", "
 								+ height);
 						CharacterType ct = CharacterType.getCharacterType(name);
@@ -109,21 +111,32 @@ public class Level {
 							}
 							
 						}
+						break;
 					} 
-					case LEVEL_END: {
+					case TRIGGER: {
+						System.out.println(" ");
+						
+						System.out.println("Trigger Found!");
+						
 						System.out.println("LEVEL_END FOUND");
 						String name = map.getObjectProperty(groupID, objectID, "name", null);
 						int x = map.getObjectX(groupID, objectID);
 						int y = map.getObjectY(groupID, objectID);
+						
 						int width = map.getObjectWidth(groupID, objectID);
-						int height = map.getObjectWidth(groupID, objectID);
+						int height = map.getObjectHeight(groupID, objectID);
 						System.out.println(x + ", " + y + ", " + width + ", "	+ height);
+						
+						System.out.println("Name: " + name);
 						CharacterType ct = CharacterType.getCharacterType(name);
 						LevelType lt = LevelType.getLevelObject(name);
 						System.out.println("lt: " + lt);
 						
-					}
+						endOfWorldObject = new EndOfLevelObject(x, y, width, height);
 						break;
+						
+					}
+						
 					}
 				}
 			}
@@ -366,4 +379,14 @@ public class Level {
 	public void setCamera(Camera camera) {
 		this.camera = camera;
 	}
+
+	public EndOfLevelObject getEndOfWorldObject() {
+		return endOfWorldObject;
+	}
+
+	public void setEndOfWorldObject(EndOfLevelObject endOfWorldObject) {
+		this.endOfWorldObject = endOfWorldObject;
+	}
+	
+	
 }
