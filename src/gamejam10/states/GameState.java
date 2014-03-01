@@ -12,6 +12,9 @@ import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.physics.*;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.IntBuffer;
 import java.util.*;
 
 import gamejam10.Main;
@@ -25,6 +28,12 @@ import gamejam10.physics.AABoundingRect;
 import gamejam10.physics.Physics;
 import gamejam10.physics.Tile;
 
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.EXTFramebufferObject;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GL14;
+import org.lwjgl.opengl.GLContext;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.state.transition.*;
@@ -46,6 +55,8 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.state.transition.RotateTransition;
 
+import shader.Shader;
+
 
 /**
  * 
@@ -65,7 +76,9 @@ public class GameState extends BasicGameState {
 
 	private MusicPlayer musicPlayer;
 
-   
+	private int textureId;
+   private int offscreenFBO;
+   private Shader quadShader;
     
 
 
@@ -92,11 +105,98 @@ public class GameState extends BasicGameState {
 		player = level.getPlayer();
 
 		physics = new Physics(this);
+		
+		quadShader = Shader.makeShader("data/shaders/quad.vs.glsl", "data/shaders/quad.fs.glsl");
+		
+		fboInit();
+		
+	}
+	
+	private void fboInit() {
+		
+		int width = Main.getOptions().getWidth();
+		int height = Main.getOptions().getHeight();
+		
+		boolean FBOEnabled = GLContext.getCapabilities().GL_EXT_framebuffer_object;
+		
+		IntBuffer buffer = ByteBuffer.allocateDirect(1*4).order(ByteOrder.nativeOrder()).asIntBuffer(); // allocate a 1 int byte buffer
+		EXTFramebufferObject.glGenFramebuffersEXT( buffer ); // generate
+		offscreenFBO = buffer.get();
+		
+
+		IntBuffer buf = BufferUtils.createIntBuffer(1);
+		GL11.glGenTextures(buf);
+		
+		textureId = buf.get(0);
+		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+
+		GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
+		
+		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, width, height ,0,GL11.GL_RGBA,GL11.GL_UNSIGNED_BYTE, (ByteBuffer) null );
+
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		
+		
+		int depthRenderBufferID = EXTFramebufferObject.glGenRenderbuffersEXT();
+		
+		EXTFramebufferObject.glBindRenderbufferEXT(EXTFramebufferObject.GL_RENDERBUFFER_EXT, depthRenderBufferID);// bind the depth renderbuffer
+		EXTFramebufferObject.glRenderbufferStorageEXT(EXTFramebufferObject.GL_RENDERBUFFER_EXT, GL14.GL_DEPTH_COMPONENT24, width, height);// get the data space for it
+		
+		EXTFramebufferObject.glBindRenderbufferEXT(EXTFramebufferObject.GL_RENDERBUFFER_EXT, 0);
+		
+		
+		
+		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, offscreenFBO );
+		EXTFramebufferObject.glFramebufferTexture2DEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, EXTFramebufferObject.GL_COLOR_ATTACHMENT0_EXT, GL11.GL_TEXTURE_2D, textureId, 0);
+		//EXTFramebufferObject.glFramebufferRenderbufferEXT(EXTFramebufferObject.GL_FRAMEBUFFER_EXT,EXTFramebufferObject.GL_DEPTH_ATTACHMENT_EXT,EXTFramebufferObject.GL_RENDERBUFFER_EXT, depthRenderBufferID); // bind it to the renderbuffer
+		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0 );
+		
+		
+		System.out.println("FBO: " + FBOEnabled + " " + offscreenFBO + " " + textureId + " " + depthRenderBufferID);
+		
+		
+		/*
+		RenderTexture tex = new RenderTexture(false, true, false, false, RenderTexture.RENDER_TEXTURE_2D, 1);
+		
+		try {
+			microBuffer = new Pbuffer(128, 128, new PixelFormat(), tex, null);
+		} catch (LWJGLException e) {
+			e.printStackTrace();
+		}
+		*/
+		
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
+		
+		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, offscreenFBO );
+		
+		g.pushTransform();
+		
+		doRender(gc, sbg, g);
+		
+		g.popTransform();
+
+		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0 );
+		
+		g.pushTransform();
+		
+		//doRender(gc, sbg, g);
+		
+		renderQuad(gc, sbg, g);
+		
+		g.popTransform();
+		
+	}
+
+	
+	private void doRender(GameContainer gc, StateBasedGame sbg, Graphics g) {
+		
 		g.setBackground(Color.white);
 		g.clear();
 		
@@ -117,8 +217,38 @@ public class GameState extends BasicGameState {
 		level.render(g);
 		
 		gc.getInput().clearControlPressedRecord();
+		
 	}
+	
+	private void renderQuad(GameContainer gc, StateBasedGame sbg, Graphics g) {
+		
+		int width = Main.getOptions().getWidth();
+		int height = Main.getOptions().getHeight();
+		
+		quadShader.startShader();
 
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
+		
+		g.setBackground(Color.white);
+		g.clear();
+		
+		g.scale(width, height);
+		
+		GL11.glBegin(GL11.GL_QUADS);
+
+    		GL11.glTexCoord2f(0, 1);
+	    	GL11.glVertex3f(0, 0, 0);
+	    	GL11.glTexCoord2f(0, 0);
+	    	GL11.glVertex3f(0, 1, 0);
+	    	GL11.glTexCoord2f(1, 0);
+	    	GL11.glVertex3f(1, 1, 0);
+	    	GL11.glTexCoord2f(1, 1);
+	    	GL11.glVertex3f(1, 0, 0);
+		
+		GL11.glEnd();
+		
+	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
