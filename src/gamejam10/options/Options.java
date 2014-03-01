@@ -10,10 +10,16 @@ public class Options implements Serializable {
 	private String aspectRatio = AspectRatio.getDefaultAspectRatio();
 	private int width = 900;
 	private int height = (int)(width/AspectRatio.getAspectRatio(aspectRatio));
+	
+	// TODO
+	// private int width = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	// private int height = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	
 	private boolean fullscreen = false;
 	private boolean vsync = false;
 	private int targetFrameRate = 60;
 	private boolean showFPS = false;
+	private boolean soundEnabled = true;
 	
 	public void setWidth(int width) {
 		this.width = width;
@@ -37,6 +43,14 @@ public class Options implements Serializable {
 	
 	public double getAspectRatio() {
 		return AspectRatio.getAspectRatio(aspectRatio);
+	}
+
+	public void setSoundEnabled(boolean soundEnabled) {
+		this.soundEnabled = soundEnabled;
+	}
+
+	public boolean isSoundEnabled() {
+		return soundEnabled;
 	}
 	
 	public void setFullscreen(boolean fullscreen) {

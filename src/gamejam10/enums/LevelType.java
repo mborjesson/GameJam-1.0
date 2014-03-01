@@ -2,7 +2,7 @@ package gamejam10.enums;
 
 public enum LevelType {
 	SPAWN("spawn"),
-	LEVEL_END("end"),
+	TRIGGER("trigger"),
 	;
 
 	final private String value;

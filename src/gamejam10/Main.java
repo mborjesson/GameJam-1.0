@@ -41,6 +41,7 @@ public class Main extends StateBasedGame {
     public Main(String title) {
         super(title);
         
+        AudioPlayer.getInstance().setEnabled(options.isSoundEnabled());
         AudioPlayer.getInstance().initialize();
     }
 
@@ -49,6 +50,7 @@ public class Main extends StateBasedGame {
         this.addState(new MenuState());
         this.addState(new GameState());
         enterState(States.MENU.getID());
+        this.addState(new ExitState());
     }
     
     public static Options getOptions() {
