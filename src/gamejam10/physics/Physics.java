@@ -51,6 +51,7 @@ public class Physics {
     }
     
     private void checkCollisionBetweenCharacters(Level level) {
+    	// O(N^2) ftw :)
     	for (Character c : level.getCharacters() ) {
 			if ( c instanceof Player ) {
 				for (Character c2 : level.getCharacters()) {
