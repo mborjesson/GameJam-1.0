@@ -12,11 +12,40 @@ import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.physics.*;
 
+
 import java.util.*;
+
+import gamejam10.Main;
+import gamejam10.ai.BasicAI;
+import gamejam10.audio.MusicPlayer;
+import gamejam10.character.Enemy;
+import gamejam10.character.Player;
+import gamejam10.level.Level;
+import gamejam10.physics.AABoundingRect;
+import gamejam10.physics.Physics;
+import gamejam10.physics.Tile;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.state.transition.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.logging.Logger;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.state.transition.RotateTransition;
+
 
 /**
  * 
@@ -33,7 +62,12 @@ public class GameState extends BasicGameState {
 	
 	private Camera camera = new Camera();
 
+
 	private MusicPlayer musicPlayer;
+
+   
+    
+
 
 	@Override
 	public int getID() {
@@ -44,8 +78,9 @@ public class GameState extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame sbg)
 			throws SlickException {
 
-		Enemy en = new Enemy(300, 250);
-		enemies.add(en);
+        Enemy en = new Enemy(300, 250);
+        en.setAI(new BasicAI(en, player));
+        enemies.add(en);
 
 		musicPlayer = MusicPlayer.getInstance();
 		
@@ -82,13 +117,22 @@ public class GameState extends BasicGameState {
 		level.render(g);
 	}
 
+
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 
 		handleKeyboardInput(gc.getInput(), delta, sbg);
 
-		physics.handlePhysics(level, delta);
+        for (gamejam10.character.Character c : level.getCharacters()) {
+        	if ( c instanceof Enemy ) {
+        		Enemy e = (Enemy)c;
+        		e.updateAI(delta);
+        	}
+		}
+        
+        
+        physics.handlePhysics(level, delta);
 
 	}
 

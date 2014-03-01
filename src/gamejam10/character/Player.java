@@ -19,17 +19,17 @@ public class Player extends Character {
     public Player(float x, float y) throws SlickException{
         super(x,y);
         //sprite = new Image("data/img/characters/player/player.png");
-         setSprite(new Image("data/images/characters/player/homerstill.png"));
+         setSprite(new Image("data/images/characters/player/mainstill.png") /*new Image("data/images/characters/player/homerstill.png")*/);
 //       setMovingAnimation(new Image[]{new Image("data/img/characters/player/player_1.png"),new Image("data/img/characters/player/player_2.png"),
 //                                       new Image("data/img/characters/player/player_3.png"),new Image("data/img/characters/player/player_4.png")}
 //                                       ,125); 
        
        
        // setAnimation("data/images/characters/player/homeranim.png");
-       setAnimation("data/images/characters/player/homeranimsmall.png");
+       setAnimation(/*"data/images/characters/player/homeranimsmall.png"*/"data/images/characters/player/mainanim.png", 20, 43);
        
        //default bounding shape is a 32 by 32 box
-        boundingShape = new AABoundingRect(x,y,30,30);
+        boundingShape = new AABoundingRect(x,y,/*24,30*/20, 43);
         
         accelerationSpeed = 0.001f;
         maximumSpeed = 0.15f;

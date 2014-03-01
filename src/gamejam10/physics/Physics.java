@@ -5,6 +5,8 @@
 package gamejam10.physics;
 
 import gamejam10.character.Character;
+import gamejam10.character.Enemy;
+import gamejam10.character.Player;
 import gamejam10.level.Level;
 import gamejam10.level.LevelObject;
 import gamejam10.states.GameState;
@@ -27,6 +29,7 @@ public class Physics {
     
     public void handlePhysics(Level level, int delta) {
         handleCharacters(level, delta);
+        checkCollisionBetweenCharacters(level);
     }
 
     private void handleCharacters(Level level, int delta) {
@@ -42,6 +45,24 @@ public class Physics {
             handleGameObject(c, level, delta);
         }
     }
+    
+    private void checkCollisionBetweenCharacters(Level level) {
+    	for (Character c : level.getCharacters() ) {
+			if ( c instanceof Player ) {
+				for (Character c2 : level.getCharacters()) {
+					if ( c != c2 && c2 instanceof Enemy && 
+							c.getBoundingShape().checkCollision(c2.getBoundingShape()) ) {
+						killPlayer();
+					}
+				}
+			}
+		}
+    }
+    
+    private void killPlayer() {
+        gameState.getPlayer().setX(128);
+        gameState.getPlayer().setY(50);
+    }
 
     private boolean checkCollision(LevelObject obj, Tile[][] mapTiles) {
         //get only the tiles that matter
@@ -55,8 +76,7 @@ public class Physics {
                 
                  if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                      System.out.println("AAAAAAHHHHHHHHHHHH!!!!!!!!!!!");
-                     gameState.getPlayer().setX(128);
-                     gameState.getPlayer().setY(50);
+                     killPlayer();
                      return false;
                  }
             } 

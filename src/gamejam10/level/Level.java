@@ -8,10 +8,18 @@ import gamejam10.*;
 import gamejam10.camera.*;
 import gamejam10.character.*;
 import gamejam10.character.Character;
+
 import gamejam10.enums.*;
 import gamejam10.physics.*;
+import gamejam10.character.Enemy;
+import gamejam10.character.Player;
+import gamejam10.physics.Tile;
 
 import java.util.*;
+import java.util.ArrayList;
+
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.tiled.TiledMap;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.tiled.*;
@@ -64,8 +72,12 @@ public class Level {
 			}
 		}
 
+
 		addCharacter(player);
-		addEnemies(enemies);
+		//addEnemies(enemies);
+		for (Object e : enemies) {
+			addCharacter((Character)e);
+		}
 
 		loadTileMap();
 	}
