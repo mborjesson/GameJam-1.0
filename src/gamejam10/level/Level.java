@@ -242,6 +242,7 @@ public class Level {
 	
 	public void update(int delta) {
 		sun.update(delta);
+//		player.update(delta);
 	}
 
 	public void addCharacter(Character c) {

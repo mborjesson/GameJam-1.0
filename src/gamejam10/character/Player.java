@@ -32,6 +32,8 @@ public class Player extends Character {
        // setAnimation("data/images/characters/player/homeranim.png");
        setAnimation(/*"data/images/characters/player/homeranimsmall.png"*/"data/images/characters/player/mainanim.png", 20, 43, 8);
        
+       setJumpAnimation("data/images/characters/player/enemyanim.png", 22, 28, 250, 3);
+       
        //default bounding shape is a 32 by 32 box
 
         boundingShape = new AABoundingRect(x,y,/*24,30*/20, 39);
@@ -48,7 +50,8 @@ public class Player extends Character {
         if (onGround) {
         	AudioPlayer ap = AudioPlayer.getInstance();
         	ap.playSound(SoundType.JUMP, 0.3f);
-            y_velocity = -0.6f;
+            y_velocity = getJumpVelocity();
+            showJumpingAnimation = true;
         }
     }
     
@@ -61,6 +64,12 @@ public class Player extends Character {
 	public void handleCollision(Character c2) {
 		System.out.println(this + " colliding with " + c2);
 	}
+
+//	public void update(int delta) {
+//		if ( onGround ) {
+//		     setAnimation("data/images/characters/player/mainanim.png", 20, 43, 8);
+//		}
+//	}
     
 //    public void moveLeft(int delta){
 //        facing = Facing.LEFT; 
