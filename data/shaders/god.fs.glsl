@@ -26,7 +26,7 @@ varying vec2 texCoord;
 
 	
 
-	vec4 colors = vec4(0.0, 0.0, 0.0, 0.0);
+	vec3 colors = vec3(0.0, 0.0, 0.0);
 
  	for(int i=0; i < NUM_SAMPLES ; i++)
 
@@ -34,7 +34,7 @@ varying vec2 texCoord;
 
     			textCoo -= deltaTextCoord;
 
-    			vec4 sample = texture(texture_0, textCoo );
+    			vec3 sample = texture(texture_0, textCoo ).xyz;
     			
     			sample *= illuminationDecay * weight;
 
@@ -51,7 +51,7 @@ varying vec2 texCoord;
  	//gl_FragColor = vec4( texture(texture_0, texCoord ) );
  	
  	//gl_FragColor = vec4(exposure, exposure, exposure, 1.0);
- 	gl_FragColor = colors;
+ 	gl_FragColor = vec4( colors, 0.2 );
  	
  	//vec4 texColor = texture( texture_0, texCoord );
     //gl_FragColor = vec4( texColor );

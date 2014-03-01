@@ -164,8 +164,6 @@ public class Level {
 	}
 
 	public void render(Graphics g) {
-		g.setBackground(new Color(sun.getSunColor(), sun.getSunColor(), sun.getSunColor()));
-		g.clear();
 
 		g.pushTransform();
 		

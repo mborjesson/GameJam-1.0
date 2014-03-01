@@ -177,8 +177,19 @@ public class GameState extends BasicGameState {
 			throws SlickException {
 		
 		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, offscreenFBO );
+
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		
 		g.pushTransform();
+		
+		//GL11.glEnable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		
+
+		g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
+		//g.setBackground( new Color(1.0f, 1.0f, 1.0f, 1.0f) );
+		g.clear();
 		
 		doRender(gc, sbg, g);
 		
@@ -186,25 +197,41 @@ public class GameState extends BasicGameState {
 
 		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0 );
 		
+		g.setBackground( new Color(1.0f, 1.0f, 1.0f, 1.0f) );
+		g.clear();
+		
 		g.pushTransform();
 		
-		//doRender(gc, sbg, g);
-		
-		renderQuad(gc, sbg, g);
-		
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GL11.glDisable(GL11.GL_BLEND);
+
+		renderQuad1(gc, sbg, g);
+
 		g.popTransform();
+		
+		
+		/*
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		//GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+		
+		g.pushTransform();
+		
+		renderQuad2(gc, sbg, g);
+
+		g.popTransform();
+		
+		*/
+		
+		gc.getInput().clearControlPressedRecord();
+		
+		
 		
 	}
 
 	
 	private void doRender(GameContainer gc, StateBasedGame sbg, Graphics g) {
 		
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glDisable(GL11.GL_ALPHA_TEST);
-		
-		g.setBackground(Color.white);
-
-		g.clear();
 		
 		// calculate scale
 		// we want to show what camera wants to show (in pixels)
@@ -220,14 +247,40 @@ public class GameState extends BasicGameState {
 		
 		level.render(g);
 		
-		gc.getInput().clearControlPressedRecord();
 		
 	}
 	
-	private void renderQuad(GameContainer gc, StateBasedGame sbg, Graphics g) {
+	private void renderQuad1(GameContainer gc, StateBasedGame sbg, Graphics g) {
 		
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		int width = Main.getOptions().getWidth();
+		int height = Main.getOptions().getHeight();
+		
+		quadShader.startShader();
+
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
+		
+		
+		g.scale(width, height);
+		
+		GL11.glBegin(GL11.GL_QUADS);
+
+    		GL11.glTexCoord2f(0, 1);
+	    	GL11.glVertex3f(0, 0, 0);
+	    	GL11.glTexCoord2f(0, 0);
+	    	GL11.glVertex3f(0, 1, 0);
+	    	GL11.glTexCoord2f(1, 0);
+	    	GL11.glVertex3f(1, 1, 0);
+	    	GL11.glTexCoord2f(1, 1);
+	    	GL11.glVertex3f(1, 0, 0);
+		
+		GL11.glEnd();
+
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		
+	}
+	
+	private void renderQuad2(GameContainer gc, StateBasedGame sbg, Graphics g) {
 		
 		int width = Main.getOptions().getWidth();
 		int height = Main.getOptions().getHeight();
@@ -242,9 +295,6 @@ public class GameState extends BasicGameState {
 
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
-		
-		g.setBackground(Color.white);
-		g.clear();
 		
 		g.scale(width, height);
 		
