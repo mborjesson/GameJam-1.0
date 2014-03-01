@@ -84,7 +84,7 @@ public class GameState extends BasicGameState {
 
 		musicPlayer = AudioPlayer.getInstance();
 		
-		camera.setWidth(600);
+		camera.setWidth(1000);
 
 		level = new Level("map06");
 		level.setCamera(camera);
@@ -131,7 +131,7 @@ public class GameState extends BasicGameState {
         
         level.update(delta);
         
-        physics.handlePhysics(level, delta);
+        physics.handlePhysics(sbg, level, delta);
 
 	}
 

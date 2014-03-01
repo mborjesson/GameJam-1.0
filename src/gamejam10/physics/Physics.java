@@ -15,8 +15,12 @@ import gamejam10.states.GameState;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 
 /**
@@ -32,12 +36,12 @@ public class Physics {
         this.gameState = gameState;
     }
     
-    public void handlePhysics(Level level, int delta) {
+    public void handlePhysics(StateBasedGame sbg, Level level, int delta) {
         handleCharacters(level, delta);
         checkCollisionBetweenPlayerAndEnemies(level);
         checkCollisionBetweenCharacters(level);
         checkCollisionBetweenCharacterAndTheEndOfTheUniverse(level);
-        checkIfEndOfWorld(level);
+        checkIfEndOfWorld(sbg, level);
     }
 
     private void handleCharacters(Level level, int delta) {
@@ -93,7 +97,7 @@ public class Physics {
 		}
     }
     
-    private void checkIfEndOfWorld(Level level) {
+    private void checkIfEndOfWorld(StateBasedGame sbg, Level level) {
     	for (Character c : level.getCharacters() ) {
 			if ( c instanceof Player ) {
 				AABoundingRect box = (AABoundingRect)level.getEndOfWorldObject().getBoundingShape();
@@ -103,7 +107,7 @@ public class Physics {
 				if (c.getBoundingShape().checkCollision(box)) {
 					
 					System.out.println("Woho \\0/ You Made It!!!");
-					
+					sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
 				}
 					
     	

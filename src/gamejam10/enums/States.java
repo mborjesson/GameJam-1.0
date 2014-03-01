@@ -3,7 +3,7 @@ package gamejam10.enums;
 public enum States {
 	MENU(0),
 	GAME(1),
-	GAMEOVER(2),
+	LEVELCOMPLETED(2),
 	EXIT(3);
 	
 	private final int id;
