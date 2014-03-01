@@ -1,0 +1,58 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gamejam10.character;
+
+import gamejam10.physics.AABoundingRect;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+
+/**
+ *
+ * @author gregof
+ */
+public class Player extends Character {
+     
+    public Player(float x, float y) throws SlickException{
+        super(x,y);
+        //sprite = new Image("data/img/characters/player/player.png");
+         setSprite(new Image("data/images/characters/player/homerstill.png"));
+//       setMovingAnimation(new Image[]{new Image("data/img/characters/player/player_1.png"),new Image("data/img/characters/player/player_2.png"),
+//                                       new Image("data/img/characters/player/player_3.png"),new Image("data/img/characters/player/player_4.png")}
+//                                       ,125); 
+       
+       
+       // setAnimation("data/images/characters/player/homeranim.png");
+       setAnimation("data/images/characters/player/homeranimsmall.png");
+       
+       //default bounding shape is a 32 by 32 box
+        boundingShape = new AABoundingRect(x,y,24,30);
+        
+        accelerationSpeed = 0.001f;
+        maximumSpeed = 0.15f;
+        maximumFallSpeed = 0.3f;
+        decelerationSpeed = 0.001f;
+        
+    }
+    
+    public void updateBoundingShape(){
+        
+        boundingShape.updatePosition(x+3,y);
+    }
+    
+//    public void moveLeft(int delta){
+//        facing = Facing.LEFT; 
+//        x = x - (0.15f*delta);
+//        lastTimeMoved = System.currentTimeMillis(); 
+//    }
+// 
+//    public void moveRight(int delta){
+//        facing = Facing.RIGHT;
+//        x = x + (0.15f*delta);
+//        lastTimeMoved = System.currentTimeMillis(); 
+//    }
+     
+}
