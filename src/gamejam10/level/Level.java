@@ -24,8 +24,6 @@ import org.newdawn.slick.tiled.*;
  */
 public class Level {
 
-	private static final int TILE_WIDTH_X = 32;
-	
 	private TiledMap map;
 	private int mapWidth;
 	private int mapHeight;
@@ -73,8 +71,8 @@ public class Level {
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = x - TILE_WIDTH_X * deltaTilesMin;
-								moveParameters.maxX = x + TILE_WIDTH_X * deltaTilesMax;
+								moveParameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								moveParameters.maxX = x + map.getTileWidth() * deltaTilesMax;
 								
 								ai.addAIAction(new RandomMovementAIAction(en, moveParameters));
 								
@@ -93,8 +91,8 @@ public class Level {
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = x - TILE_WIDTH_X * deltaTilesMin;
-								moveParameters.maxX = x + TILE_WIDTH_X * deltaTilesMax;
+								moveParameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								moveParameters.maxX = x + map.getTileWidth() * deltaTilesMax;
 								
 								RandomJumpAIAction.Parameters jumpParameters = new RandomJumpAIAction.Parameters();
 								jumpParameters.maxTimeBetweenJumps = 5000;
