@@ -8,8 +8,10 @@ import gamejam10.states.GameState;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 
 /**
@@ -24,7 +26,7 @@ public class MusicPlayer {
     private static final MusicPlayer INSTANCE = new MusicPlayer();
     private Music menuMusic;
     private Music gameMusic;
-    private Music jump;
+    private Sound jump, death;
     
     public static MusicPlayer getInstance() {
         return INSTANCE;
@@ -35,8 +37,9 @@ public class MusicPlayer {
         try {
             
             menuMusic = new Music("/data/music/menu.ogg");
-            randomGameMusic();
-            jump = new Music("data/sounds/Jump.wav");
+            gameMusic = new Music("/data/music/game.ogg");
+            jump = new Sound("data/sounds/Jump.wav");
+            death = new Sound("data/sounds/dead_lava.wav");
             
             
         } catch (SlickException ex) {
@@ -73,13 +76,11 @@ public class MusicPlayer {
     }
     
     public void playJumpSound() {
-        gameMusic.pause();
-        
+        jump.play();
     }
     
-    public void resumeGameMusic() {
-        gameMusic.resume();
-        gameMusic.setVolume(0.2f);
+    public void playDeathSound() {
+        death.play();
     }
     
     /**
