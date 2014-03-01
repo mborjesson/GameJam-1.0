@@ -7,11 +7,16 @@ package gamejam10.character;
 import gamejam10.audio.AudioPlayer;
 import gamejam10.enums.Facing;
 import gamejam10.level.LevelObject;
-import gamejam10.physics.*;
+import gamejam10.physics.AABoundingRect;
 
 import java.util.HashMap;
 
-import org.newdawn.slick.*;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 
 /**
@@ -126,7 +131,7 @@ public abstract class Character extends LevelObject {
 
     }
 
-    protected void setAnimation(String img, int frameWidth, int frameHeight) {
+    protected void setAnimation(String img, int frameWidth, int frameHeight, int numberOfFrames) {
         movingAnimations = new HashMap<Facing, Animation>();
 
         SpriteSheet sheet = null;
@@ -141,12 +146,12 @@ public abstract class Character extends LevelObject {
         Animation facingRightAnimation = new Animation();
         Animation facingLeftAnimation = new Animation();
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < numberOfFrames; i++) {
             facingRightAnimation.addFrame(sheet.getSprite(i, 0), 150);
         }
         movingAnimations.put(Facing.RIGHT, facingRightAnimation);
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < numberOfFrames; i++) {
             facingLeftAnimation.addFrame(sheet.getSprite(i, 0).getFlippedCopy(true, false), 150);
         }
         movingAnimations.put(Facing.LEFT, facingLeftAnimation);
@@ -207,4 +212,7 @@ public abstract class Character extends LevelObject {
     public boolean isHighlight() {
 		return highlight;
 	}
+
+	public abstract void handleCollision(Character c2);
+	
 }

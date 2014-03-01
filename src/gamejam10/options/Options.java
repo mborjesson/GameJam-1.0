@@ -8,7 +8,7 @@ public class Options implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String aspectRatio = AspectRatio.getDefaultAspectRatio();
-	private int width = 1280;
+	private int width = 900;
 	private int height = (int)(width/AspectRatio.getAspectRatio(aspectRatio));
 	private boolean fullscreen = false;
 	private boolean vsync = false;
