@@ -5,7 +5,7 @@ import gamejam10.character.Character;
 /**
  * Requires a parallel surface to patrol
  */
-public class PatrollingAction extends AIAction  {
+public class PatrollingAction implements AIAction  {
 
 	private Character character;
 	double accumulatedTime = 0;

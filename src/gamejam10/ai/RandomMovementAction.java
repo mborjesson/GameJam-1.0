@@ -2,7 +2,7 @@ package gamejam10.ai;
 
 import gamejam10.character.Character;
 
-public class RandomMovementAction extends AIAction  {
+public class RandomMovementAction implements AIAction  {
 
 	private Character character;
 	double accumulatedTime = 0;
