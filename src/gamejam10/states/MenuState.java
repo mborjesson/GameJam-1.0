@@ -7,19 +7,21 @@ package gamejam10.states;
 
 import gamejam10.Main;
 import gamejam10.audio.AudioPlayer;
-import gamejam10.enums.*;
+import gamejam10.enums.MusicType;
+import gamejam10.enums.States;
+import gamejam10.menu.Menu;
+import gamejam10.menu.MenuAction;
+import gamejam10.menu.MenuActionEnterMenu;
+import gamejam10.menu.MenuActionEnterState;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
