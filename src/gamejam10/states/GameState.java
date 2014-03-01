@@ -97,8 +97,6 @@ public class GameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		g.setBackground(Color.yellow);
-		g.clear();
 		
 		// calculate scale
 		// we want to show what camera wants to show (in pixels)
@@ -111,8 +109,6 @@ public class GameState extends BasicGameState {
 		
 		camera.setX(-player.getX());
 		camera.setY(-player.getY());
-		
-		g.translate(camera.getX()+width*0.5f, camera.getY()+height*0.5f);
 		
 		level.render(g);
 		
@@ -133,6 +129,7 @@ public class GameState extends BasicGameState {
         	}
 		}
         
+        level.update(delta);
         
         physics.handlePhysics(level, delta);
 
