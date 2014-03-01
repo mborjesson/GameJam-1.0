@@ -4,14 +4,18 @@
  */
 package gamejam10.character;
 
-import gamejam10.audio.MusicPlayer;
 import gamejam10.enums.Facing;
 import gamejam10.level.LevelObject;
-import gamejam10.physics.*;
+import gamejam10.physics.AABoundingRect;
 
 import java.util.HashMap;
 
-import org.newdawn.slick.*;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 
 /**
@@ -207,4 +211,7 @@ public abstract class Character extends LevelObject {
     public boolean isHighlight() {
 		return highlight;
 	}
+
+	public abstract void handleCollision(Character c2);
+	
 }
