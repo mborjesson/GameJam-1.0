@@ -24,7 +24,7 @@ import org.newdawn.slick.tiled.*;
  */
 public class Level {
 
-	private static final int TITLE_WIDTH_X = 32;
+	private static final int TILE_WIDTH_X = 32;
 	
 	private TiledMap map;
 	private int mapWidth;
@@ -73,8 +73,8 @@ public class Level {
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = x - TITLE_WIDTH_X * deltaTilesMin;
-								moveParameters.maxX = x + TITLE_WIDTH_X * deltaTilesMax;
+								moveParameters.minX = x - TILE_WIDTH_X * deltaTilesMin;
+								moveParameters.maxX = x + TILE_WIDTH_X * deltaTilesMax;
 								
 								ai.addAIAction(new RandomMovementAIAction(en, moveParameters));
 								
@@ -93,8 +93,8 @@ public class Level {
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = x - TITLE_WIDTH_X * deltaTilesMin;
-								moveParameters.maxX = x + TITLE_WIDTH_X * deltaTilesMax;
+								moveParameters.minX = x - TILE_WIDTH_X * deltaTilesMin;
+								moveParameters.maxX = x + TILE_WIDTH_X * deltaTilesMax;
 								
 								RandomJumpAIAction.Parameters jumpParameters = new RandomJumpAIAction.Parameters();
 								jumpParameters.maxTimeBetweenJumps = 5000;
@@ -133,14 +133,20 @@ public class Level {
 		sun = new Sun(60*1000);
 
 		// TEST
-//		AIEnemy en = new AIEnemy(50, 370);
-//		BasicAI ai = new BasicAI(en, player);
-//		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
-//		moveParameters.minX = 50;
-//		moveParameters.maxX = 150;
-//		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
-//		en.setAI(ai);
-//		enemies.add(en);
+		AIEnemy en = new AIEnemy(50, 370);
+		BasicAI ai = new BasicAI(en, player);
+		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
+		moveParameters.minX = 50;
+		moveParameters.maxX = 150;
+		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
+
+		RandomJumpAIAction.Parameters jumpParameters = new RandomJumpAIAction.Parameters();
+		jumpParameters.maxTimeBetweenJumps = 100;
+		jumpParameters.minTimeBetweenJumps = 0;
+		ai.addAIAction(new RandomJumpAIAction(en, jumpParameters));
+		en.setAI(ai);
+		
+		enemies.add(en);
 
 		addCharacter(player);
 		//addEnemies(enemies);
