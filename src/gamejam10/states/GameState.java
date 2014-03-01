@@ -19,7 +19,7 @@ import java.util.*;
 
 import gamejam10.Main;
 import gamejam10.ai.BasicAI;
-import gamejam10.audio.MusicPlayer;
+import gamejam10.audio.AudioPlayer;
 import gamejam10.character.AIEnemy;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
@@ -74,11 +74,12 @@ public class GameState extends BasicGameState {
 	private Camera camera = new Camera();
 
 
-	private MusicPlayer musicPlayer;
+	private AudioPlayer musicPlayer;
 
 	private int textureId;
    private int offscreenFBO;
    private Shader quadShader;
+   private Shader godShader;
     
 
 
@@ -95,9 +96,9 @@ public class GameState extends BasicGameState {
 //		en.setAI(new BasicAI(en, player, 100, 200));
 //		enemies.add(en);
 
-		musicPlayer = MusicPlayer.getInstance();
+		musicPlayer = AudioPlayer.getInstance();
 		
-		camera.setWidth(1500);
+		camera.setWidth(1000);
 
 		level = new Level("map06");
 		level.setCamera(camera);
@@ -107,6 +108,7 @@ public class GameState extends BasicGameState {
 		physics = new Physics(this);
 		
 		quadShader = Shader.makeShader("data/shaders/quad.vs.glsl", "data/shaders/quad.fs.glsl");
+		godShader = Shader.makeShader("data/shaders/god.vs.glsl", "data/shaders/god.fs.glsl");
 		
 		fboInit();
 		
@@ -130,8 +132,8 @@ public class GameState extends BasicGameState {
 		textureId = buf.get(0);
 		
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
-		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
-		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 
 		GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
 		
@@ -197,7 +199,11 @@ public class GameState extends BasicGameState {
 	
 	private void doRender(GameContainer gc, StateBasedGame sbg, Graphics g) {
 		
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		
 		g.setBackground(Color.white);
+
 		g.clear();
 		
 		// calculate scale
@@ -222,10 +228,19 @@ public class GameState extends BasicGameState {
 	
 	private void renderQuad(GameContainer gc, StateBasedGame sbg, Graphics g) {
 		
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		
 		int width = Main.getOptions().getWidth();
 		int height = Main.getOptions().getHeight();
 		
-		quadShader.startShader();
+		godShader.startShader();
+		godShader.setUniformFloatVariable("exposure", 0.0034f);
+		godShader.setUniformFloatVariable("decay", 1.0f);
+		godShader.setUniformFloatVariable("density", 0.84f);
+		godShader.setUniformFloatVariable("weight", 5.65f);
+		godShader.setUniformFloatVariable("lightPositionOnScreen", 0.5f, 0.5f);
+		godShader.setUniformFloatVariable("test", 1.0f, 0.0f, 0.0f, 1.0f);
 
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
@@ -291,7 +306,7 @@ public class GameState extends BasicGameState {
 		}
 
 		if (i.isKeyPressed(Input.KEY_ESCAPE)) {
-			musicPlayer.playMenuMusic();
+			musicPlayer.playMusic(MusicType.MENU, 1);
 			game.enterState(States.MENU.getID(), new FadeOutTransition(
 					Color.black, 50), new FadeInTransition(Color.black, 50));
 		}

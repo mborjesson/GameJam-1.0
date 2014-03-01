@@ -6,8 +6,9 @@ package gamejam10.level;
 
 import gamejam10.*;
 import gamejam10.ai.BasicAI;
-import gamejam10.ai.RandomJumpAction;
-import gamejam10.ai.RandomMovementAction;
+import gamejam10.ai.PatrollingAIAction;
+import gamejam10.ai.RandomJumpAIAction;
+import gamejam10.ai.RandomMovementAIAction;
 import gamejam10.camera.*;
 import gamejam10.character.*;
 import gamejam10.character.Character;
@@ -68,13 +69,13 @@ public class Level {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
 								
-								RandomMovementAction.Parameters moveParameters = new RandomMovementAction.Parameters();
+								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
 								moveParameters.minX = 100;
 								moveParameters.maxX = 200;
 								
-								ai.addAIAction(new RandomMovementAction(en, moveParameters));
+								ai.addAIAction(new RandomMovementAIAction(en, moveParameters));
 								
 								en.setAI(ai);
 								
@@ -85,18 +86,18 @@ public class Level {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
 								
-								RandomMovementAction.Parameters moveParameters = new RandomMovementAction.Parameters();
+								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
 								moveParameters.minX = 100;
 								moveParameters.maxX = 200;
 								
-								RandomJumpAction.Parameters jumpParameters = new RandomJumpAction.Parameters();
+								RandomJumpAIAction.Parameters jumpParameters = new RandomJumpAIAction.Parameters();
 								jumpParameters.maxTimeBetweenJumps = 5000;
 								jumpParameters.minTimeBetweenJumps = 1000;
 								
-								ai.addAIAction(new RandomJumpAction(en, jumpParameters));
-								ai.addAIAction(new RandomMovementAction(en, moveParameters));
+								ai.addAIAction(new RandomJumpAIAction(en, jumpParameters));
+								ai.addAIAction(new RandomMovementAIAction(en, moveParameters));
 								
 								en.setAI(ai);
 								
@@ -111,6 +112,15 @@ public class Level {
 			}
 		}
 
+		// TEST
+//		AIEnemy en = new AIEnemy(50, 370);
+//		BasicAI ai = new BasicAI(en, player);
+//		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
+//		moveParameters.minX = 50;
+//		moveParameters.maxX = 150;
+//		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
+//		en.setAI(ai);
+//		enemies.add(en);
 
 		addCharacter(player);
 		//addEnemies(enemies);

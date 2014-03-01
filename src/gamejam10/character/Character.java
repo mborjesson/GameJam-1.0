@@ -4,7 +4,7 @@
  */
 package gamejam10.character;
 
-import gamejam10.audio.MusicPlayer;
+import gamejam10.audio.AudioPlayer;
 import gamejam10.enums.Facing;
 import gamejam10.level.LevelObject;
 import gamejam10.physics.*;
@@ -32,7 +32,7 @@ public abstract class Character extends LevelObject {
     protected float decelerationSpeed = 1;
     protected float maximumSpeed = 1;
     
-    protected boolean highlight = true;
+    protected boolean highlight = false;
 
     public Character(float x, float y) throws SlickException {
         super(x,y);

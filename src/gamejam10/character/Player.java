@@ -4,7 +4,8 @@
  */
 package gamejam10.character;
 
-import gamejam10.audio.MusicPlayer;
+import gamejam10.audio.AudioPlayer;
+import gamejam10.enums.*;
 import gamejam10.physics.AABoundingRect;
 
 import org.newdawn.slick.Image;
@@ -31,8 +32,8 @@ public class Player extends Character {
        
        //default bounding shape is a 32 by 32 box
 
-        boundingShape = new AABoundingRect(x,y,/*24,30*/20, 43);
-
+        boundingShape = new AABoundingRect(x,y,/*24,30*/20, 39);
+        
         accelerationSpeed = 0.09f;
         maximumSpeed = 0.23f;
         maximumFallSpeed = 1.0f;
@@ -43,8 +44,8 @@ public class Player extends Character {
     @Override
     public void jump() {
         if (onGround) {
-        	MusicPlayer mp = MusicPlayer.getInstance();
-        	mp.playJumpSound();
+        	AudioPlayer ap = AudioPlayer.getInstance();
+        	ap.playSound(SoundType.JUMP, 0.3f);
             y_velocity = -0.6f;
         }
     }

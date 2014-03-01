@@ -4,7 +4,6 @@
  */
 package gamejam10.character;
 
-import gamejam10.ai.BasicAI;
 import gamejam10.physics.AABoundingRect;
 
 import org.newdawn.slick.Image;
