@@ -43,7 +43,7 @@ public class MenuState extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         
         audioPlayer = AudioPlayer.getInstance();
-        audioPlayer.playMusic(MusicType.MENU, 0.3f);
+        audioPlayer.playMusic(MusicType.MENU, 1);
         menuImage = new org.newdawn.slick.Image("data/images/mantis.jpg");
         
     }
@@ -64,7 +64,7 @@ public class MenuState extends BasicGameState {
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         Input input = container.getInput();
         if (input.isKeyPressed(Input.KEY_SPACE) || startGame) {
-            audioPlayer.playMusic(MusicType.GAME);
+            audioPlayer.playMusic(MusicType.GAME, 0.3f);
             startGame = false;
             game.enterState(States.GAME.getID(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
         } 

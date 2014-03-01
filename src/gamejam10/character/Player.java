@@ -17,9 +17,13 @@ import org.newdawn.slick.SlickException;
  * @author gregof
  */
 public class Player extends Character {
+	
+	public float startx, starty;
      
     public Player(float x, float y) throws SlickException{
         super(x,y);
+        startx = x;
+        starty = y;
         //sprite = new Image("data/img/characters/player/player.png");
          setSprite(new Image("data/images/characters/player/mainstill.png") /*new Image("data/images/characters/player/homerstill.png")*/);
 //       setMovingAnimation(new Image[]{new Image("data/img/characters/player/player_1.png"),new Image("data/img/characters/player/player_2.png"),

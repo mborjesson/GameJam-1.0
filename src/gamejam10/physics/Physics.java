@@ -66,8 +66,10 @@ public class Physics {
     }
     
     private void killPlayer() {
-        gameState.getPlayer().setX(50);
-        gameState.getPlayer().setY(350);
+        gameState.getPlayer().setX(gameState.getPlayer().startx);
+        gameState.getPlayer().setY(gameState.getPlayer().starty);
+        gameState.getPlayer().setXVelocity(0);
+        gameState.getPlayer().setYVelocity(0);
         
         AudioPlayer ap = AudioPlayer.getInstance();
     	 ap.playSound(SoundType.DEATH, 0.2f);
@@ -101,12 +103,14 @@ public class Physics {
 //            System.out.println("((AABoundingRect)obj.getBoundingShape()).y: " + ((AABoundingRect)obj.getBoundingShape()).getY());
 //            System.out.println("((AABoundingRect)obj.getBoundingShape()).width: " + ((AABoundingRect)obj.getBoundingShape()).getWidth());
 //            System.out.println("((AABoundingRect)obj.getBoundingShape()).height: " + ((AABoundingRect)obj.getBoundingShape()).getHeight());
+            	System.out.println(y_movement);
+            	System.out.println("vel " + obj.getYVelocity());
                 
                 if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                     // System.out.println("checkCollision true");
                 	
-                	System.out.println(y_movement);
-                	if (y_movement > 10)
+                	System.out.println("coll " + y_movement);
+                	if (obj.getYVelocity() > 0.90f)
                 	{
                 		System.out.println("Ugh!!!!!!!!!!!");
                      	killPlayer();
