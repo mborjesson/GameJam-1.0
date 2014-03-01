@@ -31,10 +31,10 @@ public class Player extends Character {
        //default bounding shape is a 32 by 32 box
         boundingShape = new AABoundingRect(x,y,24,30);
         
-        accelerationSpeed = 0.001f;
-        maximumSpeed = 0.15f;
-        maximumFallSpeed = 0.3f;
-        decelerationSpeed = 0.001f;
+        accelerationSpeed = 0.09f;
+        maximumSpeed = 0.23f;
+        maximumFallSpeed = 1.0f;
+        decelerationSpeed = 0.09f;
         
     }
     

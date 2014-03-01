@@ -64,7 +64,7 @@ public class GameState extends BasicGameState {
         musicPlayer = MusicPlayer.getInstance();
         
        //at the start of the game we don't have a player yet
-        player = new Player(128,250);
+        player = new Player(68,500);
  
         //once we initialize our level, we want to load the right level
         level = new Level("", player, enemies);
@@ -116,17 +116,17 @@ public class GameState extends BasicGameState {
     private void handleKeyboardInput(Input i, int delta, StateBasedGame game) {
 
         //we can both use the WASD or arrow keys to move around, obviously we can't move both left and right simultaneously
-        if (i.isKeyDown(Input.KEY_A) || i.isKeyDown(Input.KEY_LEFT)) {
+        if (i.isKeyDown(Input.KEY_A) || i.isKeyDown(Input.KEY_LEFT) || i.isControllerLeft(2)) {
             player.moveLeft(delta);
             player.setMoving(true);
-        } else if (i.isKeyDown(Input.KEY_D) || i.isKeyDown(Input.KEY_RIGHT)) {
+        } else if (i.isKeyDown(Input.KEY_D) || i.isKeyDown(Input.KEY_RIGHT) || i.isControllerRight(2)) {
             player.moveRight(delta);
             player.setMoving(true);
         }  else {
              player.setMoving(false);
         }
         
-        if (i.isKeyDown(Input.KEY_UP) || i.isKeyDown(Input.KEY_W)) {
+        if (i.isKeyDown(Input.KEY_UP) || i.isKeyDown(Input.KEY_W) || i.isButton1Pressed(2)) {
             player.jump();
         }else  if (i.isKeyPressed(Input.KEY_J)) {
              this.higLightPlayer = !this.higLightPlayer;
@@ -138,6 +138,21 @@ public class GameState extends BasicGameState {
             musicPlayer.playMenuMusic();
             game.enterState(Main.STATE_MENU, new FadeOutTransition(Color.black, 50), new FadeInTransition(Color.black, 50));
         } 
+        
+    }
+    
+    public void controllerButtonPressed(int controller, int button)
+    {
+    	System.out.println(controller + " " + button);
+    	
+    	switch (button) {
+		case 1:
+			player.jump();
+			break;
+
+		default:
+			break;
+		}
     }
     
      /**

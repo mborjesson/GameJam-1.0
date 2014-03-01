@@ -8,8 +8,10 @@ import gamejam10.enums.Facing;
 import gamejam10.level.LevelObject;
 
 import java.util.HashMap;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
@@ -72,6 +74,13 @@ public abstract class Character extends LevelObject {
 
     public void jump() {
         if (onGround) {
+        	try {
+				Music a = new Music("data/sounds/Jump.wav");
+				a.play();
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             y_velocity = -0.6f;
         }
     }
