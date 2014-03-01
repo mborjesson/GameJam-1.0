@@ -37,7 +37,9 @@ public class AABoundingRect extends BoundingShape {
         //we go from the left of the rect towards to right of the rect, making sure we round upwards to a multiple of 32 or we might miss a few tiles
         for (int i = (int) x; i <= x + width + (32 - width % 32); i += 32) {
             for (int j = (int) y; j <= y + height + (32 - height % 32); j += 32) {
-                occupiedTiles.add(tiles[i / 32][j / 32]);
+            	if ((i / 32) < tiles.length && (j / 32)< tiles[0].length) {
+            		occupiedTiles.add(tiles[i / 32][j / 32]);
+            	}
             }
         }
         return occupiedTiles;
