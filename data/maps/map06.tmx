@@ -69,7 +69,7 @@
     <property name="name" value="skurk02"/>
    </properties>
   </object>
-  <object name="The End" type="trigger" x="5536" y="352" width="64" height="320">
+  <object name="The End" type="trigger" x="5540" y="349" width="64" height="320">
    <properties>
     <property name="name" value="end"/>
    </properties>
