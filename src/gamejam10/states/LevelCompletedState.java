@@ -21,6 +21,7 @@ public class LevelCompletedState extends BasicGameState {
 		
 		g.drawString("Grattis", 400, 200);
 		
+		
 	}
 
 	@Override
