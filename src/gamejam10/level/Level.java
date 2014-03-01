@@ -7,11 +7,12 @@ package gamejam10.level;
 
 import gamejam10.Main;
 import gamejam10.character.Character;
+import gamejam10.character.Enemy;
 import gamejam10.character.Player;
 import gamejam10.physics.Tile;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
@@ -57,7 +58,12 @@ public class Level {
         
         this.player = player;
         addCharacter(player);
-        addEnemies(enemies);
+//        addEnemies(enemies);
+        for (Object e : enemies) {
+        	addCharacter((Character)e);
+		}
+//        
+//        addEnemies(enemies);
         
         
         loadTileMap();

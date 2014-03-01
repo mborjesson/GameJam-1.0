@@ -6,6 +6,7 @@ package gamejam10.states;
 
 
 import gamejam10.Main;
+import gamejam10.ai.BasicAI;
 import gamejam10.audio.MusicPlayer;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.logging.Logger;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -58,13 +60,14 @@ public class GameState extends BasicGameState {
     @Override
       public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
  
-       Enemy en = new Enemy(300, 250);
-       enemies.add(en);
-        
         musicPlayer = MusicPlayer.getInstance();
         
        //at the start of the game we don't have a player yet
         player = new Player(128,250);
+        
+        Enemy en = new Enemy(300, 250);
+        en.setAI(new BasicAI(en, player));
+        enemies.add(en);
  
         //once we initialize our level, we want to load the right level
         level = new Level("", player, enemies);
@@ -100,7 +103,8 @@ public class GameState extends BasicGameState {
     }
 
  
-   
+
+    
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -108,6 +112,14 @@ public class GameState extends BasicGameState {
       
         handleKeyboardInput(gc.getInput(), delta, sbg);
 
+        for (gamejam10.character.Character c : level.getCharacters()) {
+        	if ( c instanceof Enemy ) {
+        		Enemy e = (Enemy)c;
+        		e.updateAI(delta);
+        	}
+		}
+        
+        
         physics.handlePhysics(level, delta);
       
     }
