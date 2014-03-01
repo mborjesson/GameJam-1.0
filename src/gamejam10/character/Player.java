@@ -30,7 +30,7 @@ public class Player extends Character {
        
        
        // setAnimation("data/images/characters/player/homeranim.png");
-       setAnimation(/*"data/images/characters/player/homeranimsmall.png"*/"data/images/characters/player/mainanim.png", 20, 43);
+       setAnimation(/*"data/images/characters/player/homeranimsmall.png"*/"data/images/characters/player/mainanim.png", 20, 43, 8);
        
        //default bounding shape is a 32 by 32 box
 

@@ -24,6 +24,8 @@ import org.newdawn.slick.tiled.*;
  */
 public class Level {
 
+	private static final int TITLE_WIDTH_X = 32;
+	
 	private TiledMap map;
 	private int mapWidth;
 	private int mapHeight;
@@ -48,6 +50,7 @@ public class Level {
 					case SPAWN: {
 						String name = map.getObjectProperty(groupID, objectID,
 								"name", null);
+
 						int x = map.getObjectX(groupID, objectID);
 						int y = map.getObjectY(groupID, objectID);
 						int width = map.getObjectWidth(groupID, objectID);
@@ -64,11 +67,14 @@ public class Level {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
 								
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
+								
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = 100;
-								moveParameters.maxX = 200;
+								moveParameters.minX = x - TITLE_WIDTH_X * deltaTilesMin;
+								moveParameters.maxX = x + TITLE_WIDTH_X * deltaTilesMax;
 								
 								ai.addAIAction(new RandomMovementAIAction(en, moveParameters));
 								
@@ -81,11 +87,14 @@ public class Level {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
 								
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
+
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
 								moveParameters.maxMovementDuration = 1000;
 								moveParameters.minMovementDuration = 100;
-								moveParameters.minX = 100;
-								moveParameters.maxX = 200;
+								moveParameters.minX = x - TITLE_WIDTH_X * deltaTilesMin;
+								moveParameters.maxX = x + TITLE_WIDTH_X * deltaTilesMax;
 								
 								RandomJumpAIAction.Parameters jumpParameters = new RandomJumpAIAction.Parameters();
 								jumpParameters.maxTimeBetweenJumps = 5000;
@@ -99,7 +108,21 @@ public class Level {
 								enemies.add(en);
 								break;
 							}
+							
 						}
+					} 
+					case LEVEL_END: {
+						System.out.println("LEVEL_END FOUND");
+						String name = map.getObjectProperty(groupID, objectID, "name", null);
+						int x = map.getObjectX(groupID, objectID);
+						int y = map.getObjectY(groupID, objectID);
+						int width = map.getObjectWidth(groupID, objectID);
+						int height = map.getObjectWidth(groupID, objectID);
+						System.out.println(x + ", " + y + ", " + width + ", "	+ height);
+						CharacterType ct = CharacterType.getCharacterType(name);
+						LevelType lt = LevelType.getLevelObject(name);
+						System.out.println("lt: " + lt);
+						
 					}
 						break;
 					}
@@ -110,14 +133,14 @@ public class Level {
 		sun = new Sun(60*1000);
 
 		// TEST
-//		AIEnemy en = new AIEnemy(50, 370);
-//		BasicAI ai = new BasicAI(en, player);
-//		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
-//		moveParameters.minX = 50;
-//		moveParameters.maxX = 150;
-//		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
-//		en.setAI(ai);
-//		enemies.add(en);
+		AIEnemy en = new AIEnemy(50, 370);
+		BasicAI ai = new BasicAI(en, player);
+		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
+		moveParameters.minX = 50;
+		moveParameters.maxX = 150;
+		ai.addAIAction(new PatrollingAIAction(en, moveParameters));
+		en.setAI(ai);
+		enemies.add(en);
 
 		addCharacter(player);
 		//addEnemies(enemies);

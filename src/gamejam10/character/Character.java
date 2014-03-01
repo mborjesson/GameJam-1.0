@@ -131,7 +131,7 @@ public abstract class Character extends LevelObject {
 
     }
 
-    protected void setAnimation(String img, int frameWidth, int frameHeight) {
+    protected void setAnimation(String img, int frameWidth, int frameHeight, int numberOfFrames) {
         movingAnimations = new HashMap<Facing, Animation>();
 
         SpriteSheet sheet = null;
@@ -146,12 +146,12 @@ public abstract class Character extends LevelObject {
         Animation facingRightAnimation = new Animation();
         Animation facingLeftAnimation = new Animation();
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < numberOfFrames; i++) {
             facingRightAnimation.addFrame(sheet.getSprite(i, 0), 150);
         }
         movingAnimations.put(Facing.RIGHT, facingRightAnimation);
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < numberOfFrames; i++) {
             facingLeftAnimation.addFrame(sheet.getSprite(i, 0).getFlippedCopy(true, false), 150);
         }
         movingAnimations.put(Facing.LEFT, facingLeftAnimation);

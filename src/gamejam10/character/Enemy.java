@@ -25,12 +25,12 @@ public class Enemy extends Character {
         // default sprite
     //    sprite = new Image("data/images/placeholder_sprite.png");
         
-               setSprite(new Image("data/images/characters/player/homerstill.png"));
+               setSprite(new Image("data/images/characters/player/enemystill.png"));
 
-       setAnimation("data/images/characters/player/homeranimsmall.png", 32, 32);
+       setAnimation("data/images/characters/player/enemyanim.png", 22, 28, 3);
        
        //default bounding shape is a 32 by 32 box
-        boundingShape = new AABoundingRect(x,y,24,30);
+        boundingShape = new AABoundingRect(x,y,22,28);
         
         accelerationSpeed = 0.001f;
         maximumSpeed = 0.05f; //0.15f;
