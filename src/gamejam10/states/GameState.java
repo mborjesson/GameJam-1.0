@@ -84,7 +84,7 @@ public class GameState extends BasicGameState {
 
 		musicPlayer = AudioPlayer.getInstance();
 		
-		camera.setWidth(1000);
+		camera.setWidth(600);
 
 		level = new Level("map06");
 		level.setCamera(camera);
