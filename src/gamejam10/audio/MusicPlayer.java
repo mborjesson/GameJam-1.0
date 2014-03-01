@@ -31,14 +31,14 @@ public class MusicPlayer {
     
     
     private MusicPlayer() {
-        try {
-            
-            menuMusic = new Music("/data/modar/c2k-commando2000theme.xm");
-            randomGameMusic();
-            
-        } catch (SlickException ex) {
-            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            
+//           menuMusic = new Music("/data/modar/c2k-commando2000theme.xm");
+//            randomGameMusic();
+//            
+//        } catch (SlickException ex) {
+//            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
     }
 
@@ -48,8 +48,8 @@ public class MusicPlayer {
     private void muteAll() {
 //        menuMusic.fade(500, 0, true);
 //        gameMusic.fade(500, 0, true);
-        menuMusic.stop();
-        gameMusic.stop();
+//        menuMusic.stop();
+//        gameMusic.stop();
     }
     
     /*
@@ -57,7 +57,7 @@ public class MusicPlayer {
      */
     public void playMenuMusic() {
         muteAll();        
-        menuMusic.loop();
+        //menuMusic.loop();
     }
     
     /*
@@ -65,7 +65,7 @@ public class MusicPlayer {
      */
     public void playGameMusic() {
         muteAll();
-        gameMusic.loop();;
+        //gameMusic.loop();;
     }
     
     /**
@@ -73,14 +73,14 @@ public class MusicPlayer {
      */
      private void randomGameMusic() {
         
-        try {
-            //openingMenuMusic = new Music("/data/modar/c2k-burt_reynolds.xm");
-            //openingMenuMusic = new Music("/data/modar/c2k-helly_hansen.xm");
-            gameMusic = new Music("/data/modar/c2k-lock_and_load.xm");
-            //openingMenuMusic = new Music("/data/modar/kirby.ogg");
-        } catch (SlickException ex) {
-            Logger.getLogger(GameState.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            //openingMenuMusic = new Music("/data/modar/c2k-burt_reynolds.xm");
+//            //openingMenuMusic = new Music("/data/modar/c2k-helly_hansen.xm");
+//            gameMusic = new Music("/data/modar/c2k-lock_and_load.xm");
+//            //openingMenuMusic = new Music("/data/modar/kirby.ogg");
+//        } catch (SlickException ex) {
+//            Logger.getLogger(GameState.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
  
     }
     
