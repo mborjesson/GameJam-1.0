@@ -75,6 +75,7 @@ public abstract class Character extends LevelObject {
     public void jump() {
         if (onGround) {
             y_velocity = -0.6f;
+            
         }
     }
 

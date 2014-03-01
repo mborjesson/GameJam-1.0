@@ -142,17 +142,17 @@ public class GameState extends BasicGameState {
 
 		// we can both use the WASD or arrow keys to move around, obviously we
 		// can't move both left and right simultaneously
-		if (i.isKeyDown(Input.KEY_A) || i.isKeyDown(Input.KEY_LEFT) || i.isControllerLeft(2)) {
+		if (i.isKeyDown(Input.KEY_A) || i.isKeyDown(Input.KEY_LEFT) || isControllerPressed("left", i)) {
 			player.moveLeft(delta);
 			player.setMoving(true);
-		} else if (i.isKeyDown(Input.KEY_D) || i.isKeyDown(Input.KEY_RIGHT) || i.isControllerRight(2)) {
+		} else if (i.isKeyDown(Input.KEY_D) || i.isKeyDown(Input.KEY_RIGHT) || isControllerPressed("right", i)) {
 			player.moveRight(delta);
 			player.setMoving(true);
 		} else {
 			player.setMoving(false);
 		}
 
-		if (i.isKeyDown(Input.KEY_UP) || i.isKeyDown(Input.KEY_W) || i.isButton1Pressed(2)) {
+		if (i.isKeyDown(Input.KEY_UP) || i.isKeyDown(Input.KEY_W) || isControllerPressed("a", i)) {
 			player.jump();
 		} else if (i.isKeyPressed(Input.KEY_J)) {
 			player.setHighlight(!player.isHighlight());
@@ -165,6 +165,21 @@ public class GameState extends BasicGameState {
 			game.enterState(States.MENU.getID(), new FadeOutTransition(
 					Color.black, 50), new FadeInTransition(Color.black, 50));
 		}
+	}
+	
+	private boolean isControllerPressed(String btn, Input i)
+	{
+		for(int c = 0; c < i.getControllerCount(); c++)
+		{
+			if (btn == "left" && i.isControllerLeft(c))
+				return true;
+			else if (btn == "right" && i.isControllerRight(c))
+				return true;
+			else if (btn == "a" && i.isButton1Pressed(c))
+				return true;
+		}
+		
+		return false;
 	}
 
 	/**
