@@ -48,9 +48,11 @@ public class AABoundingRect extends BoundingShape {
     public ArrayList<Tile> getGroundTiles(Tile[][] tiles) {
         ArrayList<Tile> tilesUnderneath = new ArrayList<Tile>();
         int j = (int) (y + height + 1);
-
+        
         for (int i = (int) x; i <= x + width + (32 - width % 32); i += 32) {
-            tilesUnderneath.add(tiles[i / 32][j / 32]);
+        	if ((i / 32) < tiles.length && (j / 32)< tiles[0].length) {
+        		tilesUnderneath.add(tiles[i / 32][j / 32]);
+        	}
         }
 
         return tilesUnderneath;
