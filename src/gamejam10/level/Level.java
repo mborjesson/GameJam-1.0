@@ -5,23 +5,16 @@
 package gamejam10.level;
 
 import gamejam10.*;
-import gamejam10.ai.BasicAI;
-import gamejam10.ai.PatrollingAIAction;
-import gamejam10.ai.RandomJumpAIAction;
-import gamejam10.ai.RandomMovementAIAction;
+import gamejam10.ai.*;
 import gamejam10.camera.*;
 import gamejam10.character.*;
 import gamejam10.character.Character;
 import gamejam10.enums.*;
 import gamejam10.physics.*;
-import gamejam10.character.Enemy;
-import gamejam10.character.Player;
-import gamejam10.physics.Tile;
+import gamejam10.sun.*;
 
 import java.util.*;
 
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.*;
 import org.newdawn.slick.tiled.*;
 
@@ -40,6 +33,8 @@ public class Level {
 	// list of all characters on this map
 	private List<Character> characters = new ArrayList<Character>();
 	private List<Character> enemies = new ArrayList<Character>();
+	
+	private Sun sun = null;
 
 	public Level(String level) throws SlickException {
 
@@ -125,6 +120,8 @@ public class Level {
 				}
 			}
 		}
+		
+		sun = new Sun(10*1000);
 
 		// TEST
 //		AIEnemy en = new AIEnemy(50, 370);
@@ -198,6 +195,13 @@ public class Level {
 	}
 
 	public void render(Graphics g) {
+		g.setBackground(new Color(sun.getSunColor(), sun.getSunColor(), sun.getSunColor()));
+		g.clear();
+
+		g.pushTransform();
+		
+		g.translate(camera.getX()+camera.getWidth()*0.5f, camera.getY()+camera.getHeight()*0.5f);
+		
 
 //		int offsetX = getXOffset();
 //		int offsetY = getYOffset();
@@ -215,8 +219,15 @@ public class Level {
 		for (Character c : characters) {
 			c.render(g, offsetX, offsetY);
 		}
-	}
 
+		g.popTransform();
+		
+		g.resetTransform();
+		g.setColor(Color.red);
+		g.fillRect(sun.getSunPositionX()*Main.getOptions().getWidth(), (1-sun.getSunPositionY())*Main.getOptions().getHeight(), 10, 10);
+		
+	}
+	
 	private void loadTileMap() {
 		// create an array to hold all the tiles in the map
 		tiles = new Tile[map.getWidth()][map.getHeight()];
@@ -261,6 +272,10 @@ public class Level {
 				tiles[x][y] = tile;
 			}
 		}
+	}
+	
+	public void update(int delta) {
+		sun.update(delta);
 	}
 
 	public void addCharacter(Character c) {
