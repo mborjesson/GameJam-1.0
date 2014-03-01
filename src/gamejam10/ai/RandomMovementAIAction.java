@@ -1,5 +1,6 @@
 package gamejam10.ai;
 
+import gamejam10.ai.PatrollingAIAction.Direction;
 import gamejam10.character.Character;
 
 public class RandomMovementAIAction implements AIAction  {
@@ -30,7 +31,7 @@ public class RandomMovementAIAction implements AIAction  {
 		character = c;
 		this.parameters = parameters;
 		
-		dir = Direction.LEFT;
+		dir = Math.random() > 0.5 ? Direction.LEFT : Direction.RIGHT;
 	}
 	
 	public void doAction(double dt) {
