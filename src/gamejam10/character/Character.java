@@ -4,7 +4,7 @@
  */
 package gamejam10.character;
 
-import gamejam10.audio.MusicPlayer;
+import gamejam10.audio.AudioPlayer;
 import gamejam10.enums.Facing;
 import gamejam10.level.LevelObject;
 import gamejam10.physics.*;
