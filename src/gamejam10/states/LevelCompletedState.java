@@ -29,9 +29,9 @@ public class LevelCompletedState extends BasicGameState {
 
 		System.out.println(Player.getDeathCounter());
 		
-		if (Player.getDeathCounter() <= 5) {
-			JOptionPane.showMessageDialog(null, "FLAWLESS VICTORY!!!!");
-		}
+//		if (Player.getDeathCounter() <= 5) {
+//			JOptionPane.showMessageDialog(null, "FLAWLESS VICTORY!!!!");
+//		}
 	}
 
 	@Override

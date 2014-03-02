@@ -49,5 +49,10 @@
     <property name="name" value="player"/>
    </properties>
   </object>
+  <object name="End Of Level" type="trigger" x="1310" y="861" width="35" height="66">
+   <properties>
+    <property name="name" value="end"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
