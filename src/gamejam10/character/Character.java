@@ -196,22 +196,6 @@ public abstract class Character extends LevelObject {
 
     }
 
-    protected void setfsdfAnimation(Image[] images, int frameDuration) {
-        SpriteSheet sheet = null;
-        try {
-//            sheet = new SpriteSheet("media/homeranim.png", 36, 65);
-            sheet = new SpriteSheet("media/animhamster.png", 32, 32);
-        } catch (SlickException ex) {
-            ex.printStackTrace();
-        }
-        Animation animation = new Animation();
-        for (int i = 0; i < 8; i++) {
-            animation.addFrame(sheet.getSprite(i, 0), 150);
-        }
-
-
-    }
-
     public float getX() {
         return x;
     }

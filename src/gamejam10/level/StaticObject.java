@@ -17,7 +17,6 @@ public abstract class StaticObject {
 	        this.x = x;
 	        this.y = y;
 	 
-	        System.out.println("End of World: x:" + x + "y: " + y + ", w: " + w + ", h:" + h);
 	        //default bounding shape is a 32 by 32 box
 	        boundingShape = new AABoundingRect(x,y,w,h);
 	        
@@ -48,5 +47,4 @@ public abstract class StaticObject {
 	    public BoundingShape getBoundingShape(){
 	        return boundingShape;
 	    } 
-	    
 }
