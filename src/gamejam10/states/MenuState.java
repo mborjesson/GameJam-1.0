@@ -36,12 +36,13 @@ public class MenuState extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
     	// build menu
     	menu = new Menu(null);
-    	menu.addMenuAction("RESUME", new MenuActionEnterState(States.GAME.getID(), 1));
-    	menu.addMenuAction("NEW GAME", new MenuActionEnterState(States.GAME.getID(), 0));
-    	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID(), 0));
-    	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID(), 0));
+    	menu.addMenuAction("resume", new MenuActionEnterState(States.GAME.getID(), 1));
+    	menu.addMenuAction("restart level", new MenuActionEnterState(States.GAME.getID(), 2));
+    	menu.addMenuAction("new game", new MenuActionEnterState(States.GAME.getID(), 0));
+    	menu.addMenuAction("credits", new MenuActionEnterState(States.CREDITS.getID(), 0));
+    	menu.addMenuAction("exit", new MenuActionEnterState(States.EXIT.getID(), 0));
     	
-    	menu.setSelectedItem(1);
+    	menu.setSelectedItem(2);
         
         audioPlayer = AudioPlayer.getInstance();
         audioPlayer.playMusic(MusicType.MENU, 1);
@@ -63,19 +64,20 @@ public class MenuState extends BasicGameState {
 		
 		GameState gs = (GameState)game.getState(States.GAME.getID());
 		
-		menu.getItem(menu.getItemIndex("RESUME")).setEnabled(gs.isRunning());
+		menu.getItem(menu.getItemIndex("resume")).setEnabled(gs.isRunning());
+		menu.getItem(menu.getItemIndex("restart level")).setEnabled(gs.isRunning());
 		
 		for (int i = 0; i < menu.getNumItems(); ++i) {
 			MenuItem item = menu.getItem(i);
 			String name = item.getName();
 			if (menu.getSelectedItem() == i) {
+				name = name.toUpperCase();
 				if (!item.isEnabled()) {
 					g.setColor(Color.lightGray);
 				} else {
 					g.setColor(Color.white);
 				}
 			} else {
-				name = name.toLowerCase();
 				if (!item.isEnabled()) {
 					g.setColor(Color.darkGray);
 				} else {
@@ -109,11 +111,16 @@ public class MenuState extends BasicGameState {
 	                    
 	                    // play game, initialize first level
 	                    if (actionState.getType() == 0) {
+	                    	menu.setSelectedItem(1);
 		                    GameState gs = (GameState)game.getState(States.GAME.getID());
 		                    LevelOrder lo = LevelOrder.getInstance();
 		                    lo.reset();
 		                    Player.resetDeathCounter();
 		                    gs.initializeLevel(lo.getNextLevel());
+	                    } else if (actionState.getType() == 2) {
+		                    GameState gs = (GameState)game.getState(States.GAME.getID());
+		                    LevelOrder lo = LevelOrder.getInstance();
+		                    gs.initializeLevel(lo.getCurrentLevel());
 	                    }
 	        		}
 	                game.enterState(actionState.getStateId(), actionState.getLeaveTransition(), actionState.getEnterTransition());
