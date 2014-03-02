@@ -35,7 +35,7 @@ public class Physics {
         this.gameState = gameState;
     }
     
-    public void handlePhysics(StateBasedGame sbg, Level level, int delta) {
+    public void handlePhysics(StateBasedGame sbg, Level level, int delta) throws SlickException {
         handleCharacters(level, delta);
         checkCollisionBetweenPlayerAndEnemies(level);
         checkCollisionBetweenCharacters(level);
@@ -96,7 +96,7 @@ public class Physics {
 		}
     }
     
-    private void checkIfEndOfWorld(StateBasedGame sbg, Level level) {
+    private void checkIfEndOfWorld(StateBasedGame sbg, Level level) throws SlickException {
     	
     	//if level goal exists
     	if (level.getEndOfWorldObject() != null) {

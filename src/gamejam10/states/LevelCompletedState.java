@@ -52,13 +52,20 @@ public class LevelCompletedState extends BasicGameState {
 	
 	private void handleInput(Input i, int delta, StateBasedGame game) throws SlickException {
 		if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
+			GameState gs = (GameState)game.getState(States.GAME.getID());
+			if (nextLevel != null) {
+				gs.initializeLevel(nextLevel);
+			} else {
+				gs.setRunning(false);
+			}
 			game.enterState(States.MENU.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 		} else if (i.isKeyPressed(Input.KEY_ENTER)) {
+			GameState gs = (GameState)game.getState(States.GAME.getID());
 			if (nextLevel != null) {
-				GameState gs = (GameState)game.getState(States.GAME.getID());
 				gs.initializeLevel(nextLevel);
 				game.enterState(States.GAME.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 			} else {
+				gs.setRunning(false);
 				game.enterState(States.MENU.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 			}
 		}

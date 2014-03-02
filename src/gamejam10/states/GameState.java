@@ -453,6 +453,10 @@ public class GameState extends BasicGameState {
 		running = true;
 	}
 
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+	
 	public boolean isRunning() {
 		return running;
 	}
