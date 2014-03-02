@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="suntime" value="90"/>
+ </properties>
  <tileset firstgid="1" source="../tilesets/bw_smoothies.tsx"/>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3ZQQ6CMBRF0cbgoGH/+2UBqDVQbOWdk9yRkz95sQm1lFIlSZIkxQXcm/1DLvuHXPYPuewfctk/5LJ/yOT7H+Syf8hl/5DL/iGX/UMu+4dc9g+57B9y2T/kmnn/S9nf8xh6EdzLzPsHrmX/kOuq/b96u396vy+N34H+/P9DLvuHXK39f9Pz51cDPfTYv3cC/Cf7h1z2f946+gA4qNf+Jc3VO6PvkiRJ87UBbVCL+wCAAAA=
+   H4sIAAAAAAAAC+2Y266CMBBF8YrG//9f5YEEG9CWDp1L10r2w4mEDmSvY+1zGIYnIYQQQgghpLt4Rvvd9fSuwS9RO6ntM/6DB6J2Uttn/AcPRO2kts/4Dx6I2kltn/EfPBC1k9o+4z94IGontX3Gf7BO5E5q+4z/YJ3IndT2Gf/BOpE7qe0z/oN1IndS22f8B+tE7mTpM+A/9EbkTuL/OtfCuc4NZ4O2WOnkEYyf3Bd/P4bvZ7sl1/fiP8BMT53893z4X85LewCoImInt+jJ/3SPzx4e1rDs/6/fqcs+p/v6vc5F8h8ghwidlHCu9EwM/yECETop5Zwn/6c9T3p+ufwfxn4fcjjK/63v061eXv98/osW/reYZ88aADXw/Z93nxbz5HBJ1gCoAf/z7tNinj1rANRQ486c9HeoBKeCa6X8HzOvO2qe2jUASpHwf4r0edNYcE8p/3NZO9toed62XB+gBin/NbG2d2mBhfcO/undf+3Z9+J5drCDlP+EEFvZQnsuQgghhNjLG6l+dkYAgAAA
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
@@ -12,14 +15,14 @@
     <property name="name" value="player"/>
    </properties>
   </object>
-  <object name="Pat" type="spawn" x="1047" y="604" width="27" height="32">
+  <object name="Pat" type="spawn" x="1186" y="542" width="27" height="32">
    <properties>
-    <property name="deltatilesmax" value="8"/>
-    <property name="deltatilesmin" value="1"/>
+    <property name="deltatilesmax" value="2"/>
+    <property name="deltatilesmin" value="3"/>
     <property name="name" value="patroling_brain"/>
    </properties>
   </object>
-  <object name="Jumper" type="spawn" x="1542" y="801" width="29" height="31">
+  <object name="Jumper" type="spawn" x="3139" y="865" width="29" height="31">
    <properties>
     <property name="deltatilesmax" value="6"/>
     <property name="deltatilesmin" value="6"/>
@@ -36,13 +39,39 @@
   <object name="FE" type="spawn" x="645" y="672" width="33" height="31">
    <properties>
     <property name="deltatilesmax" value="3"/>
-    <property name="deltatilesmin" value="2"/>
+    <property name="deltatilesmin" value="3"/>
     <property name="name" value="enemy_float_easy"/>
    </properties>
   </object>
-  <object type="trigger" x="2400" y="414" width="96" height="513">
+  <object type="trigger" x="4416" y="511" width="97" height="99">
    <properties>
     <property name="name" value="end"/>
+   </properties>
+  </object>
+  <object name="WM" type="spawn" x="935" y="644" width="77" height="58">
+   <properties>
+    <property name="name" value="windmill"/>
+   </properties>
+  </object>
+  <object name="FE" type="spawn" x="2370" y="896" width="33" height="31">
+   <properties>
+    <property name="deltatilesmax" value="4"/>
+    <property name="deltatilesmin" value="5"/>
+    <property name="name" value="enemy_float_easy"/>
+   </properties>
+  </object>
+  <object name="Jumper" type="spawn" x="3651" y="802" width="29" height="31">
+   <properties>
+    <property name="deltatilesmax" value="6"/>
+    <property name="deltatilesmin" value="6"/>
+    <property name="name" value="jumping_brain"/>
+   </properties>
+  </object>
+  <object name="Jumper" type="spawn" x="4002" y="799" width="29" height="31">
+   <properties>
+    <property name="deltatilesmax" value="6"/>
+    <property name="deltatilesmin" value="6"/>
+    <property name="name" value="jumping_brain"/>
    </properties>
   </object>
  </objectgroup>
