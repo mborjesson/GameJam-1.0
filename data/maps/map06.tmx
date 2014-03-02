@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
  <properties>
-  <property name="suntime" value="60"/>
+  <property name="suntime" value="15"/>
  </properties>
  <tileset firstgid="1" name="bw_smoothies" tilewidth="32" tileheight="32">
   <image source="../images/bw_smoothies.png" trans="ffffff" width="128" height="256"/>
@@ -51,7 +51,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="maplayer" width="256" height="32">
+ <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2c2YrEIBBFnb3D/P//Dk0TyISKlkuZUs+B+9AilYrxuiX0FkLYEEIIIYQQQsvJC55yAZgN/A+wLvgfYF28+/8jo+4jvHJ/N8oFYDa8+z+H0rw/w/97Z/yAVcD/AOvi3f/nuTmm75tyBBiVVXx0HEdY3wO88Drvg19ia8YtUWdLxAlCnXOZ9BvK8Oj//Rz/6+5EQCS3n1zV15RrxgIoJzZOS/6T2r5l2c/h+jPuQ2Yg5j/tc9eW439bUmdqAGektXjMmzGfa9f/qVhQBv6HXGIez/G/Jgbzvy1e/P/W8VpQh9Q38P+YePH/c99/93u5VDt4aCcPpNpIqq+NI5VLMVZrcytifXq287fUWKfpp9q4lqw89kBbVpjPZrmv0fO3gr1jOSX+13yTW7OWb9nPZ/A9XPMbeL41zDL/z7o3z8lfs79B8/WRGmgPex6drsNzg1ys/S/tFUr3Bvt3wS32GL3Yc+4B/odcRpn/93FkJI7jVS3nGFLM0doH7mcU/99Jyfr9vFbpAc8Ncqnxf+y9y8rvZM7ex//glRr/x+q16ou9zs5aIXm/hy9Zt0EJnv3f6uys11rkyvv4H7yifT+6/xdArI/nSvp/gZbxe/nPKmeEPCkYxTximbt0rdKyJ/geraRgFPOIZe4twftoNv0B7DD3HACAAAA=
   </data>
