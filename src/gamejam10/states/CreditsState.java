@@ -1,5 +1,6 @@
 package gamejam10.states;
 
+import gamejam10.*;
 import gamejam10.enums.*;
 
 import org.newdawn.slick.*;
@@ -19,17 +20,24 @@ public class CreditsState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 		
-		g.drawString("CREDITS", 400, 50);
+		g.setBackground(Color.black);
+		g.clear();
+		g.setColor(Color.white);
 		
-		g.drawString("Adam Lärkeryd", 		370, 100);
-		g.drawString("Erik Eliasson", 		370, 120);
-		g.drawString("Henrik Olsson", 		370, 140);
-		g.drawString("Magnus Lundmark",		370, 160);
-		g.drawString("Martin Börjesson", 	370, 180);
-		g.drawString("Nicklas Gavelin", 	370, 200);
+		float screenWidth = Constants.MENU_WIDTH;
+		Tools.setScale(g, screenWidth);
 		
-	}
+		Tools.drawStringCentered(g, screenWidth, 50, "CREDITS");
+		
+		int height = g.getFont().getLineHeight();
 
+		int y = 100;
+		for (int i = 0; i < Constants.AUTHORS.length; ++i) {
+			String a = Constants.AUTHORS[i];
+			Tools.drawStringCentered(g, screenWidth, y+i*height, a);
+		}
+	}
+	
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {

@@ -36,7 +36,7 @@ public class MenuState extends BasicGameState {
     	// build menu
     	menu = new Menu(null);
     	menu.addMenuAction("RESUME", new MenuActionEnterState(States.GAME.getID(), 1));
-    	menu.addMenuAction("PLAY", new MenuActionEnterState(States.GAME.getID(), 0));
+    	menu.addMenuAction("NEW GAME", new MenuActionEnterState(States.GAME.getID(), 0));
     	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID(), 0));
     	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID(), 0));
     	
@@ -52,15 +52,13 @@ public class MenuState extends BasicGameState {
 		g.setBackground(Color.black);
 		g.clear();
 		
-		float screenWidth = 640f;
-		float screenHeight = (float)(screenWidth/Main.getOptions().getAspectRatio());
-		float scaleX = Main.getOptions().getWidth()/screenWidth;
-		float scaleY = Main.getOptions().getHeight()/screenHeight;
-		g.scale(scaleX, scaleY);
+		float screenWidth = Constants.MENU_WIDTH;
+		Tools.setScale(g, screenWidth);
 		
-		float x = 40;
-		float y = 20;
-		float height = 20;
+		Tools.drawStringCentered(g, screenWidth, 50, "Luleå GameJam 1.0");
+		
+		float y = 100;
+		float height = g.getFont().getLineHeight();
 		
 		GameState gs = (GameState)game.getState(States.GAME.getID());
 		
@@ -69,20 +67,25 @@ public class MenuState extends BasicGameState {
 		for (int i = 0; i < menu.getNumItems(); ++i) {
 			MenuItem item = menu.getItem(i);
 			String name = item.getName();
-			if (!item.isEnabled()) {
-				name = name.toLowerCase();
-			}
 			if (menu.getSelectedItem() == i) {
-				g.setColor(Color.white);
-			} else {
 				if (!item.isEnabled()) {
-					g.setColor(Color.gray);
+					g.setColor(Color.lightGray);
+				} else {
+					g.setColor(Color.white);
+				}
+			} else {
+				name = name.toLowerCase();
+				if (!item.isEnabled()) {
+					g.setColor(Color.darkGray);
 				} else {
 					g.setColor(Color.lightGray);
 				}
 			}
-			g.drawString(name, x, y+height*i);
+			Tools.drawStringCentered(g, screenWidth, y+height*i, name);
 		}
+		
+		g.setColor(Color.white);
+		Tools.drawStringCentered(g, screenWidth, 300, "Music copyright?");
     }
 
     @Override

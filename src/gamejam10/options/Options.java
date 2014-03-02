@@ -1,40 +1,40 @@
 package gamejam10.options;
 
-import gamejam10.enums.AspectRatio;
+import gamejam10.enums.*;
 
-import java.io.Serializable;
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
 
-public class Options implements Serializable {
-	private static final long serialVersionUID = 1L;
+import org.newdawn.slick.util.*;
+
+public class Options {
+	transient private static final String REF = "/data/options.props";
 	
 	private String aspectRatio = AspectRatio.getDefaultAspectRatio();
-	private int width = 900;
-	private int height = (int)(width/AspectRatio.getAspectRatio(aspectRatio));
-	
-	// TODO
-	// private int width = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-	// private int height = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	private int width = 1280;
+	transient private Integer height = null;
 	
 	private boolean fullscreen = false;
-	private boolean vsync = false;
+	private boolean vsync = true;
 	private int targetFrameRate = 60;
 	private boolean showFPS = false;
 	private boolean soundEnabled = true;
+	private int multiSample = 2;
 	
 	public void setWidth(int width) {
 		this.width = width;
 	}
 	
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
 	public int getWidth() {
 		return width;
 	}
 	
 	public int getHeight() {
-		return height;
+		if (height == null) {
+			height = (int)(width/AspectRatio.getAspectRatio(aspectRatio));
+		}
+		return height.intValue();
 	}
 
 	public void setAspectRatio(String aspectRatio) {
@@ -85,11 +85,77 @@ public class Options implements Serializable {
 		return showFPS;
 	}
 	
-	public static void write() {
-		
+	public void setMultiSample(int multiSample) {
+		this.multiSample = multiSample;
 	}
 	
-	public static Options read() {
-		return new Options();
+	public int getMultiSample() {
+		return multiSample;
+	}
+	
+	public void write() throws IOException {
+		OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(".", REF)));
+		Properties props = new Properties();
+
+		for (Field f : getClass().getDeclaredFields()) {
+			int mod = f.getModifiers();
+			if (!Modifier.isTransient(mod)) {
+				try {
+					String name = f.getName();
+					String value = String.valueOf(f.get(this));
+					props.setProperty(name, value);
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	
+		try {
+			props.store(out, null);
+		} finally {
+			out.close();
+		}
+	}
+	
+	public static Options read() throws IOException {
+		if (!ResourceLoader.resourceExists(REF)) {
+			// write defaults
+			Options opt = new Options();
+			opt.write();
+			return opt;
+		}
+		InputStream in = ResourceLoader.getResourceAsStream(REF);
+		
+		try {
+			Options opt = new Options();
+			Properties props = new Properties();
+			props.load(in);
+			for (Field f : opt.getClass().getDeclaredFields()) {
+				int mod = f.getModifiers();
+				if (!Modifier.isTransient(mod)) {
+					try {
+						String name = f.getName();
+						String value = props.getProperty(name);
+						Class<?> type = f.getType();
+						if (type == Integer.TYPE || type == Integer.class) {
+							f.setInt(opt, Integer.valueOf(value));
+						} else if (type == Boolean.TYPE || type == Boolean.class) {
+							f.setBoolean(opt, Boolean.valueOf(value));
+						} else if (type == Float.TYPE || type == Float.class) {
+							f.setFloat(opt, Float.valueOf(value));
+						}
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return opt;
+		} finally {
+			in.close();
+		}
 	}
 }
