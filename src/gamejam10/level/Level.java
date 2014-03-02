@@ -153,7 +153,7 @@ public class Level {
 		
 		//sun = new Sun(160*1000);
 		// TEST
-		staticObjects.add(new WindmillObject(100, 352));
+		staticObjects.add(new WindmillObject(1100, 322));
 
 		addCharacter(player);
 		//addEnemies(enemies);
