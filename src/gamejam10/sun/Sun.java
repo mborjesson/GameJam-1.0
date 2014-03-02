@@ -4,7 +4,7 @@ public class Sun {
 	private int maxTime = 0;
 	private int currentTime = 0;
 	
-	private int radius = 40;
+	private float radius;
 	
 	/**
 	 * 
@@ -18,13 +18,16 @@ public class Sun {
 	public void update(int frameTime) {
 		currentTime += frameTime;
 		//System.out.println(currentTime);
+		
+		radius = (float) ( 40 + 2 * Math.sin(currentTime / 500.0) );
+		
 	}
 	
 	public long getRemainingTime() {
 		return maxTime-currentTime;
 	}
 	
-	public int getRadius() {
+	public float getRadius() {
 		return radius;
 	}
 	
