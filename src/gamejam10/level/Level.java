@@ -59,10 +59,9 @@ public class Level {
 						int y = map.getObjectY(groupID, objectID);
 						int width = map.getObjectWidth(groupID, objectID);
 						int height = map.getObjectHeight(groupID, objectID);
-						System.out.println(x + ", " + y + ", " + width + ", "
-								+ height);
+//						System.out.println(x + ", " + y + ", " + width + ", " + height);
 						CharacterType ct = CharacterType.getCharacterType(name);
-						System.out.println("name: " + name);
+//						System.out.println("name: " + name);
 						switch (ct) {
 							case PLAYER: {
 								player = new Player(x, y);
@@ -162,23 +161,13 @@ public class Level {
 						break;
 					} 
 					case TRIGGER: {
-						System.out.println(" ");
-						
-						System.out.println("Trigger Found!");
-						
-						System.out.println("LEVEL_END FOUND");
-						String name = map.getObjectProperty(groupID, objectID, "name", null);
+//						String name = map.getObjectProperty(groupID, objectID, "name", null);
 						int x = map.getObjectX(groupID, objectID);
 						int y = map.getObjectY(groupID, objectID);
 						
 						int width = map.getObjectWidth(groupID, objectID);
 						int height = map.getObjectHeight(groupID, objectID);
-						System.out.println(x + ", " + y + ", " + width + ", "	+ height);
-						
-						System.out.println("Name: " + name);
-						CharacterType ct = CharacterType.getCharacterType(name);
-						LevelType lt = LevelType.getLevelObject(name);
-						System.out.println("lt: " + lt);
+//						System.out.println(x + ", " + y + ", " + width + ", "	+ height);
 						
 						EndOfLevelObject endOfWorldObject = new EndOfLevelObject(x, y, width, height);
 						endOfWorldObjects.add(endOfWorldObject);
@@ -193,23 +182,12 @@ public class Level {
 		}
 		
 		String suntime = map.getMapProperty("suntime", "60");
-		System.out.println("suntime: " + suntime);
 		int sunint = Integer.parseInt(suntime);
 		
 		sun = new Sun(sunint*1000);
 		
-		//sun = new Sun(160*1000);
-		// TEST
-		
-
 		addCharacter(player);
-		//addEnemies(enemies);
-		
-//		Brainemy beny = new Brainemy(50, 370, 50, 150);
-//		enemies.add(en);
-		
-		//FloatEnemy fenemy = new FloatEnemy(50, 370, 50, 150);
-		//enemies.add(fenemy);
+
 		
 		for (Object e : enemies) {
 			addCharacter((Character)e);
@@ -319,7 +297,7 @@ public class Level {
 	}
 
 	public void addEnemies(List<Character> e) {
-		System.out.println("enemies: " + enemies);
+//		System.out.println("enemies: " + enemies);
 		enemies.addAll(e);
 	}
 

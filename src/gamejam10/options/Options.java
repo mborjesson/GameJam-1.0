@@ -17,7 +17,7 @@ public class Options {
 	private boolean fullscreen = false;
 	private boolean vsync = true;
 	private int targetFrameRate = 60;
-	private boolean showFPS = false;
+	private boolean showFPS = true;
 	private boolean soundEnabled = true;
 	private int multiSample = 2;
 	

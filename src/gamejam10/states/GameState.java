@@ -64,7 +64,7 @@ public class GameState extends BasicGameState {
 
 		// calculate scale
 		// we want to show what camera wants to show (in pixels)
-
+//		camera.setWidth(1000);
 		camera.setWidth(Constants.GAME_WIDTH);
 		camera.setHeight((float) (camera.getWidth() / Main.getOptions()
 				.getAspectRatio()));

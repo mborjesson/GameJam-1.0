@@ -57,7 +57,7 @@ public class PatrollingAIAction implements AIAction  {
 			notMovingDelta += dt;
 			
 			if ( notMovingDelta > 1000 ) {
-				System.out.println("Not moving!!");
+//				System.out.println("Not moving!!");
 				character.jump();
 				
 				// Start moving again in the same direction
