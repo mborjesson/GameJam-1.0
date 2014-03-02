@@ -28,6 +28,8 @@ import org.newdawn.slick.state.transition.*;
  */
 public class GameState extends BasicGameState {
 
+	public static final boolean shaderOn = true;
+	
 	private Level level = null;
 	private Physics physics;
 	private Player player;
@@ -72,12 +74,14 @@ public class GameState extends BasicGameState {
 		System.out.println("Camera: " + camera.getWidth() + " x " + camera.getHeight());
 		System.out.println("Aspect: " + Main.getOptions().getAspectRatio());
  
-		quadShader = Shader.makeShader("data/shaders/quad.vs.glsl",
-				"data/shaders/quad.fs.glsl");
-		godShader = Shader.makeShader("data/shaders/god.vs.glsl",
-				"data/shaders/god.fs.glsl");
-
-		fboInit();
+		if ( shaderOn ) {
+			quadShader = Shader.makeShader("data/shaders/quad.vs.glsl",
+					"data/shaders/quad.fs.glsl");
+			godShader = Shader.makeShader("data/shaders/god.vs.glsl",
+					"data/shaders/god.fs.glsl");
+	
+			fboInit();
+		}
 	}
 
 	private void fboInit() {
@@ -185,57 +189,65 @@ public class GameState extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 
-		EXTFramebufferObject.glBindFramebufferEXT(
-				EXTFramebufferObject.GL_FRAMEBUFFER_EXT, offscreenFBO);
-
-		// GL11.glEnable(GL11.GL_DEPTH_TEST);
-
-		g.pushTransform();
-
-		// GL11.glEnable(GL11.GL_BLEND);
-		GL11.glEnable(GL11.GL_BLEND);
-		// GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		
+		if ( shaderOn ) {
+			EXTFramebufferObject.glBindFramebufferEXT(
+					EXTFramebufferObject.GL_FRAMEBUFFER_EXT, offscreenFBO);
+	
+			// GL11.glEnable(GL11.GL_DEPTH_TEST);
+	
+			g.pushTransform();
+	
+			// GL11.glEnable(GL11.GL_BLEND);
+			GL11.glEnable(GL11.GL_BLEND);
+			// GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			
+		}
+			
 		//g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
 		g.setBackground( new Color(0.5f, 0.5f, 0.5f, 1.0f) );
 		g.clear();
-
+		
 		doRender(gc, sbg, g);
+	
+		if ( shaderOn ) {
+			g.popTransform();
+	
+			EXTFramebufferObject.glBindFramebufferEXT(
+					EXTFramebufferObject.GL_FRAMEBUFFER_EXT, godFBO);
+	
+			g.pushTransform();
+	
+			GL11.glDisable(GL11.GL_BLEND);
+	
+	//		renderQuad2(gc, sbg, g);
+	
+			g.popTransform();
+	
+			EXTFramebufferObject.glBindFramebufferEXT(
+					EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0);
+	
+			g.setBackground(new Color(1.0f, 1.0f, 1.0f, 1.0f));
+			g.clear();
 
-		g.popTransform();
-
-		EXTFramebufferObject.glBindFramebufferEXT(
-				EXTFramebufferObject.GL_FRAMEBUFFER_EXT, godFBO);
-
-		g.pushTransform();
-
-		GL11.glDisable(GL11.GL_BLEND);
-
-		renderQuad2(gc, sbg, g);
-
-		g.popTransform();
-
-		EXTFramebufferObject.glBindFramebufferEXT(
-				EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0);
-
-		g.setBackground(new Color(1.0f, 1.0f, 1.0f, 1.0f));
-		g.clear();
-
-		g.pushTransform();
-
-		// GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glDisable(GL11.GL_BLEND);
-
-		renderQuad1(gc, sbg, g);
-
-		g.popTransform();
+			g.pushTransform();
+	
+			// GL11.glDisable(GL11.GL_DEPTH_TEST);
+			GL11.glDisable(GL11.GL_BLEND);
+	
+			renderQuad1(gc, sbg, g);
+	
+			g.popTransform();
+	
+			GL11.glEnable(GL11.GL_BLEND);
 		
-		
-		GL11.glEnable(GL11.GL_BLEND);
+		}		
+	
 
 		gc.getInput().clearControlPressedRecord();
 
-		Shader.forceFixedShader();
+		if ( shaderOn ) {
+			Shader.forceFixedShader();
+		}
 	}
 
 	private void doRender(GameContainer gc, StateBasedGame sbg, Graphics g) {
