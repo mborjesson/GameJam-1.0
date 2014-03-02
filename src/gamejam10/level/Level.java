@@ -205,7 +205,7 @@ public class Level {
 //		Brainemy beny = new Brainemy(50, 370, 50, 150);
 //		enemies.add(en);
 		
-		FloatEnemy fenemy = new FloatEnemy(50, 370, 50, 150);
+		//FloatEnemy fenemy = new FloatEnemy(50, 370, 50, 150);
 		//enemies.add(fenemy);
 		
 		for (Object e : enemies) {
