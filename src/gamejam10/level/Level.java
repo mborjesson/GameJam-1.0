@@ -119,8 +119,8 @@ public class Level {
 								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
 								
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
-								moveParameters.maxMovementDuration = 1000;
-								moveParameters.minMovementDuration = 100;
+								moveParameters.maxMovementDuration = 3000;
+								moveParameters.minMovementDuration = 1000;
 								moveParameters.minX = x - map.getTileWidth() * deltaTilesMin;
 								moveParameters.maxX = x + map.getTileWidth() * deltaTilesMax;
 								

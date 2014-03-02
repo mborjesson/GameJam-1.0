@@ -1,6 +1,5 @@
 package gamejam10.ai;
 
-import gamejam10.ai.PatrollingAIAction.Direction;
 import gamejam10.character.Character;
 
 public class RandomMovementAIAction implements AIAction  {
@@ -44,13 +43,13 @@ public class RandomMovementAIAction implements AIAction  {
 		
 		if ( character.getX() <= parameters.minX ) {
 			accumulatedTime = 0;
-			movementDuration = parameters.minMovementDuration + Math.random() * parameters.maxMovementDuration;
+			setNewMovementDuration();
 			character.moveRight(1000);
 		}
 		
 		if ( character.getX() >= parameters.maxX ) {
 			accumulatedTime = 0;
-			movementDuration = parameters.minMovementDuration + Math.random() * parameters.maxMovementDuration;
+			setNewMovementDuration();
 			character.moveLeft(1000);
 		}
 		
@@ -65,11 +64,13 @@ public class RandomMovementAIAction implements AIAction  {
 			}
 			
 			accumulatedTime = 0;
-			movementDuration = 1000 + Math.random() * 2000;
+			setNewMovementDuration();
 		}
 		
-		
-		
+	}
+	
+	private void setNewMovementDuration() {
+		movementDuration = parameters.minMovementDuration + Math.random() * (parameters.maxMovementDuration - parameters.minMovementDuration);
 	}
 	
 	public void notMovingCorrection(double dt) {

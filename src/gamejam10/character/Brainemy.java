@@ -28,8 +28,8 @@ public class Brainemy extends AIEnemy
         
         // AI
 		RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
-		moveParameters.maxMovementDuration = 1000;
-		moveParameters.minMovementDuration = 100;
+		moveParameters.maxMovementDuration = 3000;
+		moveParameters.minMovementDuration = 1000;
 		moveParameters.minX = x - minMoveX;
 		moveParameters.maxX = x + maxMoveX;
 		

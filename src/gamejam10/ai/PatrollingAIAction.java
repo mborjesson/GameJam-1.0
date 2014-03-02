@@ -1,6 +1,5 @@
 package gamejam10.ai;
 
-import gamejam10.ai.RandomMovementAIAction.Direction;
 import gamejam10.character.Character;
 
 /**
