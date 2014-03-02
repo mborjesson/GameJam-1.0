@@ -383,8 +383,6 @@ public class GameState extends BasicGameState {
 				return true;
 			else if (btn == "a" && i.isButton1Pressed(c))
 				return true;
-			else if (btn == "start" && i.isButtonPressed(c, 3))
-				return true;
 		}
 
 		return false;
@@ -453,6 +451,10 @@ public class GameState extends BasicGameState {
 		running = true;
 	}
 
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+	
 	public boolean isRunning() {
 		return running;
 	}

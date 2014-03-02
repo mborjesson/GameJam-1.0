@@ -116,7 +116,10 @@ public class Physics {
 						if (c.getBoundingShape().checkCollision(box)) {
 							
 							System.out.println("Woho \\0/ You Made It!!!");
-							sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
+						//	sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
+						LevelCompletedState lcs = (LevelCompletedState)sbg.getState(States.LEVELCOMPLETED.getID());
+						lcs.setNextLevel(LevelOrder.getInstance().getNextLevel());
+						sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
 						}
 							
 					}
