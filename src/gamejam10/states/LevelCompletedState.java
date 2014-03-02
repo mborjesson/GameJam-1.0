@@ -27,7 +27,11 @@ public class LevelCompletedState extends BasicGameState {
 			throws SlickException {
 		
 		g.drawString("Grattis", 400, 200);
-		g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
+		int dc = Player.getDeathCounter();
+		if ( dc == 1 )
+			g.drawString("You died " + Player.getDeathCounter() + " time.", 370, 250);
+		else
+			g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
 		
 	}
 
