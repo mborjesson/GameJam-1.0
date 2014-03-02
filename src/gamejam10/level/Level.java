@@ -152,7 +152,7 @@ public class Level {
 //		enemies.add(en);
 		
 		FloatEnemy fenemy = new FloatEnemy(50, 370, 50, 150);
-		enemies.add(fenemy);
+		//enemies.add(fenemy);
 		
 		for (Object e : enemies) {
 			addCharacter((Character)e);

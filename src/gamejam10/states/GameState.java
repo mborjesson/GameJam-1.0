@@ -179,7 +179,7 @@ public class GameState extends BasicGameState {
 		
 		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, offscreenFBO );
 
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		//GL11.glEnable(GL11.GL_DEPTH_TEST);
 		
 		g.pushTransform();
 		
@@ -205,7 +205,7 @@ public class GameState extends BasicGameState {
 		
 		g.pushTransform();
 		
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		//GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glDisable(GL11.GL_BLEND);
 
 		renderQuad1(gc, sbg, g);
@@ -225,6 +225,8 @@ public class GameState extends BasicGameState {
 		g.popTransform();
 		
 		*/
+		
+		GL11.glEnable(GL11.GL_BLEND);
 		
 		gc.getInput().clearControlPressedRecord();
 		
@@ -254,7 +256,7 @@ public class GameState extends BasicGameState {
 	private void renderQuad1(GameContainer gc, StateBasedGame sbg, Graphics g) {
 		
 		int width = Main.getOptions().getWidth();
-		int height = Main.getOptions().getHeight();
+		int height = Main.getOptions().getHeight() - 1;
 		
 		quadShader.startShader();
 
