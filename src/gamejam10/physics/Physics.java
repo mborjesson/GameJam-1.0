@@ -9,10 +9,13 @@ import gamejam10.character.Character;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
 import gamejam10.enums.*;
-import gamejam10.level.*;
-import gamejam10.states.*;
+import gamejam10.level.EndOfLevelObject;
+import gamejam10.level.Level;
+import gamejam10.level.LevelObject;
+import gamejam10.states.GameState;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Music;
@@ -35,7 +38,7 @@ public class Physics {
         this.gameState = gameState;
     }
     
-    public void handlePhysics(StateBasedGame sbg, Level level, int delta) throws SlickException {
+    public void handlePhysics(StateBasedGame sbg, Level level, int delta) {
         handleCharacters(level, delta);
         checkCollisionBetweenPlayerAndEnemies(level);
         checkCollisionBetweenCharacters(level);
@@ -96,24 +99,30 @@ public class Physics {
 		}
     }
     
-    private void checkIfEndOfWorld(StateBasedGame sbg, Level level) throws SlickException {
+    private void checkIfEndOfWorld(StateBasedGame sbg, Level level) {
     	
     	//if level goal exists
-    	if (level.getEndOfWorldObject() != null) {
+    	List eowl = level.getEndOfWorldObjects();
+    	if (eowl != null && eowl.size() != 0) {
+    		
 	    	for (Character c : level.getCharacters() ) {
 				if ( c instanceof Player ) {
-					AABoundingRect box = (AABoundingRect)level.getEndOfWorldObject().getBoundingShape();
-	//				AABoundingRect cbox = (AABoundingRect)c.getBoundingShape();
-	//				System.out.println("END BOX " + box.getX() + ", " + box.getY() + ", " + box.getWidth() + ", "	+ box.getHeight());
-	//				System.out.println("CHAR BOX " + cbox.getX() + ", " + cbox.getY() + ", " + cbox.getWidth() + ", "	+ cbox.getHeight());
-					if (c.getBoundingShape().checkCollision(box)) {
-						
-						System.out.println("Woho \\0/ You Made It!!!");
+		
+					for (int i=0;i < eowl.size();i++) {
+						AABoundingRect box = (AABoundingRect)(((EndOfLevelObject)eowl.get(i)).getBoundingShape());
+		//				AABoundingRect cbox = (AABoundingRect)c.getBoundingShape();
+		//				System.out.println("END BOX " + box.getX() + ", " + box.getY() + ", " + box.getWidth() + ", "	+ box.getHeight());
+		//				System.out.println("CHAR BOX " + cbox.getX() + ", " + cbox.getY() + ", " + cbox.getWidth() + ", "	+ cbox.getHeight());
+						if (c.getBoundingShape().checkCollision(box)) {
+							
+							System.out.println("Woho \\0/ You Made It!!!");
+						//	sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
 						LevelCompletedState lcs = (LevelCompletedState)sbg.getState(States.LEVELCOMPLETED.getID());
 						lcs.setNextLevel(LevelOrder.getInstance().getNextLevel());
 						sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
+						}
+							
 					}
-						
 	    	
 	    	
 				}

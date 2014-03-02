@@ -2,14 +2,14 @@ package gamejam10.enums;
 
 public enum CharacterType {
 	PLAYER("player"),
-	ENEMY_EASY("skurk01"),
-	ENEMY_JUMPING("skurk02");
+	ENEMY_EASY("patroling_brain"),
+	ENEMY_JUMPING("jumping_brain");
 	
 	final private String value;
 	private CharacterType(String value) {
 		this.value = value;
 	}
-	
+	 
 	public String getValue() {
 		return value;
 	}

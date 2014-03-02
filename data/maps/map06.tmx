@@ -53,7 +53,7 @@
  </tileset>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2c2W7EIAxF6ToT9f//t5qOIqXIQ2zCYuAc6T4UIeImXLNqthDChhBCCCGEEFpOXvAUC8Bs4H+AdcH/AOvi3f8fhrr38Iz9vVIsALPh3f8WcuP+DP//d/IHrAL+B1gX7/6Px+aUvjvFCDAqq/jomEeY3wM88Trug19Sc8btpM520k4Q6sRl0t+QR/z+f/qG88e+j//VOxAQsXrvVX1NuSYXQD6pPC35T3r3Jctuh+f3XIdYzh1XI+U/7XfXluP/upztqQHESHPxlDdTPtfO/8/agjzwP1hJedzif00bjP918eL/t4bPgmtIfQP/j4kX/z/W/ZzLjYFm/z+ur21HKpfaIAeUIeX9Ge8BzAB3GaAUvcd90MOZhAxrx3xy/K+5k3tlXPKQf/DaGDzuq3joL6PC+O8bSx46y8mI/h7D+6jPvdFz+G5gpbb/pbVC7tpgvxc80t7XHnML8D9YGWX83/PISBzz1VXidYC0Lhjt/UB/RvF/T3L2AuO5Sgv4bmDliv9T5y4rn8nE3sf/4JUr/k/VK9UXW+2dlULyfgtfttxngHnw7P9SfbrVXOSV91v4knUb5KA9H91/CyDVx62Sfl+gZPut/FcrZoQ8KVRq80jN2GOkfT1t2QN8j1ZSqNTmkZqxlwTvo9n0C2Xw/2EAgAAA
+   H4sIAAAAAAAAC+2c227DIBBE6T1W//9/Kzey6qINBgJ41pwjzUMIIhvCsGBQlhDCghBCCCGEEJpOKijFAnA18D/AvOB/gHlR9/9bQd1buMf+2ikWgKuh7v8SauN+D/+/O/MHzAL+B5gXdf/HuTmlz5NiBPDKLD7azyOs7wHuqOZ90CW1ZlwO6iwH7QSjTlxmvYY64v7/PjecX7bn+B9nBwImpd57VD+nPGcugHpS87TlP+s8rmXZ1+7zz9yHlJw7zkbKf9Z7+F8XL/eAQQdrLZ7yZsrnuev/o7agDvwPpaQ8XuL/nDbI/31R8T/rbT9YYwP/+0TF/+CHnOf/cf3cdqxyqw3GZhtS3r/iPQAA+EMt77MPgFJezg7AMTX+z7mT6/2OHfOQD9b7KuwF6lHL/1DP0ZyMGO8xqv1xpfx7G/Q5Cr8b+KK3/629gve9QQnbXeYR4H8oRTX/r3hfA2ze79GfVt+o/G7gB2X/q1AzD+29T/4HVZ7xP+cuNrH38T+o8oz/R4y3Uc/OWmF5f1Q/4X8oRdn/rcb0qHXKI++P8CX7Nqgh93x0+y+A1BgvlfX/Ai3bH+W/XjEjpKTQqc09PWPfWM8krTNIq/xR3RV8j2ZS6NTmnp6xtwTvo6vpB7105gQAgAAA
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
@@ -65,11 +65,11 @@
     <property name="name" value="player"/>
    </properties>
   </object>
-  <object name="Skurk 2" type="spawn" x="3049" y="519" width="31" height="33">
+  <object name="Skurk 2" type="spawn" x="3145" y="735" width="31" height="33">
    <properties>
-    <property name="deltatilesmax" value="7"/>
-    <property name="deltatilesmin" value="4"/>
-    <property name="name" value="skurk02"/>
+    <property name="deltatilesmax" value="12"/>
+    <property name="deltatilesmin" value="10"/>
+    <property name="name" value="jumping_brain"/>
    </properties>
   </object>
   <object name="The End" type="trigger" x="5540" y="349" width="64" height="320">
@@ -81,19 +81,47 @@
    <properties>
     <property name="deltatilesmax" value="7"/>
     <property name="deltatilesmin" value="4"/>
-    <property name="name" value="skurk02"/>
+    <property name="name" value="jumping_brain"/>
    </properties>
   </object>
   <object name="Skurk 2" type="spawn" x="1524" y="654" width="31" height="33">
    <properties>
     <property name="deltatilesmax" value="7"/>
     <property name="deltatilesmin" value="4"/>
-    <property name="name" value="skurk02"/>
+    <property name="name" value="jumping_brain"/>
    </properties>
   </object>
-  <object name="The End" type="trigger" x="32" y="352" width="35" height="63">
+  <object name="Skurk t1" type="spawn" x="465" y="546" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="5"/>
+    <property name="deltatilesmin" value="5"/>
+    <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="The End" type="trigger" x="33" y="352" width="33" height="62">
    <properties>
     <property name="name" value="end"/>
+   </properties>
+  </object>
+  <object name="Skurk t1" type="spawn" x="1344" y="150" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="5"/>
+    <property name="deltatilesmin" value="5"/>
+    <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="Skurk t2" type="spawn" x="4930" y="605" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="15"/>
+    <property name="deltatilesmin" value="15"/>
+    <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="Skurk t1" type="spawn" x="643" y="860" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="8"/>
+    <property name="deltatilesmin" value="8"/>
+    <property name="name" value="patroling_brain"/>
    </properties>
   </object>
  </objectgroup>
