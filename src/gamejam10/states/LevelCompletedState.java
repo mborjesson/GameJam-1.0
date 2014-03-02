@@ -1,15 +1,18 @@
 package gamejam10.states;
 
-import gamejam10.*;
-import gamejam10.character.*;
-import gamejam10.enums.*;
-import gamejam10.level.*;
+import gamejam10.Constants;
+import gamejam10.audio.AudioPlayer;
+import gamejam10.character.Player;
+import gamejam10.enums.MusicType;
+import gamejam10.enums.States;
+import gamejam10.states.GameState;
 
-import javax.swing.*;
-
-import org.newdawn.slick.*;
-import org.newdawn.slick.state.*;
-import org.newdawn.slick.state.transition.*;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 
 public class LevelCompletedState extends BasicGameState {
 	

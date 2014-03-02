@@ -9,7 +9,8 @@ public class Sun {
 	private float radius;
 	
 	private float startAlpha = 0.6f;
-	private Color color = new Color(0.0f, 1.0f, 1.0f, startAlpha);
+	private float startGreen = 1.0f;
+	private Color color = new Color(1.0f, startGreen, 0.0f, startAlpha);
 	
 	/**
 	 * 
@@ -27,6 +28,7 @@ public class Sun {
 		radius = (float) ( 20 + 1 * Math.sin(currentTime / 500.0) );
 		
 		color.a = startAlpha * getSunColor();
+		color.g = startGreen * getSunColor();
 		
 	}
 	
