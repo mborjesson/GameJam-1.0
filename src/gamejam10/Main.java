@@ -5,6 +5,7 @@
 package gamejam10;
 
 import gamejam10.audio.*;
+import gamejam10.character.Player;
 import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.options.*;

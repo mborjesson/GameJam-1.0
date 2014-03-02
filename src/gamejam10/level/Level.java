@@ -34,6 +34,7 @@ public class Level {
 	private List<Character> characters = new ArrayList<Character>();
 	private List<Character> enemies = new ArrayList<Character>();
 	private List<EndOfLevelObject> endOfWorldObjects = new ArrayList<EndOfLevelObject>();
+	private List<StaticAnimatedObject> staticObjects = new ArrayList<StaticAnimatedObject>();
 	 
 	
 	private Sun sun = null;
@@ -64,6 +65,47 @@ public class Level {
 								player = new Player(x, y);
 								break;
 							}
+							case ENEMY_FLOAT_EASY: {
+								FloatEnemy en = new FloatEnemy(x, y, 0, 150);
+								en.setMaximumSpeed(0.20f);
+								en.setMaximumFallSpeed(0);
+								BasicAI ai = new BasicAI(en, player);
+								
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
+								
+								PatrollingAIAction.Parameters parameters = new PatrollingAIAction.Parameters();
+								parameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								parameters.maxX = x + map.getTileWidth() * deltaTilesMax;
+								PatrollingAIAction aiAction = new PatrollingAIAction(en, parameters);
+								
+								ai.addAIAction(aiAction);
+								
+								en.setAI(ai);
+								
+								enemies.add(en);
+								} break;
+							case ENEMY_FLOAT_HARD:  {
+								FloatEnemy en = new FloatEnemy(x, y, 0, 150);
+								en.setMaximumSpeed(0.90f);
+								en.setMaximumFallSpeed(0);
+								
+								BasicAI ai = new BasicAI(en, player);
+								
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
+								
+								PatrollingAIAction.Parameters parameters = new PatrollingAIAction.Parameters();
+								parameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								parameters.maxX = x + map.getTileWidth() * deltaTilesMax;
+								PatrollingAIAction aiAction = new PatrollingAIAction(en, parameters);
+								
+								ai.addAIAction(aiAction);
+								
+								en.setAI(ai);
+								
+								enemies.add(en);
+							} break;
 							case ENEMY_EASY: {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
@@ -152,6 +194,7 @@ public class Level {
 		
 		//sun = new Sun(160*1000);
 		// TEST
+		staticObjects.add(new WindmillObject(1100, 322));
 
 		addCharacter(player);
 		//addEnemies(enemies);
@@ -191,6 +234,11 @@ public class Level {
 //				offsetX / map.getTileWidth(), offsetY / map.getTileHeight(),
 //				(int)camera.getWidth()/map.getTileWidth(), (int)camera.getHeight()/map.getTileHeight());
 
+		// Render static objects
+		for(StaticAnimatedObject ao : staticObjects) {
+			ao.render(g);
+		}
+		
 		// and then render the characters on top of the map
 		for (Character c : characters) {
 			c.render(g, 0, 0);

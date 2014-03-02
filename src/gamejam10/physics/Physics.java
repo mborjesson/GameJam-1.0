@@ -34,6 +34,8 @@ public class Physics {
 
     private final float gravity = 0.0015f;
     private GameState gameState;
+    
+    private boolean wheeeCheck = true;
 
     public Physics(GameState gameState) {
         this.gameState = gameState;
@@ -92,10 +94,15 @@ public class Physics {
     	for (Character c : level.getCharacters() ) {
 			if ( c instanceof Player ) {
 				float y =((AABoundingRect)c.getBoundingShape()).getY(); 
-							if (y > 1500) {
+							if (y > 1200 && wheeeCheck) {
+								wheeeCheck = false;
 								AudioPlayer.getInstance().playSound(SoundType.WEEE, 0.4f);
+							}
+							if (y > 2700) {
+								wheeeCheck = true;
 								killPlayer();
 							}
+							
 			}
 		}
     }
@@ -177,9 +184,10 @@ public class Physics {
                 
                 if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                     // System.out.println("checkCollision true");
-                	if (obj.getYVelocity() > 0.90f)
+                	if (obj.getYVelocity() >= 1.0f)
                 	{
                 		System.out.println("Ugh!!!!!!!!!!!");
+                		System.out.println(obj.getYVelocity());
                      	killPlayer();
                          return false;
                 	}

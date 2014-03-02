@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" source="../tilesets/bw_smoothies.tsx"/>
+ <layer name="mapplayer" width="256" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3ZMQqEMABFwbBo4f0vvBcwuEVg1TcDrzKIzYeAxxjjkCRJkpQLeDf7hy77hy77hy77hy77hy77hyb//6DL/qHL/qHL/qHL/qHL/qHL/qHL/qHL/qHL/qHL/qHL/qHrav+/tE/evZ2c/VycnT0H1luxf/cEeCb7hy77hy77hy77hy77h65V+5d0r2b+/V2SJOl+fQFKTvhkAIAAAA==
+  </data>
+ </layer>
+ <objectgroup color="#5500ff" name="objects" width="256" height="32">
+  <object name="Player" type="spawn" x="194" y="608" width="30" height="33">
+   <properties>
+    <property name="name" value="player"/>
+   </properties>
+  </object>
+  <object name="Pat" type="spawn" x="132" y="192" width="27" height="32">
+   <properties>
+    <property name="deltatilesmax" value="8"/>
+    <property name="deltatilesmin" value="1"/>
+    <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="Jumper" type="spawn" x="609" y="800" width="29" height="31">
+   <properties>
+    <property name="deltatilesmax" value="6"/>
+    <property name="deltatilesmin" value="6"/>
+    <property name="name" value="jumping_brain"/>
+   </properties>
+  </object>
+  <object name="Jumper" type="spawn" x="898" y="801" width="29" height="31">
+   <properties>
+    <property name="deltatilesmax" value="6"/>
+    <property name="deltatilesmin" value="6"/>
+    <property name="name" value="jumping_brain"/>
+   </properties>
+  </object>
+  <object name="Jumper" type="spawn" x="1153" y="800" width="29" height="31">
+   <properties>
+    <property name="deltatilesmax" value="6"/>
+    <property name="deltatilesmin" value="6"/>
+    <property name="name" value="jumping_brain"/>
+   </properties>
+  </object>
+  <object name="FH" type="spawn" x="639" y="640" width="33" height="31">
+   <properties>
+    <property name="deltatilesmax" value="3"/>
+    <property name="deltatilesmin" value="2"/>
+    <property name="name" value="enemy_float_hard"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

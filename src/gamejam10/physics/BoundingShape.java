@@ -13,6 +13,8 @@ import java.util.ArrayList;
  */
 public abstract class BoundingShape {
 
+	
+	
     public boolean checkCollision(BoundingShape bv) {
         if (bv instanceof AABoundingRect) {
             return checkCollision((AABoundingRect) bv);
@@ -30,5 +32,6 @@ public abstract class BoundingShape {
 
     public abstract ArrayList<Tile> getGroundTiles(Tile[][] tiles);
     
+    public abstract void setCollisionState(boolean enabled);
     
 }

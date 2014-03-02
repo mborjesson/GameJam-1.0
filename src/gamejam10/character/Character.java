@@ -64,7 +64,15 @@ public abstract class Character extends LevelObject {
     public void setMoving(boolean b) {
         moving = b;
     }
-
+    
+    public void setMaximumSpeed(float maxSpeed) {
+    	maximumSpeed = maxSpeed;
+    }
+    
+    public void setMaximumFallSpeed(float maxSpeed) {
+    	maximumFallSpeed = maxSpeed;
+    }
+    
     //move towards x_velocity = 0
     public void decelerate(int delta) {
         if (x_velocity > 0) {
@@ -193,22 +201,6 @@ public abstract class Character extends LevelObject {
             facingLeftAnimation.addFrame(sheet.getSprite(i, 0).getFlippedCopy(true, false), 150);
         }
         movingAnimations.put(Facing.LEFT, facingLeftAnimation);
-
-    }
-
-    protected void setfsdfAnimation(Image[] images, int frameDuration) {
-        SpriteSheet sheet = null;
-        try {
-//            sheet = new SpriteSheet("media/homeranim.png", 36, 65);
-            sheet = new SpriteSheet("media/animhamster.png", 32, 32);
-        } catch (SlickException ex) {
-            ex.printStackTrace();
-        }
-        Animation animation = new Animation();
-        for (int i = 0; i < 8; i++) {
-            animation.addFrame(sheet.getSprite(i, 0), 150);
-        }
-
 
     }
 

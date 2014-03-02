@@ -17,6 +17,7 @@ public class AABoundingRect extends BoundingShape {
     private float y;
     private float width;
     private float height;
+    private boolean checkCollision = true;
 
     public AABoundingRect(float x, float y, float width, float height) {
         this.x = x;
@@ -26,7 +27,9 @@ public class AABoundingRect extends BoundingShape {
     }
 
     public boolean checkCollision(AABoundingRect rect) {
-        
+        if(!checkCollision)
+        	return false;
+    	
         return !(rect.x > this.x + width || rect.x + rect.width < this.x || rect.y > this.y + height || rect.y + rect.height < this.y);
         
     }
@@ -68,6 +71,10 @@ public class AABoundingRect extends BoundingShape {
         this.y += y;
     }
 
+    public void setCollisionState(boolean enabled) {    	
+    	checkCollision = enabled;
+    }
+    
     /**
      * @return the x
      */
