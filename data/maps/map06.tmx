@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
  <properties>
-  <property name="suntime" value="60"/>
+  <property name="suntime" value="50"/>
  </properties>
  <tileset firstgid="1" source="../tilesets/bw_smoothies.tsx"/>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2c227DIBBE6T1W//9/Kzey6qINBgJ41pwjzUMIIhvCsGBQlhDCghBCCCGEEJpOKijFAnA18D/AvOB/gHlR9/9bQd1buMf+2ikWgKuh7v8SauN+D/+/O/MHzAL+B5gXdf/HuTmlz5NiBPDKLD7azyOs7wHuqOZ90CW1ZlwO6iwH7QSjTlxmvYY64v7/PjecX7bn+B9nBwImpd57VD+nPGcugHpS87TlP+s8rmXZ1+7zz9yHlJw7zkbKf9Z7+F8XL/eAQQdrLZ7yZsrnuev/o7agDvwPpaQ8XuL/nDbI/31R8T/rbT9YYwP/+0TF/+CHnOf/cf3cdqxyqw3GZhtS3r/iPQAA+EMt77MPgFJezg7AMTX+z7mT6/2OHfOQD9b7KuwF6lHL/1DP0ZyMGO8xqv1xpfx7G/Q5Cr8b+KK3/629gve9QQnbXeYR4H8oRTX/r3hfA2ze79GfVt+o/G7gB2X/q1AzD+29T/4HVZ7xP+cuNrH38T+o8oz/R4y3Uc/OWmF5f1Q/4X8oRdn/rcb0qHXKI++P8CX7Nqgh93x0+y+A1BgvlfX/Ai3bH+W/XjEjpKTQqc09PWPfWM8krTNIq/xR3RV8j2ZS6NTmnp6xtwTvo6vpB7105gQAgAAA
+   H4sIAAAAAAAAC+2c626EIBCF6X1N3/99G7sxtWREQMEz8n3J+VFKxlmWw0XITiGECSGEEEIIITScVFDKBeBu4H+AccH/AOOi7v+3grqP8Mz9tVEuAHdD3f8l1Ob9Hv5/dsYPGAX8DzAu6v6P5+aUPi/KEcAro/hoPY6wvgd4ojrvgy6pNeO0U2faiROMOnGZ9TfUEbf/97Xp/LK8x/+4OhEwKfXeVv2c8pyxAOpJjdOW/6zzuDPLvlbPv3IfUnLuOBop/1n/w/+6eLkHDDpYa/GUN1M+z13/78WCOvA/lJLyeIn/c2Iw/7dFxf+st/1g9Q387xMV/4Mfct7/x/Vz41jlVgz65jmkvH/HewAA8IfavM8+AEp5uToBx9T4P+dOrvc7doxDPpjvq7AXqEdt/od69sZkRH+PUW2PO82/j07PUfjewBet/W/tFbzvDUpY7jL3AP9DKarz/4z3NcDi/RbtabWNyvcGflD2vwo149Da+8z/oMoR/3PuYhN7H/+DKkf836O/9Xp3dhaW93u1E/6HUpT9f1af7rVO2fJ+D1+yb4Macs5G178DkOrjpbJ+X+DM+L381ypnhFS00Cpuq/jWc+YzSesM0irfqjuD79EoWmgVt1X8reccBe+ju+kH/wnMmgCAAAA=
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
