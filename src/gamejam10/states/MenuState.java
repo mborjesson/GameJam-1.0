@@ -8,6 +8,7 @@ package gamejam10.states;
 import gamejam10.*;
 import gamejam10.audio.*;
 import gamejam10.enums.*;
+import gamejam10.level.*;
 import gamejam10.menu.*;
 
 import org.newdawn.slick.*;
@@ -105,7 +106,9 @@ public class MenuState extends BasicGameState {
 	                    // play game, initialize first level
 	                    if (actionState.getType() == 0) {
 		                    GameState gs = (GameState)game.getState(States.GAME.getID());
-		                    gs.initializeLevel("map06");
+		                    LevelOrder lo = LevelOrder.getInstance();
+		                    lo.reset();
+		                    gs.initializeLevel(lo.getNextLevel());
 	                    }
 	        		}
 	                game.enterState(actionState.getStateId(), actionState.getLeaveTransition(), actionState.getEnterTransition());
