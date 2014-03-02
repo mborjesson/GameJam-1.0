@@ -15,8 +15,8 @@ public class Options implements Serializable {
 	// private int width = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	// private int height = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	
-	private boolean fullscreen = false;
-	private boolean vsync = false;
+	private boolean fullscreen = true;
+	private boolean vsync = true;
 	private int targetFrameRate = 60;
 	private boolean showFPS = true;
 	private boolean soundEnabled = true;

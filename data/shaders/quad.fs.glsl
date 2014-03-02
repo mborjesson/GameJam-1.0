@@ -16,5 +16,7 @@ void main(void)
     }
     
     gl_FragColor = vec4( godColor.xyz + texColor.xyz, 1.0 );
+    
+    //gl_FragColor = vec4(texColor.xyz, 1.0);
 	
 }

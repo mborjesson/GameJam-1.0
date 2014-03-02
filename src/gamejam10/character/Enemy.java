@@ -36,6 +36,7 @@ public class Enemy extends Character {
         maximumFallSpeed = 0.3f;
         decelerationSpeed = 0.05f;
     }
+    
      
       public void updateBoundingShape(){
         

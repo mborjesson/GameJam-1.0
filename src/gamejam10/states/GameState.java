@@ -191,9 +191,6 @@ public class GameState extends BasicGameState {
 		// GL11.glEnable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_BLEND);
 		// GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-
-		g.setColor(Color.red);
-		g.drawString("DeathCounter: " + Player.getDeathCounter(), 130f, 130f);
 		
 		g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
 		g.clear();
@@ -238,8 +235,8 @@ public class GameState extends BasicGameState {
 
 	private void doRender(GameContainer gc, StateBasedGame sbg, Graphics g) {
 
-		float scaleX = Main.getOptions().getWidth() / camera.getWidth();
-		float scaleY = Main.getOptions().getHeight() / camera.getHeight();
+		float scaleX = ( Main.getOptions().getWidth() - 1 ) / camera.getWidth();
+		float scaleY = ( Main.getOptions().getHeight() - 1 ) / camera.getHeight();
 		g.scale(scaleX, scaleY);
 
 		camera.setX(player.getX());
@@ -264,7 +261,7 @@ public class GameState extends BasicGameState {
 		GL13.glActiveTexture(GL13.GL_TEXTURE1);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, godTex);
 
-		g.scale(width, height);
+		g.scale(width - 1, height - 1);
 
 		GL11.glBegin(GL11.GL_QUADS);
 
@@ -306,7 +303,7 @@ public class GameState extends BasicGameState {
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
 
-		g.scale(width, height);
+		g.scale(width - 1, height - 1);
 
 		GL11.glBegin(GL11.GL_QUADS);
 
