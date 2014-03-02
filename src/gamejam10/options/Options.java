@@ -14,14 +14,6 @@ public class Options {
 	private String aspectRatio = AspectRatio.getDefaultAspectRatio();
 	private int width = 1280;
 	transient private Integer height = null;
-	
-<<<<<<< HEAD
-	// TODO
-	// private int width = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-	// private int height = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-	
-=======
->>>>>>> branch 'develop' of https://github.com/mborjesson/GameJam-1.0.git
 	private boolean fullscreen = false;
 	private boolean vsync = true;
 	private int targetFrameRate = 60;
