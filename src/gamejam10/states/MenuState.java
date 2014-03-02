@@ -7,6 +7,7 @@ package gamejam10.states;
 
 import gamejam10.*;
 import gamejam10.audio.*;
+import gamejam10.character.Player;
 import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.menu.*;
@@ -108,6 +109,7 @@ public class MenuState extends BasicGameState {
 		                    GameState gs = (GameState)game.getState(States.GAME.getID());
 		                    LevelOrder lo = LevelOrder.getInstance();
 		                    lo.reset();
+		                    Player.resetDeathCounter();
 		                    gs.initializeLevel(lo.getNextLevel());
 	                    }
 	        		}

@@ -27,7 +27,6 @@ public class Player extends Character {
         super(x,y);
         startx = x;
         starty = y;
-        deathCounter = 0;
         //sprite = new Image("data/img/characters/player/player.png");
          setSprite(new Image("data/images/characters/player/mainstill.png") /*new Image("data/images/characters/player/homerstill.png")*/);
 //       setMovingAnimation(new Image[]{new Image("data/img/characters/player/player_1.png"),new Image("data/img/characters/player/player_2.png"),
@@ -49,6 +48,11 @@ public class Player extends Character {
         maximumFallSpeed = 1.0f;
         decelerationSpeed = 0.09f;
         
+    }
+    
+    public static void resetDeathCounter()
+    {
+    	deathCounter = 0;
     }
     
     @Override

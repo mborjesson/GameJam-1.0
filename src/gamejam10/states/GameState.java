@@ -191,9 +191,6 @@ public class GameState extends BasicGameState {
 		// GL11.glEnable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_BLEND);
 		// GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-
-		g.setColor(Color.red);
-		g.drawString("DeathCounter: " + Player.getDeathCounter(), 130f, 130f);
 		
 		g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
 		g.clear();
