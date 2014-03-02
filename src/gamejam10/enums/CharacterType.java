@@ -5,7 +5,8 @@ public enum CharacterType {
 	ENEMY_FLOAT_EASY("enemy_float_easy"),
 	ENEMY_FLOAT_HARD("enemy_float_hard"),
 	ENEMY_EASY("patroling_brain"),
-	ENEMY_JUMPING("jumping_brain");
+	ENEMY_JUMPING("jumping_brain"),
+	WINDMILL("windmill");
 	
 	final private String value;
 	private CharacterType(String value) {
