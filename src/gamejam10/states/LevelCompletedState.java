@@ -33,13 +33,16 @@ public class LevelCompletedState extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
+		String dc = Player.getDeathCounter() + "time";
+		dc += Player.getDeathCounter() == 1 ? "." : "s.";
+		
 		if (nextLevel != null) {
 			g.drawString("Grattis", 400, 200);
-			g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
+			g.drawString("You died " + dc, 370, 250);
 		} else {
 			// if there's no levels left
 			g.drawString("Grattis, there's nothing left to do!", 250, 200);
-			g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
+			g.drawString("You died " + dc, 370, 250);
 		}
 		
 		g.drawString("Press Space/Enter or A to continue...", 380, 300);
