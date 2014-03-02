@@ -33,7 +33,7 @@ public class Level {
 	// list of all characters on this map
 	private List<Character> characters = new ArrayList<Character>();
 	private List<Character> enemies = new ArrayList<Character>();
-	private EndOfLevelObject endOfWorldObject;
+	private List<EndOfLevelObject> endOfWorldObjects = new ArrayList<EndOfLevelObject>();
 	 
 	
 	private Sun sun = null;
@@ -131,7 +131,9 @@ public class Level {
 						LevelType lt = LevelType.getLevelObject(name);
 						System.out.println("lt: " + lt);
 						
-						endOfWorldObject = new EndOfLevelObject(x, y, width, height);
+						EndOfLevelObject endOfWorldObject = new EndOfLevelObject(x, y, width, height);
+						endOfWorldObjects.add(endOfWorldObject);
+						
 						break;
 						
 					}
@@ -333,13 +335,14 @@ public class Level {
 		this.camera = camera;
 	}
 
-	public EndOfLevelObject getEndOfWorldObject() {
-		return endOfWorldObject;
+	public List<EndOfLevelObject> getEndOfWorldObjects() {
+		return endOfWorldObjects;
 	}
 
-	public void setEndOfWorldObject(EndOfLevelObject endOfWorldObject) {
-		this.endOfWorldObject = endOfWorldObject;
+	public void setEndOfWorldObjects(List<EndOfLevelObject> endOfWorldObjects) {
+		this.endOfWorldObjects = endOfWorldObjects;
 	}
+
 	
 	
 }
