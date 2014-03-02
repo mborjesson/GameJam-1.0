@@ -194,10 +194,8 @@ public class GameState extends BasicGameState {
 
 		g.setColor(Color.red);
 		g.drawString("DeathCounter: " + Player.getDeathCounter(), 130f, 130f);
-
-		g.setBackground(new Color(level.getSun().getSunColor(), level.getSun()
-				.getSunColor(), level.getSun().getSunColor()));
-		// g.setBackground( new Color(1.0f, 1.0f, 1.0f, 1.0f) );
+		
+		g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
 		g.clear();
 
 		doRender(gc, sbg, g);
@@ -229,19 +227,8 @@ public class GameState extends BasicGameState {
 		renderQuad1(gc, sbg, g);
 
 		g.popTransform();
-
-		/*
-		 * GL11.glEnable(GL11.GL_BLEND); GL11.glBlendFunc(GL11.GL_SRC_ALPHA,
-		 * GL11.GL_ONE_MINUS_SRC_ALPHA); //GL11.glBlendFunc(GL11.GL_SRC_ALPHA,
-		 * GL11.GL_ONE);
-		 * 
-		 * g.pushTransform();
-		 * 
-		 * renderQuad2(gc, sbg, g);
-		 * 
-		 * g.popTransform();
-		 */
-
+		
+		
 		GL11.glEnable(GL11.GL_BLEND);
 
 		gc.getInput().clearControlPressedRecord();
