@@ -22,7 +22,6 @@ import org.newdawn.slick.state.transition.*;
 public class MenuState extends BasicGameState {
     
     private AudioPlayer audioPlayer;
-    private Image menuImage;
     
     private Menu menu = null;
     
@@ -33,13 +32,11 @@ public class MenuState extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-    	Transition defaultOutTransition = new FadeOutTransition(Color.black, 150);
-    	Transition defaultInTransition = new FadeInTransition(Color.black, 150);
     	// build menu
     	menu = new Menu(null);
-    	menu.addMenuAction("PLAY", new MenuActionEnterState(States.GAME.getID(), defaultOutTransition, defaultInTransition));
-    	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID(), defaultOutTransition, defaultInTransition));
-    	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID(), defaultOutTransition, defaultInTransition));
+    	menu.addMenuAction("PLAY", new MenuActionEnterState(States.GAME.getID()));
+    	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID()));
+    	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID()));
         
         audioPlayer = AudioPlayer.getInstance();
         audioPlayer.playMusic(MusicType.MENU, 1);
@@ -87,15 +84,7 @@ public class MenuState extends BasicGameState {
         		if (actionState.getStateId() == States.GAME.getID()) {
                     audioPlayer.playMusic(MusicType.GAME, 0.3f);
         		}
-        		Transition out = actionState.getOutTransition();
-        		if (out != null) {
-        			out.init(this, game.getState(actionState.getStateId()));
-        		}
-        		Transition in = actionState.getInTransition();
-        		if (in != null) {
-        			in.init(this, game.getState(actionState.getStateId()));
-        		}
-                game.enterState(actionState.getStateId(), out, in);
+                game.enterState(actionState.getStateId(), actionState.getOutTransition(), actionState.getInTransition());
         	} else if (a instanceof MenuActionEnterMenu) {
         		MenuActionEnterMenu menuState = (MenuActionEnterMenu)a;
         		menu = menuState.getMenu();

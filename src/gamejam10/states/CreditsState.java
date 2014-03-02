@@ -24,13 +24,8 @@ public class CreditsState extends BasicGameState {
 		g.drawString("Adam Lärkeryd", 		370, 100);
 		g.drawString("Erik Eliasson", 		370, 120);
 		g.drawString("Henrik Olsson", 		370, 140);
-<<<<<<< HEAD
 		g.drawString("Magnus Lundmark",		370, 160);
 		g.drawString("Martin Börjesson", 	370, 180);
-=======
-		g.drawString("Magnus Lundmark", 	370, 160);
-		g.drawString("Martin B�rjesson", 	370, 180);
->>>>>>> branch 'develop' of https://github.com/mborjesson/GameJam-1.0.git
 		g.drawString("Nicklas Gavelin", 	370, 200);
 		
 	}

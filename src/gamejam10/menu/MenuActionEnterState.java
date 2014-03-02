@@ -1,15 +1,12 @@
 package gamejam10.menu;
 
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.transition.*;
 
 public class MenuActionEnterState extends MenuAction {
 	private final int stateId;
-	private final Transition outTransition;
-	private final Transition inTransition;
-	public MenuActionEnterState(int stateId, Transition outTransition, Transition inTransition) {
+	public MenuActionEnterState(int stateId) {
 		this.stateId = stateId;
-		this.outTransition = outTransition;
-		this.inTransition = inTransition;
 	}
 	
 	public int getStateId() {
@@ -17,10 +14,10 @@ public class MenuActionEnterState extends MenuAction {
 	}
 	
 	public Transition getOutTransition() {
-		return outTransition;
+		return new FadeOutTransition(Color.black, 150);
 	}
 	
 	public Transition getInTransition() {
-		return inTransition;
+		return new FadeInTransition(Color.black, 150);
 	}
 }
