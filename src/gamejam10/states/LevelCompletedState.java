@@ -24,11 +24,14 @@ public class LevelCompletedState extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
-		
-		g.drawString("Grattis", 400, 200);
-		g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
-
-		System.out.println(Player.getDeathCounter());
+		if (nextLevel != null) {
+			g.drawString("Grattis", 400, 200);
+			g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
+		} else {
+			// if there's no levels left
+			g.drawString("Grattis, there's nothing left to do!", 250, 200);
+			g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
+		}
 		
 //		if (Player.getDeathCounter() <= 5) {
 //			JOptionPane.showMessageDialog(null, "FLAWLESS VICTORY!!!!");
@@ -49,12 +52,15 @@ public class LevelCompletedState extends BasicGameState {
 	
 	private void handleInput(Input i, int delta, StateBasedGame game) throws SlickException {
 		if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
-			game.enterState(States.MENU.getID(), new FadeOutTransition(
-				Color.black, 50), new FadeInTransition(Color.black, 50));
+			game.enterState(States.MENU.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 		} else if (i.isKeyPressed(Input.KEY_ENTER)) {
-			GameState gs = (GameState)game.getState(States.GAME.getID());
-			gs.initializeLevel(nextLevel);
-			game.enterState(States.GAME.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
+			if (nextLevel != null) {
+				GameState gs = (GameState)game.getState(States.GAME.getID());
+				gs.initializeLevel(nextLevel);
+				game.enterState(States.GAME.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
+			} else {
+				game.enterState(States.MENU.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
+			}
 		}
 	}
 	

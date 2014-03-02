@@ -9,9 +9,8 @@ import gamejam10.character.Character;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
 import gamejam10.enums.*;
-import gamejam10.level.Level;
-import gamejam10.level.LevelObject;
-import gamejam10.states.GameState;
+import gamejam10.level.*;
+import gamejam10.states.*;
 
 import java.util.ArrayList;
 
@@ -110,6 +109,8 @@ public class Physics {
 					if (c.getBoundingShape().checkCollision(box)) {
 						
 						System.out.println("Woho \\0/ You Made It!!!");
+						LevelCompletedState lcs = (LevelCompletedState)sbg.getState(States.LEVELCOMPLETED.getID());
+						lcs.setNextLevel(LevelOrder.getInstance().getNextLevel());
 						sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
 					}
 						
