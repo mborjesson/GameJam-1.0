@@ -42,6 +42,9 @@ public class Level {
 	public Level(String level) throws SlickException {
 
 		map = new TiledMap("data/maps/" + level + ".tmx", "data/images");
+		for (int i = 0; i < map.getTileSetCount(); ++i) {
+			map.getTileSet(i).tiles.setFilter(Image.FILTER_NEAREST);
+		}
 		for (int groupID = 0; groupID < map.getObjectGroupCount(); ++groupID) {
 			for (int objectID = 0; objectID < map.getObjectCount(groupID); ++objectID) {
 				LevelType obj = LevelType.getLevelObject(map.getObjectType(
