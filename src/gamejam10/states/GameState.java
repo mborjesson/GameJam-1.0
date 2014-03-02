@@ -101,7 +101,7 @@ public class GameState extends BasicGameState {
 		
 		camera.setWidth(1000);
 
-		level = new Level("map06");
+		level = new Level("map07");
 		level.setCamera(camera);
 
 		player = level.getPlayer();

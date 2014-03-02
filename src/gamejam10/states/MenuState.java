@@ -72,7 +72,7 @@ public class MenuState extends BasicGameState {
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         Input input = container.getInput();
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-        	game.enterState(States.EXIT.getID(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
+        	exitGame(game);
         } else if (input.isKeyPressed(Input.KEY_DOWN) || isControllerPressed("down", input) ) {
         	menu.nextItem();
         } else if (input.isKeyPressed(Input.KEY_UP) || isControllerPressed("up", input) ) {
@@ -84,7 +84,7 @@ public class MenuState extends BasicGameState {
         		if (actionState.getStateId() == States.GAME.getID()) {
                     audioPlayer.playMusic(MusicType.GAME, 0.3f);
         		}
-                game.enterState(actionState.getStateId(), actionState.getOutTransition(), actionState.getInTransition());
+                game.enterState(actionState.getStateId(), actionState.getLeaveTransition(), actionState.getEnterTransition());
         	} else if (a instanceof MenuActionEnterMenu) {
         		MenuActionEnterMenu menuState = (MenuActionEnterMenu)a;
         		menu = menuState.getMenu();
@@ -106,4 +106,8 @@ public class MenuState extends BasicGameState {
     	
 		return false;
 	}
+    
+    private void exitGame(StateBasedGame game) {
+    	game.enterState(States.EXIT.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
+    }
 }
