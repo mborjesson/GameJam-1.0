@@ -141,7 +141,7 @@ public class Level {
 			}
 		}
 		
-		sun = new Sun(60*1000);
+		sun = new Sun(160*1000);
 
 		// TEST
 
@@ -160,10 +160,12 @@ public class Level {
 
 		loadTileMap();
 	}
+	
+	public Sun getSun() {
+		return sun;
+	}
 
 	public void render(Graphics g) {
-		g.setBackground(new Color(sun.getSunColor(), sun.getSunColor(), sun.getSunColor()));
-		g.clear();
 
 		g.pushTransform();
 		
@@ -242,6 +244,7 @@ public class Level {
 	
 	public void update(int delta) {
 		sun.update(delta);
+//		player.update(delta);
 	}
 
 	public void addCharacter(Character c) {

@@ -23,6 +23,7 @@ public class AudioPlayer {
     private static final AudioPlayer INSTANCE = new AudioPlayer();
     private Map<MusicType, Music> musicMap = new HashMap<MusicType, Music>();
     private Map<SoundType, Sound> soundMap = new HashMap<SoundType, Sound>();
+
     private boolean enabled = true;
     private boolean initialized = false;
     

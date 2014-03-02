@@ -6,9 +6,11 @@ package gamejam10;
 
 import gamejam10.audio.*;
 import gamejam10.enums.*;
+import gamejam10.level.EndOfLevelObject;
 import gamejam10.options.Options;
 import gamejam10.states.ExitState;
 import gamejam10.states.GameState;
+import gamejam10.states.LevelCompletedState;
 import gamejam10.states.MenuState;
 
 import org.lwjgl.opengl.*;
@@ -51,6 +53,7 @@ public class Main extends StateBasedGame {
         this.addState(new MenuState());
         this.addState(new GameState());
         enterState(States.MENU.getID());
+        this.addState(new LevelCompletedState());
         this.addState(new ExitState());
     }
     

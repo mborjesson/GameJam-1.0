@@ -1,4 +1,4 @@
-package shader;
+package gamejam10.shader;
 
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
