@@ -32,6 +32,7 @@ public class Main extends StateBasedGame {
         Options options = Main.getOptions();
         if (options.isFullscreen()) {
         	options.setWidth(app.getScreenWidth());
+        	app.setMouseGrabbed(true);
         }
         app.setDisplayMode(options.getWidth(), options.getHeight(), options.isFullscreen());
         app.setAlwaysRender(true);

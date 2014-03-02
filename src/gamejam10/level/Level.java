@@ -222,6 +222,14 @@ public class Level {
 	public void render(Graphics g) {
 
 		g.pushTransform();
+		g.resetTransform();
+		g.setColor( sun.getRealColor() );
+		
+		float sunRadius = sun.getRadius();
+		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
+		g.popTransform();
+
+		g.pushTransform();
 		
 		float x = Math.min(map.getWidth()*map.getTileWidth()-camera.getWidth(), Math.max(0, camera.getX()-camera.getWidth()*0.5f));
 		float y = Math.min(map.getHeight()*map.getTileHeight()-camera.getHeight(), Math.max(0, camera.getY()-camera.getHeight()*0.5f));
@@ -249,11 +257,6 @@ public class Level {
 
 		g.popTransform();
 		
-		g.resetTransform();
-		g.setColor( sun.getRealColor() );
-		
-		float sunRadius = sun.getRadius();
-		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
 		
 	}
 	

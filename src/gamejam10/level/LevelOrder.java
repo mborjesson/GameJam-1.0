@@ -13,6 +13,7 @@ public class LevelOrder {
 	
 	private final List<String> levelList = new ArrayList<String>();
 	private int currentLevel = 0;
+	private String currentLevelName = null;
 
 	public void initialize() throws IOException {
 		InputStream in = ResourceLoader.getResourceAsStream("/data/maps/map_order.list");
@@ -33,9 +34,11 @@ public class LevelOrder {
 
 	public String getNextLevel() {
 		if (currentLevel >= levelList.size()) {
-			return null;
+			currentLevelName = null;
+		} else {
+			currentLevelName = levelList.get(currentLevel++);
 		}
-		return levelList.get(currentLevel++);
+		return currentLevelName;
 	}
 	
 	public void reset() {
@@ -44,5 +47,9 @@ public class LevelOrder {
 	
 	public String getFirstLevel() {
 		return levelList.get(0);
+	}
+	
+	public String getCurrentLevel() {
+		return currentLevelName;
 	}
 }

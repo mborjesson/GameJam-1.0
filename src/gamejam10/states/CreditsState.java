@@ -48,7 +48,9 @@ public class CreditsState extends BasicGameState {
 	}
 	
 	private void handleKeyboardInput(Input i, int delta, StateBasedGame game) {
-	if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
+	if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i) || i.isKeyPressed(Input.KEY_SPACE) || i.isKeyPressed(Input.KEY_ENTER)) {
+		i.clearControlPressedRecord();
+		i.clearKeyPressedRecord();
 		game.enterState(States.MENU.getID(), new FadeOutTransition(
 				Color.black, 150), new FadeInTransition(Color.black, 150));
 		}
