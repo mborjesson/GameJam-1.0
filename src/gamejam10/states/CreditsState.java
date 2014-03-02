@@ -24,7 +24,7 @@ public class CreditsState extends BasicGameState {
 		g.drawString("Adam Lärkeryd", 		370, 100);
 		g.drawString("Erik Eliasson", 		370, 120);
 		g.drawString("Henrik Olsson", 		370, 140);
-		g.drawString("Magnus ??", 			370, 160);
+		g.drawString("Magnus Lundmark", 	370, 160);
 		g.drawString("Martin Börjesson", 	370, 180);
 		g.drawString("Nicklas Gavelin", 	370, 200);
 		
