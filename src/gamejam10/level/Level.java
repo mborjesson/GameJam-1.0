@@ -141,7 +141,7 @@ public class Level {
 			}
 		}
 		
-		sun = new Sun(160*1000);
+		sun = new Sun(160*100);
 
 		// TEST
 
