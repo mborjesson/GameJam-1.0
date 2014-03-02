@@ -184,9 +184,10 @@ public class Physics {
                 
                 if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
                     // System.out.println("checkCollision true");
-                	if (obj.getYVelocity() > 0.90f)
+                	if (obj.getYVelocity() >= 1.0f)
                 	{
                 		System.out.println("Ugh!!!!!!!!!!!");
+                		System.out.println(obj.getYVelocity());
                      	killPlayer();
                          return false;
                 	}
