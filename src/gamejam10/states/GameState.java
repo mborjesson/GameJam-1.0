@@ -64,10 +64,13 @@ public class GameState extends BasicGameState {
 
 		// calculate scale
 		// we want to show what camera wants to show (in pixels)
-		camera.setWidth(1000);
+		camera.setWidth(1024);
 		camera.setHeight((float) (camera.getWidth() / Main.getOptions()
 				.getAspectRatio()));
-
+		
+		System.out.println("Camera: " + camera.getWidth() + " x " + camera.getHeight());
+		System.out.println("Aspect: " + Main.getOptions().getAspectRatio());
+ 
 		quadShader = Shader.makeShader("data/shaders/quad.vs.glsl",
 				"data/shaders/quad.fs.glsl");
 		godShader = Shader.makeShader("data/shaders/god.vs.glsl",
@@ -235,8 +238,8 @@ public class GameState extends BasicGameState {
 
 	private void doRender(GameContainer gc, StateBasedGame sbg, Graphics g) {
 
-		float scaleX = ( Main.getOptions().getWidth() - 1 ) / camera.getWidth();
-		float scaleY = ( Main.getOptions().getHeight() - 1 ) / camera.getHeight();
+		float scaleX = ( Main.getOptions().getWidth() ) / camera.getWidth();
+		float scaleY = ( Main.getOptions().getHeight() ) / camera.getHeight();
 		g.scale(scaleX, scaleY);
 
 		camera.setX(player.getX());
