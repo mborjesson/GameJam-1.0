@@ -6,12 +6,18 @@ import org.newdawn.slick.state.transition.*;
 
 public class MenuActionEnterState extends MenuAction {
 	private final int stateId;
-	public MenuActionEnterState(int stateId) {
+	private final int type;
+	public MenuActionEnterState(int stateId, int type) {
 		this.stateId = stateId;
+		this.type = type;
 	}
 	
 	public int getStateId() {
 		return stateId;
+	}
+
+	public int getType() {
+		return type;
 	}
 	
 	public Transition getLeaveTransition() {

@@ -1,5 +1,6 @@
 package gamejam10.states;
 
+import gamejam10.*;
 import gamejam10.character.*;
 import gamejam10.enums.*;
 import gamejam10.level.*;
@@ -12,7 +13,7 @@ import org.newdawn.slick.state.transition.*;
 
 public class LevelCompletedState extends BasicGameState {
 	
-	private Level nextLevel = null;
+	private String nextLevel = null;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -39,17 +40,21 @@ public class LevelCompletedState extends BasicGameState {
 			throws SlickException {
 		
 		
-		handleKeyboardInput(container.getInput(), delta, game);
+		handleInput(container.getInput(), delta, game);
 		
 	}
 
 	
 
 	
-	private void handleKeyboardInput(Input i, int delta, StateBasedGame game) {
+	private void handleInput(Input i, int delta, StateBasedGame game) throws SlickException {
 		if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
 			game.enterState(States.MENU.getID(), new FadeOutTransition(
 				Color.black, 50), new FadeInTransition(Color.black, 50));
+		} else if (i.isKeyPressed(Input.KEY_ENTER)) {
+			GameState gs = (GameState)game.getState(States.GAME.getID());
+			gs.initializeLevel(nextLevel);
+			game.enterState(States.GAME.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 		}
 	}
 	
@@ -69,7 +74,7 @@ public class LevelCompletedState extends BasicGameState {
 		return States.LEVELCOMPLETED.getID();
 	}
 
-	public void setNextLevel(Level nextLevel) {
+	public void setNextLevel(String nextLevel) {
 		this.nextLevel = nextLevel;
 	}
 }
