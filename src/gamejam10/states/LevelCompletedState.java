@@ -1,6 +1,7 @@
 package gamejam10.states;
 
 import gamejam10.*;
+import gamejam10.audio.AudioPlayer;
 import gamejam10.character.*;
 import gamejam10.enums.*;
 import gamejam10.level.*;
@@ -27,12 +28,7 @@ public class LevelCompletedState extends BasicGameState {
 		
 		g.drawString("Grattis", 400, 200);
 		g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
-
-		System.out.println(Player.getDeathCounter());
 		
-//		if (Player.getDeathCounter() <= 5) {
-//			JOptionPane.showMessageDialog(null, "FLAWLESS VICTORY!!!!");
-//		}
 	}
 
 	@Override
@@ -49,6 +45,7 @@ public class LevelCompletedState extends BasicGameState {
 	
 	private void handleInput(Input i, int delta, StateBasedGame game) throws SlickException {
 		if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
+			AudioPlayer.getInstance().playMusic(MusicType.MENU);
 			game.enterState(States.MENU.getID(), new FadeOutTransition(
 				Color.black, 50), new FadeInTransition(Color.black, 50));
 		} else if (i.isKeyPressed(Input.KEY_ENTER)) {
