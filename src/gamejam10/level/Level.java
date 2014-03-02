@@ -65,6 +65,47 @@ public class Level {
 								player = new Player(x, y);
 								break;
 							}
+							case ENEMY_FLOAT_EASY: {
+								FloatEnemy en = new FloatEnemy(x, y, 0, 150);
+								en.setMaximumSpeed(0.20f);
+								en.setMaximumFallSpeed(0);
+								BasicAI ai = new BasicAI(en, player);
+								
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
+								
+								PatrollingAIAction.Parameters parameters = new PatrollingAIAction.Parameters();
+								parameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								parameters.maxX = x + map.getTileWidth() * deltaTilesMax;
+								PatrollingAIAction aiAction = new PatrollingAIAction(en, parameters);
+								
+								ai.addAIAction(aiAction);
+								
+								en.setAI(ai);
+								
+								enemies.add(en);
+								} break;
+							case ENEMY_FLOAT_HARD:  {
+								FloatEnemy en = new FloatEnemy(x, y, 0, 150);
+								en.setMaximumSpeed(0.90f);
+								en.setMaximumFallSpeed(0);
+								
+								BasicAI ai = new BasicAI(en, player);
+								
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
+								
+								PatrollingAIAction.Parameters parameters = new PatrollingAIAction.Parameters();
+								parameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								parameters.maxX = x + map.getTileWidth() * deltaTilesMax;
+								PatrollingAIAction aiAction = new PatrollingAIAction(en, parameters);
+								
+								ai.addAIAction(aiAction);
+								
+								en.setAI(ai);
+								
+								enemies.add(en);
+							} break;
 							case ENEMY_EASY: {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);

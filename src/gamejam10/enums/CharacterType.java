@@ -2,6 +2,8 @@ package gamejam10.enums;
 
 public enum CharacterType {
 	PLAYER("player"),
+	ENEMY_FLOAT_EASY("patroling_float"),
+	ENEMY_FLOAT_HARD("hard_float"),
 	ENEMY_EASY("patroling_brain"),
 	ENEMY_JUMPING("jumping_brain");
 	

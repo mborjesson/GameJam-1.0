@@ -27,12 +27,6 @@ public class FloatEnemy extends AIEnemy {
         decelerationSpeed = 0.02f;
         
         // AI
-//		RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
-//		moveParameters.maxMovementDuration = 1000;
-//		moveParameters.minMovementDuration = 100;
-//		moveParameters.minX = x - minMoveX;
-//		moveParameters.maxX = x + maxMoveX;
-		
         BasicAI ai = new BasicAI(this, null);
 		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
 		moveParameters.minX = 50;
