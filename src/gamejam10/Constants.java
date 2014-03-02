@@ -24,5 +24,5 @@ public class Constants {
 	};
 
 	public static final float MENU_WIDTH = 640f;
-	public static final float GAME_WIDTH = 1024f;
+	public static final float GAME_WIDTH = 700;
 }

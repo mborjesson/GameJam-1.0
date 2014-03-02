@@ -244,8 +244,8 @@ public class GameState extends BasicGameState {
 		float scaleY = ( Main.getOptions().getHeight() ) / camera.getHeight();
 		g.scale(scaleX, scaleY);
 
-		camera.setX(player.getX());
-		camera.setY(player.getY());
+		camera.setX(player.getX()+10);
+		camera.setY(player.getY()+70);
 
 		level.render(g);
 
@@ -267,7 +267,7 @@ public class GameState extends BasicGameState {
 		GL13.glActiveTexture(GL13.GL_TEXTURE1);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, godTex);
 
-		g.scale(width - 1, height - 1);
+		g.scale(width, height);
 
 		GL11.glBegin(GL11.GL_QUADS);
 
@@ -301,7 +301,7 @@ public class GameState extends BasicGameState {
 		godShader.setUniformFloatVariable("exposure", 0.0034f);
 		godShader.setUniformFloatVariable("decay", 1.0f);
 		godShader.setUniformFloatVariable("density", 0.84f);
-		godShader.setUniformFloatVariable("weight", 2.65f);
+		godShader.setUniformFloatVariable("weight", 4.65f);
 		godShader.setUniformFloatVariable("lightPositionOnScreen", level
 				.getSun().getSunPositionX(), level.getSun().getSunPositionY());
 		// godShader.setUniformFloatVariable("test", 1.0f, 0.0f, 0.0f, 1.0f);
@@ -309,7 +309,7 @@ public class GameState extends BasicGameState {
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
 
-		g.scale(width - 1, height - 1);
+		g.scale(width, height);
 
 		GL11.glBegin(GL11.GL_QUADS);
 

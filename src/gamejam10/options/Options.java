@@ -144,6 +144,8 @@ public class Options {
 							f.setBoolean(opt, Boolean.valueOf(value));
 						} else if (type == Float.TYPE || type == Float.class) {
 							f.setFloat(opt, Float.valueOf(value));
+						} else if (type == String.class) {
+							f.set(opt, value);
 						}
 					} catch (IllegalArgumentException e) {
 						e.printStackTrace();
