@@ -226,7 +226,7 @@ public class Level {
 		g.setColor( sun.getRealColor() );
 		
 		float sunRadius = sun.getRadius();
-		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1.2f-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
+		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1f-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
 		g.popTransform();
 
 		g.pushTransform();

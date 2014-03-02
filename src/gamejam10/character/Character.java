@@ -4,19 +4,13 @@
  */
 package gamejam10.character;
 
-import gamejam10.audio.AudioPlayer;
-import gamejam10.enums.Facing;
-import gamejam10.level.LevelObject;
-import gamejam10.physics.AABoundingRect;
+import gamejam10.enums.*;
+import gamejam10.level.*;
+import gamejam10.physics.*;
 
-import java.util.HashMap;
+import java.util.*;
 
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.*;
 
 
 /**

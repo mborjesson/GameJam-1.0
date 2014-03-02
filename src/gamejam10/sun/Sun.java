@@ -49,10 +49,10 @@ public class Sun {
 	}
 	
 	public float getSunPositionX() {
-		return ( Math.min((float)currentTime/maxTime, 1f) * 1.2f );
+		return Math.min((float)currentTime/maxTime, 1f) * 1.2f;
 	}
 	
 	public float getSunPositionY() {
-		return (float) ( Math.sin((Math.PI+getSunPositionX()*Math.PI)*0.5f) * 1.2 );
+		return (float)Math.sin((Math.PI+getSunPositionX()*Math.PI)*0.5) * 1f;
 	}
 }

@@ -267,7 +267,7 @@ public class GameState extends BasicGameState {
 		GL13.glActiveTexture(GL13.GL_TEXTURE1);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, godTex);
 
-		g.scale(width - 1, height - 1);
+		g.scale(width, height);
 
 		GL11.glBegin(GL11.GL_QUADS);
 
@@ -309,7 +309,7 @@ public class GameState extends BasicGameState {
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
 
-		g.scale(width - 1, height - 1);
+		g.scale(width, height);
 
 		GL11.glBegin(GL11.GL_QUADS);
 
