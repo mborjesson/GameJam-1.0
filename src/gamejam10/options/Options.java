@@ -14,7 +14,6 @@ public class Options {
 	private String aspectRatio = AspectRatio.getDefaultAspectRatio();
 	private int width = 1280;
 	transient private Integer height = null;
-	
 	private boolean fullscreen = false;
 	private boolean vsync = true;
 	private int targetFrameRate = 60;
