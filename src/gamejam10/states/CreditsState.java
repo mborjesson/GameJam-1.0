@@ -1,6 +1,7 @@
 package gamejam10.states;
 
 import gamejam10.*;
+import gamejam10.audio.AudioPlayer;
 import gamejam10.enums.*;
 
 import org.newdawn.slick.*;
@@ -51,6 +52,7 @@ public class CreditsState extends BasicGameState {
 	if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i) || i.isKeyPressed(Input.KEY_SPACE) || i.isKeyPressed(Input.KEY_ENTER)) {
 		i.clearControlPressedRecord();
 		i.clearKeyPressedRecord();
+		AudioPlayer.getInstance().playMusic(MusicType.MENU, 1f);
 		game.enterState(States.MENU.getID(), new FadeOutTransition(
 				Color.black, 150), new FadeInTransition(Color.black, 150));
 		}
