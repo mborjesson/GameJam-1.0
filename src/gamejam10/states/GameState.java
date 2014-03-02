@@ -196,7 +196,8 @@ public class GameState extends BasicGameState {
 		GL11.glEnable(GL11.GL_BLEND);
 		// GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		
-		g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
+		//g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
+		g.setBackground( new Color(0.5f, 0.5f, 0.5f, 1.0f) );
 		g.clear();
 
 		doRender(gc, sbg, g);
@@ -258,6 +259,7 @@ public class GameState extends BasicGameState {
 		quadShader.startShader();
 		quadShader.setUniformIntVariable("texture_0", 0);
 		quadShader.setUniformIntVariable("texture_1", 1);
+		quadShader.setUniformFloatVariable("sunFactor", level.getSun().getSunColor() );
 
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);

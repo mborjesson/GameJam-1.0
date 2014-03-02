@@ -27,8 +27,8 @@ public class Sun {
 		
 		radius = (float) ( 20 + 1 * Math.sin(currentTime / 500.0) );
 		
-		color.a = startAlpha * getSunColor();
-		color.g = startGreen * getSunColor();
+		//color.a = startAlpha * getSunColor();
+		color.g = Math.max( startGreen * getSunColor(), 0.5f );
 		
 	}
 	
@@ -49,10 +49,10 @@ public class Sun {
 	}
 	
 	public float getSunPositionX() {
-		return Math.min((float)currentTime/maxTime, 1f);
+		return ( Math.min((float)currentTime/maxTime, 1f) * 1.2f );
 	}
 	
 	public float getSunPositionY() {
-		return (float)Math.sin((Math.PI+getSunPositionX()*Math.PI)*0.5f);
+		return (float) ( Math.sin((Math.PI+getSunPositionX()*Math.PI)*0.5f) * 1.2 );
 	}
 }
