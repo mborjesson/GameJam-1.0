@@ -145,9 +145,9 @@ public class Level {
 		System.out.println("suntime: " + suntime);
 		int sunint = Integer.parseInt(suntime);
 		
-		// sun = new Sun(sunint*1000);
+		sun = new Sun(sunint*1000);
 		
-		sun = new Sun(160*1000);
+		//sun = new Sun(160*1000);
 
 		// TEST
 
