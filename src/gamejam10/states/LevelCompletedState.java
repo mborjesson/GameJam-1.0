@@ -57,7 +57,7 @@ public class LevelCompletedState extends BasicGameState {
 	
 	private void handleInput(Input i, int delta, StateBasedGame game) throws SlickException {
 		if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
-			AudioPlayer.getInstance().playMusic(MusicType.MENU);
+			AudioPlayer.getInstance().playMusic(MusicType.MENU, 1f);
 			GameState gs = (GameState)game.getState(States.GAME.getID());
 			if (nextLevel != null) {
 				gs.initializeLevel(nextLevel);
