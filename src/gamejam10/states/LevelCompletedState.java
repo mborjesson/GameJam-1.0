@@ -57,7 +57,7 @@ public class LevelCompletedState extends BasicGameState {
 				gs.setRunning(false);
 			}
 			game.enterState(States.MENU.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
-		} else if (i.isKeyPressed(Input.KEY_ENTER)) {
+		} else if (i.isKeyPressed(Input.KEY_ENTER) || i.isKeyPressed(Input.KEY_SPACE)) {
 			GameState gs = (GameState)game.getState(States.GAME.getID());
 			if (nextLevel != null) {
 				gs.initializeLevel(nextLevel);
