@@ -11,50 +11,16 @@ import gamejam10.character.*;
 import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.physics.*;
+import gamejam10.shader.*;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.IntBuffer;
+import java.nio.*;
 import java.util.*;
 
-import gamejam10.Main;
-import gamejam10.ai.BasicAI;
-import gamejam10.audio.AudioPlayer;
-import gamejam10.character.AIEnemy;
-import gamejam10.character.Enemy;
-import gamejam10.character.Player;
-import gamejam10.level.Level;
-import gamejam10.physics.AABoundingRect;
-import gamejam10.physics.Physics;
-import gamejam10.physics.Tile;
-import gamejam10.shader.Shader;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.EXTFramebufferObject;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.*;
+import org.lwjgl.opengl.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.state.transition.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.logging.Logger;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
-import org.newdawn.slick.state.transition.RotateTransition;
 
 
 
@@ -68,9 +34,8 @@ public class GameState extends BasicGameState {
 	private Physics physics;
 	private Player player;
 	private boolean exitGame = false;
-	private boolean higLightPlayer = false;
 	private boolean highlightAllTiles = false;
-	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	private boolean running = false;
 	
 	private Camera camera = new Camera();
 
@@ -102,20 +67,15 @@ public class GameState extends BasicGameState {
 
 		musicPlayer = AudioPlayer.getInstance();
 		
+		// calculate scale
+		// we want to show what camera wants to show (in pixels)
 		camera.setWidth(1000);
+		camera.setHeight((float)(camera.getWidth()/Main.getOptions().getAspectRatio()));
 
-		level = new Level("map06");
-		level.setCamera(camera);
-
-		player = level.getPlayer();
-
-		physics = new Physics(this);
-		
 		quadShader = Shader.makeShader("data/shaders/quad.vs.glsl", "data/shaders/quad.fs.glsl");
 		godShader = Shader.makeShader("data/shaders/god.vs.glsl", "data/shaders/god.fs.glsl");
 		
 		fboInit();
-		
 	}
 	
 	private void fboInit() {
@@ -136,7 +96,6 @@ public class GameState extends BasicGameState {
 		
 		textureId = buf.get();
 		godTex = buf.get();
-		
 		
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		
@@ -187,6 +146,8 @@ public class GameState extends BasicGameState {
 		System.out.println("FBO: " + FBOEnabled + " " + offscreenFBO + " " + textureId);
 		
 		
+		GL11.glPopAttrib();
+
 		/*
 		RenderTexture tex = new RenderTexture(false, true, false, false, RenderTexture.RENDER_TEXTURE_2D, 1);
 		
@@ -280,13 +241,8 @@ public class GameState extends BasicGameState {
 	private void doRender(GameContainer gc, StateBasedGame sbg, Graphics g) {
 		
 		
-		// calculate scale
-		// we want to show what camera wants to show (in pixels)
-		float width = (float)camera.getWidth();
-		float height = (float)(camera.getWidth()/Main.getOptions().getAspectRatio());
-		camera.setHeight(height);
-		float scaleX = Main.getOptions().getWidth()/width;
-		float scaleY = Main.getOptions().getHeight()/height;
+		float scaleX = Main.getOptions().getWidth()/camera.getWidth();
+		float scaleY = Main.getOptions().getHeight()/camera.getHeight();
 		g.scale(scaleX, scaleY);
 		
 		camera.setX(player.getX());
@@ -476,14 +432,6 @@ public class GameState extends BasicGameState {
 	}
 
 	/**
-	 * @param level
-	 *            the level to set
-	 */
-	public void setLevel(Level level) {
-		this.level = level;
-	}
-
-	/**
 	 * @return the player
 	 */
 	public Player getPlayer() {
@@ -497,5 +445,19 @@ public class GameState extends BasicGameState {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+	
+	public void initializeLevel(String level) throws SlickException {
+		this.level = new Level(level);
+		this.level.setCamera(camera);
 
+		player = this.level.getPlayer();
+
+		physics = new Physics(this);
+		
+		running = true;
+	}
+
+	public boolean isRunning() {
+		return running;
+	}
 }

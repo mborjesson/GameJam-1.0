@@ -98,22 +98,26 @@ public class Physics {
     }
     
     private void checkIfEndOfWorld(StateBasedGame sbg, Level level) {
-    	for (Character c : level.getCharacters() ) {
-			if ( c instanceof Player ) {
-				AABoundingRect box = (AABoundingRect)level.getEndOfWorldObject().getBoundingShape();
-//				AABoundingRect cbox = (AABoundingRect)c.getBoundingShape();
-//				System.out.println("END BOX " + box.getX() + ", " + box.getY() + ", " + box.getWidth() + ", "	+ box.getHeight());
-//				System.out.println("CHAR BOX " + cbox.getX() + ", " + cbox.getY() + ", " + cbox.getWidth() + ", "	+ cbox.getHeight());
-				if (c.getBoundingShape().checkCollision(box)) {
-					
-					System.out.println("Woho \\0/ You Made It!!!");
-					sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
+    	
+    	//if level goal exists
+    	if (level.getEndOfWorldObject() != null) {
+	    	for (Character c : level.getCharacters() ) {
+				if ( c instanceof Player ) {
+					AABoundingRect box = (AABoundingRect)level.getEndOfWorldObject().getBoundingShape();
+	//				AABoundingRect cbox = (AABoundingRect)c.getBoundingShape();
+	//				System.out.println("END BOX " + box.getX() + ", " + box.getY() + ", " + box.getWidth() + ", "	+ box.getHeight());
+	//				System.out.println("CHAR BOX " + cbox.getX() + ", " + cbox.getY() + ", " + cbox.getWidth() + ", "	+ cbox.getHeight());
+					if (c.getBoundingShape().checkCollision(box)) {
+						
+						System.out.println("Woho \\0/ You Made It!!!");
+						sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
+					}
+						
+	    	
+	    	
 				}
-					
-    	
-    	
 			}
-		}
+    	}
     }
     
     

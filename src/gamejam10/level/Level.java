@@ -141,8 +141,13 @@ public class Level {
 			}
 		}
 		
-		sun = new Sun(160*100);
-
+		String suntime = map.getMapProperty("suntime", "60");
+		System.out.println("suntime: " + suntime);
+		int sunint = Integer.parseInt(suntime);
+		
+		sun = new Sun(sunint*1000);
+		
+		//sun = new Sun(160*1000);
 		// TEST
 
 		addCharacter(player);
@@ -200,12 +205,12 @@ public class Level {
 		// create an array to hold all the tiles in the map
 		tiles = new Tile[map.getWidth()][map.getHeight()];
 
-		int layerIndex = map.getLayerIndex("maplayer");
+		int layerIndex = map.getLayerIndex("mapplayer");
 
 		if (layerIndex == -1) {
 			// TODO we can clean this up later with an exception if we want, but
 			// because we make the maps ourselfs this will suffice for now
-			System.err.println("Map does not have the layer \"images\"");
+			System.err.println("Map does not have the layer \"mapplayer\"");
 			System.exit(0);
 		}
 

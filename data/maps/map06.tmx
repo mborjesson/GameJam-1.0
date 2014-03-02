@@ -51,9 +51,9 @@
    </properties>
   </tile>
  </tileset>
- <layer name="maplayer" width="256" height="32">
+ <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2c2YrEIBBFnb3D/P//Dk0TyISKlkuZUs+B+9AilYrxuiX0FkLYEEIIIYQQQsvJC55yAZgN/A+wLvgfYF28+/8jo+4jvHJ/N8oFYDa8+z+H0rw/w/97Z/yAVcD/AOvi3f/nuTmm75tyBBiVVXx0HEdY3wO88Drvg19ia8YtUWdLxAlCnXOZ9BvK8Oj//Rz/6+5EQCS3n1zV15RrxgIoJzZOS/6T2r5l2c/h+jPuQ2Yg5j/tc9eW439bUmdqAGektXjMmzGfa9f/qVhQBv6HXGIez/G/Jgbzvy1e/P/W8VpQh9Q38P+YePH/c99/93u5VDt4aCcPpNpIqq+NI5VLMVZrcytifXq287fUWKfpp9q4lqw89kBbVpjPZrmv0fO3gr1jOSX+13yTW7OWb9nPZ/A9XPMbeL41zDL/z7o3z8lfs79B8/WRGmgPex6drsNzg1ys/S/tFUr3Bvt3wS32GL3Yc+4B/odcRpn/93FkJI7jVS3nGFLM0doH7mcU/99Jyfr9vFbpAc8Ncqnxf+y9y8rvZM7ex//glRr/x+q16ou9zs5aIXm/hy9Zt0EJnv3f6uys11rkyvv4H7yifT+6/xdArI/nSvp/gZbxe/nPKmeEPCkYxTximbt0rdKyJ/geraRgFPOIZe4twftoNv0B7DD3HACAAAA=
+   H4sIAAAAAAAAC+2c627DIAxG6dZtjfb+7ztVVaQMuY4hXAycI30/ihBxEz5zi7KFEDaEEEIIIYTQcvKCp1gAZgP/A6wL/gdYF+/+/0yo+wiv2D8qxQIwG979n0Ju3Pfw/7+TP2AV8D/Aunj3fzw2a/ruFCPAqKzio2MeYX4P8MLruA9+0eaM20md7aSdINSJy6TfkIdH/+/7+F+9AwGR1H7yrr6l3JILIB8tT0v+k+59ybKfw/V7rkNSzh1XQ/Of9blby/F/Xc721ABipLm45k3N59b5/1lbkAf+h1Q0j6f439IG439dvPj/1vBacA2pb+D/MfHi/+e6n3O5MbDs/8f1re1I5VIb5IAyaN6f8T2AGeBdBihF73Ef7HAmIcPaMZ8c/1veyb0yLnnIP3htDH6Dj/4yKoz/vknJQ2c5GdHfY7gf9Xk0ug7PDVKp7X9prZC7NtjfCx5p72uPuQX4H1IZZfzf88hIHPPVVeJ1gLQuGO3+QH9G8X9PcvYC47lKC3hukMoV/2vnLiufycTex//glSv+1+qV6out9s5KIXm/hS9b7jPAPHj2f6k+3Wou8s77LXzJug1ysJ6P7t8C0Pp4qqTvC5Rsv5X/asWMkCeFSm0eqRl7jLSvZy17gu/RSgqV2jxSM/aS4H00m/4ANysoMwCAAAA=
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
@@ -75,6 +75,20 @@
   <object name="The End" type="trigger" x="5540" y="349" width="64" height="320">
    <properties>
     <property name="name" value="end"/>
+   </properties>
+  </object>
+  <object name="Skurk 2" type="spawn" x="3953" y="416" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="7"/>
+    <property name="deltatilesmin" value="4"/>
+    <property name="name" value="skurk02"/>
+   </properties>
+  </object>
+  <object name="Skurk 2" type="spawn" x="1524" y="654" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="7"/>
+    <property name="deltatilesmin" value="4"/>
+    <property name="name" value="skurk02"/>
    </properties>
   </object>
  </objectgroup>
