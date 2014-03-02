@@ -64,7 +64,8 @@ public class GameState extends BasicGameState {
 
 		// calculate scale
 		// we want to show what camera wants to show (in pixels)
-		camera.setWidth(1024);
+
+		camera.setWidth(Constants.GAME_WIDTH);
 		camera.setHeight((float) (camera.getWidth() / Main.getOptions()
 				.getAspectRatio()));
 		
@@ -368,6 +369,8 @@ public class GameState extends BasicGameState {
 		}
 
 		if (i.isKeyPressed(Input.KEY_ESCAPE) || exitGame) {
+			i.clearControlPressedRecord();
+			i.clearKeyPressedRecord();
 			exitGame = false;
 			musicPlayer.playMusic(MusicType.MENU, 1);
 			game.enterState(States.MENU.getID(), new FadeOutTransition(

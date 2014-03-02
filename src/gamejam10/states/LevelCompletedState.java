@@ -1,18 +1,6 @@
 package gamejam10.states;
 
-import gamejam10.Constants;
 import gamejam10.*;
-
-import gamejam10.character.Player;
-import gamejam10.enums.MusicType;
-import gamejam10.enums.States;
-import gamejam10.states.GameState;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
 import gamejam10.audio.*;
 import gamejam10.character.*;
 import gamejam10.enums.*;
@@ -33,19 +21,26 @@ public class LevelCompletedState extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
-		String dc = Player.getDeathCounter() + "time";
+		String dc = Player.getDeathCounter() + " time";
 		dc += Player.getDeathCounter() == 1 ? "." : "s.";
 		
+		g.setBackground(Color.black);
+		g.clear();
+		g.setColor(Color.white);
+		
+		float screenWidth = Constants.MENU_WIDTH;
+		Tools.setScale(g, screenWidth);
+		
+		Font font = g.getFont();
+		
 		if (nextLevel != null) {
-			g.drawString("Grattis", 400, 200);
-			g.drawString("You died " + dc, 370, 250);
+			Tools.drawStringCentered(g, screenWidth, 50, "Grattis");
 		} else {
 			// if there's no levels left
-			g.drawString("Grattis, there's nothing left to do!", 250, 200);
-			g.drawString("You died " + dc, 370, 250);
+			Tools.drawStringCentered(g, screenWidth, 50, "Grattis, there's nothing left to do!");
 		}
-		
-		g.drawString("Press Space/Enter or A to continue...", 380, 300);
+		Tools.drawStringCentered(g, screenWidth, 50+font.getLineHeight(), "You died " + dc);
+		Tools.drawStringCentered(g, screenWidth, 100, "Press Space/Enter or A to continue...");
 	}
 
 	@Override
@@ -69,14 +64,20 @@ public class LevelCompletedState extends BasicGameState {
 			} else {
 				gs.setRunning(false);
 			}
+			i.clearControlPressedRecord();
+			i.clearKeyPressedRecord();
 			game.enterState(States.MENU.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 		} else if (i.isKeyPressed(Input.KEY_ENTER) || i.isKeyPressed(Input.KEY_SPACE) || isControllerPressed("a", i)) {
 			GameState gs = (GameState)game.getState(States.GAME.getID());
 			if (nextLevel != null) {
 				gs.initializeLevel(nextLevel);
+				i.clearControlPressedRecord();
+				i.clearKeyPressedRecord();
 				game.enterState(States.GAME.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 			} else {
 				gs.setRunning(false);
+				i.clearControlPressedRecord();
+				i.clearKeyPressedRecord();
 				game.enterState(States.CREDITS.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 			}
 		}

@@ -36,6 +36,7 @@ public class Enemy extends Character {
         maximumFallSpeed = 0.3f;
         decelerationSpeed = 0.05f;
     }
+    
      
       public void updateBoundingShape(){
         
@@ -44,7 +45,7 @@ public class Enemy extends Character {
 
 	@Override
 	public void handleCollision(Character c2) {
-		System.out.println(this + " colliding with " + c2);
+		//System.out.println(this + " colliding with " + c2);
 	}
     
 }

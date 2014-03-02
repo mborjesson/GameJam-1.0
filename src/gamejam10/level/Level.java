@@ -65,6 +65,50 @@ public class Level {
 								player = new Player(x, y);
 								break;
 							}
+							case WINDMILL: {
+								staticObjects.add(new WindmillObject(x, y));
+							}break;
+							case ENEMY_FLOAT_EASY: {
+								FloatEnemy en = new FloatEnemy(x, y, 0, 150);
+								en.setMaximumSpeed(0.20f);
+								en.setMaximumFallSpeed(0);
+								BasicAI ai = new BasicAI(en, player);
+								
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
+								
+								PatrollingAIAction.Parameters parameters = new PatrollingAIAction.Parameters();
+								parameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								parameters.maxX = x + map.getTileWidth() * deltaTilesMax;
+								PatrollingAIAction aiAction = new PatrollingAIAction(en, parameters);
+								
+								ai.addAIAction(aiAction);
+								
+								en.setAI(ai);
+								
+								enemies.add(en);
+								} break;
+							case ENEMY_FLOAT_HARD:  {
+								FloatEnemy en = new FloatEnemy(x, y, 0, 150);
+								en.setMaximumSpeed(0.90f);
+								en.setMaximumFallSpeed(0);
+								
+								BasicAI ai = new BasicAI(en, player);
+								
+								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
+								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
+								
+								PatrollingAIAction.Parameters parameters = new PatrollingAIAction.Parameters();
+								parameters.minX = x - map.getTileWidth() * deltaTilesMin;
+								parameters.maxX = x + map.getTileWidth() * deltaTilesMax;
+								PatrollingAIAction aiAction = new PatrollingAIAction(en, parameters);
+								
+								ai.addAIAction(aiAction);
+								
+								en.setAI(ai);
+								
+								enemies.add(en);
+							} break;
 							case ENEMY_EASY: {
 								AIEnemy en = new AIEnemy(x, y);
 								BasicAI ai = new BasicAI(en, player);
@@ -153,7 +197,7 @@ public class Level {
 		
 		//sun = new Sun(160*1000);
 		// TEST
-		staticObjects.add(new WindmillObject(100, 352));
+		
 
 		addCharacter(player);
 		//addEnemies(enemies);
@@ -176,6 +220,14 @@ public class Level {
 	}
 
 	public void render(Graphics g) {
+
+		g.pushTransform();
+		g.resetTransform();
+		g.setColor( sun.getRealColor() );
+		
+		float sunRadius = sun.getRadius();
+		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
+		g.popTransform();
 
 		g.pushTransform();
 		
@@ -205,11 +257,6 @@ public class Level {
 
 		g.popTransform();
 		
-		g.resetTransform();
-		g.setColor( sun.getRealColor() );
-		
-		float sunRadius = sun.getRadius();
-		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
 		
 	}
 	

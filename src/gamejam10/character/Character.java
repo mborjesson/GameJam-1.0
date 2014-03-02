@@ -64,7 +64,15 @@ public abstract class Character extends LevelObject {
     public void setMoving(boolean b) {
         moving = b;
     }
-
+    
+    public void setMaximumSpeed(float maxSpeed) {
+    	maximumSpeed = maxSpeed;
+    }
+    
+    public void setMaximumFallSpeed(float maxSpeed) {
+    	maximumFallSpeed = maxSpeed;
+    }
+    
     //move towards x_velocity = 0
     public void decelerate(int delta) {
         if (x_velocity > 0) {

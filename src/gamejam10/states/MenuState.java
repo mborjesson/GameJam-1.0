@@ -7,6 +7,7 @@ package gamejam10.states;
 
 import gamejam10.*;
 import gamejam10.audio.*;
+import gamejam10.character.Player;
 import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.menu.*;
@@ -35,12 +36,13 @@ public class MenuState extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
     	// build menu
     	menu = new Menu(null);
-    	menu.addMenuAction("RESUME", new MenuActionEnterState(States.GAME.getID(), 1));
-    	menu.addMenuAction("PLAY", new MenuActionEnterState(States.GAME.getID(), 0));
-    	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID(), 0));
-    	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID(), 0));
+    	menu.addMenuAction("resume", new MenuActionEnterState(States.GAME.getID(), 1));
+    	menu.addMenuAction("restart level", new MenuActionEnterState(States.GAME.getID(), 2));
+    	menu.addMenuAction("new game", new MenuActionEnterState(States.GAME.getID(), 0));
+    	menu.addMenuAction("credits", new MenuActionEnterState(States.CREDITS.getID(), 0));
+    	menu.addMenuAction("exit", new MenuActionEnterState(States.EXIT.getID(), 0));
     	
-    	menu.setSelectedItem(1);
+    	menu.setSelectedItem(2);
         
         audioPlayer = AudioPlayer.getInstance();
         audioPlayer.playMusic(MusicType.MENU, 1);
@@ -52,37 +54,41 @@ public class MenuState extends BasicGameState {
 		g.setBackground(Color.black);
 		g.clear();
 		
-		float screenWidth = 640f;
-		float screenHeight = (float)(screenWidth/Main.getOptions().getAspectRatio());
-		float scaleX = Main.getOptions().getWidth()/screenWidth;
-		float scaleY = Main.getOptions().getHeight()/screenHeight;
-		g.scale(scaleX, scaleY);
+		float screenWidth = Constants.MENU_WIDTH;
+		Tools.setScale(g, screenWidth);
 		
-		float x = 40;
-		float y = 20;
-		float height = 20;
+		Tools.drawStringCentered(g, screenWidth, 50, "Luleå GameJam 1.0");
+		
+		float y = 100;
+		float height = g.getFont().getLineHeight();
 		
 		GameState gs = (GameState)game.getState(States.GAME.getID());
 		
-		menu.getItem(menu.getItemIndex("RESUME")).setEnabled(gs.isRunning());
+		menu.getItem(menu.getItemIndex("resume")).setEnabled(gs.isRunning());
+		menu.getItem(menu.getItemIndex("restart level")).setEnabled(gs.isRunning());
 		
 		for (int i = 0; i < menu.getNumItems(); ++i) {
 			MenuItem item = menu.getItem(i);
 			String name = item.getName();
-			if (!item.isEnabled()) {
-				name = name.toLowerCase();
-			}
 			if (menu.getSelectedItem() == i) {
-				g.setColor(Color.white);
+				name = name.toUpperCase();
+				if (!item.isEnabled()) {
+					g.setColor(Color.lightGray);
+				} else {
+					g.setColor(Color.white);
+				}
 			} else {
 				if (!item.isEnabled()) {
-					g.setColor(Color.gray);
+					g.setColor(Color.darkGray);
 				} else {
 					g.setColor(Color.lightGray);
 				}
 			}
-			g.drawString(name, x, y+height*i);
+			Tools.drawStringCentered(g, screenWidth, y+height*i, name);
 		}
+		
+		g.setColor(Color.white);
+		Tools.drawStringCentered(g, screenWidth, 300, "Music copyright?");
     }
 
     @Override
@@ -105,10 +111,16 @@ public class MenuState extends BasicGameState {
 	                    
 	                    // play game, initialize first level
 	                    if (actionState.getType() == 0) {
+	                    	menu.setSelectedItem(1);
 		                    GameState gs = (GameState)game.getState(States.GAME.getID());
 		                    LevelOrder lo = LevelOrder.getInstance();
 		                    lo.reset();
+		                    Player.resetDeathCounter();
 		                    gs.initializeLevel(lo.getNextLevel());
+	                    } else if (actionState.getType() == 2) {
+		                    GameState gs = (GameState)game.getState(States.GAME.getID());
+		                    LevelOrder lo = LevelOrder.getInstance();
+		                    gs.initializeLevel(lo.getCurrentLevel());
 	                    }
 	        		}
 	                game.enterState(actionState.getStateId(), actionState.getLeaveTransition(), actionState.getEnterTransition());

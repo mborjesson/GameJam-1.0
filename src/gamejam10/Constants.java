@@ -14,4 +14,15 @@ public class Constants {
     	return new FadeInTransition(Color.black, 150);
     }
 
+	public static final String[] AUTHORS = { 
+		"Adam Lärkeryd",
+		"Erik Eliasson",
+		"Henrik Olsson",
+		"Magnus Lundmark",
+		"Martin Börjesson",
+		"Nicklas Gavelin"
+	};
+
+	public static final float MENU_WIDTH = 640f;
+	public static final float GAME_WIDTH = 1024f;
 }

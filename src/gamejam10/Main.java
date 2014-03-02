@@ -4,23 +4,19 @@
  */
 package gamejam10;
 
-import java.io.*;
-
 import gamejam10.audio.*;
+import gamejam10.character.Player;
 import gamejam10.enums.*;
 import gamejam10.level.*;
-import gamejam10.options.Options;
-import gamejam10.states.CreditsState;
-import gamejam10.states.ExitState;
+import gamejam10.options.*;
+import gamejam10.states.*;
 import gamejam10.states.GameState;
-import gamejam10.states.LevelCompletedState;
-import gamejam10.states.MenuState;
+
+import java.io.*;
 
 import org.lwjgl.opengl.*;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
 
 
 
@@ -36,20 +32,26 @@ public class Main extends StateBasedGame {
         Options options = Main.getOptions();
         if (options.isFullscreen()) {
         	options.setWidth(app.getScreenWidth());
-        	options.setHeight(app.getScreenHeight());
         }
         app.setDisplayMode(options.getWidth(), options.getHeight(), options.isFullscreen());
         app.setAlwaysRender(true);
         app.setTargetFrameRate(options.getTargetFrameRate());
         app.setVSync(options.isVSync());
         app.setShowFPS(options.isShowFPS());
+        app.setMultiSample(options.getMultiSample());
         app.start();
     }
 	
-	static private Options options = new Options();
+	static private Options options = null;
 
     public Main(String title) {
         super(title);
+        
+        try {
+			options = Options.read();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         
         AudioPlayer.getInstance().setEnabled(options.isSoundEnabled());
         AudioPlayer.getInstance().initialize();
