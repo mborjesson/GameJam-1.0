@@ -8,6 +8,7 @@ import gamejam10.audio.*;
 import gamejam10.enums.*;
 import gamejam10.level.EndOfLevelObject;
 import gamejam10.options.Options;
+import gamejam10.states.CreditsState;
 import gamejam10.states.ExitState;
 import gamejam10.states.GameState;
 import gamejam10.states.LevelCompletedState;
@@ -31,7 +32,10 @@ public class Main extends StateBasedGame {
     	Main main = new Main("Game Jam 1.0 - From Git Sux Team");
         AppGameContainer app = new AppGameContainer(main);
         Options options = Main.getOptions();
-        app.setDisplayMode(options.getWidth(), options.getHeight(), options.isFullscreen());
+        if ( options.isFullscreen() )
+        	app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), options.isFullscreen());
+        else
+        	app.setDisplayMode(options.getWidth(), options.getHeight(), options.isFullscreen());
         app.setAlwaysRender(true);
         app.setTargetFrameRate(options.getTargetFrameRate());
         app.setVSync(options.isVSync());
@@ -55,6 +59,7 @@ public class Main extends StateBasedGame {
         enterState(States.MENU.getID());
         this.addState(new LevelCompletedState());
         this.addState(new ExitState());
+        this.addState(new CreditsState());
     }
     
     public static Options getOptions() {

@@ -160,10 +160,12 @@ public class Level {
 
 		loadTileMap();
 	}
+	
+	public Sun getSun() {
+		return sun;
+	}
 
 	public void render(Graphics g) {
-		g.setBackground(new Color(sun.getSunColor(), sun.getSunColor(), sun.getSunColor()));
-		g.clear();
 
 		g.pushTransform();
 		

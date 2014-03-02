@@ -21,11 +21,13 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class Player extends Character {
 	
 	public float startx, starty;
+	private static int deathCounter;
      
     public Player(float x, float y) throws SlickException{
         super(x,y);
         startx = x;
         starty = y;
+        deathCounter = 0;
         //sprite = new Image("data/img/characters/player/player.png");
          setSprite(new Image("data/images/characters/player/mainstill.png") /*new Image("data/images/characters/player/homerstill.png")*/);
 //       setMovingAnimation(new Image[]{new Image("data/img/characters/player/player_1.png"),new Image("data/img/characters/player/player_2.png"),
@@ -67,6 +69,16 @@ public class Player extends Character {
 	@Override
 	public void handleCollision(Character c2) {
 		System.out.println(this + " colliding with " + c2);
+	}
+	
+	public void increaseDeathCounter()
+	{
+		deathCounter++;
+	}
+	
+	public static int getDeathCounter()
+	{
+		return deathCounter;
 	}
 
 //	public void update(int delta) {

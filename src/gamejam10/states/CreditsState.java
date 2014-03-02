@@ -1,8 +1,5 @@
 package gamejam10.states;
 
-import javax.swing.JOptionPane;
-
-import gamejam10.character.Player;
 import gamejam10.enums.*;
 
 import org.newdawn.slick.*;
@@ -10,7 +7,7 @@ import org.newdawn.slick.state.*;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-public class LevelCompletedState extends BasicGameState {
+public class CreditsState extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -22,14 +19,15 @@ public class LevelCompletedState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 		
-		g.drawString("Grattis", 400, 200);
-		g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
-
-		System.out.println(Player.getDeathCounter());
+		g.drawString("CREDITS", 400, 50);
 		
-		if (Player.getDeathCounter() <= 5) {
-			JOptionPane.showMessageDialog(null, "FLAWLESS VICTORY!!!!");
-		}
+		g.drawString("Adam Lärkeryd", 		370, 100);
+		g.drawString("Erik Eliasson", 		370, 120);
+		g.drawString("Henrik Olsson", 		370, 140);
+		g.drawString("Magnus ??", 			370, 160);
+		g.drawString("Martin Börjesson", 	370, 180);
+		g.drawString("Nicklas Gavelin", 	370, 200);
+		
 	}
 
 	@Override
@@ -40,9 +38,6 @@ public class LevelCompletedState extends BasicGameState {
 		handleKeyboardInput(container.getInput(), delta, game);
 		
 	}
-
-	
-
 	
 	private void handleKeyboardInput(Input i, int delta, StateBasedGame game) {
 	if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
@@ -64,7 +59,7 @@ public class LevelCompletedState extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return States.LEVELCOMPLETED.getID();
+		return States.CREDITS.getID();
 	}
 
 }
