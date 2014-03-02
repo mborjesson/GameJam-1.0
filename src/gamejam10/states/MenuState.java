@@ -5,25 +5,14 @@
 package gamejam10.states;
 
 
-import gamejam10.Main;
-import gamejam10.audio.AudioPlayer;
-import gamejam10.enums.MusicType;
-import gamejam10.enums.States;
-import gamejam10.menu.Menu;
-import gamejam10.menu.MenuAction;
-import gamejam10.menu.MenuActionEnterMenu;
-import gamejam10.menu.MenuActionEnterState;
+import gamejam10.*;
+import gamejam10.audio.*;
+import gamejam10.enums.*;
+import gamejam10.menu.*;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
+import org.newdawn.slick.state.transition.*;
 
     
 /**
@@ -33,8 +22,6 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class MenuState extends BasicGameState {
     
     private AudioPlayer audioPlayer;
-    private Image menuImage;
-    private boolean startGame = false;
     
     private Menu menu = null;
     
@@ -48,6 +35,7 @@ public class MenuState extends BasicGameState {
     	// build menu
     	menu = new Menu(null);
     	menu.addMenuAction("PLAY", new MenuActionEnterState(States.GAME.getID()));
+    	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID()));
     	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID()));
         
         audioPlayer = AudioPlayer.getInstance();
@@ -85,32 +73,37 @@ public class MenuState extends BasicGameState {
         Input input = container.getInput();
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
         	game.enterState(States.EXIT.getID(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
-        } else if (input.isKeyPressed(Input.KEY_DOWN)) {
+        } else if (input.isKeyPressed(Input.KEY_DOWN) || isControllerPressed("down", input) ) {
         	menu.nextItem();
-        } else if (input.isKeyPressed(Input.KEY_UP)) {
+        } else if (input.isKeyPressed(Input.KEY_UP) || isControllerPressed("up", input) ) {
         	menu.previousItem();
-        } else if (input.isKeyPressed(Input.KEY_SPACE) || input.isKeyPressed(Input.KEY_ENTER) || startGame) {
+        } else if (input.isKeyPressed(Input.KEY_SPACE) || input.isKeyPressed(Input.KEY_ENTER) || isControllerPressed("a", input) )  {
         	MenuAction a = menu.getAction(menu.getSelectedItem());
         	if (a instanceof MenuActionEnterState) {
         		MenuActionEnterState actionState = (MenuActionEnterState)a;
         		if (actionState.getStateId() == States.GAME.getID()) {
                     audioPlayer.playMusic(MusicType.GAME, 0.3f);
-                    startGame = false;
         		}
-                game.enterState(actionState.getStateId(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
+                game.enterState(actionState.getStateId(), actionState.getOutTransition(), actionState.getInTransition());
         	} else if (a instanceof MenuActionEnterMenu) {
         		MenuActionEnterMenu menuState = (MenuActionEnterMenu)a;
         		menu = menuState.getMenu();
         	}
         }
-        
     }
     
-    public void controllerButtonPressed(int controller, int button)
-    {	
-    	if(button == 8)
-    	{
-    		startGame = true;
-    	}
-    }
+    private boolean isControllerPressed(String btn, Input i)
+	{
+    	for(int c = 0; c < i.getControllerCount(); c++)
+		{
+			if (btn == "up" && i.isControlPressed(2, c))
+				return true;
+			else if (btn == "down" && i.isControlPressed(3, c))
+				return true;
+			else if (btn == "a" && i.isButton1Pressed(c))
+				return true;
+		}
+    	
+		return false;
+	}
 }

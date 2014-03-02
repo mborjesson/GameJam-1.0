@@ -222,6 +222,7 @@ public abstract class Character extends LevelObject {
 
     HashMap<Facing, Animation> jumpAnimations;
     boolean showJumpingAnimation;
+    int currentIndex = 0;
     
     public void render(Graphics g, float offset_x, float offset_y){
     	
@@ -232,11 +233,18 @@ public abstract class Character extends LevelObject {
             
     		Animation anim = jumpAnimations.get(facing);
     		anim.draw(xp, yp);
-
+    		
+        	for (Animation a : jumpAnimations.values()) {
+				a.setCurrentFrame(anim.getFrame());
+			}
+    		
     		// If we showed the last animation
-            if ( anim.getCurrentFrame() == anim.getImage(anim.getFrameCount()-1) ) {
+            if ( anim.getFrame() == anim.getFrameCount()-1 ) {
             	showJumpingAnimation = false;
-            	anim.restart();
+            	for (Animation a : jumpAnimations.values()) {
+					a.restart();
+				}
+            	currentIndex = 0;
             }
             
     	} else {

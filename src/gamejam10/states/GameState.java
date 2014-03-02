@@ -12,6 +12,9 @@ import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.physics.*;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.IntBuffer;
 import java.util.*;
 
 import gamejam10.Main;
@@ -24,7 +27,14 @@ import gamejam10.level.Level;
 import gamejam10.physics.AABoundingRect;
 import gamejam10.physics.Physics;
 import gamejam10.physics.Tile;
+import gamejam10.shader.Shader;
 
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.EXTFramebufferObject;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GL14;
+import org.lwjgl.opengl.GLContext;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.state.transition.*;
@@ -47,6 +57,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.state.transition.RotateTransition;
 
 
+
 /**
  * 
  * @author gregof
@@ -56,6 +67,7 @@ public class GameState extends BasicGameState {
 	private Level level = null;
 	private Physics physics;
 	private Player player;
+	private boolean exitGame = false;
 	private boolean higLightPlayer = false;
 	private boolean highlightAllTiles = false;
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -65,7 +77,10 @@ public class GameState extends BasicGameState {
 
 	private AudioPlayer musicPlayer;
 
-   
+	private int textureId;
+   private int offscreenFBO;
+   private Shader quadShader;
+   private Shader godShader;
     
 
 
@@ -92,11 +107,134 @@ public class GameState extends BasicGameState {
 		player = level.getPlayer();
 
 		physics = new Physics(this);
+		
+		quadShader = Shader.makeShader("data/shaders/quad.vs.glsl", "data/shaders/quad.fs.glsl");
+		godShader = Shader.makeShader("data/shaders/god.vs.glsl", "data/shaders/god.fs.glsl");
+		
+		fboInit();
+		
+	}
+	
+	private void fboInit() {
+		
+		int width = Main.getOptions().getWidth();
+		int height = Main.getOptions().getHeight();
+		
+		boolean FBOEnabled = GLContext.getCapabilities().GL_EXT_framebuffer_object;
+		
+		IntBuffer buffer = ByteBuffer.allocateDirect(1*4).order(ByteOrder.nativeOrder()).asIntBuffer(); // allocate a 1 int byte buffer
+		EXTFramebufferObject.glGenFramebuffersEXT( buffer ); // generate
+		offscreenFBO = buffer.get();
+		
+
+		IntBuffer buf = BufferUtils.createIntBuffer(1);
+		GL11.glGenTextures(buf);
+		
+		textureId = buf.get(0);
+		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+
+		GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
+		
+		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, width, height ,0,GL11.GL_RGBA,GL11.GL_UNSIGNED_BYTE, (ByteBuffer) null );
+
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		
+		
+		int depthRenderBufferID = EXTFramebufferObject.glGenRenderbuffersEXT();
+		
+		EXTFramebufferObject.glBindRenderbufferEXT(EXTFramebufferObject.GL_RENDERBUFFER_EXT, depthRenderBufferID);// bind the depth renderbuffer
+		EXTFramebufferObject.glRenderbufferStorageEXT(EXTFramebufferObject.GL_RENDERBUFFER_EXT, GL14.GL_DEPTH_COMPONENT24, width, height);// get the data space for it
+		
+		EXTFramebufferObject.glBindRenderbufferEXT(EXTFramebufferObject.GL_RENDERBUFFER_EXT, 0);
+		
+		
+		
+		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, offscreenFBO );
+		EXTFramebufferObject.glFramebufferTexture2DEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, EXTFramebufferObject.GL_COLOR_ATTACHMENT0_EXT, GL11.GL_TEXTURE_2D, textureId, 0);
+		//EXTFramebufferObject.glFramebufferRenderbufferEXT(EXTFramebufferObject.GL_FRAMEBUFFER_EXT,EXTFramebufferObject.GL_DEPTH_ATTACHMENT_EXT,EXTFramebufferObject.GL_RENDERBUFFER_EXT, depthRenderBufferID); // bind it to the renderbuffer
+		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0 );
+		
+		
+		System.out.println("FBO: " + FBOEnabled + " " + offscreenFBO + " " + textureId + " " + depthRenderBufferID);
+		
+		
+		/*
+		RenderTexture tex = new RenderTexture(false, true, false, false, RenderTexture.RENDER_TEXTURE_2D, 1);
+		
+		try {
+			microBuffer = new Pbuffer(128, 128, new PixelFormat(), tex, null);
+		} catch (LWJGLException e) {
+			e.printStackTrace();
+		}
+		*/
+		
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
+		
+		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, offscreenFBO );
+
+		//GL11.glEnable(GL11.GL_DEPTH_TEST);
+		
+		g.pushTransform();
+		
+		//GL11.glEnable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		
+		g.setColor(Color.red);
+		g.drawString("DeathCounter: " + Player.getDeathCounter(), 130f, 130f);
+		
+		g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
+		//g.setBackground( new Color(1.0f, 1.0f, 1.0f, 1.0f) );
+		g.clear();
+		
+		doRender(gc, sbg, g);
+		
+		g.popTransform();
+
+		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0 );
+		
+		g.setBackground( new Color(1.0f, 1.0f, 1.0f, 1.0f) );
+		g.clear();
+		
+		g.pushTransform();
+		
+		//GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GL11.glDisable(GL11.GL_BLEND);
+
+		renderQuad1(gc, sbg, g);
+
+		g.popTransform();
+		
+		
+		/*
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		//GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+		
+		g.pushTransform();
+		
+		renderQuad2(gc, sbg, g);
+
+		g.popTransform();
+		
+		*/
+		
+		GL11.glEnable(GL11.GL_BLEND);
+		
+		gc.getInput().clearControlPressedRecord();
+		
+	}
+
+	
+	private void doRender(GameContainer gc, StateBasedGame sbg, Graphics g) {
+		
 		
 		// calculate scale
 		// we want to show what camera wants to show (in pixels)
@@ -112,9 +250,71 @@ public class GameState extends BasicGameState {
 		
 		level.render(g);
 		
-		gc.getInput().clearControlPressedRecord();
+		
 	}
+	
+	private void renderQuad1(GameContainer gc, StateBasedGame sbg, Graphics g) {
+		
+		int width = Main.getOptions().getWidth();
+		int height = Main.getOptions().getHeight() - 1;
+		
+		quadShader.startShader();
 
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
+		
+		
+		g.scale(width, height);
+		
+		GL11.glBegin(GL11.GL_QUADS);
+
+    		GL11.glTexCoord2f(0, 1);
+	    	GL11.glVertex3f(0, 0, 0);
+	    	GL11.glTexCoord2f(0, 0);
+	    	GL11.glVertex3f(0, 1, 0);
+	    	GL11.glTexCoord2f(1, 0);
+	    	GL11.glVertex3f(1, 1, 0);
+	    	GL11.glTexCoord2f(1, 1);
+	    	GL11.glVertex3f(1, 0, 0);
+		
+		GL11.glEnd();
+
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		
+	}
+	
+	private void renderQuad2(GameContainer gc, StateBasedGame sbg, Graphics g) {
+		
+		int width = Main.getOptions().getWidth();
+		int height = Main.getOptions().getHeight();
+		
+		godShader.startShader();
+		godShader.setUniformFloatVariable("exposure", 0.0034f);
+		godShader.setUniformFloatVariable("decay", 1.0f);
+		godShader.setUniformFloatVariable("density", 0.84f);
+		godShader.setUniformFloatVariable("weight", 1.65f);
+		godShader.setUniformFloatVariable("lightPositionOnScreen", level.getSun().getSunPositionX(), level.getSun().getSunPositionY());
+		//godShader.setUniformFloatVariable("test", 1.0f, 0.0f, 0.0f, 1.0f);
+
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
+		
+		g.scale(width, height);
+		
+		GL11.glBegin(GL11.GL_QUADS);
+
+    		GL11.glTexCoord2f(0, 1);
+	    	GL11.glVertex3f(0, 0, 0);
+	    	GL11.glTexCoord2f(0, 0);
+	    	GL11.glVertex3f(0, 1, 0);
+	    	GL11.glTexCoord2f(1, 0);
+	    	GL11.glVertex3f(1, 1, 0);
+	    	GL11.glTexCoord2f(1, 1);
+	    	GL11.glVertex3f(1, 0, 0);
+		
+		GL11.glEnd();
+		
+	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
@@ -157,7 +357,8 @@ public class GameState extends BasicGameState {
 			this.highlightAllTiles = !this.highlightAllTiles;
 		}
 
-		if (i.isKeyPressed(Input.KEY_ESCAPE)) {
+		if (i.isKeyPressed(Input.KEY_ESCAPE) || exitGame) {
+			exitGame = false;
 			musicPlayer.playMusic(MusicType.MENU, 1);
 			game.enterState(States.MENU.getID(), new FadeOutTransition(
 					Color.black, 50), new FadeInTransition(Color.black, 50));
@@ -174,9 +375,17 @@ public class GameState extends BasicGameState {
 				return true;
 			else if (btn == "a" && i.isButton1Pressed(c))
 				return true;
+			else if (btn == "start" && i.isButtonPressed(c, 3))
+				return true;
 		}
 		
 		return false;
+	}
+	
+	public void controllerButtonPressed(int c, int b)
+	{
+		if ( b == 8 )
+			exitGame = true;
 	}
 
 	/**

@@ -152,7 +152,7 @@ public class Level {
 //		enemies.add(en);
 		
 		FloatEnemy fenemy = new FloatEnemy(50, 370, 50, 150);
-		enemies.add(fenemy);
+		//enemies.add(fenemy);
 		
 		for (Object e : enemies) {
 			addCharacter((Character)e);
@@ -160,10 +160,12 @@ public class Level {
 
 		loadTileMap();
 	}
+	
+	public Sun getSun() {
+		return sun;
+	}
 
 	public void render(Graphics g) {
-		g.setBackground(new Color(sun.getSunColor(), sun.getSunColor(), sun.getSunColor()));
-		g.clear();
 
 		g.pushTransform();
 		
