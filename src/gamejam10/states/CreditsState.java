@@ -21,11 +21,11 @@ public class CreditsState extends BasicGameState {
 		
 		g.drawString("CREDITS", 400, 50);
 		
-		g.drawString("Adam Lärkeryd", 		370, 100);
+		g.drawString("Adam LÃ¤rkeryd", 		370, 100);
 		g.drawString("Erik Eliasson", 		370, 120);
 		g.drawString("Henrik Olsson", 		370, 140);
-		g.drawString("Magnus ??", 			370, 160);
-		g.drawString("Martin Börjesson", 	370, 180);
+		g.drawString("Magnus Lundmark",		370, 160);
+		g.drawString("Martin BÃ¶rjesson", 	370, 180);
 		g.drawString("Nicklas Gavelin", 	370, 200);
 		
 	}
@@ -42,7 +42,7 @@ public class CreditsState extends BasicGameState {
 	private void handleKeyboardInput(Input i, int delta, StateBasedGame game) {
 	if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
 		game.enterState(States.MENU.getID(), new FadeOutTransition(
-				Color.black, 50), new FadeInTransition(Color.black, 50));
+				Color.black, 150), new FadeInTransition(Color.black, 150));
 		}
 	}
 	

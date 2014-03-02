@@ -5,25 +5,14 @@
 package gamejam10.states;
 
 
-import gamejam10.Main;
-import gamejam10.audio.AudioPlayer;
-import gamejam10.enums.MusicType;
-import gamejam10.enums.States;
-import gamejam10.menu.Menu;
-import gamejam10.menu.MenuAction;
-import gamejam10.menu.MenuActionEnterMenu;
-import gamejam10.menu.MenuActionEnterState;
+import gamejam10.*;
+import gamejam10.audio.*;
+import gamejam10.enums.*;
+import gamejam10.menu.*;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
+import org.newdawn.slick.state.transition.*;
 
     
 /**
@@ -44,11 +33,13 @@ public class MenuState extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    	Transition defaultOutTransition = new FadeOutTransition(Color.black, 150);
+    	Transition defaultInTransition = new FadeInTransition(Color.black, 150);
     	// build menu
     	menu = new Menu(null);
-    	menu.addMenuAction("PLAY", new MenuActionEnterState(States.GAME.getID()));
-    	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID()));
-    	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID()));
+    	menu.addMenuAction("PLAY", new MenuActionEnterState(States.GAME.getID(), defaultOutTransition, defaultInTransition));
+    	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID(), defaultOutTransition, defaultInTransition));
+    	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID(), defaultOutTransition, defaultInTransition));
         
         audioPlayer = AudioPlayer.getInstance();
         audioPlayer.playMusic(MusicType.MENU, 1);
@@ -96,7 +87,15 @@ public class MenuState extends BasicGameState {
         		if (actionState.getStateId() == States.GAME.getID()) {
                     audioPlayer.playMusic(MusicType.GAME, 0.3f);
         		}
-                game.enterState(actionState.getStateId(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
+        		Transition out = actionState.getOutTransition();
+        		if (out != null) {
+        			out.init(this, game.getState(actionState.getStateId()));
+        		}
+        		Transition in = actionState.getInTransition();
+        		if (in != null) {
+        			in.init(this, game.getState(actionState.getStateId()));
+        		}
+                game.enterState(actionState.getStateId(), out, in);
         	} else if (a instanceof MenuActionEnterMenu) {
         		MenuActionEnterMenu menuState = (MenuActionEnterMenu)a;
         		menu = menuState.getMenu();

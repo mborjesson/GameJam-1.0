@@ -19,7 +19,7 @@ public class Options implements Serializable {
 	private boolean vsync = false;
 	private int targetFrameRate = 60;
 	private boolean showFPS = false;
-	private boolean soundEnabled = true;
+	private boolean soundEnabled = false;
 	
 	public void setWidth(int width) {
 		this.width = width;
