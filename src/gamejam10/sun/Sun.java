@@ -4,6 +4,8 @@ public class Sun {
 	private int maxTime = 0;
 	private int currentTime = 0;
 	
+	private int radius = 40;
+	
 	/**
 	 * 
 	 * @param initialTime in ms
@@ -15,10 +17,15 @@ public class Sun {
 	
 	public void update(int frameTime) {
 		currentTime += frameTime;
+		//System.out.println(currentTime);
 	}
 	
 	public long getRemainingTime() {
 		return maxTime-currentTime;
+	}
+	
+	public int getRadius() {
+		return radius;
 	}
 	
 	public float getSunColor() {

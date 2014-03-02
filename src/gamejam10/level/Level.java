@@ -199,6 +199,10 @@ public class Level {
 		g.setColor(Color.red);
 		g.fillRect(sun.getSunPositionX()*Main.getOptions().getWidth(), (1-sun.getSunPositionY())*Main.getOptions().getHeight(), 10, 10);
 		
+		
+		float sunRadius = sun.getRadius();
+		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
+		
 	}
 	
 	private void loadTileMap() {
