@@ -12,7 +12,9 @@ import gamejam10.enums.*;
 import gamejam10.level.EndOfLevelObject;
 import gamejam10.level.Level;
 import gamejam10.level.LevelObject;
+import gamejam10.level.LevelOrder;
 import gamejam10.states.GameState;
+import gamejam10.states.LevelCompletedState;
 
 import java.util.ArrayList;
 import java.util.List;
