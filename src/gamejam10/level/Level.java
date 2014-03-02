@@ -58,6 +58,7 @@ public class Level {
 						System.out.println(x + ", " + y + ", " + width + ", "
 								+ height);
 						CharacterType ct = CharacterType.getCharacterType(name);
+						System.out.println("name: " + name);
 						switch (ct) {
 							case PLAYER: {
 								player = new Player(x, y);
