@@ -29,7 +29,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Main extends StateBasedGame {
     public static void main(String[] args) throws SlickException {
     	Display.setLocation(100, 100);
-    	Main main = new Main("Game Jam 1.0 - From Git Sux Team");
+    	Main main = new Main(Constants.GAME_NAME);
         AppGameContainer app = new AppGameContainer(main);
         Options options = Main.getOptions();
         if ( options.isFullscreen() )

@@ -1,16 +1,18 @@
 package gamejam10.states;
 
-import javax.swing.JOptionPane;
-
-import gamejam10.character.Player;
+import gamejam10.character.*;
 import gamejam10.enums.*;
+import gamejam10.level.*;
+
+import javax.swing.*;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.state.transition.*;
 
 public class LevelCompletedState extends BasicGameState {
+	
+	private Level nextLevel = null;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -45,8 +47,8 @@ public class LevelCompletedState extends BasicGameState {
 
 	
 	private void handleKeyboardInput(Input i, int delta, StateBasedGame game) {
-	if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
-		game.enterState(States.MENU.getID(), new FadeOutTransition(
+		if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
+			game.enterState(States.MENU.getID(), new FadeOutTransition(
 				Color.black, 50), new FadeInTransition(Color.black, 50));
 		}
 	}
@@ -67,4 +69,7 @@ public class LevelCompletedState extends BasicGameState {
 		return States.LEVELCOMPLETED.getID();
 	}
 
+	public void setNextLevel(Level nextLevel) {
+		this.nextLevel = nextLevel;
+	}
 }
