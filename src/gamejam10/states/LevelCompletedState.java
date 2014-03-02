@@ -77,8 +77,7 @@ public class LevelCompletedState extends BasicGameState {
 				game.enterState(States.GAME.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 			} else {
 				gs.setRunning(false);
-				AudioPlayer.getInstance().playMusic(MusicType.MENU);
-				game.enterState(States.MENU.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
+				game.enterState(States.CREDITS.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 			}
 		}
 	}
