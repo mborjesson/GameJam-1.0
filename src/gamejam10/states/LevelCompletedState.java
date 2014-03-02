@@ -30,9 +30,7 @@ public class LevelCompletedState extends BasicGameState {
 			g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
 		}
 		
-//		if (Player.getDeathCounter() <= 5) {
-//			JOptionPane.showMessageDialog(null, "FLAWLESS VICTORY!!!!");
-//		}
+		g.drawString("Press Space/Enter or A to continue...", 380, 300);
 	}
 
 	@Override
@@ -57,7 +55,7 @@ public class LevelCompletedState extends BasicGameState {
 				gs.setRunning(false);
 			}
 			game.enterState(States.MENU.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
-		} else if (i.isKeyPressed(Input.KEY_ENTER) || i.isKeyPressed(Input.KEY_SPACE)) {
+		} else if (i.isKeyPressed(Input.KEY_ENTER) || i.isKeyPressed(Input.KEY_SPACE) || isControllerPressed("a", i)) {
 			GameState gs = (GameState)game.getState(States.GAME.getID());
 			if (nextLevel != null) {
 				gs.initializeLevel(nextLevel);
@@ -74,6 +72,8 @@ public class LevelCompletedState extends BasicGameState {
 	{
 		for(int c = 0; c < i.getControllerCount(); c++)
 		{
+			if (btn == "a" && i.isButton1Pressed(c))
+				return true;
 			if (btn == "b" && i.isButton2Pressed(c))
 				return true;
 		}
