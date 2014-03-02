@@ -205,7 +205,7 @@ public class Level {
 //		Brainemy beny = new Brainemy(50, 370, 50, 150);
 //		enemies.add(en);
 		
-		FloatEnemy fenemy = new FloatEnemy(50, 370, 50, 150);
+		//FloatEnemy fenemy = new FloatEnemy(50, 370, 50, 150);
 		//enemies.add(fenemy);
 		
 		for (Object e : enemies) {
@@ -220,6 +220,14 @@ public class Level {
 	}
 
 	public void render(Graphics g) {
+
+		g.pushTransform();
+		g.resetTransform();
+		g.setColor( sun.getRealColor() );
+		
+		float sunRadius = sun.getRadius();
+		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
+		g.popTransform();
 
 		g.pushTransform();
 		
@@ -249,11 +257,6 @@ public class Level {
 
 		g.popTransform();
 		
-		g.resetTransform();
-		g.setColor( sun.getRealColor() );
-		
-		float sunRadius = sun.getRadius();
-		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
 		
 	}
 	

@@ -64,14 +64,20 @@ public class LevelCompletedState extends BasicGameState {
 			} else {
 				gs.setRunning(false);
 			}
+			i.clearControlPressedRecord();
+			i.clearKeyPressedRecord();
 			game.enterState(States.MENU.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 		} else if (i.isKeyPressed(Input.KEY_ENTER) || i.isKeyPressed(Input.KEY_SPACE) || isControllerPressed("a", i)) {
 			GameState gs = (GameState)game.getState(States.GAME.getID());
 			if (nextLevel != null) {
 				gs.initializeLevel(nextLevel);
+				i.clearControlPressedRecord();
+				i.clearKeyPressedRecord();
 				game.enterState(States.GAME.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 			} else {
 				gs.setRunning(false);
+				i.clearControlPressedRecord();
+				i.clearKeyPressedRecord();
 				game.enterState(States.CREDITS.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
 			}
 		}

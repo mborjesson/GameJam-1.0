@@ -72,7 +72,7 @@ public class Player extends Character {
 
 	@Override
 	public void handleCollision(Character c2) {
-		System.out.println(this + " colliding with " + c2);
+		//System.out.println(this + " colliding with " + c2);
 	}
 	
 	public void increaseDeathCounter()
