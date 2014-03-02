@@ -47,6 +47,7 @@ public class MenuState extends BasicGameState {
     	// build menu
     	menu = new Menu(null);
     	menu.addMenuAction("PLAY", new MenuActionEnterState(States.GAME.getID()));
+    	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID()));
     	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID()));
         
         audioPlayer = AudioPlayer.getInstance();

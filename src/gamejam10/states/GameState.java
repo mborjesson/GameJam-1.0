@@ -67,6 +67,7 @@ public class GameState extends BasicGameState {
 	private Level level = null;
 	private Physics physics;
 	private Player player;
+	private boolean exitGame = false;
 	private boolean higLightPlayer = false;
 	private boolean highlightAllTiles = false;
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -186,7 +187,9 @@ public class GameState extends BasicGameState {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		
-
+		g.setColor(Color.red);
+		g.drawString("DeathCounter: " + Player.getDeathCounter(), 130f, 130f);
+		
 		g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
 		//g.setBackground( new Color(1.0f, 1.0f, 1.0f, 1.0f) );
 		g.clear();
@@ -224,8 +227,6 @@ public class GameState extends BasicGameState {
 		*/
 		
 		gc.getInput().clearControlPressedRecord();
-		
-		
 		
 	}
 
@@ -354,7 +355,8 @@ public class GameState extends BasicGameState {
 			this.highlightAllTiles = !this.highlightAllTiles;
 		}
 
-		if (i.isKeyPressed(Input.KEY_ESCAPE)) {
+		if (i.isKeyPressed(Input.KEY_ESCAPE) || exitGame) {
+			exitGame = false;
 			musicPlayer.playMusic(MusicType.MENU, 1);
 			game.enterState(States.MENU.getID(), new FadeOutTransition(
 					Color.black, 50), new FadeInTransition(Color.black, 50));
@@ -371,9 +373,17 @@ public class GameState extends BasicGameState {
 				return true;
 			else if (btn == "a" && i.isButton1Pressed(c))
 				return true;
+			else if (btn == "start" && i.isButtonPressed(c, 3))
+				return true;
 		}
 		
 		return false;
+	}
+	
+	public void controllerButtonPressed(int c, int b)
+	{
+		if ( b == 8 )
+			exitGame = true;
 	}
 
 	/**

@@ -125,6 +125,8 @@ public class Physics {
         gameState.getPlayer().setXVelocity(0);
         gameState.getPlayer().setYVelocity(0);
         
+        gameState.getPlayer().increaseDeathCounter();
+        
         AudioPlayer ap = AudioPlayer.getInstance();
     	 ap.playSound(SoundType.DEATH, 0.2f);
     }
