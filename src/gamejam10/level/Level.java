@@ -34,6 +34,7 @@ public class Level {
 	private List<Character> characters = new ArrayList<Character>();
 	private List<Character> enemies = new ArrayList<Character>();
 	private EndOfLevelObject endOfWorldObject;
+	private List<StaticAnimatedObject> staticObjects = new ArrayList<StaticAnimatedObject>();
 	 
 	
 	private Sun sun = null;
@@ -150,7 +151,8 @@ public class Level {
 		//sun = new Sun(160*1000);
 
 		// TEST
-
+		staticObjects.add(new WindmillObject(350, 800));
+		
 		addCharacter(player);
 		//addEnemies(enemies);
 		
@@ -189,6 +191,11 @@ public class Level {
 //				offsetX / map.getTileWidth(), offsetY / map.getTileHeight(),
 //				(int)camera.getWidth()/map.getTileWidth(), (int)camera.getHeight()/map.getTileHeight());
 
+		// render animated objects
+		for(StaticAnimatedObject ao : staticObjects) {
+			ao.render(g);
+		}
+		
 		// and then render the characters on top of the map
 		for (Character c : characters) {
 			c.render(g, 0, 0);

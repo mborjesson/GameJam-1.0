@@ -28,21 +28,21 @@ public abstract class LevelObject {
         this.y = y;
  
         //default bounding shape is a 32 by 32 box
-        boundingShape = new AABoundingRect(x,y,32,32);
-        
+        boundingShape = new AABoundingRect(x,y,32,32);   
     }
  
+    public LevelObject(float x, float y, float width, float height) {
+    	this.x = x;
+    	this.y = y;
+    	
+    	boundingShape = new AABoundingRect(x, y, width, height);
+    }
+     
     public void applyGravity(float gravity){
-//        System.out.println("gravity!!!!!");
-      //if we aren't already moving at maximum speed
-//        System.out.println("y_velocity: " + y_velocity);
-//        System.out.println("maximumFallSpeed: " + maximumFallSpeed);
         if(y_velocity < maximumFallSpeed){
-//            System.out.println("gravity!!!!!   1");
             //accelerate
             y_velocity += gravity;
             if(y_velocity > maximumFallSpeed){
-//                System.out.println("gravity!!!!!   1");
                 //and if we exceed maximum speed, set it to maximum speed
                 y_velocity = maximumFallSpeed;
             }
