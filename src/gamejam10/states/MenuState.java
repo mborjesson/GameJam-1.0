@@ -34,7 +34,6 @@ public class MenuState extends BasicGameState {
     
     private AudioPlayer audioPlayer;
     private Image menuImage;
-    private boolean startGame = false;
     
     private Menu menu = null;
     
@@ -85,17 +84,16 @@ public class MenuState extends BasicGameState {
         Input input = container.getInput();
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
         	game.enterState(States.EXIT.getID(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
-        } else if (input.isKeyPressed(Input.KEY_DOWN)) {
+        } else if (input.isKeyPressed(Input.KEY_DOWN) || isControllerPressed("down", input) ) {
         	menu.nextItem();
-        } else if (input.isKeyPressed(Input.KEY_UP)) {
+        } else if (input.isKeyPressed(Input.KEY_UP) || isControllerPressed("up", input) ) {
         	menu.previousItem();
-        } else if (input.isKeyPressed(Input.KEY_SPACE) || input.isKeyPressed(Input.KEY_ENTER) || startGame) {
+        } else if (input.isKeyPressed(Input.KEY_SPACE) || input.isKeyPressed(Input.KEY_ENTER) || isControllerPressed("a", input) )  {
         	MenuAction a = menu.getAction(menu.getSelectedItem());
         	if (a instanceof MenuActionEnterState) {
         		MenuActionEnterState actionState = (MenuActionEnterState)a;
         		if (actionState.getStateId() == States.GAME.getID()) {
                     audioPlayer.playMusic(MusicType.GAME, 0.3f);
-                    startGame = false;
         		}
                 game.enterState(actionState.getStateId(), new FadeOutTransition(Color.black, 500), new FadeInTransition(Color.black, 500) );
         	} else if (a instanceof MenuActionEnterMenu) {
@@ -103,14 +101,20 @@ public class MenuState extends BasicGameState {
         		menu = menuState.getMenu();
         	}
         }
-        
     }
     
-    public void controllerButtonPressed(int controller, int button)
-    {	
-    	if(button == 8)
-    	{
-    		startGame = true;
-    	}
-    }
+    private boolean isControllerPressed(String btn, Input i)
+	{
+    	for(int c = 0; c < i.getControllerCount(); c++)
+		{
+			if (btn == "up" && i.isControlPressed(2, c))
+				return true;
+			else if (btn == "down" && i.isControlPressed(3, c))
+				return true;
+			else if (btn == "a" && i.isButton1Pressed(c))
+				return true;
+		}
+    	
+		return false;
+	}
 }
