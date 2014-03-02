@@ -65,6 +65,9 @@ public class Level {
 								player = new Player(x, y);
 								break;
 							}
+							case WINDMILL: {
+								staticObjects.add(new WindmillObject(x, y));
+							}break;
 							case ENEMY_FLOAT_EASY: {
 								FloatEnemy en = new FloatEnemy(x, y, 0, 150);
 								en.setMaximumSpeed(0.20f);
@@ -194,7 +197,7 @@ public class Level {
 		
 		//sun = new Sun(160*1000);
 		// TEST
-		staticObjects.add(new WindmillObject(1100, 322));
+		
 
 		addCharacter(player);
 		//addEnemies(enemies);
