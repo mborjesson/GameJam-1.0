@@ -1,15 +1,12 @@
 package gamejam10.states;
 
 import gamejam10.*;
+import gamejam10.audio.*;
 import gamejam10.character.*;
 import gamejam10.enums.*;
-import gamejam10.level.*;
-
-import javax.swing.*;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-import org.newdawn.slick.state.transition.*;
 
 public class LevelCompletedState extends BasicGameState {
 	
