@@ -57,7 +57,7 @@ public class MenuState extends BasicGameState {
 		float screenWidth = Constants.MENU_WIDTH;
 		Tools.setScale(g, screenWidth);
 		
-		Tools.drawStringCentered(g, screenWidth, 50, "LuleÃ¥ GameJam 1.0");
+		Tools.drawStringCentered(g, screenWidth, 50, "Luleå GameJam 1.0");
 		
 		float y = 100;
 		float height = g.getFont().getLineHeight();
@@ -88,7 +88,9 @@ public class MenuState extends BasicGameState {
 		}
 		
 		g.setColor(Color.white);
-		Tools.drawStringCentered(g, screenWidth, 300, "Music copyright?");
+		Tools.drawStringCentered(g, screenWidth, 300, "Menu music: Torture Super Sonic - Mister S.");
+		Tools.drawStringCentered(g, screenWidth, 280, "Game music: Chris ZabriskieSuper - Oxygen Garden");
+		Tools.drawStringCentered(g, screenWidth, 320, "Downloaded from http://freemusicarchive.org/");
     }
 
     @Override
