@@ -6,7 +6,6 @@ import gamejam10.character.Player;
 import gamejam10.enums.MusicType;
 import gamejam10.enums.States;
 import gamejam10.states.GameState;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;

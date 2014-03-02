@@ -1,8 +1,8 @@
 package gamejam10.enums;
 
 public enum MusicType {
-	MENU("/data/music/test3.ogg"),
-	GAME("/data/music/test2.ogg");
+	MENU("/data/music/menu.ogg"),
+	GAME("/data/music/game.ogg");
 	
 	
 	final private String file;
