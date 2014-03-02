@@ -1,11 +1,7 @@
 package gamejam10.states;
 
 import gamejam10.*;
-<<<<<<< HEAD
 import gamejam10.audio.*;
-=======
-import gamejam10.audio.AudioPlayer;
->>>>>>> branch 'develop' of https://github.com/mborjesson/GameJam-1.0.git
 import gamejam10.character.*;
 import gamejam10.enums.*;
 
