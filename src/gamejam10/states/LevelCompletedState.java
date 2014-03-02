@@ -1,6 +1,7 @@
 package gamejam10.states;
 
 import gamejam10.*;
+import gamejam10.audio.AudioPlayer;
 import gamejam10.character.*;
 import gamejam10.enums.*;
 import gamejam10.level.*;
