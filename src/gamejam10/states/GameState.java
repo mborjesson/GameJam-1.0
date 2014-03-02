@@ -181,12 +181,12 @@ public class GameState extends BasicGameState {
 		g.drawString("DeathCounter: " + Player.getDeathCounter(), 130f, 130f);
 		
 		g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
-		//g.setBackground( new Color(1.0f, 1.0f, 1.0f, 1.0f) );
 		g.clear();
 		
 		doRender(gc, sbg, g);
 		
 		g.popTransform();
+
 		
 		
 
@@ -200,6 +200,10 @@ public class GameState extends BasicGameState {
 		
 		g.popTransform();
 		
+
+		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0 );
+		
+
 		
 
 		EXTFramebufferObject.glBindFramebufferEXT( EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0 );
@@ -215,23 +219,10 @@ public class GameState extends BasicGameState {
 		renderQuad1(gc, sbg, g);
 
 		g.popTransform();
-		
-		
-		
-		/*
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		//GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-		
-		g.pushTransform();
-		
-		renderQuad2(gc, sbg, g);
-
-		g.popTransform();
-		
-		*/
+	
 		
 		GL11.glEnable(GL11.GL_BLEND);
+		
 		
 		gc.getInput().clearControlPressedRecord();
 		
@@ -292,6 +283,9 @@ public class GameState extends BasicGameState {
 
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		
+
+		Shader.forceFixedShader();
+		
 	}
 	
 	private void renderQuad2(GameContainer gc, StateBasedGame sbg, Graphics g) {
@@ -324,6 +318,11 @@ public class GameState extends BasicGameState {
 	    	GL11.glVertex3f(1, 0, 0);
 		
 		GL11.glEnd();
+
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		
+		Shader.forceFixedShader();
 		
 	}
 
