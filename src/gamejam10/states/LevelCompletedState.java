@@ -1,18 +1,28 @@
 package gamejam10.states;
 
+import gamejam10.Constants;
+import gamejam10.*;
+
+import gamejam10.character.Player;
+import gamejam10.enums.MusicType;
+import gamejam10.enums.States;
+import gamejam10.states.GameState;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+import gamejam10.audio.*;
 import gamejam10.character.*;
 import gamejam10.enums.*;
-import gamejam10.level.*;
-
-import javax.swing.*;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-import org.newdawn.slick.state.transition.*;
 
 public class LevelCompletedState extends BasicGameState {
 	
-	private Level nextLevel = null;
+	private String nextLevel = null;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -23,15 +33,19 @@ public class LevelCompletedState extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
+		String dc = Player.getDeathCounter() + "time";
+		dc += Player.getDeathCounter() == 1 ? "." : "s.";
 		
-		g.drawString("Grattis", 400, 200);
-		g.drawString("You died " + Player.getDeathCounter() + " times.", 370, 250);
-
-		System.out.println(Player.getDeathCounter());
-		
-		if (Player.getDeathCounter() <= 5) {
-			JOptionPane.showMessageDialog(null, "FLAWLESS VICTORY!!!!");
+		if (nextLevel != null) {
+			g.drawString("Grattis", 400, 200);
+			g.drawString("You died " + dc, 370, 250);
+		} else {
+			// if there's no levels left
+			g.drawString("Grattis, there's nothing left to do!", 250, 200);
+			g.drawString("You died " + dc, 370, 250);
 		}
+		
+		g.drawString("Press Space/Enter or A to continue...", 380, 300);
 	}
 
 	@Override
@@ -39,17 +53,32 @@ public class LevelCompletedState extends BasicGameState {
 			throws SlickException {
 		
 		
-		handleKeyboardInput(container.getInput(), delta, game);
+		handleInput(container.getInput(), delta, game);
 		
 	}
 
 	
 
 	
-	private void handleKeyboardInput(Input i, int delta, StateBasedGame game) {
+	private void handleInput(Input i, int delta, StateBasedGame game) throws SlickException {
 		if (i.isKeyPressed(Input.KEY_ESCAPE) || isControllerPressed("b", i)) {
-			game.enterState(States.MENU.getID(), new FadeOutTransition(
-				Color.black, 50), new FadeInTransition(Color.black, 50));
+			AudioPlayer.getInstance().playMusic(MusicType.MENU);
+			GameState gs = (GameState)game.getState(States.GAME.getID());
+			if (nextLevel != null) {
+				gs.initializeLevel(nextLevel);
+			} else {
+				gs.setRunning(false);
+			}
+			game.enterState(States.MENU.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
+		} else if (i.isKeyPressed(Input.KEY_ENTER) || i.isKeyPressed(Input.KEY_SPACE) || isControllerPressed("a", i)) {
+			GameState gs = (GameState)game.getState(States.GAME.getID());
+			if (nextLevel != null) {
+				gs.initializeLevel(nextLevel);
+				game.enterState(States.GAME.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
+			} else {
+				gs.setRunning(false);
+				game.enterState(States.CREDITS.getID(), Constants.getDefaultLeaveTransition(), Constants.getDefaultEnterTransition());
+			}
 		}
 	}
 	
@@ -57,6 +86,8 @@ public class LevelCompletedState extends BasicGameState {
 	{
 		for(int c = 0; c < i.getControllerCount(); c++)
 		{
+			if (btn == "a" && i.isButton1Pressed(c))
+				return true;
 			if (btn == "b" && i.isButton2Pressed(c))
 				return true;
 		}
@@ -69,7 +100,7 @@ public class LevelCompletedState extends BasicGameState {
 		return States.LEVELCOMPLETED.getID();
 	}
 
-	public void setNextLevel(Level nextLevel) {
+	public void setNextLevel(String nextLevel) {
 		this.nextLevel = nextLevel;
 	}
 }

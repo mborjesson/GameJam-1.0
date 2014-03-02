@@ -41,12 +41,17 @@
    <properties>
     <property name="deltatilesmax" value="4"/>
     <property name="deltatilesmin" value="5"/>
-    <property name="name" value="skurk02"/>
+    <property name="name" value="jumping_brain"/>
    </properties>
   </object>
   <object name="Player" type="spawn" x="283" y="458" width="44" height="32">
    <properties>
     <property name="name" value="player"/>
+   </properties>
+  </object>
+  <object name="End Of Level" type="trigger" x="1310" y="861" width="35" height="66">
+   <properties>
+    <property name="name" value="end"/>
    </properties>
   </object>
  </objectgroup>

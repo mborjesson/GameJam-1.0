@@ -33,7 +33,7 @@ public class Level {
 	// list of all characters on this map
 	private List<Character> characters = new ArrayList<Character>();
 	private List<Character> enemies = new ArrayList<Character>();
-	private EndOfLevelObject endOfWorldObject;
+	private List<EndOfLevelObject> endOfWorldObjects = new ArrayList<EndOfLevelObject>();
 	private List<StaticAnimatedObject> staticObjects = new ArrayList<StaticAnimatedObject>();
 	 
 	
@@ -59,6 +59,7 @@ public class Level {
 						System.out.println(x + ", " + y + ", " + width + ", "
 								+ height);
 						CharacterType ct = CharacterType.getCharacterType(name);
+						System.out.println("name: " + name);
 						switch (ct) {
 							case PLAYER: {
 								player = new Player(x, y);
@@ -132,7 +133,9 @@ public class Level {
 						LevelType lt = LevelType.getLevelObject(name);
 						System.out.println("lt: " + lt);
 						
-						endOfWorldObject = new EndOfLevelObject(x, y, width, height);
+						EndOfLevelObject endOfWorldObject = new EndOfLevelObject(x, y, width, height);
+						endOfWorldObjects.add(endOfWorldObject);
+						
 						break;
 						
 					}
@@ -149,10 +152,9 @@ public class Level {
 		sun = new Sun(sunint*1000);
 		
 		//sun = new Sun(160*1000);
-
 		// TEST
-		staticObjects.add(new WindmillObject(350, 800));
-		
+		staticObjects.add(new WindmillObject(100, 352));
+
 		addCharacter(player);
 		//addEnemies(enemies);
 		
@@ -191,7 +193,7 @@ public class Level {
 //				offsetX / map.getTileWidth(), offsetY / map.getTileHeight(),
 //				(int)camera.getWidth()/map.getTileWidth(), (int)camera.getHeight()/map.getTileHeight());
 
-		// render animated objects
+		// Render static objects
 		for(StaticAnimatedObject ao : staticObjects) {
 			ao.render(g);
 		}
@@ -204,8 +206,10 @@ public class Level {
 		g.popTransform();
 		
 		g.resetTransform();
-		g.setColor(Color.red);
-		g.fillRect(sun.getSunPositionX()*Main.getOptions().getWidth(), (1-sun.getSunPositionY())*Main.getOptions().getHeight(), 10, 10);
+		g.setColor( sun.getRealColor() );
+		
+		float sunRadius = sun.getRadius();
+		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
 		
 	}
 	
@@ -341,13 +345,14 @@ public class Level {
 		this.camera = camera;
 	}
 
-	public EndOfLevelObject getEndOfWorldObject() {
-		return endOfWorldObject;
+	public List<EndOfLevelObject> getEndOfWorldObjects() {
+		return endOfWorldObjects;
 	}
 
-	public void setEndOfWorldObject(EndOfLevelObject endOfWorldObject) {
-		this.endOfWorldObject = endOfWorldObject;
+	public void setEndOfWorldObjects(List<EndOfLevelObject> endOfWorldObjects) {
+		this.endOfWorldObjects = endOfWorldObjects;
 	}
+
 	
 	
 }

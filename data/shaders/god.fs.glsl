@@ -7,7 +7,7 @@ uniform sampler2D texture_0;
 
 uniform vec4 test;
 
-const int NUM_SAMPLES = 100;
+const int NUM_SAMPLES = 50;
 
 varying vec2 texCoord;
 

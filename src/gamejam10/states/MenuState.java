@@ -8,6 +8,7 @@ package gamejam10.states;
 import gamejam10.*;
 import gamejam10.audio.*;
 import gamejam10.enums.*;
+import gamejam10.level.*;
 import gamejam10.menu.*;
 
 import org.newdawn.slick.*;
@@ -34,9 +35,12 @@ public class MenuState extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
     	// build menu
     	menu = new Menu(null);
-    	menu.addMenuAction("PLAY", new MenuActionEnterState(States.GAME.getID()));
-    	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID()));
-    	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID()));
+    	menu.addMenuAction("RESUME", new MenuActionEnterState(States.GAME.getID(), 1));
+    	menu.addMenuAction("PLAY", new MenuActionEnterState(States.GAME.getID(), 0));
+    	menu.addMenuAction("CREDITS", new MenuActionEnterState(States.CREDITS.getID(), 0));
+    	menu.addMenuAction("EXIT", new MenuActionEnterState(States.EXIT.getID(), 0));
+    	
+    	menu.setSelectedItem(1);
         
         audioPlayer = AudioPlayer.getInstance();
         audioPlayer.playMusic(MusicType.MENU, 1);
@@ -58,13 +62,26 @@ public class MenuState extends BasicGameState {
 		float y = 20;
 		float height = 20;
 		
+		GameState gs = (GameState)game.getState(States.GAME.getID());
+		
+		menu.getItem(menu.getItemIndex("RESUME")).setEnabled(gs.isRunning());
+		
 		for (int i = 0; i < menu.getNumItems(); ++i) {
+			MenuItem item = menu.getItem(i);
+			String name = item.getName();
+			if (!item.isEnabled()) {
+				name = name.toLowerCase();
+			}
 			if (menu.getSelectedItem() == i) {
 				g.setColor(Color.white);
 			} else {
-				g.setColor(Color.gray);
+				if (!item.isEnabled()) {
+					g.setColor(Color.gray);
+				} else {
+					g.setColor(Color.lightGray);
+				}
 			}
-			g.drawString(menu.getItemName(i), x, y+height*i);
+			g.drawString(name, x, y+height*i);
 		}
     }
 
@@ -78,16 +95,27 @@ public class MenuState extends BasicGameState {
         } else if (input.isKeyPressed(Input.KEY_UP) || isControllerPressed("up", input) ) {
         	menu.previousItem();
         } else if (input.isKeyPressed(Input.KEY_SPACE) || input.isKeyPressed(Input.KEY_ENTER) || isControllerPressed("a", input) )  {
-        	MenuAction a = menu.getAction(menu.getSelectedItem());
-        	if (a instanceof MenuActionEnterState) {
-        		MenuActionEnterState actionState = (MenuActionEnterState)a;
-        		if (actionState.getStateId() == States.GAME.getID()) {
-                    audioPlayer.playMusic(MusicType.GAME, 0.3f);
-        		}
-                game.enterState(actionState.getStateId(), actionState.getLeaveTransition(), actionState.getEnterTransition());
-        	} else if (a instanceof MenuActionEnterMenu) {
-        		MenuActionEnterMenu menuState = (MenuActionEnterMenu)a;
-        		menu = menuState.getMenu();
+        	MenuItem i = menu.getItem(menu.getSelectedItem());
+        	if (i.isEnabled()) {
+	        	MenuAction a = i.getAction();
+	        	if (a instanceof MenuActionEnterState) {
+	        		MenuActionEnterState actionState = (MenuActionEnterState)a;
+	        		if (actionState.getStateId() == States.GAME.getID()) {
+	                    audioPlayer.playMusic(MusicType.GAME, 0.3f);
+	                    
+	                    // play game, initialize first level
+	                    if (actionState.getType() == 0) {
+		                    GameState gs = (GameState)game.getState(States.GAME.getID());
+		                    LevelOrder lo = LevelOrder.getInstance();
+		                    lo.reset();
+		                    gs.initializeLevel(lo.getNextLevel());
+	                    }
+	        		}
+	                game.enterState(actionState.getStateId(), actionState.getLeaveTransition(), actionState.getEnterTransition());
+	        	} else if (a instanceof MenuActionEnterMenu) {
+	        		MenuActionEnterMenu menuState = (MenuActionEnterMenu)a;
+	        		menu = menuState.getMenu();
+	        	}
         	}
         }
     }

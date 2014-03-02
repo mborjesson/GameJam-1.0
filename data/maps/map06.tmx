@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
  <properties>
-  <property name="suntime" value="15"/>
+  <property name="suntime" value="60"/>
  </properties>
  <tileset firstgid="1" name="bw_smoothies" tilewidth="32" tileheight="32">
   <image source="../images/bw_smoothies.png" trans="ffffff" width="128" height="256"/>
@@ -53,7 +53,7 @@
  </tileset>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2c2YrEIBBFnb3D/P//Dk0TyISKlkuZUs+B+9AilYrxuiX0FkLYEEIIIYQQQsvJC55yAZgN/A+wLvgfYF28+/8jo+4jvHJ/N8oFYDa8+z+H0rw/w/97Z/yAVcD/AOvi3f/nuTmm75tyBBiVVXx0HEdY3wO88Drvg19ia8YtUWdLxAlCnXOZ9BvK8Oj//Rz/6+5EQCS3n1zV15RrxgIoJzZOS/6T2r5l2c/h+jPuQ2Yg5j/tc9eW439bUmdqAGektXjMmzGfa9f/qVhQBv6HXGIez/G/Jgbzvy1e/P/W8VpQh9Q38P+YePH/c99/93u5VDt4aCcPpNpIqq+NI5VLMVZrcytifXq287fUWKfpp9q4lqw89kBbVpjPZrmv0fO3gr1jOSX+13yTW7OWb9nPZ/A9XPMbeL41zDL/z7o3z8lfs79B8/WRGmgPex6drsNzg1ys/S/tFUr3Bvt3wS32GL3Yc+4B/odcRpn/93FkJI7jVS3nGFLM0doH7mcU/99Jyfr9vFbpAc8Ncqnxf+y9y8rvZM7ex//glRr/x+q16ou9zs5aIXm/hy9Zt0EJnv3f6uys11rkyvv4H7yifT+6/xdArI/nSvp/gZbxe/nPKmeEPCkYxTximbt0rdKyJ/geraRgFPOIZe4twftoNv0B7DD3HACAAAA=
+   H4sIAAAAAAAAC+2c227DIBBE6T1W//9/Kzey6qINBgJ41pwjzUMIIhvCsGBQlhDCghBCCCGEEJpOKijFAnA18D/AvOB/gHlR9/9bQd1buMf+2ikWgKuh7v8SauN+D/+/O/MHzAL+B5gXdf/HuTmlz5NiBPDKLD7azyOs7wHuqOZ90CW1ZlwO6iwH7QSjTlxmvYY64v7/PjecX7bn+B9nBwImpd57VD+nPGcugHpS87TlP+s8rmXZ1+7zz9yHlJw7zkbKf9Z7+F8XL/eAQQdrLZ7yZsrnuev/o7agDvwPpaQ8XuL/nDbI/31R8T/rbT9YYwP/+0TF/+CHnOf/cf3cdqxyqw3GZhtS3r/iPQAA+EMt77MPgFJezg7AMTX+z7mT6/2OHfOQD9b7KuwF6lHL/1DP0ZyMGO8xqv1xpfx7G/Q5Cr8b+KK3/629gve9QQnbXeYR4H8oRTX/r3hfA2ze79GfVt+o/G7gB2X/q1AzD+29T/4HVZ7xP+cuNrH38T+o8oz/R4y3Uc/OWmF5f1Q/4X8oRdn/rcb0qHXKI++P8CX7Nqgh93x0+y+A1BgvlfX/Ai3bH+W/XjEjpKTQqc09PWPfWM8krTNIq/xR3RV8j2ZS6NTmnp6xtwTvo6vpB7105gQAgAAA
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
@@ -65,16 +65,63 @@
     <property name="name" value="player"/>
    </properties>
   </object>
-  <object name="Skurk 2" type="spawn" x="3049" y="519" width="31" height="33">
+  <object name="Skurk 2" type="spawn" x="3145" y="735" width="31" height="33">
    <properties>
-    <property name="deltatilesmax" value="7"/>
-    <property name="deltatilesmin" value="4"/>
-    <property name="name" value="skurk02"/>
+    <property name="deltatilesmax" value="12"/>
+    <property name="deltatilesmin" value="10"/>
+    <property name="name" value="jumping_brain"/>
    </properties>
   </object>
   <object name="The End" type="trigger" x="5540" y="349" width="64" height="320">
    <properties>
     <property name="name" value="end"/>
+   </properties>
+  </object>
+  <object name="Skurk 2" type="spawn" x="3953" y="416" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="7"/>
+    <property name="deltatilesmin" value="4"/>
+    <property name="name" value="jumping_brain"/>
+   </properties>
+  </object>
+  <object name="Skurk 2" type="spawn" x="1524" y="654" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="7"/>
+    <property name="deltatilesmin" value="4"/>
+    <property name="name" value="jumping_brain"/>
+   </properties>
+  </object>
+  <object name="Skurk t1" type="spawn" x="465" y="546" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="5"/>
+    <property name="deltatilesmin" value="5"/>
+    <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="The End" type="trigger" x="33" y="352" width="33" height="62">
+   <properties>
+    <property name="name" value="end"/>
+   </properties>
+  </object>
+  <object name="Skurk t1" type="spawn" x="1344" y="150" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="5"/>
+    <property name="deltatilesmin" value="5"/>
+    <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="Skurk t2" type="spawn" x="4930" y="605" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="15"/>
+    <property name="deltatilesmin" value="15"/>
+    <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="Skurk t1" type="spawn" x="643" y="860" width="31" height="33">
+   <properties>
+    <property name="deltatilesmax" value="8"/>
+    <property name="deltatilesmin" value="8"/>
+    <property name="name" value="patroling_brain"/>
    </properties>
   </object>
  </objectgroup>
