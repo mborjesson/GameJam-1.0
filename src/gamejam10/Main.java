@@ -28,7 +28,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Main extends StateBasedGame {
     public static void main(String[] args) throws SlickException {
     	Display.setLocation(100, 100);
-    	Main main = new Main("SlickScrollerTest");
+    	Main main = new Main("Game Jam 1.0 - From Git Sux Team");
         AppGameContainer app = new AppGameContainer(main);
         Options options = Main.getOptions();
         app.setDisplayMode(options.getWidth(), options.getHeight(), options.isFullscreen());
