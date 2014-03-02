@@ -4,9 +4,11 @@
  */
 package gamejam10;
 
+import java.io.*;
+
 import gamejam10.audio.*;
 import gamejam10.enums.*;
-import gamejam10.level.EndOfLevelObject;
+import gamejam10.level.*;
 import gamejam10.options.Options;
 import gamejam10.states.CreditsState;
 import gamejam10.states.ExitState;
@@ -51,6 +53,12 @@ public class Main extends StateBasedGame {
         
         AudioPlayer.getInstance().setEnabled(options.isSoundEnabled());
         AudioPlayer.getInstance().initialize();
+        
+        try {
+			LevelOrder.getInstance().initialize();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @Override

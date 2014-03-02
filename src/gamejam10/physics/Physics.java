@@ -9,9 +9,8 @@ import gamejam10.character.Character;
 import gamejam10.character.Enemy;
 import gamejam10.character.Player;
 import gamejam10.enums.*;
-import gamejam10.level.Level;
-import gamejam10.level.LevelObject;
-import gamejam10.states.GameState;
+import gamejam10.level.*;
+import gamejam10.states.*;
 
 import java.util.ArrayList;
 
@@ -36,7 +35,7 @@ public class Physics {
         this.gameState = gameState;
     }
     
-    public void handlePhysics(StateBasedGame sbg, Level level, int delta) {
+    public void handlePhysics(StateBasedGame sbg, Level level, int delta) throws SlickException {
         handleCharacters(level, delta);
         checkCollisionBetweenPlayerAndEnemies(level);
         checkCollisionBetweenCharacters(level);
@@ -97,7 +96,7 @@ public class Physics {
 		}
     }
     
-    private void checkIfEndOfWorld(StateBasedGame sbg, Level level) {
+    private void checkIfEndOfWorld(StateBasedGame sbg, Level level) throws SlickException {
     	
     	//if level goal exists
     	if (level.getEndOfWorldObject() != null) {
@@ -110,6 +109,8 @@ public class Physics {
 					if (c.getBoundingShape().checkCollision(box)) {
 						
 						System.out.println("Woho \\0/ You Made It!!!");
+						LevelCompletedState lcs = (LevelCompletedState)sbg.getState(States.LEVELCOMPLETED.getID());
+						lcs.setNextLevel(LevelOrder.getInstance().getNextLevel());
 						sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
 					}
 						
