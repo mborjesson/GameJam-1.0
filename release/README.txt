@@ -1,3 +1,3 @@
 Start in command line:
 
-java -jar sven.jar -Djava.library.path=./natives
+java -Djava.library.path=./natives -jar sven.jar
