@@ -37,9 +37,6 @@ public class AudioPlayer {
     }
     
     public void initialize() {
-    	if (!enabled) {
-    		return;
-    	}
     	if (initialized) {
     		return;
     	}

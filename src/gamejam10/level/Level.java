@@ -13,6 +13,7 @@ import gamejam10.camera.*;
 import gamejam10.character.*;
 import gamejam10.character.Character;
 import gamejam10.enums.*;
+import gamejam10.options.*;
 import gamejam10.physics.*;
 import gamejam10.sun.*;
 
@@ -210,7 +211,7 @@ public class Level {
 		g.setColor( sun.getRealColor() );
 		
 		float sunRadius = sun.getRadius();
-		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1f-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
+		g.fillOval(sun.getSunPositionX() * Options.getInstance().getWidth() - sunRadius, (1f-sun.getSunPositionY())*Options.getInstance().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
 		g.popTransform();
 
 		g.pushTransform();
