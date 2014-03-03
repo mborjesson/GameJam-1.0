@@ -1,7 +1,7 @@
 package gamejam10.character;
 
 import gamejam10.ai.BasicAI;
-import gamejam10.ai.RandomMovementAIAction;
+import gamejam10.ai.actions.RandomMovementAIAction;
 import gamejam10.physics.AABoundingRect;
 
 import org.newdawn.slick.Image;
@@ -33,7 +33,7 @@ public class Brainemy extends AIEnemy
 		moveParameters.minX = x - minMoveX;
 		moveParameters.maxX = x + maxMoveX;
 		
-		BasicAI ai = new BasicAI(this, null);
+		BasicAI ai = new BasicAI();
 		ai.addAIAction(new RandomMovementAIAction(this, moveParameters));
 		this.setAI(ai);
 	}

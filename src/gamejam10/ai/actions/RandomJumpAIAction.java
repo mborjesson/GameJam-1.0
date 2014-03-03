@@ -1,17 +1,17 @@
-package gamejam10.ai;
+package gamejam10.ai.actions;
 import gamejam10.character.Character;
 
 public class RandomJumpAIAction implements AIAction {
 
-	private Character character;
-	double accumulatedTime = 0;
-	RandomJumpAIAction.Parameters parameters;
-	double nextJumpTime = 0;
-	
 	public static class Parameters {
 		public double minTimeBetweenJumps;
 		public double maxTimeBetweenJumps;
 	}
+	
+	private Character character;
+	private double accumulatedTime = 0;
+	private RandomJumpAIAction.Parameters parameters;
+	private double nextJumpTime = 0;
 	
 	public RandomJumpAIAction(Character c, RandomJumpAIAction.Parameters parameters) {
 		character = c;

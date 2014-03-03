@@ -6,6 +6,9 @@ package gamejam10.level;
 
 import gamejam10.*;
 import gamejam10.ai.*;
+import gamejam10.ai.actions.PatrollingAIAction;
+import gamejam10.ai.actions.RandomJumpAIAction;
+import gamejam10.ai.actions.RandomMovementAIAction;
 import gamejam10.camera.*;
 import gamejam10.character.*;
 import gamejam10.character.Character;
@@ -74,7 +77,7 @@ public class Level {
 								FloatEnemy en = new FloatEnemy(x, y, 0, 150);
 								en.setMaximumSpeed(0.20f);
 								en.setMaximumFallSpeed(0);
-								BasicAI ai = new BasicAI(en, player);
+								BasicAI ai = new BasicAI();
 								
 								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
 								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
@@ -95,7 +98,7 @@ public class Level {
 								en.setMaximumSpeed(0.90f);
 								en.setMaximumFallSpeed(0);
 								
-								BasicAI ai = new BasicAI(en, player);
+								BasicAI ai = new BasicAI();
 								
 								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
 								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
@@ -113,7 +116,7 @@ public class Level {
 							} break;
 							case ENEMY_EASY: {
 								AIEnemy en = new AIEnemy(x, y);
-								BasicAI ai = new BasicAI(en, player);
+								BasicAI ai = new BasicAI();
 								
 								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
 								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
@@ -133,14 +136,14 @@ public class Level {
 							}
 							case ENEMY_JUMPING: {
 								AIEnemy en = new AIEnemy(x, y);
-								BasicAI ai = new BasicAI(en, player);
+								BasicAI ai = new BasicAI();
 								
 								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
 								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
 
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
-								moveParameters.maxMovementDuration = 1000;
-								moveParameters.minMovementDuration = 100;
+								moveParameters.maxMovementDuration = 3000;
+								moveParameters.minMovementDuration = 1000;
 								moveParameters.minX = x - map.getTileWidth() * deltaTilesMin;
 								moveParameters.maxX = x + map.getTileWidth() * deltaTilesMax;
 								
