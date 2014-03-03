@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="suntime" value="15"/>
+ </properties>
+ <tileset firstgid="1" name="bw_smoothies" tilewidth="32" tileheight="32">
+  <image source="../images/bw_smoothies.png" width="128" height="256"/>
+  <tile id="1">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="collidable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="mapplayer" width="256" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YzQqCQBiFYftZJN3//dYuIQxm+MapzvPA2WXm4kVzXZZlNTMzMzOzuAH/T/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+Qa1b/l82AOY7uv6L3U8F3AN/x/N96Xv9PoMZR/Vc+5+sfarT2f33ufMDv+kT/UGP0/X/E+z39Q42K/m+b41qeDXrf4+kfalT033uP7+1Y/1Bj5vt//cNcv9b/vfM44F1r/3uf792o7zWz/u0ZdZ7Z12tmr+0ZdZ7Z12uWvgeUrMQ2AIAAAA==
+  </data>
+ </layer>
+ <objectgroup color="#5500ff" name="objects" width="256" height="32">
+  <object name="Skurk 2" type="spawn" x="1120" y="770" width="36" height="33">
+   <properties>
+    <property name="deltatilesmax" value="4"/>
+    <property name="deltatilesmin" value="4"/>
+    <property name="name" value="jumping_brain"/>
+   </properties>
+  </object>
+  <object name="Player" type="spawn" x="283" y="480" width="44" height="32">
+   <properties>
+    <property name="name" value="player"/>
+   </properties>
+  </object>
+  <object name="End Of Level" type="trigger" x="1310" y="861" width="35" height="66">
+   <properties>
+    <property name="name" value="end"/>
+   </properties>
+  </object>
+  <object name="Skurk 2" type="spawn" x="510" y="736" width="32" height="33">
+   <properties>
+    <property name="deltatilesmax" value="1"/>
+    <property name="deltatilesmin" value="2"/>
+    <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="WM" type="spawn" x="877" y="549" width="67" height="58">
+   <properties>
+    <property name="name" value="windmill"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
