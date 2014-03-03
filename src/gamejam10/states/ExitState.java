@@ -1,6 +1,9 @@
 package gamejam10.states;
 
+import java.io.*;
+
 import gamejam10.enums.*;
+import gamejam10.options.*;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
@@ -22,6 +25,11 @@ public class ExitState extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
+		try {
+			Options.getWritableInstance().write();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		container.exit();
 	}
 

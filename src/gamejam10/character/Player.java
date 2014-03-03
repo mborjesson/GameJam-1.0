@@ -55,6 +55,7 @@ public class Player extends Character {
     @Override
     public void jump() {
         if (onGround) {
+        	System.out.println("JUMP");
         	AudioPlayer ap = AudioPlayer.getInstance();
         	ap.playSound(SoundType.JUMP, 0.3f);
             y_velocity = getJumpVelocity();

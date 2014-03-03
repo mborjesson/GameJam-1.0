@@ -1,5 +1,7 @@
 package gamejam10;
 
+import gamejam10.options.*;
+
 import org.newdawn.slick.*;
 
 public class Tools {
@@ -8,9 +10,9 @@ public class Tools {
 	}
 
 	static public void setScale(Graphics g, float screenWidth) {
-		float screenHeight = (float)(screenWidth/Main.getOptions().getAspectRatio());
-		float scaleX = Main.getOptions().getWidth()/screenWidth;
-		float scaleY = Main.getOptions().getHeight()/screenHeight;
+		float screenHeight = (float)(screenWidth/Options.getInstance().getAspectRatio());
+		float scaleX = Options.getInstance().getWidth()/screenWidth;
+		float scaleY = Options.getInstance().getHeight()/screenHeight;
 		g.scale(scaleX, scaleY);
 	}
 }

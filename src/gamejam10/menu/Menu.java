@@ -1,15 +1,29 @@
 package gamejam10.menu;
 
+import gamejam10.*;
+
 import java.util.*;
+
+import org.newdawn.slick.*;
 
 public class Menu {
 	private final Map<String, MenuItem> menuMap = new TreeMap<String, MenuItem>();
 	private final List<MenuItem> menuList = new ArrayList<MenuItem>();
 	private final Menu parentMenu;
 	private int selectedItem = 0;
+	private final String id;
 	
-	public Menu(Menu parentMenu) {
+	public Menu(String id, Menu parentMenu) {
+		this.id = id;
 		this.parentMenu = parentMenu;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public boolean isMenuId(String id) {
+		return this.id.equalsIgnoreCase(id);
 	}
 	
 	public void addMenuAction(String name, MenuAction action) {
@@ -53,5 +67,33 @@ public class Menu {
 	
 	public void setSelectedItem(int selectedItem) {
 		this.selectedItem = selectedItem;
+	}
+	
+	public void render(Graphics g, float screenWidth, float y, float lineHeight) {
+		for (int i = 0; i < getNumItems(); ++i) {
+			MenuItem item = getItem(i);
+			String name = item.getName();
+			if (item.getAction() instanceof MenuActionToggle) {
+				MenuActionToggle toggle = (MenuActionToggle)item.getAction();
+				name += " " + toggle.getCurrentStringValue();
+			}
+			if (getSelectedItem() == i) {
+				name = name.toUpperCase();
+				if (!item.isEnabled()) {
+					g.setColor(Color.lightGray);
+				} else {
+					g.setColor(Color.white);
+				}
+			} else {
+				name = name.toLowerCase();
+				if (!item.isEnabled()) {
+					g.setColor(Color.darkGray);
+				} else {
+					g.setColor(Color.lightGray);
+				}
+			}
+			Tools.drawStringCentered(g, screenWidth, y+lineHeight*i, name);
+		}
+
 	}
 }
