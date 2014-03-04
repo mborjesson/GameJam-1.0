@@ -54,6 +54,51 @@ public class MenuState extends BasicGameState {
     	
     	mainMenu.setSelectedItem(2);
     	
+    	String[] volumeStr = new String[11];
+    	Float[] volumes = new Float[volumeStr.length];
+    	for (int i = 0; i < volumeStr.length; ++i) {
+    		volumeStr[i] = String.valueOf(i);
+    		volumes[i] = i/10f;
+    	}
+    	
+    	optionsMenu.addMenuAction("Sound", new MenuActionToggle(
+    			volumeStr, 
+    			volumes, 
+    			AudioPlayer.getInstance(), 
+    			new MenuActionToggle.Listener() {
+			
+			@Override
+			public void toggle(MenuActionToggle toggle) {
+				float f = (float)toggle.getCurrentValue();
+				Options.getWritableInstance().setSoundVolume(f);
+				AudioPlayer ap = (AudioPlayer)toggle.getObject();
+				ap.setSoundVolume(f);
+			}
+			
+			@Override
+			public int getDefaultValue(MenuActionToggle toggle) {
+				return toggle.getValueNum(Options.getInstance().getSoundVolume());
+			}
+		}));
+    	optionsMenu.addMenuAction("Music", new MenuActionToggle(
+    			volumeStr, 
+    			volumes, 
+    			AudioPlayer.getInstance(), 
+    			new MenuActionToggle.Listener() {
+			
+			@Override
+			public void toggle(MenuActionToggle toggle) {
+				float f = (float)toggle.getCurrentValue();
+				Options.getWritableInstance().setMusicVolume(f);
+				AudioPlayer ap = (AudioPlayer)toggle.getObject();
+				ap.setMusicVolume(f);
+			}
+			
+			@Override
+			public int getDefaultValue(MenuActionToggle toggle) {
+				return toggle.getValueNum(Options.getInstance().getMusicVolume());
+			}
+		}));
     	optionsMenu.addMenuAction("VSync", new MenuActionToggle(new String[] { "on", "off" }, new Boolean[] { true, false }, container, new MenuActionToggle.Listener() {
 			
 			@Override

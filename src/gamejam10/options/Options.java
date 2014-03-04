@@ -43,6 +43,8 @@ public class Options {
 	private int targetFrameRate = 0;
 	private boolean showFPS = false;
 	private boolean soundEnabled = true;
+	private float musicVolume = 1;
+	private float soundVolume = 1;
 	private int multiSample = 2;
 	private boolean shadersEnabled = true;
 	
@@ -124,6 +126,22 @@ public class Options {
 		return shadersEnabled;
 	}
 	
+	public void setMusicVolume(float musicVolume) {
+		this.musicVolume = musicVolume;
+	}
+	
+	public float getMusicVolume() {
+		return musicVolume;
+	}
+	
+	public void setSoundVolume(float soundVolume) {
+		this.soundVolume = soundVolume;
+	}
+	
+	public float getSoundVolume() {
+		return soundVolume;
+	}
+	
 	public void write() throws IOException {
 		File file = new File(".", REF);
 		System.out.println("Writing config to " + file);
@@ -182,13 +200,24 @@ public class Options {
 						try {
 							String name = f.getName();
 							String value = props.getProperty(name);
+							if (value == null) {
+								continue;
+							}
 							Class<?> type = f.getType();
 							if (type == Integer.TYPE || type == Integer.class) {
-								f.setInt(opt, Integer.valueOf(value));
+								try {
+									f.setInt(opt, Integer.valueOf(value));
+								} catch (NumberFormatException e) {
+									System.out.println("Could not read value " + value);
+								}
 							} else if (type == Boolean.TYPE || type == Boolean.class) {
 								f.setBoolean(opt, Boolean.valueOf(value));
 							} else if (type == Float.TYPE || type == Float.class) {
-								f.setFloat(opt, Float.valueOf(value));
+								try {
+									f.setFloat(opt, Float.valueOf(value));
+								} catch (NumberFormatException e) {
+									System.out.println("Could not read value " + value);
+								}
 							} else if (type == String.class) {
 								f.set(opt, value);
 							}

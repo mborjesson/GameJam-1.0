@@ -21,11 +21,14 @@ public class AudioPlayer {
     public boolean startGameMusic = false;
     
     private static final AudioPlayer INSTANCE = new AudioPlayer();
-    private Map<MusicType, Music> musicMap = new HashMap<MusicType, Music>();
-    private Map<SoundType, Sound> soundMap = new HashMap<SoundType, Sound>();
+    private final Map<MusicType, Music> musicMap = new HashMap<MusicType, Music>();
+    private final Map<SoundType, Sound> soundMap = new HashMap<SoundType, Sound>();
 
     private boolean enabled = true;
     private boolean initialized = false;
+    
+    private float musicVolume = 1;
+    private float soundVolume = 1;
     
     public static AudioPlayer getInstance() {
         return INSTANCE;
@@ -87,7 +90,7 @@ public class AudioPlayer {
     	}
         stopMusic();
         musicMap.get(type).loop();
-        musicMap.get(type).setVolume(volume);
+        musicMap.get(type).setVolume(volume*musicVolume);
     }
     
     public void playSound(SoundType type) {
@@ -102,7 +105,7 @@ public class AudioPlayer {
     	if (!enabled) {
     		return;
     	}
-    	soundMap.get(type).play(pitch, volume);
+    	soundMap.get(type).play(pitch, volume*soundVolume);
     }
     
     public void setEnabled(boolean enabled) {
@@ -116,5 +119,26 @@ public class AudioPlayer {
     
     public boolean isEnabled() {
 		return enabled;
+	}
+    
+    public void setSoundVolume(float soundVolume) {
+		this.soundVolume = soundVolume;
+	}
+    
+    public float getSoundVolume() {
+		return soundVolume;
+	}
+    
+    public void setMusicVolume(float musicVolume) {
+		this.musicVolume = musicVolume;
+		for (Music music : musicMap.values()) {
+			if (music.playing()) {
+				music.setVolume(musicVolume);
+			}
+		}
+	}
+    
+    public float getMusicVolume() {
+		return musicVolume;
 	}
 }
