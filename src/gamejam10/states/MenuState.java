@@ -88,6 +88,7 @@ public class MenuState extends BasicGameState {
 			@Override
 			public void toggle(MenuActionToggle toggle) {
 				float f = (float)toggle.getCurrentValue();
+				Options.getInstance().setMusicVolume(f);
 				Options.getWritableInstance().setMusicVolume(f);
 				AudioPlayer ap = (AudioPlayer)toggle.getObject();
 				ap.setMusicVolume(f);
