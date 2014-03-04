@@ -19,7 +19,7 @@
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
     <target name="create_run_jar">
-        <delete file="GameJam1.0.jar"/>
+        <delete file="sven.jar"/>
         <delete dir="build"/>
         <mkdir dir="build"/>
         <javac srcdir="src" destdir="build" classpathref="classpath" failonerror="true"/>
@@ -27,7 +27,7 @@
 			<fileset dir="resources"/>
 		</copy>
         
-        <jar destfile="TheAdventuresOfSven.jar" filesetmanifest="skip">
+        <jar destfile="sven.jar" filesetmanifest="skip">
             <manifest>
                 <attribute name="Main-Class" value="gamejam10.Main"/>
                 <attribute name="Class-Path" value="."/>

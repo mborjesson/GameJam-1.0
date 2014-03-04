@@ -1,9 +1,0 @@
-#Sun Mar 02 13:53:11 CET 2014
-soundEnabled=true
-multiSample=1
-width=1024
-aspectRatio=16\:9
-targetFrameRate=60
-fullscreen=false
-showFPS=true
-vsync=true
