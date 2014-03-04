@@ -346,6 +346,8 @@ public class GameState extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 
+		player.update(delta);
+		
 		handleKeyboardInput(gc.getInput(), delta, sbg);
 
 		for (gamejam10.character.Character c : level.getCharacters()) {

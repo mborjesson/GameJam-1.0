@@ -4,6 +4,7 @@
  */
 package gamejam10.character;
 
+import gamejam10.*;
 import gamejam10.audio.*;
 import gamejam10.enums.*;
 import gamejam10.physics.*;
@@ -19,6 +20,7 @@ public class Player extends Character {
 	
 	public float startx, starty;
 	private static int deathCounter;
+	private int jumpDelay = 0;
      
     public Player(float x, float y) throws SlickException{
         super(x,y);
@@ -54,7 +56,8 @@ public class Player extends Character {
     
     @Override
     public void jump() {
-        if (onGround) {
+        if (onGround && jumpDelay <= 0) {
+        	jumpDelay = Constants.JUMP_DELAY;
         	AudioPlayer ap = AudioPlayer.getInstance();
         	ap.playSound(SoundType.JUMP, 0.3f);
             y_velocity = getJumpVelocity();
@@ -80,6 +83,10 @@ public class Player extends Character {
 	public static int getDeathCounter()
 	{
 		return deathCounter;
+	}
+	
+	public void update(int delta) {
+		jumpDelay = Math.max(jumpDelay-delta, 0);
 	}
 
 //	public void update(int delta) {

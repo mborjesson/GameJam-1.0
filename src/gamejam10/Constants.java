@@ -25,4 +25,6 @@ public class Constants {
 
 	public static final float MENU_WIDTH = 640f;
 	public static final float GAME_WIDTH = 700;
+	
+	public static final int JUMP_DELAY = 500;
 }
