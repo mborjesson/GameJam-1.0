@@ -14,6 +14,7 @@ import gamejam10.states.GameState;
 
 import java.io.*;
 
+import org.lwjgl.*;
 import org.lwjgl.opengl.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
@@ -26,12 +27,11 @@ import org.newdawn.slick.state.*;
  */
 public class Main extends StateBasedGame {
     public static void main(String[] args) throws SlickException {
-    	Display.setLocation(100, 100);
+    	Display.setLocation(0, 0);
     	Main main = new Main(Constants.GAME_NAME);
         AppGameContainer app = new AppGameContainer(main);
-        Options options = Main.getOptions();
+        Options options = Options.getInstance();
         if (options.isFullscreen()) {
-        	options.setWidth(app.getScreenWidth());
         	app.setMouseGrabbed(true);
         }
         app.setDisplayMode(options.getWidth(), options.getHeight(), options.isFullscreen());
@@ -43,18 +43,10 @@ public class Main extends StateBasedGame {
         app.start();
     }
 	
-	static private Options options = null;
-
     public Main(String title) {
         super(title);
         
-        try {
-			options = Options.read();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        
-        AudioPlayer.getInstance().setEnabled(options.isSoundEnabled());
+        AudioPlayer.getInstance().setEnabled(Options.getInstance().isSoundEnabled());
         AudioPlayer.getInstance().initialize();
         
         try {
@@ -74,8 +66,4 @@ public class Main extends StateBasedGame {
         
         enterState(States.MENU.getID());
     }
-    
-    public static Options getOptions() {
-		return options;
-	}
 }

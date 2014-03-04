@@ -6,10 +6,14 @@ package gamejam10.level;
 
 import gamejam10.*;
 import gamejam10.ai.*;
+import gamejam10.ai.actions.PatrollingAIAction;
+import gamejam10.ai.actions.RandomJumpAIAction;
+import gamejam10.ai.actions.RandomMovementAIAction;
 import gamejam10.camera.*;
 import gamejam10.character.*;
 import gamejam10.character.Character;
 import gamejam10.enums.*;
+import gamejam10.options.*;
 import gamejam10.physics.*;
 import gamejam10.sun.*;
 
@@ -59,10 +63,9 @@ public class Level {
 						int y = map.getObjectY(groupID, objectID);
 						int width = map.getObjectWidth(groupID, objectID);
 						int height = map.getObjectHeight(groupID, objectID);
-						System.out.println(x + ", " + y + ", " + width + ", "
-								+ height);
+//						System.out.println(x + ", " + y + ", " + width + ", " + height);
 						CharacterType ct = CharacterType.getCharacterType(name);
-						System.out.println("name: " + name);
+//						System.out.println("name: " + name);
 						switch (ct) {
 							case PLAYER: {
 								player = new Player(x, y);
@@ -75,7 +78,7 @@ public class Level {
 								FloatEnemy en = new FloatEnemy(x, y, 0, 150);
 								en.setMaximumSpeed(0.20f);
 								en.setMaximumFallSpeed(0);
-								BasicAI ai = new BasicAI(en, player);
+								BasicAI ai = new BasicAI();
 								
 								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
 								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
@@ -96,7 +99,7 @@ public class Level {
 								en.setMaximumSpeed(0.90f);
 								en.setMaximumFallSpeed(0);
 								
-								BasicAI ai = new BasicAI(en, player);
+								BasicAI ai = new BasicAI();
 								
 								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
 								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
@@ -114,14 +117,14 @@ public class Level {
 							} break;
 							case ENEMY_EASY: {
 								AIEnemy en = new AIEnemy(x, y);
-								BasicAI ai = new BasicAI(en, player);
+								BasicAI ai = new BasicAI();
 								
 								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
 								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
 								
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
-								moveParameters.maxMovementDuration = 1000;
-								moveParameters.minMovementDuration = 100;
+								moveParameters.maxMovementDuration = 3000;
+								moveParameters.minMovementDuration = 1000;
 								moveParameters.minX = x - map.getTileWidth() * deltaTilesMin;
 								moveParameters.maxX = x + map.getTileWidth() * deltaTilesMax;
 								
@@ -134,14 +137,14 @@ public class Level {
 							}
 							case ENEMY_JUMPING: {
 								AIEnemy en = new AIEnemy(x, y);
-								BasicAI ai = new BasicAI(en, player);
+								BasicAI ai = new BasicAI();
 								
 								int deltaTilesMin = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmin", "0"));
 								int deltaTilesMax = Integer.parseInt(map.getObjectProperty(groupID, objectID, "deltatilesmax", "0"));
 
 								RandomMovementAIAction.Parameters moveParameters = new RandomMovementAIAction.Parameters();
-								moveParameters.maxMovementDuration = 1000;
-								moveParameters.minMovementDuration = 100;
+								moveParameters.maxMovementDuration = 3000;
+								moveParameters.minMovementDuration = 1000;
 								moveParameters.minX = x - map.getTileWidth() * deltaTilesMin;
 								moveParameters.maxX = x + map.getTileWidth() * deltaTilesMax;
 								
@@ -162,23 +165,13 @@ public class Level {
 						break;
 					} 
 					case TRIGGER: {
-						System.out.println(" ");
-						
-						System.out.println("Trigger Found!");
-						
-						System.out.println("LEVEL_END FOUND");
-						String name = map.getObjectProperty(groupID, objectID, "name", null);
+//						String name = map.getObjectProperty(groupID, objectID, "name", null);
 						int x = map.getObjectX(groupID, objectID);
 						int y = map.getObjectY(groupID, objectID);
 						
 						int width = map.getObjectWidth(groupID, objectID);
 						int height = map.getObjectHeight(groupID, objectID);
-						System.out.println(x + ", " + y + ", " + width + ", "	+ height);
-						
-						System.out.println("Name: " + name);
-						CharacterType ct = CharacterType.getCharacterType(name);
-						LevelType lt = LevelType.getLevelObject(name);
-						System.out.println("lt: " + lt);
+//						System.out.println(x + ", " + y + ", " + width + ", "	+ height);
 						
 						EndOfLevelObject endOfWorldObject = new EndOfLevelObject(x, y, width, height);
 						endOfWorldObjects.add(endOfWorldObject);
@@ -193,23 +186,12 @@ public class Level {
 		}
 		
 		String suntime = map.getMapProperty("suntime", "60");
-		System.out.println("suntime: " + suntime);
 		int sunint = Integer.parseInt(suntime);
 		
 		sun = new Sun(sunint*1000);
 		
-		//sun = new Sun(160*1000);
-		// TEST
-		
-
 		addCharacter(player);
-		//addEnemies(enemies);
-		
-//		Brainemy beny = new Brainemy(50, 370, 50, 150);
-//		enemies.add(en);
-		
-		//FloatEnemy fenemy = new FloatEnemy(50, 370, 50, 150);
-		//enemies.add(fenemy);
+
 		
 		for (Object e : enemies) {
 			addCharacter((Character)e);
@@ -229,7 +211,7 @@ public class Level {
 		g.setColor( sun.getRealColor() );
 		
 		float sunRadius = sun.getRadius();
-		g.fillOval(sun.getSunPositionX() * Main.getOptions().getWidth() - sunRadius, (1f-sun.getSunPositionY())*Main.getOptions().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
+		g.fillOval(sun.getSunPositionX() * Options.getInstance().getWidth() - sunRadius, (1f-sun.getSunPositionY())*Options.getInstance().getHeight() - sunRadius, 2*sunRadius, 2*sunRadius);
 		g.popTransform();
 
 		g.pushTransform();
@@ -319,7 +301,7 @@ public class Level {
 	}
 
 	public void addEnemies(List<Character> e) {
-		System.out.println("enemies: " + enemies);
+//		System.out.println("enemies: " + enemies);
 		enemies.addAll(e);
 	}
 

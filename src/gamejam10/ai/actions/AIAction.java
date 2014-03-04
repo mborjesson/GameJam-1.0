@@ -1,4 +1,4 @@
-package gamejam10.ai;
+package gamejam10.ai.actions;
 
 public interface AIAction {
 
