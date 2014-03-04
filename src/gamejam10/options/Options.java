@@ -1,6 +1,6 @@
 package gamejam10.options;
 
-import gamejam10.enums.*;
+import gamejam10.*;
 
 import java.io.*;
 import java.lang.reflect.*;
@@ -9,17 +9,46 @@ import java.util.*;
 import org.newdawn.slick.util.*;
 
 public class Options {
-	transient private static final String REF = "/data/options.props";
+	transient static private Options options = null;
+	transient private Options writableOptions = null;
 	
-	private String aspectRatio = AspectRatio.getDefaultAspectRatio();
+	static public Options getInstance() {
+		if (options == null) {
+			try {
+				options = read();
+				try {
+					options.writableOptions = (Options)options.clone();
+				} catch (CloneNotSupportedException e) {
+					e.printStackTrace();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (options == null) {
+				options = new Options();
+			}
+		}
+		return options;
+	}
+	
+	static public Options getWritableInstance() {
+		return getInstance().writableOptions;
+	}
+	
+	transient private int configVersion = 2;
 	private int width = 1280;
-	transient private Integer height = null;
+	private int height = 720;
 	private boolean fullscreen = false;
 	private boolean vsync = true;
-	private int targetFrameRate = 60;
+	private int targetFrameRate = 0;
 	private boolean showFPS = false;
 	private boolean soundEnabled = true;
+	private float musicVolume = 1;
+	private float soundVolume = 1;
 	private int multiSample = 2;
+	private boolean shadersEnabled = true;
+	
+	private Options() {}
 	
 	public void setWidth(int width) {
 		this.width = width;
@@ -29,19 +58,16 @@ public class Options {
 		return width;
 	}
 	
-	public int getHeight() {
-		if (height == null) {
-			height = (int)(width/AspectRatio.getAspectRatio(aspectRatio));
-		}
-		return height.intValue();
-	}
-
-	public void setAspectRatio(String aspectRatio) {
-		this.aspectRatio = aspectRatio;
+	public void setHeight(int height) {
+		this.height = height;
 	}
 	
+	public int getHeight() {
+		return height;
+	}
+
 	public double getAspectRatio() {
-		return AspectRatio.getAspectRatio(aspectRatio);
+		return width/(double)height;
 	}
 
 	public void setSoundEnabled(boolean soundEnabled) {
@@ -92,9 +118,37 @@ public class Options {
 		return multiSample;
 	}
 	
+	public void setShadersEnabled(boolean shadersEnabled) {
+		this.shadersEnabled = shadersEnabled;
+	}
+	
+	public boolean isShadersEnabled() {
+		return shadersEnabled;
+	}
+	
+	public void setMusicVolume(float musicVolume) {
+		this.musicVolume = musicVolume;
+	}
+	
+	public float getMusicVolume() {
+		return musicVolume;
+	}
+	
+	public void setSoundVolume(float soundVolume) {
+		this.soundVolume = soundVolume;
+	}
+	
+	public float getSoundVolume() {
+		return soundVolume;
+	}
+	
 	public void write() throws IOException {
-		OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(".", REF)));
+		File file = Installer.OPTIONS_FILE;
+		System.out.println("Writing config to " + file);
+		OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
 		Properties props = new Properties();
+		
+		props.setProperty("configVersion", String.valueOf(configVersion));
 
 		for (Field f : getClass().getDeclaredFields()) {
 			int mod = f.getModifiers();
@@ -119,44 +173,89 @@ public class Options {
 	}
 	
 	public static Options read() throws IOException {
-		if (!ResourceLoader.resourceExists(REF)) {
+		if (!Installer.OPTIONS_FILE.exists()) {
 			// write defaults
 			Options opt = new Options();
 			opt.write();
 			return opt;
 		}
-		InputStream in = ResourceLoader.getResourceAsStream(REF);
+		InputStream in = new FileInputStream(Installer.OPTIONS_FILE);
 		
 		try {
 			Options opt = new Options();
 			Properties props = new Properties();
 			props.load(in);
-			for (Field f : opt.getClass().getDeclaredFields()) {
-				int mod = f.getModifiers();
-				if (!Modifier.isTransient(mod)) {
-					try {
-						String name = f.getName();
-						String value = props.getProperty(name);
-						Class<?> type = f.getType();
-						if (type == Integer.TYPE || type == Integer.class) {
-							f.setInt(opt, Integer.valueOf(value));
-						} else if (type == Boolean.TYPE || type == Boolean.class) {
-							f.setBoolean(opt, Boolean.valueOf(value));
-						} else if (type == Float.TYPE || type == Float.class) {
-							f.setFloat(opt, Float.valueOf(value));
-						} else if (type == String.class) {
-							f.set(opt, value);
+			String versionStr = props.getProperty("configVersion");
+			int version = 0;
+			if (versionStr != null) {
+				try {
+					version = Integer.valueOf(versionStr);
+				} catch (NumberFormatException e) {
+				}
+			}
+			if (version == opt.configVersion) {
+				for (Field f : opt.getClass().getDeclaredFields()) {
+					int mod = f.getModifiers();
+					if (!Modifier.isTransient(mod)) {
+						try {
+							String name = f.getName();
+							String value = props.getProperty(name);
+							if (value == null) {
+								continue;
+							}
+							Class<?> type = f.getType();
+							if (type == Integer.TYPE || type == Integer.class) {
+								try {
+									f.setInt(opt, Integer.valueOf(value));
+								} catch (NumberFormatException e) {
+									System.out.println("Could not read value " + value);
+								}
+							} else if (type == Boolean.TYPE || type == Boolean.class) {
+								f.setBoolean(opt, Boolean.valueOf(value));
+							} else if (type == Float.TYPE || type == Float.class) {
+								try {
+									f.setFloat(opt, Float.valueOf(value));
+								} catch (NumberFormatException e) {
+									System.out.println("Could not read value " + value);
+								}
+							} else if (type == String.class) {
+								f.set(opt, value);
+							}
+						} catch (IllegalArgumentException e) {
+							e.printStackTrace();
+						} catch (IllegalAccessException e) {
+							e.printStackTrace();
 						}
-					} catch (IllegalArgumentException e) {
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						e.printStackTrace();
 					}
+				}
+			} else {
+				System.out.println("Wrong version, using default values");
+				try {
+					opt.write();
+				} catch (IOException e) {
 				}
 			}
 			return opt;
 		} finally {
 			in.close();
 		}
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		Options opt = new Options();
+		for (Field f : opt.getClass().getDeclaredFields()) {
+			int mod = f.getModifiers();
+			if (!Modifier.isStatic(mod) && !Modifier.isFinal(mod)) {
+				try {
+					f.set(opt, f.get(this));
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return opt;
 	}
 }

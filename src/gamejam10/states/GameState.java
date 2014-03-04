@@ -10,11 +10,11 @@ import gamejam10.camera.*;
 import gamejam10.character.*;
 import gamejam10.enums.*;
 import gamejam10.level.*;
+import gamejam10.options.*;
 import gamejam10.physics.*;
 import gamejam10.shader.*;
 
 import java.nio.*;
-import java.util.*;
 
 import org.lwjgl.*;
 import org.lwjgl.opengl.*;
@@ -46,6 +46,10 @@ public class GameState extends BasicGameState {
 
 	private int godFBO;
 	private int godTex;
+	
+	private Options options = null;
+	
+	private boolean shadersInitialized = false;
 
 	@Override
 	public int getID() {
@@ -55,6 +59,8 @@ public class GameState extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame sbg)
 			throws SlickException {
+		
+		options = Options.getInstance();
 
 		// AIEnemy en = new AIEnemy(200, 200);
 		// en.setAI(new BasicAI(en, player, 100, 200));
@@ -64,26 +70,20 @@ public class GameState extends BasicGameState {
 
 		// calculate scale
 		// we want to show what camera wants to show (in pixels)
-
+//		camera.setWidth(1000);
 		camera.setWidth(Constants.GAME_WIDTH);
-		camera.setHeight((float) (camera.getWidth() / Main.getOptions()
+		camera.setHeight((float) (camera.getWidth() / options
 				.getAspectRatio()));
 		
 		System.out.println("Camera: " + camera.getWidth() + " x " + camera.getHeight());
-		System.out.println("Aspect: " + Main.getOptions().getAspectRatio());
+		System.out.println("Aspect: " + options.getAspectRatio());
  
-		quadShader = Shader.makeShader("data/shaders/quad.vs.glsl",
-				"data/shaders/quad.fs.glsl");
-		godShader = Shader.makeShader("data/shaders/god.vs.glsl",
-				"data/shaders/god.fs.glsl");
-
-		fboInit();
 	}
 
 	private void fboInit() {
 
-		int width = Main.getOptions().getWidth();
-		int height = Main.getOptions().getHeight();
+		int width = options.getWidth();
+		int height = options.getHeight();
 
 		boolean FBOEnabled = GLContext.getCapabilities().GL_EXT_framebuffer_object;
 
@@ -184,64 +184,81 @@ public class GameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-
-		EXTFramebufferObject.glBindFramebufferEXT(
-				EXTFramebufferObject.GL_FRAMEBUFFER_EXT, offscreenFBO);
-
-		// GL11.glEnable(GL11.GL_DEPTH_TEST);
-
-		g.pushTransform();
-
-		// GL11.glEnable(GL11.GL_BLEND);
-		GL11.glEnable(GL11.GL_BLEND);
-		// GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		
-		//g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
-		g.setBackground( new Color(0.5f, 0.5f, 0.5f, 1.0f) );
-		g.clear();
+		if (options.isShadersEnabled() && !shadersInitialized) {
+			quadShader = Shader.makeShader("data/shaders/quad.vs.glsl",
+					"data/shaders/quad.fs.glsl");
+			godShader = Shader.makeShader("data/shaders/god.vs.glsl",
+					"data/shaders/god.fs.glsl");
+	
+			fboInit();
+			
+			shadersInitialized = true;
+		}
 
+		if (options.isShadersEnabled()) {
+			EXTFramebufferObject.glBindFramebufferEXT(
+					EXTFramebufferObject.GL_FRAMEBUFFER_EXT, offscreenFBO);
+	
+			GL11.glEnable(GL11.GL_BLEND);
+			
+		}
+		
+		g.pushTransform();
+		
+		if (options.isShadersEnabled()) {
+			g.setBackground(new Color(0.5f, 0.5f, 0.5f, 1.0f));
+		} else {
+			g.setBackground(new Color(level.getSun().getSunColor(), level.getSun().getSunColor(), level.getSun().getSunColor()));
+		}
+		g.clear();
+		
 		doRender(gc, sbg, g);
-
-		g.popTransform();
-
-		EXTFramebufferObject.glBindFramebufferEXT(
-				EXTFramebufferObject.GL_FRAMEBUFFER_EXT, godFBO);
-
-		g.pushTransform();
-
-		GL11.glDisable(GL11.GL_BLEND);
-
-		renderQuad2(gc, sbg, g);
-
-		g.popTransform();
-
-		EXTFramebufferObject.glBindFramebufferEXT(
-				EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0);
-
-		g.setBackground(new Color(1.0f, 1.0f, 1.0f, 1.0f));
-		g.clear();
-
-		g.pushTransform();
-
-		// GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glDisable(GL11.GL_BLEND);
-
-		renderQuad1(gc, sbg, g);
-
+	
 		g.popTransform();
 		
+		if (options.isShadersEnabled()) {
+			EXTFramebufferObject.glBindFramebufferEXT(
+					EXTFramebufferObject.GL_FRAMEBUFFER_EXT, godFBO);
+	
+			g.pushTransform();
+	
+			GL11.glDisable(GL11.GL_BLEND);
+	
+			renderQuad2(gc, sbg, g);
+	
+			g.popTransform();
+	
+			EXTFramebufferObject.glBindFramebufferEXT(
+					EXTFramebufferObject.GL_FRAMEBUFFER_EXT, 0);
+	
+			g.setBackground(new Color(1.0f, 1.0f, 1.0f, 1.0f));
+			g.clear();
+
+			g.pushTransform();
+	
+			GL11.glDisable(GL11.GL_BLEND);
+	
+			renderQuad1(gc, sbg, g);
+	
+			g.popTransform();
+	
+			GL11.glEnable(GL11.GL_BLEND);
 		
-		GL11.glEnable(GL11.GL_BLEND);
+		}
+	
 
 		gc.getInput().clearControlPressedRecord();
 
-		Shader.forceFixedShader();
+		if (options.isShadersEnabled()) {
+			Shader.forceFixedShader();
+		}
 	}
 
 	private void doRender(GameContainer gc, StateBasedGame sbg, Graphics g) {
 
-		float scaleX = ( Main.getOptions().getWidth() ) / camera.getWidth();
-		float scaleY = ( Main.getOptions().getHeight() ) / camera.getHeight();
+		float scaleX = ( options.getWidth() ) / camera.getWidth();
+		float scaleY = ( options.getHeight() ) / camera.getHeight();
 		g.scale(scaleX, scaleY);
 
 		camera.setX(player.getX()+10);
@@ -253,8 +270,8 @@ public class GameState extends BasicGameState {
 
 	private void renderQuad1(GameContainer gc, StateBasedGame sbg, Graphics g) {
 
-		int width = Main.getOptions().getWidth();
-		int height = Main.getOptions().getHeight();
+		int width = options.getWidth();
+		int height = options.getHeight();
 
 		quadShader.startShader();
 		quadShader.setUniformIntVariable("texture_0", 0);
@@ -294,8 +311,8 @@ public class GameState extends BasicGameState {
 
 	private void renderQuad2(GameContainer gc, StateBasedGame sbg, Graphics g) {
 
-		int width = Main.getOptions().getWidth();
-		int height = Main.getOptions().getHeight();
+		int width = options.getWidth();
+		int height = options.getHeight();
 
 		godShader.startShader();
 		godShader.setUniformFloatVariable("exposure", 0.0034f);
@@ -304,7 +321,6 @@ public class GameState extends BasicGameState {
 		godShader.setUniformFloatVariable("weight", 4.65f);
 		godShader.setUniformFloatVariable("lightPositionOnScreen", level
 				.getSun().getSunPositionX(), level.getSun().getSunPositionY());
-		// godShader.setUniformFloatVariable("test", 1.0f, 0.0f, 0.0f, 1.0f);
 
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
@@ -364,6 +380,8 @@ public class GameState extends BasicGameState {
 		if (i.isKeyDown(Input.KEY_UP) || i.isKeyDown(Input.KEY_W)
 				|| isControllerPressed("a", i)) {
 			player.jump();
+			i.clearControlPressedRecord();
+			i.clearKeyPressedRecord();
 		} else if (i.isKeyPressed(Input.KEY_J)) {
 			player.setHighlight(!player.isHighlight());
 		} else if (i.isKeyPressed(Input.KEY_K)) {
@@ -396,31 +414,6 @@ public class GameState extends BasicGameState {
 	public void controllerButtonPressed(int c, int b) {
 		if (b == 8)
 			exitGame = true;
-	}
-
-	/**
-	 * 
-	 * @param gc
-	 * @param sbg
-	 * @param g
-	 * @param onlySolid
-	 */
-	private void highlightAllTiles(GameContainer gc, StateBasedGame sbg,
-			Graphics g) {
-
-		Tile tiles[][] = level.getTiles();
-		for (int x = 0; x < tiles.length; x++) {
-			for (int y = 0; y < tiles[0].length; y++) {
-				if (tiles[x][y].isSolid()) {
-					g.setColor(Color.red);
-					g.drawRect(x * 32, y * 32, 32, 32);
-				} else {
-					g.setColor(Color.yellow);
-					g.drawRect(x * 32, y * 32, 32, 32);
-				}
-
-			}
-		}
 	}
 
 	/**

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project GameJam-1.0">
+	<path id="classpath">
+	    <fileset file="lib/ibxm.jar"/>
+	    <fileset file="lib/jinput.jar"/>
+	    <fileset file="lib/jnlp.jar"/>
+	    <fileset file="lib/jogg-0.0.7.jar"/>
+	    <fileset file="lib/jorbis-0.0.15.jar"/>
+	    <fileset file="lib/lwjgl_util_applet.jar"/>
+	    <fileset file="lib/lwjgl_util.jar"/>
+	    <fileset file="lib/lwjgl.jar"/>
+	    <fileset file="lib/natives-linux.jar"/>
+	    <fileset file="lib/natives-mac.jar"/>
+	    <fileset file="lib/natives-windows.jar"/>
+	    <fileset file="lib/slick-examples.jar"/>
+	    <fileset file="lib/slick.jar"/>
+	    <fileset file="lib/tinylinepp.jar"/>
+	</path>
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <delete file="GameJam1.0.jar"/>
+        <delete dir="build"/>
+        <mkdir dir="build"/>
+        <javac srcdir="src" destdir="build" classpathref="classpath" failonerror="true"/>
+		<copy todir="build">
+			<fileset dir="resources"/>
+		</copy>
+        
+        <jar destfile="TheAdventuresOfSven.jar" filesetmanifest="skip">
+            <manifest>
+                <attribute name="Main-Class" value="gamejam10.Main"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="build"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/ibxm.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/jinput.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/jnlp.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/jogg-0.0.7.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/jorbis-0.0.15.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/lwjgl_util_applet.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/lwjgl_util.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/lwjgl.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/natives-linux.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/natives-mac.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/natives-windows.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/slick-examples.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/slick.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/tinylinepp.jar"/>
+        </jar>
+    </target>
+</project>

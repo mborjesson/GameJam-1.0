@@ -1,8 +1,8 @@
 package gamejam10.character;
 
 import gamejam10.ai.BasicAI;
-import gamejam10.ai.PatrollingAIAction;
-import gamejam10.ai.RandomMovementAIAction;
+import gamejam10.ai.actions.PatrollingAIAction;
+import gamejam10.ai.actions.RandomMovementAIAction;
 import gamejam10.physics.AABoundingRect;
 
 import org.newdawn.slick.Image;
@@ -27,7 +27,7 @@ public class FloatEnemy extends AIEnemy {
         decelerationSpeed = 0.02f;
         
         // AI
-        BasicAI ai = new BasicAI(this, null);
+        BasicAI ai = new BasicAI();
 		PatrollingAIAction.Parameters moveParameters = new PatrollingAIAction.Parameters();
 		moveParameters.minX = 50;
 		moveParameters.maxX = 150;

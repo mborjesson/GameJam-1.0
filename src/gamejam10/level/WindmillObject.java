@@ -8,16 +8,16 @@ public class WindmillObject extends StaticAnimatedObject {
 	{
 		super(x, y, 77, 90);
 		
-		// St‰ng av collision detection
+		// St√§ng av collision detection
 		//this.boundingShape.setCollisionState(true);
 		
-		// S‰tt sprites
+		// S√§tt sprites
 		this.setSprite(new Image("data/images/windmill-base.png"));
 		SpriteAnimation sa = new SpriteAnimation(new Image("data/images/windmill-blades.png"));
 		sa.offsetX = -5;
 		sa.offsetY = -23;
 		sa.rotate = true;
-		sa.rotationVelocity = 5f;
+		sa.rotationVelocity = 75f;
 		this.addSpriteAnimation(sa);
 	}
 }

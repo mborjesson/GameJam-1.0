@@ -1,26 +1,17 @@
 package gamejam10.ai;
 
+import gamejam10.ai.actions.AIAction;
 import gamejam10.character.Character;
-import gamejam10.character.Player;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class BasicAI {
 
-	double accumulatedTime = 0;
-	Character character;
-	Player player;
+	private Collection<AIAction> aiActions = new ArrayList<AIAction>();
 	
-	Collection<AIAction> aiActions = new ArrayList<AIAction>();
-	
-//	boolean movingLeft = false;
-//	boolean moving = false;
-	
-	
-	public BasicAI(Character c, Player p) {
-		player = p;
-		character = c;
+	public BasicAI() {
+
 	}
 	
 	public void addAIAction(AIAction aiAction) {
@@ -29,34 +20,10 @@ public class BasicAI {
 	
 	public void update(Character character, double dt) {
 		
-//		accumulatedTime += dt;
-		
-//		if ( !moving ) {
-//			character.moveRight(50);
-//			moving = true;
-//		}
-			
-//			if ( player.getX() - character.getX() < 0) {
-//				if ( !character.isMoving() || !movingLeft ) {
-//					character.moveLeft(1000);
-//					movingLeft = true;
-//					System.out.println("Changing to left direction");
-//				}
-//			} else if ( player.getX() - character.getX() > 0 ){
-//				if ( !character.isMoving() || movingLeft ) {
-//					character.moveRight(1000);
-//					movingLeft = false;
-//					System.out.println("Changing to right direction");
-//				}
-//				
-//			}
-
 		for (AIAction aiAction : aiActions) {
 			aiAction.doAction(dt);
 		}
-
 		
 	}
-	
 	
 }

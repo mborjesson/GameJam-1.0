@@ -5,6 +5,7 @@
 package gamejam10.audio;
 
 import gamejam10.enums.*;
+import gamejam10.options.*;
 
 import java.util.*;
 
@@ -21,8 +22,9 @@ public class AudioPlayer {
     public boolean startGameMusic = false;
     
     private static final AudioPlayer INSTANCE = new AudioPlayer();
-    private Map<MusicType, Music> musicMap = new HashMap<MusicType, Music>();
-    private Map<SoundType, Sound> soundMap = new HashMap<SoundType, Sound>();
+    private final Map<MusicType, Music> musicMap = new HashMap<MusicType, Music>();
+    private final Map<SoundType, Sound> soundMap = new HashMap<SoundType, Sound>();
+    private final Map<Object, Float> volumeMap = new HashMap<Object, Float>();
 
     private boolean enabled = true;
     private boolean initialized = false;
@@ -88,9 +90,10 @@ public class AudioPlayer {
     	if (!enabled) {
     		return;
     	}
+    	volumeMap.put(musicMap.get(type), volume);
         stopMusic();
         musicMap.get(type).loop();
-        musicMap.get(type).setVolume(volume);
+        musicMap.get(type).setVolume(volume*Options.getInstance().getMusicVolume());
     }
     
     public void playSound(SoundType type) {
@@ -105,7 +108,8 @@ public class AudioPlayer {
     	if (!enabled) {
     		return;
     	}
-    	soundMap.get(type).play(pitch, volume);
+    	volumeMap.put(musicMap.get(type), volume);
+    	soundMap.get(type).play(pitch, volume*Options.getInstance().getSoundVolume());
     }
     
     public void setEnabled(boolean enabled) {
@@ -119,5 +123,14 @@ public class AudioPlayer {
     
     public boolean isEnabled() {
 		return enabled;
+	}
+    
+    public void setMusicVolume(float musicVolume) {
+		for (Music music : musicMap.values()) {
+			if (music.playing()) {
+				float volume = volumeMap.get(music);
+				music.setVolume(musicVolume*volume);
+			}
+		}
 	}
 }

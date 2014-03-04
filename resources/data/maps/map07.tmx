@@ -4,7 +4,7 @@
   <property name="suntime" value="15"/>
  </properties>
  <tileset firstgid="1" name="bw_smoothies" tilewidth="32" tileheight="32">
-  <image source="../images/bw_smoothies.png" width="128" height="256"/>
+  <image source="bw_smoothies.png" width="128" height="256"/>
   <tile id="1">
    <properties>
     <property name="collidable" value="true"/>

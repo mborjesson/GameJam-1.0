@@ -94,11 +94,11 @@ public class Physics {
     	for (Character c : level.getCharacters() ) {
 			if ( c instanceof Player ) {
 				float y =((AABoundingRect)c.getBoundingShape()).getY(); 
-							if (y > 1200 && wheeeCheck) {
+							if (y > 950 && wheeeCheck) {
 								wheeeCheck = false;
 								AudioPlayer.getInstance().playSound(SoundType.WEEE, 0.4f);
 							}
-							if (y > 2700) {
+							if (y > 2500) {
 								wheeeCheck = true;
 								killPlayer();
 							}
@@ -122,9 +122,7 @@ public class Physics {
 		//				System.out.println("END BOX " + box.getX() + ", " + box.getY() + ", " + box.getWidth() + ", "	+ box.getHeight());
 		//				System.out.println("CHAR BOX " + cbox.getX() + ", " + cbox.getY() + ", " + cbox.getWidth() + ", "	+ cbox.getHeight());
 						if (c.getBoundingShape().checkCollision(box)) {
-							
-							System.out.println("Woho \\0/ You Made It!!!");
-						//	sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
+//							System.out.println("Woho \\0/ You Made It!!!");
 						LevelCompletedState lcs = (LevelCompletedState)sbg.getState(States.LEVELCOMPLETED.getID());
 						lcs.setNextLevel(LevelOrder.getInstance().getNextLevel());
 						sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
@@ -164,7 +162,6 @@ public class Physics {
             if (t.isDeadly()) {
                 
                  if (t.getBoundingShape().checkCollision(obj.getBoundingShape())) {
-                     System.out.println("AAAAAAHHHHHHHHHHHH!!!!!!!!!!!");
                  	killPlayer();
                      return false;
                  }
@@ -186,7 +183,7 @@ public class Physics {
                     // System.out.println("checkCollision true");
                 	if (obj.getYVelocity() >= 1.0f)
                 	{
-                		System.out.println("Ugh!!!!!!!!!!!");
+//                		System.out.println("Ugh!!!!!!!!!!!");
                 		System.out.println(obj.getYVelocity());
                      	killPlayer();
                          return false;
