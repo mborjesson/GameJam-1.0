@@ -375,6 +375,8 @@ public class GameState extends BasicGameState {
 		if (i.isKeyDown(Input.KEY_UP) || i.isKeyDown(Input.KEY_W)
 				|| isControllerPressed("a", i)) {
 			player.jump();
+			i.clearControlPressedRecord();
+			i.clearKeyPressedRecord();
 		} else if (i.isKeyPressed(Input.KEY_J)) {
 			player.setHighlight(!player.isHighlight());
 		} else if (i.isKeyPressed(Input.KEY_K)) {
