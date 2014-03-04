@@ -12,12 +12,10 @@ import gamejam10.states.*;
 import gamejam10.states.GameState;
 
 import java.io.*;
-import java.lang.reflect.*;
 
 import org.lwjgl.opengl.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-import org.newdawn.slick.util.*;
 
 
 

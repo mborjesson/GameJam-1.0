@@ -4,26 +4,19 @@
  */
 package gamejam10.physics;
 
-import gamejam10.audio.AudioPlayer;
+import gamejam10.audio.*;
+import gamejam10.character.*;
 import gamejam10.character.Character;
-import gamejam10.character.Enemy;
-import gamejam10.character.Player;
-import gamejam10.enums.SoundType;
-import gamejam10.enums.States;
-import gamejam10.level.EndOfLevelObject;
-import gamejam10.level.Level;
-import gamejam10.level.LevelObject;
-import gamejam10.level.LevelOrder;
+import gamejam10.enums.*;
+import gamejam10.level.*;
+import gamejam10.states.*;
 import gamejam10.states.GameState;
-import gamejam10.states.LevelCompletedState;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
+import org.newdawn.slick.state.transition.*;
 
 
 /**

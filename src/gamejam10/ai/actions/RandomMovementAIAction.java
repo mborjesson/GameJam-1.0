@@ -1,8 +1,6 @@
 package gamejam10.ai.actions;
 
-import gamejam10.ai.AIConstants;
-import gamejam10.ai.Direction;
-import gamejam10.ai.NotMovingCorrectionHelper;
+import gamejam10.ai.*;
 import gamejam10.character.Character;
 
 public class RandomMovementAIAction implements AIAction  {

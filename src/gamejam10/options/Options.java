@@ -6,8 +6,6 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 
-import org.newdawn.slick.util.*;
-
 public class Options {
 	transient static private Options options = null;
 	transient private Options writableOptions = null;

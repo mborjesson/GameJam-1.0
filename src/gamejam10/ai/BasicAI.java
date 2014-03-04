@@ -1,10 +1,9 @@
 package gamejam10.ai;
 
-import gamejam10.ai.actions.AIAction;
+import gamejam10.ai.actions.*;
 import gamejam10.character.Character;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 
 public class BasicAI {
 

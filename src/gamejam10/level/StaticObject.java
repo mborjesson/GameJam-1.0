@@ -1,7 +1,6 @@
 package gamejam10.level;
 
-import gamejam10.physics.AABoundingRect;
-import gamejam10.physics.BoundingShape;
+import gamejam10.physics.*;
 
 /**
 *

@@ -1,9 +1,9 @@
 package gamejam10.states;
 
-import java.io.*;
-
 import gamejam10.enums.*;
 import gamejam10.options.*;
+
+import java.io.*;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;

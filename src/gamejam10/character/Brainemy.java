@@ -1,11 +1,10 @@
 package gamejam10.character;
 
-import gamejam10.ai.BasicAI;
-import gamejam10.ai.actions.RandomMovementAIAction;
-import gamejam10.physics.AABoundingRect;
+import gamejam10.ai.*;
+import gamejam10.ai.actions.*;
+import gamejam10.physics.*;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 public class Brainemy extends AIEnemy 
 {

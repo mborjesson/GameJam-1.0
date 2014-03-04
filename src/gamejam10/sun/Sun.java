@@ -1,6 +1,6 @@
 package gamejam10.sun;
 
-import org.newdawn.slick.Color;
+import org.newdawn.slick.*;
 
 public class Sun {
 	private int maxTime = 0;

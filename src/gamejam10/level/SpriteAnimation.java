@@ -1,6 +1,6 @@
 package gamejam10.level;
 
-import org.newdawn.slick.Image;
+import org.newdawn.slick.*;
 
 public class SpriteAnimation {
 	public float offsetX;

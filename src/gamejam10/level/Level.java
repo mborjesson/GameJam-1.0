@@ -4,11 +4,8 @@
  */
 package gamejam10.level;
 
-import gamejam10.*;
 import gamejam10.ai.*;
-import gamejam10.ai.actions.PatrollingAIAction;
-import gamejam10.ai.actions.RandomJumpAIAction;
-import gamejam10.ai.actions.RandomMovementAIAction;
+import gamejam10.ai.actions.*;
 import gamejam10.camera.*;
 import gamejam10.character.*;
 import gamejam10.character.Character;

@@ -1,8 +1,8 @@
 package gamejam10.character;
 
-import gamejam10.ai.BasicAI;
+import gamejam10.ai.*;
 
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 public class AIEnemy extends Enemy {
 

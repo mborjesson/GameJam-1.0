@@ -1,18 +1,13 @@
 package gamejam10.shader;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.io.*;
+import java.nio.*;
+import java.util.*;
 
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL20;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.util.ResourceLoader;
+import org.lwjgl.*;
+import org.lwjgl.opengl.*;
+import org.newdawn.slick.*;
+import org.newdawn.slick.util.*;
 
 /**
  * A simple class used to prevent duplicate shaders from

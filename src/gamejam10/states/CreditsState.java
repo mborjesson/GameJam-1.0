@@ -1,13 +1,12 @@
 package gamejam10.states;
 
 import gamejam10.*;
-import gamejam10.audio.AudioPlayer;
+import gamejam10.audio.*;
 import gamejam10.enums.*;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.state.transition.*;
 
 public class CreditsState extends BasicGameState {
 

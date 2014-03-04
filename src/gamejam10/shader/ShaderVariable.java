@@ -1,12 +1,10 @@
 package gamejam10.shader;
 
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.*;
+import java.util.*;
 
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL20;
+import org.lwjgl.*;
+import org.lwjgl.opengl.*;
 
 
 /**

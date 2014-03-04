@@ -1,16 +1,11 @@
 package gamejam10.shader;
 
-import java.nio.FloatBuffer;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.nio.*;
+import java.util.*;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL20;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.util.ResourceLoader;
+import org.lwjgl.opengl.*;
+import org.newdawn.slick.*;
+import org.newdawn.slick.util.*;
 
 
 /**

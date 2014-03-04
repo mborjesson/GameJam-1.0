@@ -1,13 +1,8 @@
 package gamejam10.level;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.*;
 
 public class StaticAnimatedObject extends LevelObject {	
 	public List<SpriteAnimation> sprites = new ArrayList<SpriteAnimation>();

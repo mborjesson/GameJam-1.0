@@ -5,22 +5,20 @@
 package gamejam10.states;
 
 
-import java.io.*;
-import java.util.*;
-
 import gamejam10.*;
 import gamejam10.audio.*;
-import gamejam10.character.Player;
+import gamejam10.character.*;
 import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.menu.*;
 import gamejam10.options.*;
 
+import java.util.*;
+
 import org.lwjgl.*;
 import org.lwjgl.opengl.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-import org.newdawn.slick.state.transition.*;
 
     
 /**

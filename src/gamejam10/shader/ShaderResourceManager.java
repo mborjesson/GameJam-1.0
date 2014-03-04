@@ -1,6 +1,6 @@
 package gamejam10.shader;
 
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 
 /**

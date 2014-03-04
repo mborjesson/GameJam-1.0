@@ -1,19 +1,12 @@
 package gamejam10.shader;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL20;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Renderable;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.opengl.InternalTextureLoader;
-import org.newdawn.slick.opengl.Texture;
+import org.lwjgl.opengl.*;
+import org.newdawn.slick.*;
+import org.newdawn.slick.opengl.*;
 
 /**
  * Class to support the concept of a single artifact being

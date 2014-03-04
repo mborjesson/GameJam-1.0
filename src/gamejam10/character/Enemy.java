@@ -4,12 +4,9 @@
  */
 package gamejam10.character;
 
-import gamejam10.physics.AABoundingRect;
+import gamejam10.physics.*;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.newdawn.slick.*;
 
 
 /**

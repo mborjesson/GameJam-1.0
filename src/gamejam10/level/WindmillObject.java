@@ -1,7 +1,6 @@
 package gamejam10.level;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 public class WindmillObject extends StaticAnimatedObject {
 	public WindmillObject(float x, float y) throws SlickException

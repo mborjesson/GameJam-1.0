@@ -1,15 +1,9 @@
 package gamejam10;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Field;
-import java.util.Properties;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.zip.*;
 
 public class Installer {
 	final static public String DATE = "2014-03-04";
