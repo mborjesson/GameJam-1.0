@@ -48,6 +48,8 @@ public class GameState extends BasicGameState {
 	private int godTex;
 	
 	private Options options = null;
+	
+	private boolean shadersInitialized = false;
 
 	@Override
 	public int getID() {
@@ -76,14 +78,6 @@ public class GameState extends BasicGameState {
 		System.out.println("Camera: " + camera.getWidth() + " x " + camera.getHeight());
 		System.out.println("Aspect: " + options.getAspectRatio());
  
-		if (options.isShadersEnabled()) {
-			quadShader = Shader.makeShader("data/shaders/quad.vs.glsl",
-					"data/shaders/quad.fs.glsl");
-			godShader = Shader.makeShader("data/shaders/god.vs.glsl",
-					"data/shaders/god.fs.glsl");
-	
-			fboInit();
-		}
 	}
 
 	private void fboInit() {
@@ -190,6 +184,17 @@ public class GameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
+		
+		if (options.isShadersEnabled() && !shadersInitialized) {
+			quadShader = Shader.makeShader("data/shaders/quad.vs.glsl",
+					"data/shaders/quad.fs.glsl");
+			godShader = Shader.makeShader("data/shaders/god.vs.glsl",
+					"data/shaders/god.fs.glsl");
+	
+			fboInit();
+			
+			shadersInitialized = true;
+		}
 
 		if (options.isShadersEnabled()) {
 			EXTFramebufferObject.glBindFramebufferEXT(

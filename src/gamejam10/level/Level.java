@@ -292,6 +292,10 @@ public class Level {
 	}
 	
 	public void update(int delta) {
+		for(StaticAnimatedObject ao : staticObjects) {
+			ao.update(delta);
+		}
+
 		sun.update(delta);
 //		player.update(delta);
 	}

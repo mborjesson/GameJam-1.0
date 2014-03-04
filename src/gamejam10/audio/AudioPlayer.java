@@ -5,6 +5,7 @@
 package gamejam10.audio;
 
 import gamejam10.enums.*;
+import gamejam10.options.*;
 
 import java.util.*;
 
@@ -23,12 +24,10 @@ public class AudioPlayer {
     private static final AudioPlayer INSTANCE = new AudioPlayer();
     private final Map<MusicType, Music> musicMap = new HashMap<MusicType, Music>();
     private final Map<SoundType, Sound> soundMap = new HashMap<SoundType, Sound>();
+    private final Map<Object, Float> volumeMap = new HashMap<Object, Float>();
 
     private boolean enabled = true;
     private boolean initialized = false;
-    
-    private float musicVolume = 1;
-    private float soundVolume = 1;
     
     public static AudioPlayer getInstance() {
         return INSTANCE;
@@ -40,6 +39,9 @@ public class AudioPlayer {
     }
     
     public void initialize() {
+    	if (!enabled) {
+    		return;
+    	}
     	if (initialized) {
     		return;
     	}
@@ -88,9 +90,10 @@ public class AudioPlayer {
     	if (!enabled) {
     		return;
     	}
+    	volumeMap.put(musicMap.get(type), volume);
         stopMusic();
         musicMap.get(type).loop();
-        musicMap.get(type).setVolume(volume*musicVolume);
+        musicMap.get(type).setVolume(volume*Options.getInstance().getMusicVolume());
     }
     
     public void playSound(SoundType type) {
@@ -105,7 +108,8 @@ public class AudioPlayer {
     	if (!enabled) {
     		return;
     	}
-    	soundMap.get(type).play(pitch, volume*soundVolume);
+    	volumeMap.put(musicMap.get(type), volume);
+    	soundMap.get(type).play(pitch, volume*Options.getInstance().getSoundVolume());
     }
     
     public void setEnabled(boolean enabled) {
@@ -121,24 +125,12 @@ public class AudioPlayer {
 		return enabled;
 	}
     
-    public void setSoundVolume(float soundVolume) {
-		this.soundVolume = soundVolume;
-	}
-    
-    public float getSoundVolume() {
-		return soundVolume;
-	}
-    
     public void setMusicVolume(float musicVolume) {
-		this.musicVolume = musicVolume;
 		for (Music music : musicMap.values()) {
 			if (music.playing()) {
-				music.setVolume(musicVolume);
+				float volume = volumeMap.get(music);
+				music.setVolume(musicVolume*volume);
 			}
 		}
-	}
-    
-    public float getMusicVolume() {
-		return musicVolume;
 	}
 }

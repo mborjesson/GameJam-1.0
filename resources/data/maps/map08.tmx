@@ -3,7 +3,7 @@
  <properties>
   <property name="suntime" value="80"/>
  </properties>
- <tileset firstgid="1" source="../tilesets/bw_smoothies.tsx"/>
+ <tileset firstgid="1" source="bw_smoothies.tsx"/>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2Y227CMBAFQ0tJEf//vy0PSMFyiC8b78Uz0nmoiOJNdKYY35dluRNCCCGEEEKmi2e0391M7xr8ErWT2j7jP3ggaie1fcZ/8EDUTmr7jP/ggaid1PYZ/8EDUTup7TP+gweidlLbZ/wH60TupLbP+A/WidxJbZ/xH6wTuZPaPuM/WCdyJ7V9xn+wTuRO1j4D/sNsRO4k/ue5Vs71NXA2GIuVTp7B+p/b5u/f5f3ZfpLrZ/Ef4MVMnTx6Pvxv46E9ADQTtZM5ZvI/3eOzh4cclv3/9Dt12+d0X9/qXCT/AUqI0EkJ52rPxPAfIhChk1LOefL/uedJzy+3/8PY70MJZ/m/932618vrweefGOH/iHla1gDoge//svuMmOeI78waAD3gf9l9RszTsgZADz3uvJL+DpXgUnGtlP9r4XVnzHPL3qluDYBaJPx/Rvq8aa24p5T/peTONkaet23XB+hByn9NrO1dRmDhvYN/Zvdfe/ZWPM8OdpDynxBiK3toz0UIIYQQe/kD/LxXYgCAAAA=

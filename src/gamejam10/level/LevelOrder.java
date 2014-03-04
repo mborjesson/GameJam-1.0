@@ -16,7 +16,7 @@ public class LevelOrder {
 	private String currentLevelName = null;
 
 	public void initialize() throws IOException {
-		InputStream in = ResourceLoader.getResourceAsStream("/data/maps/map_order.list");
+		InputStream in = ResourceLoader.getResourceAsStream("data/maps/map_order.list");
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
 		

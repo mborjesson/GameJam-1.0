@@ -49,8 +49,12 @@ public class Menu {
 		}
 	}
 	
-	public int getSelectedItem() {
+	public int getSelectedItemNum() {
 		return selectedItem;
+	}
+	
+	public MenuItem getSelectedItem() {
+		return getItem(selectedItem);
 	}
 	
 	public int getItemIndex(String name) {
@@ -77,7 +81,7 @@ public class Menu {
 				MenuActionToggle toggle = (MenuActionToggle)item.getAction();
 				name += " " + toggle.getCurrentStringValue();
 			}
-			if (getSelectedItem() == i) {
+			if (getSelectedItemNum() == i) {
 				name = name.toUpperCase();
 				if (!item.isEnabled()) {
 					g.setColor(Color.lightGray);

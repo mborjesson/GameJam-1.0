@@ -70,9 +70,8 @@ public class MenuState extends BasicGameState {
 			@Override
 			public void toggle(MenuActionToggle toggle) {
 				float f = (float)toggle.getCurrentValue();
+				Options.getInstance().setSoundVolume(f);
 				Options.getWritableInstance().setSoundVolume(f);
-				AudioPlayer ap = (AudioPlayer)toggle.getObject();
-				ap.setSoundVolume(f);
 			}
 			
 			@Override
@@ -97,6 +96,19 @@ public class MenuState extends BasicGameState {
 			@Override
 			public int getDefaultValue(MenuActionToggle toggle) {
 				return toggle.getValueNum(Options.getInstance().getMusicVolume());
+			}
+		}));
+    	optionsMenu.addMenuAction("Shaders", new MenuActionToggle(new String[] { "on", "off" }, new Boolean[] { true, false }, null, new MenuActionToggle.Listener() {
+			
+			@Override
+			public void toggle(MenuActionToggle toggle) {
+				Options.getInstance().setShadersEnabled((Boolean)toggle.getCurrentValue());
+				Options.getWritableInstance().setShadersEnabled((Boolean)toggle.getCurrentValue());
+			}
+			
+			@Override
+			public int getDefaultValue(MenuActionToggle toggle) {
+				return toggle.getValueNum(Options.getInstance().isShadersEnabled());
 			}
 		}));
     	optionsMenu.addMenuAction("VSync", new MenuActionToggle(new String[] { "on", "off" }, new Boolean[] { true, false }, container, new MenuActionToggle.Listener() {
@@ -203,18 +215,6 @@ public class MenuState extends BasicGameState {
 				return toggle.getValueNum(Options.getInstance().isFullscreen());
 			}
 		}));
-    	optionsMenu.addMenuAction("Shaders*", new MenuActionToggle(new String[] { "on", "off" }, new Boolean[] { true, false }, null, new MenuActionToggle.Listener() {
-			
-			@Override
-			public void toggle(MenuActionToggle toggle) {
-				Options.getWritableInstance().setShadersEnabled((Boolean)toggle.getCurrentValue());
-			}
-			
-			@Override
-			public int getDefaultValue(MenuActionToggle toggle) {
-				return toggle.getValueNum(Options.getInstance().isShadersEnabled());
-			}
-		}));
     	optionsMenu.addMenuAction("back", new MenuActionBack());
     	
     	
@@ -270,8 +270,18 @@ public class MenuState extends BasicGameState {
         	currentMenu.nextItem();
         } else if (input.isKeyPressed(Input.KEY_UP) || isControllerPressed("up", input) ) {
         	currentMenu.previousItem();
+        } else if (input.isKeyPressed(Input.KEY_LEFT) || isControllerPressed("left", input) ) {
+        	MenuAction a = currentMenu.getSelectedItem().getAction();
+        	if (a instanceof MenuActionToggle) {
+        		((MenuActionToggle)a).togglePrevious();
+        	}
+        } else if (input.isKeyPressed(Input.KEY_RIGHT) || isControllerPressed("right", input) ) {
+        	MenuAction a = currentMenu.getSelectedItem().getAction();
+        	if (a instanceof MenuActionToggle) {
+        		((MenuActionToggle)a).toggleNext();
+        	}
         } else if (input.isKeyPressed(Input.KEY_SPACE) || input.isKeyPressed(Input.KEY_ENTER) || isControllerPressed("a", input) )  {
-        	MenuItem i = currentMenu.getItem(currentMenu.getSelectedItem());
+        	MenuItem i = currentMenu.getItem(currentMenu.getSelectedItemNum());
         	if (i.isEnabled()) {
 	        	MenuAction a = i.getAction();
 	        	if (a instanceof MenuActionEnterState) {
@@ -300,7 +310,7 @@ public class MenuState extends BasicGameState {
 	        	} else if (a instanceof MenuActionBack) {
 	        		currentMenu = currentMenu.getParentMenu();
 	        	} else if (a instanceof MenuActionToggle) {
-	        		((MenuActionToggle)a).toggle();
+	        		((MenuActionToggle)a).toggleNext();
 	        	}
         	}
         }

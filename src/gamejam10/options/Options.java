@@ -1,5 +1,7 @@
 package gamejam10.options;
 
+import gamejam10.*;
+
 import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
@@ -7,8 +9,6 @@ import java.util.*;
 import org.newdawn.slick.util.*;
 
 public class Options {
-	transient private static final String REF = "/data/options.props";
-	
 	transient static private Options options = null;
 	transient private Options writableOptions = null;
 	
@@ -143,7 +143,7 @@ public class Options {
 	}
 	
 	public void write() throws IOException {
-		File file = new File(".", REF);
+		File file = Installer.OPTIONS_FILE;
 		System.out.println("Writing config to " + file);
 		OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
 		Properties props = new Properties();
@@ -173,13 +173,13 @@ public class Options {
 	}
 	
 	public static Options read() throws IOException {
-		if (!ResourceLoader.resourceExists(REF)) {
+		if (!Installer.OPTIONS_FILE.exists()) {
 			// write defaults
 			Options opt = new Options();
 			opt.write();
 			return opt;
 		}
-		InputStream in = ResourceLoader.getResourceAsStream(REF);
+		InputStream in = new FileInputStream(Installer.OPTIONS_FILE);
 		
 		try {
 			Options opt = new Options();

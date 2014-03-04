@@ -48,15 +48,18 @@ public class StaticAnimatedObject extends LevelObject {
         sprites.add(c);
     }
 	
-	public void render(Graphics g){
-        //draw a moving animation if we have one and we moved within the last 150 miliseconds
+	public void update(int delta) {
 		for(SpriteAnimation c : sprites) {
 			if(c.rotate) {
 				float rotation = c.sprite.getRotation();
-				rotation += c.rotationVelocity;
+				rotation += c.rotationVelocity*(delta/1000f);
 				c.sprite.setRotation(rotation);
 			}
-			
+		}          
+	}
+	
+	public void render(Graphics g) {
+		for(SpriteAnimation c : sprites) {
 			c.sprite.draw(x + c.offsetX, y + c.offsetY);
 		}          
     }

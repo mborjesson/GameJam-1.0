@@ -17,6 +17,7 @@ import java.lang.reflect.*;
 import org.lwjgl.opengl.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
+import org.newdawn.slick.util.*;
 
 
 
@@ -26,6 +27,12 @@ import org.newdawn.slick.state.*;
  */
 public class Main extends StateBasedGame {
     public static void main(String[] args) throws SlickException {
+		Installer i = new Installer();
+		try {
+			i.install();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     	Display.setLocation(0, 0);
     	Main main = new Main(Constants.GAME_NAME);
         AppGameContainer app = new AppGameContainer(main);

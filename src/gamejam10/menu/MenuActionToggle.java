@@ -63,9 +63,19 @@ public class MenuActionToggle extends MenuAction {
 		return 0;
 	}
 	
-	public void toggle() {
+	public void toggleNext() {
 		currentValue = (++currentValue)%stringValues.length;
 		System.out.println("Toggle " + getCurrentValue());
 		listener.toggle(this);
 	}
+	
+	public void togglePrevious() {
+		currentValue -= 1;
+		if (currentValue < 0) {
+			currentValue = stringValues.length-1;
+		}
+		System.out.println("Toggle " + getCurrentValue());
+		listener.toggle(this);
+	}
+
 }
