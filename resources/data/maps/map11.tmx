@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" source="../images/bw_smoothies.tsx"/>
+ <layer name="mapplayer" width="256" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2a227DIBAFaZNKTfP//5snq2llMPezCzPSkaIg21nCYHx5hBAehBBCCCGEEEII2SoAXnh23t/PBsF/gHPUbuI/gA61m/gPUM49pMf0Z8G+1H7i/3yO8VMyTsAnt8jnA7Wf+A+zSM17M9tKtxk5X6v9xH9bnJ0jju9jbantwDZqP/F/D27/Mhqucf4S63O1n/gPLeB5G2o/8R/eWcVnL3Wo/fTif+09oJx2mMfO/wX3/9c5/68yjkvrWKVuK6j9xP9xfIffOr9O2mc/D1uFmud6VlH7if/j2KlWSMP9/zr/e73DUdLeC2v+5zz3a+mbXv066/+xsF5Q+2nd/5n0GA/va/6aWmvf8dnp/R8L3vZC7Sf+X1My3jzUWjJXeJ1XaueIkXML9//tOtGLnWqFdtR+4n87qTW/5Vp7nNtr77Uo1vAWrxvUfuJ/Oznur1Ir1BE7R6j9xP92vPvv9RrfE7ExofbTsv+j34H5uGhPkbvm9+C/Na769uxdqpHHbz1eqh61n5b9H03L8UvdV9eaQ86cNtq9kPEbRvZlrA9a6k7VofYT/+u3Xc1/K3Uof0PvYz4v9rn6HFDjCSGEEEIIIYQQQnznBSSyoJkAgAAA
+  </data>
+ </layer>
+ <objectgroup color="#5500ff" name="objects" width="256" height="32">
+  <object name="player" type="spawn" x="209" y="652" width="56" height="50">
+   <properties>
+    <property name="name" value="player"/>
+   </properties>
+  </object>
+  <object name="b1" type="spawn" x="3939" y="801" width="32" height="32">
+   <properties>
+    <property name="deltatilesmax" value="12"/>
+    <property name="deltatilesmin" value="8"/>
+    <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="b1" type="spawn" x="4961" y="798" width="32" height="32">
+   <properties>
+    <property name="deltatilesmax" value="12"/>
+    <property name="deltatilesmin" value="8"/>
+    <property name="name" value="jumping_brain"/>
+   </properties>
+  </object>
+  <object name="The End" type="trigger" x="6017" y="863" width="32" height="32">
+   <properties>
+    <property name="name" value="end"/>
+   </properties>
+  </object>
+  <object name="The End" type="trigger" x="5601" y="129" width="32" height="32">
+   <properties>
+    <property name="name" value="end"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

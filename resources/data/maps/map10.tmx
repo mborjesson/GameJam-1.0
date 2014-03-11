@@ -53,7 +53,7 @@
  </tileset>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2b23LDIAxE3Ta9ZPr//9vJm0YFjJBAi71nRg+OHSxDVgjhPI/jeNJoNBqNRqPRaLTbGbknHPt7Qf0TCcf+XlD/RPIa+/dsJ8gyqH8i0WP/luIFWcUM/f802pX2WfCD5KLHYHRMHgfziB2I1v+j0aa0r4ofJBc5Bo/CcUvT3vNkPd59gs//TZqRMYO/j1yi5v+ZoMURxD6q8auOI/YKI8aC8z8GFv2j6TAL9N9u73o8s/6H3od3QcfzlWOyQzwp+YhYN5e+fB/Y+mf+j8PM/H8HfY+QPXd6YP2fSEb1X9L2VfWuyZ4/PWTV//UewG79dlVa9f8704plCDn0i5r2WjEYwXfm/ziw/mcHZR09Aorfu/TX1Zm5/u9FxpUdYkxmLc3bvrUu2FrDR/gx6rM8p6+N/J73PujoHMziu9bqFd8HOqv/o8ynvXj1H5GzW/P/Vn+e6XLknPUYebzPQJj/vayOK706QQTFV+v833vOOmf3XGu9z0706B9p3n7tNUXloKNY5soILHU+fa3uq131H5H/l9ottXH2WemeyDG/hfR5Rv0/Onb09HPEPUfq/yjaku//1P53E+mjdf/fW/+35vi154vU/66MPktp7T86nqX2aiDEWav+s/2VRPuXsf9v1X/pusjPkcbXyi6xTM8xFmblINkxQPdJz7oIJT5Z7tvy9+ycbqfUdut+1uvR4v0Zes5G9T2rf0fr/yt0pt/z17l+CQT98/0fHGbM/5b51pr3R/xevfmAR//Z8dXre8b+P5nHhzoujYl3be+hVlvKxKuhGf7LfmppNMJ3/v//mozW/2fuD67Qj/W/TBEaishhRjSKkJMw/8cFJSaf7SllEqX/jOdA84NgMWtMrO/toOlGEqn/1c8S7TuNRqPRaDQajUbbw/4Ad2fCnACAAAA=
+   H4sIAAAAAAAAA+2bAW7CMAxFuwEDtvvfd0IammUSp07s2KH/SRbrCCVt8m3HKfdt2+4wGAwGg8FgMBjscAaOCcb+WED/gIKxPxbQP6A8xv4zuhNgGtA/oPCx/wjpBZiFh/5vwnmpXQr9ALHwMegdk/OGPGIFrPV/Fs5J7avSDxALHYNz4VjS9Oj7YD6j+wSX11OqoT4D8yMWq/jvSTY/stIa6YcdW+wVWowF4n8ONPrPpsMorOKgF3vX45H1P+g/B9yfzxyTFfxJqY+WubAVJ/L3dcutfyn/x9pgLp75/wr67sF6PTwT1P8BpVf/JW2/q945HjWxWUTV//keAPSfA6n+f2QkX+ZVF9dS057kg7Pn/2AuqP/p2ZPfZiWD/mk/QCye6/+9UL+ygo/Zu8b14NRuIqKtC3pdn0b/vL5A5wffi6XH/HOXSjt+/MxPer+nNH816yRra+WDvfV/rtV3fB5Iqv+vmAd4z6c9aPN/aU5K8av3Pe3xynlMhvg/ymy/MjNOWrNi/m+lf15/fI7RrdAW+v8nU9x+jFW0tmbnypo6H2/L+7Cq/mvX1NKldI139lo7T6u9VV4UAb0Wj/q/te/YM28svlNb/8+UB9Dnf2q/u7HUv3b/f7T+r83xa9d3/Xvl96j2GUn/q9J7LaW1/4gP3KvZqHhV6kNmH1DDWv8R+/9a/ZfaWf4/ej6OsIov4zFGg1cOEu0DpPp2DY/434Pme7mPoX6EP+tM3+N7JaU4X9pPkWJZqT2/l6usA0rXmVX/UfO1p/4/ywdIc79GBv3j+Z88eMR/TbzV5v0W83U0H+jVf4a1wEjfLfv//WcgFp7PlLQ1urYfoVZbiiSLhij0PknnH+271TyA/vPRW//33B+cka9qf8tkoaFRH9Cqu2n7PhPk/3mJjq1PWntKkVjoP2otkOV+ZhhH8IrXmGif22lpJxIr/Uf4AMu+w2AwGAwGg8FgsHXsF/V4JnYAgAAA
   </data>
  </layer>
  <objectgroup color="#ff0000" name="objects" width="256" height="32">
@@ -196,6 +196,20 @@
     <property name="deltatilesmax" value="6"/>
     <property name="deltatilesmin" value="6"/>
     <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="J_b" type="spawn" x="3360" y="480" width="32" height="32">
+   <properties>
+    <property name="deltatilesmax" value="6"/>
+    <property name="deltatilesmin" value="6"/>
+    <property name="name" value="jumping_brain"/>
+   </properties>
+  </object>
+  <object name="J_b" type="spawn" x="1632" y="672" width="32" height="32">
+   <properties>
+    <property name="deltatilesmax" value="1"/>
+    <property name="deltatilesmin" value="1"/>
+    <property name="name" value="jumping_brain"/>
    </properties>
   </object>
  </objectgroup>

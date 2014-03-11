@@ -6,7 +6,7 @@
  <tileset firstgid="1" source="bw_smoothies.tsx"/>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2c626EIBCF6X1N3/99G7sxtWREQMEz8n3J+VFKxlmWw0XITiGECSGEEEIIITScVFDKBeBu4H+AccH/AOOi7v+3grqP8Mz9tVEuAHdD3f8l1Ob9Hv5/dsYPGAX8DzAu6v6P5+aUPi/KEcAro/hoPY6wvgd4ojrvgy6pNeO0U2faiROMOnGZ9TfUEbf/97Xp/LK8x/+4OhEwKfXeVv2c8pyxAOpJjdOW/6zzuDPLvlbPv3IfUnLuOBop/1n/w/+6eLkHDDpYa/GUN1M+z13/78WCOvA/lJLyeIn/c2Iw/7dFxf+st/1g9Q387xMV/4Mfct7/x/Vz41jlVgz65jmkvH/HewAA8IfavM8+AEp5uToBx9T4P+dOrvc7doxDPpjvq7AXqEdt/od69sZkRH+PUW2PO82/j07PUfjewBet/W/tFbzvDUpY7jL3AP9DKarz/4z3NcDi/RbtabWNyvcGflD2vwo149Da+8z/oMoR/3PuYhN7H/+DKkf836O/9Xp3dhaW93u1E/6HUpT9f1af7rVO2fJ+D1+yb4Macs5G178DkOrjpbJ+X+DM+L381ypnhFS00Cpuq/jWc+YzSesM0irfqjuD79EoWmgVt1X8reccBe+ju+kH/wnMmgCAAAA=
+   H4sIAAAAAAAAA+2c246DIBRFmXvN/P//Tkxj6pAjAgruI2sl+6GUHChlcxHiFEKYEEIIIYQQQsNJBaW6ANwN/A8wLvgfYFzU/f9RkPcRnnV/b1QXgLuh7v8Sauv9Gf7/dsYPGAX8DzAu6v6P5+aUvi+qI4BXRvHRehxhfQ/wRHXeB11Sa8ZpJ8+0EycYeeI06zPUoej/5Tn+19UVAZPSfrKVPyc9ZyyAelLjtOU/6zzuzLSfVflX7kNKzh1HI+U/6zv8r4uXe8Cgg7UWT3kz5fPc9f9eLKgD/0MpKY+X+D8nBvN/W1T8z3rbD1bfwP8+UfE/+CHn+X+cPzeOlW7FoG+eQ8r7d7wHAAAv1OZ99gFQytvVFXBMjf9z7uR6v2PHOOSD38Be4Ahq8z/UszcmI/p7jGp73Gn+fXQqR+F/A1+09r+1V/C+NyhhucvcA/wPpajO/zPe1wCL91u0p9U2Kv8b+EHZ/yrUjENr7zP/gypH/M+5i03sffwPqhzxf4/+1uvZ2VlY3u/VTvgfSlH2/1l9utc6Zcv7PXzJvg1qyDkbXb8HINXHS2W9X+DM+L3816rOCKlooVXcVvGtcuYzSesM0krfyjuD79EoWmgVt1X8rXKOgvfR3fQHrdIbyACAAAA=
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
@@ -25,7 +25,7 @@
     <property name="name" value="jumping_brain"/>
    </properties>
   </object>
-  <object name="The End" type="trigger" x="5540" y="349" width="64" height="320">
+  <object name="The End" type="trigger" x="5536" y="641" width="32" height="32">
    <properties>
     <property name="name" value="end"/>
    </properties>

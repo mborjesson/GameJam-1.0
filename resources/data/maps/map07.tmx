@@ -33,18 +33,18 @@
  </tileset>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3YzQqCQBiFYftZJN3//dYuIQxm+MapzvPA2WXm4kVzXZZlNTMzMzOzuAH/T/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+QS/+Qa1b/l82AOY7uv6L3U8F3AN/x/N96Xv9PoMZR/Vc+5+sfarT2f33ufMDv+kT/UGP0/X/E+z39Q42K/m+b41qeDXrf4+kfalT033uP7+1Y/1Bj5vt//cNcv9b/vfM44F1r/3uf792o7zWz/u0ZdZ7Z12tmr+0ZdZ7Z12uWvgeUrMQ2AIAAAA==
+   H4sIAAAAAAAAA+3aywqCUBiFUbsMkt7/fSNqIIWgh/94qL0W7FkqDT40aZ6maTYzMzMzs7gB/0//kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kGtU/5fFgDGO7r+i91PBOYCa/j+b3tv49X3N88bP+30CNY66/1c+5+sfauzt/3mv3nqf7kX/UKP3/b/H+z39Q42K/m+L4454NtA/1Ojx/m+r1vf4+ocaI///03od/UONX+v/3ngc8G1v/2ufb13Pc5tZ29b0vM7o72xmr63peZ3R39kseQ8K6QanAIAAAA==
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
   <object name="Skurk 2" type="spawn" x="1120" y="770" width="36" height="33">
    <properties>
     <property name="deltatilesmax" value="4"/>
-    <property name="deltatilesmin" value="4"/>
+    <property name="deltatilesmin" value="3"/>
     <property name="name" value="jumping_brain"/>
    </properties>
   </object>
-  <object name="Player" type="spawn" x="283" y="480" width="44" height="32">
+  <object name="Player" type="spawn" x="288" y="608" width="44" height="32">
    <properties>
     <property name="name" value="player"/>
    </properties>

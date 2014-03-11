@@ -365,6 +365,8 @@ public class GameState extends BasicGameState {
 
 	private void handleKeyboardInput(Input i, int delta, StateBasedGame game) {
 
+//		System.out.println("?: " + isControllerPressed("y", i));
+		
 		// we can both use the WASD or arrow keys to move around, obviously we
 		// can't move both left and right simultaneously
 		if (i.isKeyDown(Input.KEY_A) || i.isKeyDown(Input.KEY_LEFT)
@@ -390,7 +392,7 @@ public class GameState extends BasicGameState {
 			this.highlightAllTiles = !this.highlightAllTiles;
 		}
 
-		if (i.isKeyPressed(Input.KEY_ESCAPE) || exitGame) {
+		if (i.isKeyPressed(Input.KEY_ESCAPE) || exitGame || isControllerPressed("x", i)) {
 			i.clearControlPressedRecord();
 			i.clearKeyPressedRecord();
 			exitGame = false;
@@ -402,12 +404,23 @@ public class GameState extends BasicGameState {
 
 	private boolean isControllerPressed(String btn, Input i) {
 		for (int c = 0; c < i.getControllerCount(); c++) {
-			if (btn == "left" && i.isControllerLeft(c))
+			
+//			System.out.println("?: " + i.isButton1Pressed(c) + " " + c + " " +btn);
+			
+			if (btn == "left" && i.isControllerLeft(c)) { 
 				return true;
-			else if (btn == "right" && i.isControllerRight(c))
+			} else if (btn == "right" && i.isControllerRight(c)) {
 				return true;
-			else if (btn == "a" && i.isButton1Pressed(c))
+			} else if (btn == "a" && i.isButton1Pressed(c)) {
 				return true;
+			} else if (btn == "b" && i.isButton2Pressed(c)) { // B-button
+				return true;
+			} else if (btn == "x" && i.isButton3Pressed(c)) { // X-button
+				return true;
+			} else if (btn == "y" && i.isButtonPressed(4, c)) { // Y-button? NOT WORKING
+					return true;
+				}
+			
 		}
 
 		return false;

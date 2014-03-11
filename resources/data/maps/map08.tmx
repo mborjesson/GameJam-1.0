@@ -6,7 +6,7 @@
  <tileset firstgid="1" source="bw_smoothies.tsx"/>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Y227CMBAFQ0tJEf//vy0PSMFyiC8b78Uz0nmoiOJNdKYY35dluRNCCCGEEEKmi2e0391M7xr8ErWT2j7jP3ggaie1fcZ/8EDUTmr7jP/ggaid1PYZ/8EDUTup7TP+gweidlLbZ/wH60TupLbP+A/WidxJbZ/xH6wTuZPaPuM/WCdyJ7V9xn+wTuRO1j4D/sNsRO4k/ue5Vs71NXA2GIuVTp7B+p/b5u/f5f3ZfpLrZ/Ef4MVMnTx6Pvxv46E9ADQTtZM5ZvI/3eOzh4cclv3/9Dt12+d0X9/qXCT/AUqI0EkJ52rPxPAfIhChk1LOefL/uedJzy+3/8PY70MJZ/m/932618vrweefGOH/iHla1gDoge//svuMmOeI78waAD3gf9l9RszTsgZADz3uvJL+DpXgUnGtlP9r4XVnzHPL3qluDYBaJPx/Rvq8aa24p5T/peTONkaet23XB+hByn9NrO1dRmDhvYN/Zvdfe/ZWPM8OdpDynxBiK3toz0UIIYQQe/kD/LxXYgCAAAA=
+   H4sIAAAAAAAAA+2Y226DMBAFaZuGpv3//23zEIlaBnxZvBfPSOchCoIFnQmOH8uyPAghhBBCCCHTxTPaz26mZw1+idpJbZ/xHzwQtZPaPuM/eCBqJ7V9xn/wQNROavuM/+CBqJ3U9hn/wQNRO6ntM/6DdSJ3Uttn/AfrRO7k2b19CwX/wSuRO4n/AMdE7mSp962+4j94J3Ina+8B/2E2IncS//PcKud6HzgbjMVKJ69g/ct98/lr+X9vn8nxs/gP8GKmTp7dH/638aM9ADQTtZM5rvBfyn3pZ52u8VnDQw7L/h/9T932OV3XtzrH+x9mI0InJZyr3RPDf4hAhE5KOefJ/+eaJ92/3P6Gsd6HEq7yf+99utfL28n3R4zwf8Q8LdcA6IH3f9l5RsxzxkfmGgA94H/ZeUbM03INgB563Hkl/R8qwVvFsVL+r4XHXTHPPXumumsA1CLh/zPS+01rxTml/C8lt7cxcr9te32AHqT818Ta2mUEFp47+Gd2/7Vnb8Xz7GAHKf8JIbayh/ZchBBCCLGXX4id01IAgAAA
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
@@ -43,7 +43,7 @@
     <property name="name" value="enemy_float_easy"/>
    </properties>
   </object>
-  <object type="trigger" x="4450" y="510" width="67" height="65">
+  <object type="trigger" x="4481" y="544" width="32" height="32">
    <properties>
     <property name="name" value="end"/>
    </properties>
@@ -55,8 +55,8 @@
   </object>
   <object name="FE" type="spawn" x="2370" y="896" width="33" height="31">
    <properties>
-    <property name="deltatilesmax" value="4"/>
-    <property name="deltatilesmin" value="5"/>
+    <property name="deltatilesmax" value="7"/>
+    <property name="deltatilesmin" value="7"/>
     <property name="name" value="enemy_float_easy"/>
    </properties>
   </object>
@@ -77,7 +77,7 @@
   <object name="Jumper" type="spawn" x="4035" y="448" width="29" height="31">
    <properties>
     <property name="deltatilesmax" value="6"/>
-    <property name="deltatilesmin" value="3"/>
+    <property name="deltatilesmin" value="5"/>
     <property name="name" value="jumping_brain"/>
    </properties>
   </object>
