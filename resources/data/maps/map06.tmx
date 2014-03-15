@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
  <properties>
-  <property name="suntime" value="50"/>
+  <property name="suntime" value="10"/>
  </properties>
  <tileset firstgid="1" source="bw_smoothies.tsx"/>
  <layer name="mapplayer" width="256" height="32">
@@ -70,6 +70,66 @@
     <property name="deltatilesmax" value="8"/>
     <property name="deltatilesmin" value="8"/>
     <property name="name" value="patroling_brain"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="289" y="385" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="446" y="384" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="609" y="385" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="930" y="386" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="767" y="381" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="767" y="703" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="801" y="703" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="1872" y="927" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="2063" y="928" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="2221" y="928" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="2143" y="384" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="2752" y="672" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="suntime" value="5"/>
+ </properties>
  <tileset firstgid="1" source="../images/bw_smoothies.tsx"/>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
@@ -81,17 +84,42 @@
     <property name="name" value="coin"/>
    </properties>
   </object>
-  <object name="Coin" type="trigger" x="1023" y="862" width="32" height="32">
+  <object name="Coin" type="trigger" x="4474" y="766" width="32" height="32">
    <properties>
     <property name="name" value="coin"/>
    </properties>
   </object>
-  <object name="Coin" type="trigger" x="990" y="862" width="32" height="32">
+  <object name="Coin" type="trigger" x="4538" y="766" width="32" height="32">
    <properties>
     <property name="name" value="coin"/>
    </properties>
   </object>
-  <object name="Coin" type="trigger" x="959" y="862" width="32" height="32">
+  <object name="Coin" type="trigger" x="4505" y="766" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="2047" y="863" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="2080" y="863" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="2016" y="863" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="4993" y="255" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="3207" y="447" width="32" height="32">
    <properties>
     <property name="name" value="coin"/>
    </properties>

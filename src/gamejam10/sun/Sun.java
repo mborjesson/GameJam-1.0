@@ -33,6 +33,11 @@ public class Sun {
 	}
 	
 	public long getRemainingTime() {
+		//  System.out.println("maxTime: " + maxTime + ", currentTime: " + currentTime);
+		if ((maxTime-currentTime) < 0) {
+			maxTime = currentTime;
+			return 0;
+		}
 		return maxTime-currentTime;
 	}
 	
@@ -55,4 +60,14 @@ public class Sun {
 	public float getSunPositionY() {
 		return (float)Math.sin((Math.PI+getSunPositionX()*Math.PI)*0.5) * 1f;
 	}
+
+	public int getMaxTime() {
+		return maxTime;
+	}
+
+	public void setMaxTime(int maxTime) {
+		this.maxTime = maxTime;
+	}
+	
+	
 }

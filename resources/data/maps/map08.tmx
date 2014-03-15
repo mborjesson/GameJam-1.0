@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
  <properties>
-  <property name="suntime" value="120"/>
+  <property name="suntime" value="5"/>
  </properties>
  <tileset firstgid="1" source="bw_smoothies.tsx"/>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+2ai3ICIQxFsWpX7f//b7vjMIMpkIUNEMI9M3fUdh+w5rDR9umceyIIgiAIgiAIslxmZvS1W+lax3gxsTjn2bBck6N9hv/wXzuWa3K0zyv7f3PvOcF/3ViuydE+r+z/Tm6u8F8HlmtytM/wH/5rx3JNjvZ5Zf99/w//dWO5Jkf7vLL/O/BfP5ZrcrTP8B/+a8dyTXJz4/4+dTTw/z/o/+fAck3C/7Fw19zinGfDck0e9b7WV/ifB/7rx3JNls4B/suR6v/p9QJjsVyT8D8O99mc5qvyPPBfP1pqsgXbX76D1w/3Obc72X4V/3sB//WzUk1y84P/cqD/n4OVarKF/1LuS19r6l9tD38G+K8fzf7nPqeG9Uz7+lrncP+XBf7rx0JNSjhX+p0Y/M+T6//x9z89WKhJKedm8n/veej3l6FzI/p9CvyP4/tV2sOG7+cleH4Ptgn3o68vicccrfxPrf+purwxv8/Rw/8e46k5h2a4tfPM+I/UtlbovB/B8zvZJtw2Vq+x17F9c2Np4X9PVvH/GjmHVlr///++L+1/ZiHncehuqj79PXJzn9fhmnjkxgL/+eP0GE/NOTQj4T+3jmj4nFMKV3cu8hjbj/v50bGcTYt1uKS/k/J/S2zz7cpIHSeX0nP0eA/OIuF/7til10wLvj782hXep2P3bj9Pul+4NrrMYw4J/1usw1vBMaX8P0rsntTzPpS6J2paA1r3/0d6W/DmJxKPlP8jOTNuTc6UoPF9oHD+v8YNbSngv96x1zLDXOC/Dnr4jyAIgiAIgiDInPkFm+xczACAAAA=
+   H4sIAAAAAAAAA+2ai27DIAxF6fpI2///4C3aIlFmcEgMNuYe6SptlwckPoS0e4UQXgiCIAiCIAiCTJeR0T53M51rijcTj30eDc81qe0z/If/1vFck9o+z+z/Lfz2Cf7bxnNNavs8s/8rpb7Cfxt4rkltn+E//LeO55rU9nlm/7f5P/y3jeea1PZ5Zv9X4L99PNekts/wH/5bx3NNcn3jfp/aG/j/H8z/x8BzTcJ/Xbhz7rHPo+G5Jvd6f9RX+F8G/tvHc03W9gH+y5Gb/6fnC+jiuSbhPw33bJ7m6+Bx4L99rNRkC5afPKL3z/DZt3uy/iz+9wL+22emmuT6B//lwPx/DGaqyRb+S7kvfa5T/47O4c8A/+1j2f/Sc2pcz+m8/qhzuP/LAv/t46EmJZyr/U4M/pcpzf/x+58dPNSklHMj+b/OedLvL7fP131pzPdT4D8NdY3S63mJXt+jdeLt0veXzLJEK/9z43+uLm/M30v08L9He44cI2Y9hw9iXS24sfNMfe2pbauk/X5Gr+/JOvG6VL1S76ltS21p4X9PZvH/ShzDKq3//3/dlpr/jEDJ49jdXH1u98glfJ6Ha2bJtQX+8/vp0Z4jx7CMhP/cOGLhOacWru4CsaS24z7f25azaTEO18zvpPxfMuvUzqlz+yml9hg9rsFZJPwv7dvSs04NW31sY1d8n6bu3Vs/0+3isTEUliUk/G8xDi8V+5Tyfy/UPannfSh3T7Q0BrSe/++Z2wIeKf81OdNuS87UYPE6pHD+v/WaBv6Y3X/tth9lhL7Af/tI+Y8gCIIgCIIgyJj5BnpGUAoAgAAA
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
@@ -106,7 +106,7 @@
     <property name="name" value="teleport2-a"/>
    </properties>
   </object>
-  <object name="Coin" type="trigger" x="97" y="767" width="32" height="32">
+  <object name="Coin" type="trigger" x="97" y="768" width="32" height="32">
    <properties>
     <property name="name" value="coin"/>
    </properties>
@@ -116,27 +116,244 @@
     <property name="name" value="coin"/>
    </properties>
   </object>
-  <object name="Coin" type="trigger" x="164" y="768" width="32" height="32">
+  <object name="Coin" type="trigger" x="1565" y="575" width="32" height="32">
    <properties>
     <property name="name" value="coin"/>
    </properties>
   </object>
-  <object name="Coin" type="trigger" x="199" y="768" width="32" height="32">
+  <object name="Coin" type="trigger" x="1531" y="575" width="32" height="32">
    <properties>
     <property name="name" value="coin"/>
    </properties>
   </object>
-  <object name="Coin" type="trigger" x="257" y="675" width="32" height="32">
+  <object name="Coin" type="trigger" x="2364" y="799" width="32" height="32">
    <properties>
     <property name="name" value="coin"/>
    </properties>
   </object>
-  <object name="Coin" type="trigger" x="258" y="641" width="32" height="32">
+  <object name="Coin" type="trigger" x="2397" y="799" width="32" height="32">
    <properties>
     <property name="name" value="coin"/>
    </properties>
   </object>
-  <object name="Coin" type="trigger" x="257" y="706" width="32" height="32">
+  <object name="Coin" type="trigger" x="4290" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="4256" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7810" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7844" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7877" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7912" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7810" y="862" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7844" y="862" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7877" y="862" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7912" y="862" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7810" y="829" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7844" y="829" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7877" y="829" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7912" y="829" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7809" y="795" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7843" y="795" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7876" y="795" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7911" y="795" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7674" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7708" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7741" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7776" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7540" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7574" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7607" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7642" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7403" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7437" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7470" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7505" y="895" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7168" y="894" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7202" y="894" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7235" y="894" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7270" y="894" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="6969" y="896" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7003" y="896" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7036" y="896" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="7071" y="896" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Jumper" type="spawn" x="6210" y="800" width="29" height="31">
+   <properties>
+    <property name="deltatilesmax" value="15"/>
+    <property name="deltatilesmin" value="15"/>
+    <property name="name" value="jumping_brain"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="3677" y="544" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="5568" y="832" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="5602" y="832" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="5635" y="832" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="3645" y="544" width="32" height="32">
    <properties>
     <property name="name" value="coin"/>
    </properties>

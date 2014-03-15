@@ -153,8 +153,14 @@ public class Physics {
 						if (so.getName().startsWith("coin")) {
 							so.setCollidable(false);
 							so.setVisible(false);
+							((Player) c).setCoinCount(((Player) c).getCoinCount());
+							
+							//level.setPlayer((Player)c);
+							level.getPlayer().setCoinCount(level.getPlayer().getCoinCount()+1);
+							level.getSun().setMaxTime(level.getSun().getMaxTime() +5000);
 							AudioPlayer ap = AudioPlayer.getInstance();
 						    ap.playSound(SoundType.COIN, 0.2f);
+						    
 							
 						} else if (so.getName().startsWith("end")) {
 							LevelCompletedState lcs = (LevelCompletedState)sbg.getState(States.LEVELCOMPLETED.getID());

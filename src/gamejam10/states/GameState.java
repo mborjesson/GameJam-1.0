@@ -247,7 +247,12 @@ public class GameState extends BasicGameState {
 		
 		}
 	
-
+		
+		g.drawString("Coins: " + player.getCoinCount(), 100, 10);
+		g.drawString("Coins: " + level.getSun().getRemainingTime() / 1000f, 250, 10);
+		
+		
+		
 		gc.getInput().clearControlPressedRecord();
 
 		if (options.isShadersEnabled()) {
@@ -265,6 +270,8 @@ public class GameState extends BasicGameState {
 		camera.setY(player.getY()+70);
 
 		level.render(g);
+		
+	
 
 	}
 

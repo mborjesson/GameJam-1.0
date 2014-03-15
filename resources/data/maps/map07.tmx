@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
  <properties>
-  <property name="suntime" value="15"/>
+  <property name="suntime" value="10"/>
  </properties>
  <tileset firstgid="1" name="bw_smoothies" tilewidth="32" tileheight="32">
   <image source="bw_smoothies.png" width="128" height="256"/>
@@ -33,7 +33,7 @@
  </tileset>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3aywqCUBiFUbsMkt7/fSNqIIWgh/94qL0W7FkqDT40aZ6maTYzMzMzs7gB/0//kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kEv/kGtU/5fFgDGO7r+i91PBOYCa/j+b3tv49X3N88bP+30CNY66/1c+5+sfauzt/3mv3nqf7kX/UKP3/b/H+z39Q42K/m+L4454NtA/1Ojx/m+r1vf4+ocaI///03od/UONX+v/3ngc8G1v/2ufb13Pc5tZ29b0vM7o72xmr63peZ3R39kseQ8K6QanAIAAAA==
+   H4sIAAAAAAAAA+3azQqCUBSFUfsZ1Pu/cEQNJBD0co4X2mvBnpnS4EOTnsuyPM3MzMzMLG7A/9M/5NI/5NI/5NI/5NI/5NI/5NI/5NI/5NI/5NI/5NI/5NI/5NI/5NI/5NI/5JrV/201YI6z+6/o/VJwDqCm/9+mjzZ+/17zuvN4v0+gxln3/8rnfP1DjaP9v+/Ve+/TXfQPNbrv/x3v9/QPNSr6f6w+d8azgf6hRsf7v71G3+PrH2rM/P/P6HX0DzX0D7mO9r91/Og6z21mY9vSeZ3Z39nMPtvSeZ3Z39kseS/WZ1QCAIAAAA==
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
@@ -49,7 +49,7 @@
     <property name="name" value="player"/>
    </properties>
   </object>
-  <object name="End Of Level" type="trigger" x="1310" y="861" width="35" height="66">
+  <object name="End Of Level" type="trigger" x="1308" y="896" width="32" height="32">
    <properties>
     <property name="name" value="end"/>
    </properties>
@@ -64,6 +64,21 @@
   <object name="WM" type="spawn" x="877" y="549" width="67" height="58">
    <properties>
     <property name="name" value="windmill"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="699" y="891" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="737" y="672" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="449" y="638" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
    </properties>
   </object>
  </objectgroup>
