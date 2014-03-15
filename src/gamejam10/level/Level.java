@@ -35,8 +35,12 @@ public class Level {
 	private List<Character> characters = new ArrayList<Character>();
 	private List<Character> enemies = new ArrayList<Character>();
 	private List<EndOfLevelObject> endOfWorldObjects = new ArrayList<EndOfLevelObject>();
-	private List<StaticAnimatedObject> staticObjects = new ArrayList<StaticAnimatedObject>();
-	 
+	private List<StaticAnimatedObject> staticAnimatedObjects = new ArrayList<StaticAnimatedObject>();
+	private HashMap<String, TeleportObject> teleportObjects = new HashMap<String, TeleportObject>();
+	
+	
+	private HashMap<String, StaticObject> staticObjects = new HashMap<String, StaticObject>();
+	
 	
 	private Sun sun = null;
 
@@ -69,7 +73,7 @@ public class Level {
 								break;
 							}
 							case WINDMILL: {
-								staticObjects.add(new WindmillObject(x, y));
+								staticAnimatedObjects.add(new WindmillObject("", x, y));
 							}break;
 							case ENEMY_FLOAT_EASY: {
 								FloatEnemy en = new FloatEnemy(x, y, 0, 150);
@@ -162,16 +166,58 @@ public class Level {
 						break;
 					} 
 					case TRIGGER: {
-//						String name = map.getObjectProperty(groupID, objectID, "name", null);
-						int x = map.getObjectX(groupID, objectID);
-						int y = map.getObjectY(groupID, objectID);
+						String name = map.getObjectProperty(groupID, objectID, "name", null);
+
+						System.out.println("trigger name: " + name);
+						if (name != null) {
+							
+							int x = map.getObjectX(groupID, objectID);
+							int y = map.getObjectY(groupID, objectID);
+							int width = map.getObjectWidth(groupID, objectID);
+							int height = map.getObjectHeight(groupID, objectID);
 						
-						int width = map.getObjectWidth(groupID, objectID);
-						int height = map.getObjectHeight(groupID, objectID);
-//						System.out.println(x + ", " + y + ", " + width + ", "	+ height);
-						
-						EndOfLevelObject endOfWorldObject = new EndOfLevelObject(x, y, width, height);
-						endOfWorldObjects.add(endOfWorldObject);
+							if (name.startsWith("end")) {
+								 SpriteSheet sheet = null;
+							        try {
+							        	sheet = new SpriteSheet("data/images/cake.png", 32, 32);
+							        } catch (SlickException ex) {
+							            ex.printStackTrace();
+							        }
+
+							        Animation animation = new Animation();
+							            animation.addFrame(sheet.getSprite(0, 0), 1500);
+							        
+							        
+								
+								EndOfLevelObject endOfWorldObject = new EndOfLevelObject(name, animation, true, true, x, y, width, height);
+								//endOfWorldObjects.add(endOfWorldObject);
+								staticObjects.put(name, endOfWorldObject);
+								
+							} else if  (name.startsWith("teleport")) {
+								
+								TeleportObject tpo = new TeleportObject(name, x, y, width, height);
+								teleportObjects.put(name,tpo);
+								staticAnimatedObjects.add(tpo);
+							}else if (name.startsWith("coin")) {
+								
+								SpriteSheet sheet = null;
+							        try {
+							             sheet = new SpriteSheet("data/images/spinning_coin_gold.png", 32, 32);
+							        } catch (SlickException ex) {
+							            ex.printStackTrace();
+							        }
+
+							        Animation animation = new Animation();
+							        
+
+							        for (int i = 0; i < 8; i++) {
+							            animation.addFrame(sheet.getSprite(i, 0), 150);
+							        }
+							        String random = "" + System.nanoTime(); // need random names on coins so they dont overwrite in the HashMap
+							        CoinObject co = new CoinObject(name, animation, true, true, x, y, width, height);
+							        staticObjects.put(name+random, co);
+							}
+						}
 						
 						break;
 						
@@ -197,6 +243,32 @@ public class Level {
 		loadTileMap();
 	}
 	
+	
+
+	public HashMap<String, StaticObject> getStaticObjects() {
+		return staticObjects;
+	}
+
+
+
+	public void setStaticObjects(HashMap<String, StaticObject> staticObjects) {
+		this.staticObjects = staticObjects;
+	}
+
+
+
+	public HashMap<String, TeleportObject> getTeleportObjects() {
+		return teleportObjects;
+	}
+
+
+
+	public void setTeleportObjects(HashMap<String, TeleportObject> teleportObjects) {
+		this.teleportObjects = teleportObjects;
+	}
+
+
+
 	public Sun getSun() {
 		return sun;
 	}
@@ -228,13 +300,23 @@ public class Level {
 //				(int)camera.getWidth()/map.getTileWidth(), (int)camera.getHeight()/map.getTileHeight());
 
 		// Render static objects
-		for(StaticAnimatedObject ao : staticObjects) {
+		for(StaticAnimatedObject ao : staticAnimatedObjects) {
 			ao.render(g);
 		}
 		
 		// and then render the characters on top of the map
 		for (Character c : characters) {
 			c.render(g, 0, 0);
+		}
+		
+		Iterator iter = staticObjects.keySet().iterator();
+		while (iter.hasNext()) {
+			String name = (String)iter.next();
+			
+			StaticObject so = staticObjects.get(name);
+			so.render(g);
+			
+			
 		}
 
 		g.popTransform();
@@ -289,7 +371,7 @@ public class Level {
 	}
 	
 	public void update(int delta) {
-		for(StaticAnimatedObject ao : staticObjects) {
+		for(StaticAnimatedObject ao : staticAnimatedObjects) {
 			ao.update(delta);
 		}
 

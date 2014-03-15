@@ -3,9 +3,9 @@ package gamejam10.level;
 import org.newdawn.slick.*;
 
 public class WindmillObject extends StaticAnimatedObject {
-	public WindmillObject(float x, float y) throws SlickException
+	public WindmillObject(String name,float x, float y) throws SlickException
 	{
-		super(x, y, 77, 90);
+		super(name, x, y, 77, 90);
 		
 		// Stäng av collision detection
 		//this.boundingShape.setCollisionState(true);

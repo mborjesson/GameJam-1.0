@@ -36,5 +36,65 @@
     <property name="name" value="end"/>
    </properties>
   </object>
+  <object name="Coin" type="trigger" x="355" y="767" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="386" y="767" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="419" y="767" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="576" y="766" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="607" y="766" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="640" y="766" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="863" y="765" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="830" y="765" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="799" y="765" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="1023" y="862" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="990" y="862" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="959" y="862" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

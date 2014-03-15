@@ -1,49 +1,103 @@
 package gamejam10.level;
 
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Graphics;
+
 import gamejam10.physics.*;
 
 /**
-*
-* @author gregof
-*/
+ * 
+ * @author gregof
+ */
 public abstract class StaticObject {
 
-	 protected float x;
-	 protected float y;
-	 protected BoundingShape boundingShape;
-	    
-	  public StaticObject(float x, float y, float w, float h){
-	        this.x = x;
-	        this.y = y;
-	 
-	        //default bounding shape is a 32 by 32 box
-	        boundingShape = new AABoundingRect(x,y,w,h);
-	        
-	    }
-	    
-	 public float getX(){
-	        return x;
-	    }
-	 
-	    public float getY(){
-	        return y;
-	    }
-	 
-	    public void setX(float f){
-	        x = f;
-	        updateBoundingShape();
-	    }
-	 
-	    public void setY(float f){
-	        y = f;
-	        updateBoundingShape();
-	    }
-	 
-	    public void updateBoundingShape(){
-	        boundingShape.updatePosition(x,y);
-	    }
-	 
-	    public BoundingShape getBoundingShape(){
-	        return boundingShape;
-	    } 
+	protected String name;
+	protected float x;
+	protected float y;
+	protected BoundingShape boundingShape;
+	protected boolean collidable = false;
+	protected boolean visible = false;
+	protected Animation animation;
+	
+
+	public StaticObject(String name, Animation animationImage, boolean collidable, boolean visible, float x, float y, float w, float h) {
+		this.name = name;
+		this.x = x;
+		this.y = y;
+		this.collidable = collidable;
+		this.visible = visible;
+		this.animation = animationImage;
+
+		// default bounding shape is a 32 by 32 box
+		boundingShape = new AABoundingRect(x, y, w, h);
+
+	}
+	
+	public void render (Graphics g) {
+		
+		if (this.visible) {
+			g.drawAnimation(animation, x, y);
+		}
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setX(float f) {
+		x = f;
+		updateBoundingShape();
+	}
+
+	public void setY(float f) {
+		y = f;
+		updateBoundingShape();
+	}
+
+	public void updateBoundingShape() {
+		boundingShape.updatePosition(x, y);
+	}
+
+	public BoundingShape getBoundingShape() {
+		return boundingShape;
+	}
+
+	public boolean isCollidable() {
+		return collidable;
+	}
+
+	public void setCollidable(boolean collidable) {
+		this.collidable = collidable;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	public Animation getAnimation() {
+		return animation;
+	}
+
+	public void setAnimation(Animation animation) {
+		this.animation = animation;
+	}
+	
+	
 }
+

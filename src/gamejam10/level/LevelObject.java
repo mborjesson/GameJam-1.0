@@ -12,6 +12,7 @@ import gamejam10.physics.*;
  */
 public abstract class LevelObject {
    
+	protected String name;
     protected float x;
     protected float y;
     protected BoundingShape boundingShape;
@@ -30,14 +31,23 @@ public abstract class LevelObject {
         boundingShape = new AABoundingRect(x,y,32,32);   
     }
  
-    public LevelObject(float x, float y, float width, float height) {
+    public LevelObject(String name, float x, float y, float width, float height) {
     	this.x = x;
     	this.y = y;
+    	this.name = name;
     	
     	boundingShape = new AABoundingRect(x, y, width, height);
     }
      
-    public void applyGravity(float gravity){
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void applyGravity(float gravity){
         if(y_velocity < maximumFallSpeed){
             //accelerate
             y_velocity += gravity;

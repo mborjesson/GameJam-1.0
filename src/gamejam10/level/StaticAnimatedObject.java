@@ -7,13 +7,14 @@ import org.newdawn.slick.*;
 public class StaticAnimatedObject extends LevelObject {	
 	public List<SpriteAnimation> sprites = new ArrayList<SpriteAnimation>();
 	
-	public StaticAnimatedObject(float x, float y, float width, float height)
+	public StaticAnimatedObject(String name, float x, float y, float width, float height)
 	{
-		super(x, y, width, height);
+		super(name, x, y, width, height);
 		this.setXVelocity(0);
 		this.setYVelocity(0);
 		this.maximumFallSpeed = 0;
 		this.onGround = true;
+		
 	}
 	
 	public void addSpriteAnimation(SpriteAnimation anim) {

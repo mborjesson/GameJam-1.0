@@ -39,7 +39,10 @@ public class Physics {
         checkCollisionBetweenPlayerAndEnemies(level);
         checkCollisionBetweenCharacters(level);
         checkCollisionBetweenCharacterAndTheEndOfTheUniverse(level);
-        checkIfEndOfWorld(sbg, level);
+//        checkIfEndOfWorld(sbg, level);
+        checkIfTransporter(sbg, level);
+  checkStaticObjectsForCollision(sbg, level);      
+        
     }
 
     private void handleCharacters(Level level, int delta) {
@@ -130,6 +133,99 @@ public class Physics {
     }
     
     
+    private void checkStaticObjectsForCollision(StateBasedGame sbg, Level level) {
+    HashMap<String, StaticObject> sos = level.getStaticObjects();
+    
+    Iterator iter = sos.keySet().iterator();
+    
+    while (iter.hasNext()) {
+    	
+    	String name = (String)iter.next();
+    	StaticObject so = (StaticObject)sos.get(name);
+    	
+    	for (Character c : level.getCharacters() ) {
+			if ( c instanceof Player ) {
+				
+				if (so.isCollidable()) {
+					AABoundingRect box = (AABoundingRect)so.getBoundingShape();
+					if (c.getBoundingShape().checkCollision(box)) {
+					
+						if (so.getName().startsWith("coin")) {
+							so.setCollidable(false);
+							so.setVisible(false);
+							AudioPlayer ap = AudioPlayer.getInstance();
+						    ap.playSound(SoundType.COIN, 0.2f);
+							
+						} else if (so.getName().startsWith("end")) {
+							LevelCompletedState lcs = (LevelCompletedState)sbg.getState(States.LEVELCOMPLETED.getID());
+							lcs.setNextLevel(LevelOrder.getInstance().getNextLevel());
+							sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
+						}
+						
+						
+					}
+				}
+				
+			}
+    	}
+    	
+    	
+    }
+    
+    
+    	
+    }
+    
+    
+ private void checkIfTransporter(StateBasedGame sbg, Level level) {
+    	
+    	HashMap<String, TeleportObject> tpos = level.getTeleportObjects();
+    	Iterator iter = tpos.keySet().iterator();
+    	
+    	if (tpos != null && tpos.size() != 0) {
+    		
+	    	for (Character c : level.getCharacters() ) {
+				if ( c instanceof Player ) {
+		
+					while (iter.hasNext()) {
+						String key = (String)iter.next();
+						TeleportObject tpoEnter = (TeleportObject) tpos.get(key);
+						
+						AABoundingRect box = (AABoundingRect)tpoEnter.getBoundingShape();
+
+						if (c.getBoundingShape().checkCollision(box)) {
+							String enterTeleportName = tpoEnter.getName();
+
+							String exitTeleportName = "";
+							if (enterTeleportName.endsWith("a")) {
+								exitTeleportName = enterTeleportName.substring(0, enterTeleportName.length()-1) + "b";
+							} else {
+								exitTeleportName = enterTeleportName.substring(0, enterTeleportName.length()-1) + "a";
+							}
+
+							TeleportObject tpoExit = tpos.get(exitTeleportName);
+							long timeNow = System.currentTimeMillis();
+							
+							if ((timeNow - tpoExit.getTimeSinceUsed()) > 1500) {
+								tpoExit.setTimeSinceUsed(timeNow);
+								tpoEnter.setTimeSinceUsed(timeNow);
+								level.getTeleportObjects().put(tpoExit.getName(), tpoExit);
+								level.getTeleportObjects().put(tpoEnter.getName(), tpoEnter);
+								c.setX(tpoExit.getX());
+								c.setY(tpoExit.getY());
+								AudioPlayer ap = AudioPlayer.getInstance();
+							    ap.playSound(SoundType.TELEPORT, 0.2f);
+								break;
+							}
+						}
+							
+					}
+					break;
+	    	
+				}
+			}
+    	}
+    }
     
     
     private void killPlayer() {

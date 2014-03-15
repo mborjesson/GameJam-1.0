@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="256" height="32" tilewidth="32" tileheight="32">
  <properties>
-  <property name="suntime" value="80"/>
+  <property name="suntime" value="120"/>
  </properties>
  <tileset firstgid="1" source="bw_smoothies.tsx"/>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+2Y226DMBAFaZuGpv3//23zEIlaBnxZvBfPSOchCoIFnQmOH8uyPAghhBBCCCHTxTPaz26mZw1+idpJbZ/xHzwQtZPaPuM/eCBqJ7V9xn/wQNROavuM/+CBqJ3U9hn/wQNRO6ntM/6DdSJ3Uttn/AfrRO7k2b19CwX/wSuRO4n/AMdE7mSp962+4j94J3Ina+8B/2E2IncS//PcKud6HzgbjMVKJ69g/ct98/lr+X9vn8nxs/gP8GKmTp7dH/638aM9ADQTtZM5rvBfyn3pZ52u8VnDQw7L/h/9T932OV3XtzrH+x9mI0InJZyr3RPDf4hAhE5KOefJ/+eaJ92/3P6Gsd6HEq7yf+99utfL28n3R4zwf8Q8LdcA6IH3f9l5RsxzxkfmGgA94H/ZeUbM03INgB563Hkl/R8qwVvFsVL+r4XHXTHPPXumumsA1CLh/zPS+01rxTml/C8lt7cxcr9te32AHqT818Ta2mUEFp47+Gd2/7Vnb8Xz7GAHKf8JIbayh/ZchBBCCLGXX4id01IAgAAA
+   H4sIAAAAAAAAA+2ai3ICIQxFsWpX7f//b7vjMIMpkIUNEMI9M3fUdh+w5rDR9umceyIIgiAIgiAIslxmZvS1W+lax3gxsTjn2bBck6N9hv/wXzuWa3K0zyv7f3PvOcF/3ViuydE+r+z/Tm6u8F8HlmtytM/wH/5rx3JNjvZ5Zf99/w//dWO5Jkf7vLL/O/BfP5ZrcrTP8B/+a8dyTXJz4/4+dTTw/z/o/+fAck3C/7Fw19zinGfDck0e9b7WV/ifB/7rx3JNls4B/suR6v/p9QJjsVyT8D8O99mc5qvyPPBfP1pqsgXbX76D1w/3Obc72X4V/3sB//WzUk1y84P/cqD/n4OVarKF/1LuS19r6l9tD38G+K8fzf7nPqeG9Uz7+lrncP+XBf7rx0JNSjhX+p0Y/M+T6//x9z89WKhJKedm8n/veej3l6FzI/p9CvyP4/tV2sOG7+cleH4Ptgn3o68vicccrfxPrf+purwxv8/Rw/8e46k5h2a4tfPM+I/UtlbovB/B8zvZJtw2Vq+x17F9c2Np4X9PVvH/GjmHVlr///++L+1/ZiHncehuqj79PXJzn9fhmnjkxgL/+eP0GE/NOTQj4T+3jmj4nFMKV3cu8hjbj/v50bGcTYt1uKS/k/J/S2zz7cpIHSeX0nP0eA/OIuF/7til10wLvj782hXep2P3bj9Pul+4NrrMYw4J/1usw1vBMaX8P0rsntTzPpS6J2paA1r3/0d6W/DmJxKPlP8jOTNuTc6UoPF9oHD+v8YNbSngv96x1zLDXOC/Dnr4jyAIgiAIgiDInPkFm+xczACAAAA=
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
@@ -43,7 +43,7 @@
     <property name="name" value="enemy_float_easy"/>
    </properties>
   </object>
-  <object type="trigger" x="4481" y="544" width="32" height="32">
+  <object name="The End" type="trigger" x="4481" y="544" width="32" height="32">
    <properties>
     <property name="name" value="end"/>
    </properties>
@@ -63,14 +63,14 @@
   <object name="Jumper" type="spawn" x="3651" y="802" width="29" height="31">
    <properties>
     <property name="deltatilesmax" value="6"/>
-    <property name="deltatilesmin" value="6"/>
+    <property name="deltatilesmin" value="3"/>
     <property name="name" value="jumping_brain"/>
    </properties>
   </object>
   <object name="Jumper" type="spawn" x="4002" y="799" width="29" height="31">
    <properties>
-    <property name="deltatilesmax" value="6"/>
-    <property name="deltatilesmin" value="6"/>
+    <property name="deltatilesmax" value="10"/>
+    <property name="deltatilesmin" value="4"/>
     <property name="name" value="jumping_brain"/>
    </properties>
   </object>
@@ -84,6 +84,61 @@
   <object name="WM" type="spawn" x="3848" y="420" width="77" height="58">
    <properties>
     <property name="name" value="windmill"/>
+   </properties>
+  </object>
+  <object name="Teleport 1A" type="trigger" x="98" y="628" width="32" height="32">
+   <properties>
+    <property name="name" value="teleport1-a"/>
+   </properties>
+  </object>
+  <object name="Teleport 1B" type="trigger" x="4483" y="670" width="32" height="32">
+   <properties>
+    <property name="name" value="teleport1-b"/>
+   </properties>
+  </object>
+  <object name="Teleport 2B" type="trigger" x="4479" y="126" width="32" height="32">
+   <properties>
+    <property name="name" value="teleport2-b"/>
+   </properties>
+  </object>
+  <object name="Teleport 1B" type="trigger" x="7999" y="894" width="32" height="32">
+   <properties>
+    <property name="name" value="teleport2-a"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="97" y="767" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="131" y="768" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="164" y="768" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="199" y="768" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="257" y="675" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="258" y="641" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="257" y="706" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
    </properties>
   </object>
  </objectgroup>
