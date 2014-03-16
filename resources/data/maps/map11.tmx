@@ -6,11 +6,11 @@
  <tileset firstgid="1" source="../images/bw_smoothies.tsx"/>
  <layer name="mapplayer" width="256" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+2a227DIBAFaZNKTfP//5snq2llMPezCzPSkaIg21nCYHx5hBAehBBCCCGEEEII2SoAXnh23t/PBsF/gHPUbuI/gA61m/gPUM49pMf0Z8G+1H7i/3yO8VMyTsAnt8jnA7Wf+A+zSM17M9tKtxk5X6v9xH9bnJ0jju9jbantwDZqP/F/D27/Mhqucf4S63O1n/gPLeB5G2o/8R/eWcVnL3Wo/fTif+09oJx2mMfO/wX3/9c5/68yjkvrWKVuK6j9xP9xfIffOr9O2mc/D1uFmud6VlH7if/j2KlWSMP9/zr/e73DUdLeC2v+5zz3a+mbXv066/+xsF5Q+2nd/5n0GA/va/6aWmvf8dnp/R8L3vZC7Sf+X1My3jzUWjJXeJ1XaueIkXML9//tOtGLnWqFdtR+4n87qTW/5Vp7nNtr77Uo1vAWrxvUfuJ/Oznur1Ir1BE7R6j9xP92vPvv9RrfE7ExofbTsv+j34H5uGhPkbvm9+C/Na769uxdqpHHbz1eqh61n5b9H03L8UvdV9eaQ86cNtq9kPEbRvZlrA9a6k7VofYT/+u3Xc1/K3Uof0PvYz4v9rn6HFDjCSGEEEIIIYQQQnznBSSyoJkAgAAA
+   H4sIAAAAAAAAA+2a227DIBAFadNKTfP//9unqG0EmPvZhRnpSFUtx1nCgI25hxDuhBBCCCGEEEIIOSoAXngM/rzvA4L/AHHUbuI/gA61m/gPUM9HyPfp94rPUvuJ/+t59p+afgI+uSX+fqL207r/sbEWb3ySG/dWHqs9Z+Z4rfbTuv+nEZsjnv9PHcudB7ZR+4n/Z3B7yWx4xvlPqs3VflrwP7eeQv+xDZ73ofbTgv9gh1189lKH2k8v/r/eI1j/XSGOFy9nwPr/nPlf0ad26ce1dexStxXUfu7gv1W+wm+dn5Hjq9+H7ULLez2rqP3E/3mcVCvkYf2/b/9Pyx6O1FrBqnnCmv8l7/162mZUu676fSzcL6j9tO7/Skb0h7/3/C21tu7xOWn/jwVvR6H2E/+vqelvHmqtGSu8jiutY8TMsYX1f7tOjOKkWqEftZ/430/unt9yrSPm9qv50tJavcXnBrWf+N9Pifu71AptpOYItZ/43493/70+43si1SfUflr2f/YemLeL4zlK7/k9+G+Nq7aN7aWaef3e6+XqUftp2f/Z9Fy/1n11rSWUjGmz3QsF32FmW6baoKfuXB1qP/G//dzd/LdSh/I7jL7m4+Izdx8DWjwhhBBCCCGEEEKI7/wALfJwvgCAAAA=
   </data>
  </layer>
  <objectgroup color="#5500ff" name="objects" width="256" height="32">
-  <object name="player" type="spawn" x="209" y="652" width="56" height="50">
+  <object name="player" type="spawn" x="137" y="658" width="56" height="50">
    <properties>
     <property name="name" value="player"/>
    </properties>
@@ -122,6 +122,177 @@
   <object name="Coin" type="trigger" x="3207" y="447" width="32" height="32">
    <properties>
     <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Text" type="trigger" x="419" y="692" width="192" height="38">
+   <properties>
+    <property name="name" value="text-1"/>
+    <property name="text" value="Collect coins to delay sundown!"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="859" y="542" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="892" y="542" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="828" y="542" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="535" y="412" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="568" y="412" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="504" y="412" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="702" y="446" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="735" y="446" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="671" y="446" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="199" y="350" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="232" y="350" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="168" y="350" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="298" y="350" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="331" y="350" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="267" y="350" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="418" y="255" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="451" y="255" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="387" y="255" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="517" y="256" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="550" y="256" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Coin" type="trigger" x="486" y="256" width="32" height="32">
+   <properties>
+    <property name="name" value="coin"/>
+   </properties>
+  </object>
+  <object name="Text trigger" type="trigger" x="322" y="640" width="32" height="256">
+   <properties>
+    <property name="name" value="text-1-trigger"/>
+   </properties>
+  </object>
+  <object name="Text" type="trigger" x="1986" y="383" width="192" height="48">
+   <properties>
+    <property name="name" value="text-2"/>
+    <property name="text" value="A fall from this height is deadly, thread carefully!"/>
+   </properties>
+  </object>
+  <object name="Text trigger" type="trigger" x="1893" y="254" width="32" height="256">
+   <properties>
+    <property name="name" value="text-2-trigger"/>
+   </properties>
+  </object>
+  <object name="Text" type="trigger" x="3427" y="716" width="192" height="48">
+   <properties>
+    <property name="name" value="text-3"/>
+    <property name="text" value="Enemies will kill on contact, avoid this by jumping over him"/>
+   </properties>
+  </object>
+  <object name="Text trigger" type="trigger" x="3359" y="318" width="32" height="512">
+   <properties>
+    <property name="name" value="text-3-trigger"/>
+   </properties>
+  </object>
+  <object name="Text" type="trigger" x="4513" y="672" width="192" height="48">
+   <properties>
+    <property name="name" value="text-4"/>
+    <property name="text" value="This enemy jumps at irregular intervals, be alert!"/>
+   </properties>
+  </object>
+  <object name="Text trigger" type="trigger" x="4419" y="288" width="32" height="512">
+   <properties>
+    <property name="name" value="text-4-trigger"/>
+   </properties>
+  </object>
+  <object name="Text trigger" type="trigger" x="5686" y="383" width="32" height="512">
+   <properties>
+    <property name="name" value="text-5-trigger"/>
+   </properties>
+  </object>
+  <object name="Text" type="trigger" x="5780" y="767" width="192" height="48">
+   <properties>
+    <property name="name" value="text-5"/>
+    <property name="text" value="Cake!!! This is the exit portal of the levels."/>
+   </properties>
+  </object>
+  <object name="Text trigger" type="trigger" x="5379" y="128" width="32" height="160">
+   <properties>
+    <property name="name" value="text-6-trigger"/>
+   </properties>
+  </object>
+  <object name="Text" type="trigger" x="5442" y="192" width="192" height="48">
+   <properties>
+    <property name="name" value="text-6"/>
+    <property name="text" value="Cake!!! This is the exit portal of the levels."/>
    </properties>
   </object>
  </objectgroup>

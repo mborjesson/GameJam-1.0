@@ -14,6 +14,24 @@ public abstract class StaticObject {
 	protected String name;
 	protected float x;
 	protected float y;
+	protected float w;
+	protected float h;
+	public float getW() {
+		return w;
+	}
+
+	public void setW(float w) {
+		this.w = w;
+	}
+
+	public float getH() {
+		return h;
+	}
+
+	public void setH(float h) {
+		this.h = h;
+	}
+
 	protected BoundingShape boundingShape;
 	protected boolean collidable = false;
 	protected boolean visible = false;
@@ -24,6 +42,8 @@ public abstract class StaticObject {
 		this.name = name;
 		this.x = x;
 		this.y = y;
+		this.w = w;
+		this.h = h;
 		this.collidable = collidable;
 		this.visible = visible;
 		this.animation = animationImage;
@@ -35,11 +55,12 @@ public abstract class StaticObject {
 	
 	public void render (Graphics g) {
 		
-		if (this.visible) {
+		if (animation != null && this.visible) {
 			g.drawAnimation(animation, x, y);
 		}
 	}
-
+	
+	
 	public String getName() {
 		return name;
 	}

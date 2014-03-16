@@ -11,6 +11,7 @@ import gamejam10.enums.*;
 import gamejam10.level.*;
 import gamejam10.states.*;
 import gamejam10.states.GameState;
+import gamejam10.text.*;
 
 import java.util.*;
 
@@ -166,7 +167,13 @@ public class Physics {
 							LevelCompletedState lcs = (LevelCompletedState)sbg.getState(States.LEVELCOMPLETED.getID());
 							lcs.setNextLevel(LevelOrder.getInstance().getNextLevel());
 							sbg.enterState(States.LEVELCOMPLETED.getID(), new FadeOutTransition(Color.pink, 500), new FadeInTransition(Color.pink, 500) );
+						} else if (so.getName().startsWith("text") && so.getName().endsWith("trigger")) {
+							// System.out.println("Collision with text trigger!" + name);
+							String textBoxToTrigger = so.getName().substring(0, so.getName().lastIndexOf("-trigger"));
+							// System.out.println("textBoxToTrigger!" + textBoxToTrigger);
+							((TextBox)sos.get(textBoxToTrigger)).setVisibilityTimer(5);
 						}
+							
 						
 						
 					}

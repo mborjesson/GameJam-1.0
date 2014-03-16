@@ -13,6 +13,8 @@ import gamejam10.enums.*;
 import gamejam10.options.*;
 import gamejam10.physics.*;
 import gamejam10.sun.*;
+import gamejam10.text.TextBox;
+import gamejam10.text.TextRenderer;
 
 import java.util.*;
 
@@ -42,8 +44,15 @@ public class Level {
 
 	private Sun sun = null;
 
+	private HashMap<String, TextBox> textboxes = new HashMap<String, TextBox>();
+	
+	
+	
+	
 	public Level(String level) throws SlickException {
 
+	
+		
 		map = new TiledMap("data/maps/" + level + ".tmx", "data/images");
 		// for (int i = 0; i < map.getTileSetCount(); ++i) {
 		// map.getTileSet(i).tiles.setFilter(Image.FILTER_LINEAR);
@@ -259,6 +268,21 @@ public class Level {
 								CoinObject co = new CoinObject(name, animation,
 										true, true, x, y, width, height);
 								staticObjects.put(name + random, co);
+							}  else if (name.startsWith("text")) {
+								
+								if (name.contains("trigger")) {
+									// System.out.println("level text  x: " + x + ", y: " + y + ", w: " + width + ", h: " + height);
+									TextBox tb = new TextBox(name, "", null, true, false, x, y, width, height);
+									//String random = "" + System.nanoTime(); // need random names so they dont overwrite in the HashMap
+									staticObjects.put(name, tb);
+								} else {
+									String text = map.getObjectProperty(groupID, objectID, "text", null);
+									// System.out.println("level text  x: " + x + ", y: " + y + ", w: " + width + ", h: " + height);
+									TextBox tb = new TextBox(name, text, null, false, false, x, y, width, height);
+									//String random = "" + System.nanoTime(); // need random names so they dont overwrite in the HashMap
+									staticObjects.put(name, tb);
+								}
+								
 							}
 						}
 
@@ -358,8 +382,32 @@ public class Level {
 			so.render(g);
 
 		}
+		
+		
 
+		
+		Iterator iter3 = textboxes.keySet().iterator();
+		while (iter3.hasNext()) {
+			String name = (String) iter3.next();
+			
+			System.out.println("text name: " + name);
+			
+			System.out.println("Rendering text...");
+			TextBox tb = textboxes.get(name);
+			
+			// tb.renderText(g, tb.getX(), tb.getY(), 11);
+			tb.render(g);
+
+		}
+		
+		
+		
 		g.popTransform();
+		
+		
+		// tr.renderText(g,"Collect Coins to delay sundown", 200,100, 11);
+		
+		
 
 	}
 
